@@ -1,3 +1,74 @@
+- 启动
+    - .xinitrc
+        - exec /usr/bin/awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
+- 命令
+    - awesome
+    - awesome-client
+- 配置
+    - 配置模板
+        - /etc/xdg/awesome/rc.lua
+    - .config/awesome/rc.lua
+        - Variable definitions            # 可定义布局优先级
+        - Menu                            # 右键菜单
+        - Wibar                           # 生成screen, 设壁纸
+        - Mounse bindings                 # 鼠标键绑定函数
+        - Key bindings                    # 快捷键
+        - Rules                           # client规则, 如在哪个screen显示
+        - Signals                         # client启动信号触发动作
+        - 自定义
+    - API
+        - 文档地址
+            - https://awesomewm.org/apidoc/
+        - 快捷键简写
+            - modkey                      # win键
+            - Mod1                        # alt
+        - gears                           # 工具组件
+        - wibox                           # wibar
+            - widget
+            - layout
+        - beautiful                       # theme
+            - init(gears.filesystem.get_configuration_dir() .. "/themes/default/theme.lua")
+                - # 主题
+            - useless_gap = 5             # 窗口间隔
+            - theme.lua文件
+                - theme.wallpaper = "~/.config/awesome/themes/awesome-wallpaper.png"
+                    - # 背景
+        - naughty
+            - notify({ preset = naughty.config.presets.critical, title = "Oops, there were errors during startup!", text = awesome.startup_errors })
+        - menubar
+            - menu_gen
+        - hotkeys_popup
+        - awful
+            - layout
+            - tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+            - key({ modkey }, "F12", function () awful.spawn{ "xlock" } end)
+                - # 快捷键
+                - awful.key({ "Mod1" }, "Escape", function () awful.menu.menu_keys.down = { "Down", "Alt_L" } awful.menu.clients({theme = { width = 250 }}, { keygrabber=true, coords={x=525, y=330} }) end),
+            - widget
+            - rules
+            - spawn("firefox", { tag = mouse.screen.selected_tag })
+            - util.spawn_with_shell("~/.config/awesome/autorun.sh")
+                - # 随桌面启动脚本
+    - autorun.sh
+        - #!/usr/bin/env bash
+        - # nothing to use
+        - function run {
+            - if ! pgrep $1 ; then
+                - $@&
+            - fi
+        - }
+        - if randr | grep -q 'eDP1 connected' ; then
+            - run xrandr --output VIRTUAL1 --off --output eDP1 --mode 1920x1080 --pos 0x720 --rotate normal --output DP1 --off --output DP2-1 --mode 2560x1080 --pos 3360x720 --rotate normal --output DP2-2 --off --output DP2-3 --off --output HDMI2 --off --output HDMI1 --primary --mode 2560x1440 --pos 1920x0 --rotate left --output DP2 --off
+        - fi
+        - run ibus-daemon -d -x
+        - run nm-applet
+- 插件
+    - revelation          # 全局client
+    - shifty              # 动态tag
+    - naughty             # 通知
+    - vicious             # widgets
+    - obvious             # widgets
+    - bashets             # widgets
 - awesome常用键
     - 独立
         - 帮助<M - s>

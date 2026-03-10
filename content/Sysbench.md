@@ -1,3 +1,5 @@
 - 硬件压测
 - 场景
     - sysbench cpu run
+- mysql 压测
+    - -db-driver=mysql --mysql-host=visitor-bench.ctysoosgzk4k.rds.cn-north-1.amazonaws.com.cn --mysql-user=root --mysql-password=12345678 --threads=512 --events=1000000 --time=0 --report-interval=15 ./bench_visit_page_insert.lua run

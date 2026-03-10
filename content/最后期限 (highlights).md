@@ -1,6 +1,6 @@
 - Author:: [[id2002]]
 - Full Title:: 最后期限
-- Category:: #articles
+- Category: #articles
 - URL:: https://readwise.io/reader/document_raw_content/18657776
 - ### Highlights first synced by #Readwise [[February 6th, 2023]]
     - 最后期 ([View Highlight](https://read.readwise.io/read/01grk32y246fgkbvcf8t41b1x7))

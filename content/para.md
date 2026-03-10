@@ -76,7 +76,7 @@
         - [[LaTeX]] [[Markdown]] [[Mermaid]] [[PlantUML]] [[HTML]] [[CSS]] [[XML]]
             - [[DTD]] [[XML Schema]] [[UML]] [[Org-mode]] [[reStructedText]] [[KaTeX]]
     - 了解
-        - [[C++]] [[C语言]] [[Rust]] [[Lua]] [[Groovy]] [[Lisp]] [[Scheme]] [[Clojure]] [[Haskell]]
+        - [[C++]] [[C语言]] [[Rust]] [[Lua]] [[Groovy]] [[LISP]] [[Scheme]] [[Clojure]] [[Haskell]]
             - [[Scala]] [[C#]] [[R语言]] [[Elixir]] [[PHP]] [[Erlang]] [[Perl]] [[Prolog]] [[D语言]] [[Ruby]] [[.NET]] [[Objective-C]] [[Swift]] [[Dart]] [[Hack语言]] [[Roy]] [[Elm]] [[Jujia]] [[Fortran]] [[ML语言]] [[OCaml]] [[Simula]] [[Solidity]]
 - area组织{{table}}
     - 

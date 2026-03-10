@@ -1,0 +1,32 @@
+- sysdig
+    - c
+        - topprocs_cpu            # 进程cpu top
+            - evt.cpu=0           # 只统计cpu0
+        - topprocs_net            # 进程带宽 top
+        - topprocs_file           # 进程硬盘i/o top
+        - topfiles_bytes          # 文件读写 top
+            - proc.name=httpd     # 指定进程名
+        - topfiles_time           # 文件时间 top
+        - topprocs_errors         # 进程error top
+        - topfiles_errors         # 文件error top
+        - topscalls_time          # 系统调用时间 top
+        - topscalls "evt.failed=true"                 # 系统调用出错 top
+        - topconns                # 网络连接 top
+        - fdcount_by
+            - proc.name "fd.type=file"                # 进程文件描述符
+        - fdbytes_by
+            - fd.directory "fd.type=file"             # 目录读写 top
+            - fd.filename "fd.directory=/tmp/"        # /tmp目录文件 读写top
+            - fd.type             # fd type i/o
+        - echo_fds "fd.filename=passwd"               # 所有名为passwd文件的i/o
+        - stdout
+            - proc.name=bash      # 进程标准输出
+        - fileslower 1            # 文件i/o 大于1ms
+        - spy_users               # 命令执行情况
+    - A                          # 只显示可读数据
+    - s 4096                     # 指定 data buffer 字节
+    - r trace.scap               #  指定trace file
+    - pc                         # 详情
+- csysdig                         # 交互式工具
+    - vcontainers                # 容器资源
+    - pc                         # 详情

@@ -1,3 +1,2 @@
-- nftables，替代 iptables，C实现
-- nft list ruleset
-- nft add rule ...
+- 不可替代性通证/非同质通证, 持久性数字物品
+- 以太猫

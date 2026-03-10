@@ -2,8 +2,8 @@
 - Article: 因为要活得罪老板怎么办|一亩三分地职场达人版 | 一亩三分地 1Point3Acres
     - Author:: [[1Point3Acres Team]] [[一亩三分地 1Point3Acres]]
     - Full Title:: 因为要活得罪老板怎么办|一亩三分地职场达人版
-    - Category:: #articles
-    - Description:: 楼主今年二月份ng入职某中厂infra组，入职之前和组里关系好的senior学长通过气了解到该组manager是一个心眼小很micromanage的白男，并告诫我在所有事上一定不能有自己的想 ...
+    - Category: #articles
+    - Description: 楼主今年二月份ng入职某中厂infra组，入职之前和组里关系好的senior学长通过气了解到该组manager是一个心眼小很micromanage的白男，并告诫我在所有事上一定不能有自己的想 ...
     - Document Tags:: 
     - Date Captured:: [[January 16th, 2026]]
     - URL:: https://www.1point3acres.com/bbs/thread-1142704-1-1.html
@@ -11,8 +11,8 @@
 - Article: 写代码从来不是瓶颈 | 宝玉的分享 | baoyu.io
     - Author:: [[baoyu.io]]
     - Full Title:: 写代码从来不是瓶颈 | 宝玉的分享
-    - Category:: #articles
-    - Description:: 多年来，我一直认为软件开发的瓶颈根本不在于写代码本身。
+    - Category: #articles
+    - Description: 多年来，我一直认为软件开发的瓶颈根本不在于写代码本身。
       
       真正的瓶颈从来都是代码审查、通过指导与结对编程传递知识、测试、调试，还有人与人之间沟通协调所产生的“人类开销”。所有这些都被嵌套在纷繁复杂的任务票据、计划会议和敏捷开发流程之中。
       

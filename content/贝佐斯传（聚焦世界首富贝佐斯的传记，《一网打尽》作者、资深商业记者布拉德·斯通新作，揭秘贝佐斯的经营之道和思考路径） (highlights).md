@@ -1,5 +1,5 @@
 - Author:: [[布拉德·斯通]]
 - Full Title:: 贝佐斯传（聚焦世界首富贝佐斯的传记，《一网打尽》作者、资深商业记者布拉德·斯通新作，揭秘贝佐斯的经营之道和思考路径）
-- Category:: #books
+- Category: #books
 - ### Highlights first synced by #Readwise [[December 27th, 2022]]
     - 大胆思考 ([View Highlight](https://read.readwise.io/read/01gmn8f51vaf84rx19wcznavm8))

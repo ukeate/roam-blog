@@ -96,8 +96,8 @@
                     - 属性
                         - colorField                值为dataProvider提供数据中的字段名，表示数据在报表中的颜色
                         - valueField                值为dataProvider提供数据中的字段名，表示占有数值的多少
-                        - balloonText                鼠标悬停时气球中的内容，用[[value]], [[description]], [[percents]], [[open]], [[category]] 等标记来引用数据
-                            - 也可以用html标签，如： "<span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>"
+                        - balloonText                鼠标悬停时气球中的内容，用[[value]], description, [[percents]], [[open]], category 等标记来引用数据
+                            - 也可以用html标签，如： "<span style='font-size:14px'>category: <b>[[value]]</b></span>"
                         - lineAlpha                0或1，代表数据图形是否有边界
                         - fillAlpha                代表数据图形是否透明，0为透明
                     - AmSerialChart中AGraph的属性

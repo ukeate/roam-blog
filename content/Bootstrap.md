@@ -1,7 +1,7 @@
 - 在jquery基础上的组件框架
 - 移动
     - &lt;meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"&gt;- [[Bootstrap CSS]]
-- [[Less]]
+- [[CSS Less]]
 - 案例
     - ```css
       <div class="table-responsive">

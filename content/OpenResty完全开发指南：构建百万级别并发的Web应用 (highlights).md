@@ -1,6 +1,6 @@
 - Author:: [[Unknown]]
 - Full Title:: OpenResty完全开发指南：构建百万级别并发的Web应用
-- Category:: #articles
+- Category: #articles
 - URL:: https://readwise.io/reader/document_raw_content/18655268
 - ### Highlights first synced by #Readwise [[February 6th, 2023]]
     - 4.2 查询地址 ([View Highlight](https://read.readwise.io/read/01grkh3jkftgc7r5vm0q9gfs05))

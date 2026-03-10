@@ -7,7 +7,7 @@
     - 
     - 使用
         - [[gt]]、[[claude]]、[[codex]]、[[gemini]]、[[openclaw]]
-            - [[AI 听说]]、[[SD]]
+            - [[AI 听说]]、[[S D]]
     - 组装
         - [[skills]]、[[mcp]]、[[plugin]]
 - 操作{{table}}
@@ -32,7 +32,7 @@
         - 后搜<ctr r> 前搜<ctr s>
     - 其它
         - 
-            - [[mac]]、[[KB]]、[[Awesome]]、[[ipad]]
+            - [[mac]]、[[KB]]、[[awesome]]、[[ipad]]
 - TUI
     - 操作{{table}}
         - 
@@ -97,7 +97,7 @@
         - 进程
             - [[procs]]
         - 网络
-            - [[ip]]、[[ss]]、[[nft]]、[[bandwhich]]、[[iftop]]、[[ntopng]]
+            - [[ip]]、[[ss]]、[[nft命令]]、[[bandwhich]]、[[iftop]]、[[ntopng]]
                 - [[netstat]]、[[nicstat]]、[[nethogs]]、[[vnstat]]、[[iptraf-ng]]、[[tcptrack]]、[[nload]]、[[ifstat]]
                   
         - 抓包
