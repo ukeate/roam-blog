@@ -1,0 +1,9 @@
+- telnet，一个简单的远程终端协议。用户可以通过TCP连接登录到远程的一个主机上，好象使用远程主机一样。
+    - 采用客户机/服务器计算模式。在本地系统上运行TELNET客户机进程，在远程主机上运行TELNET服务器进程。
+    - 用于远程管理一台主机
+    - 命令
+        - telnet 192.168.1.200
+        - Login: group1_1
+        - Password: group1_1
+        - 按“CTRL+]”回到telnet提示符下
+        - quit 退出telnet

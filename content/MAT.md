@@ -1,0 +1,7 @@
+- Eclipse Memory Analyzer，Eclipse MAT插件分析dump文件
+- 分析dump文件
+- 泄漏分析
+    - Leak Suspects
+    - dominator_tree视图
+    - Histogram视图
+        - 右键基础数据类型 -> List objects -> with incoming references

@@ -1,0 +1,7 @@
+- __修改用户状态__
+- a -G root outrun   # 加入组
+- l newuser user1    # 改名
+- L user1            # 锁定
+- U user1            # 解锁
+- d /home/ftp ftp    # 改登录目录
+    - u 123 outrun       # 修改id

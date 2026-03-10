@@ -1,0 +1,4 @@
+- 比join()灵活
+- new CountDownLatch(4)
+- countDown()
+- await()

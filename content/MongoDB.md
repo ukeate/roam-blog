@@ -1,0 +1,40 @@
+- 特点
+    - 数据结构json(bson)
+    - 易写入，易修改
+    - C++编写
+    - 分布式
+    - 介于关系数据库 和 非关系数据库之间
+    - 查询语句强
+    - 支持索引
+    - BSON格式
+- 注意
+    - document不能大于4Mb
+    - 可以非安全模式异步马上成功
+    - 每个连接用队列存储命令
+- 数据结构定义
+    - collection                                        # 表
+        - document                                # 记录
+            - field(key, value)                # 字段(field)与值(value)
+    - 与关系型数据库的区别
+        - document中的field不要key俱全或一样
+        - find()命令查询
+- 命名
+    - 数据库与集合名
+        - 不能是空字符串
+        - 特殊字符
+            - ' (空格) , $ / \ \0
+        - 应该全小写
+        - 小于64字节
+        - 数据库名不与保留库名相同，如
+            - admin, local, config
+    - 集合名
+        - db-text合法，但不能db.db-text得到，要db.getCollection("db-text").text得到
+            - db-text 会认为是减法
+                - 数据库名可以是db-text
+        - 可以a.b来命名来划分子集合
+            - 不能以system.开头命名
+- [[BSON]]
+- [[MongoDB ObjectId]]
+- [[MongoDB API]]
+- [[MongoDB 命令]]
+- [[MongoDB Java Client]]

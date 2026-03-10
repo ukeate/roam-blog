@@ -1,0 +1,54 @@
+- 介绍
+    - 表达式(expression), 由解释器计算(evaluate)
+- 原始表达式(primary expression)
+    - 常量
+    - 直接量
+    - 关键字
+        - true, false, null, this
+    - 变量名
+- 对象和数组初始化表达式                             # 对象直接量、数组直接量
+    - {}
+    - []
+- 函数定义表达式                                    # 函数直接量
+    - var square = function(x){reutrn x*x}
+- 属性访问表达式                                    # 其前面的表达式首先计算, null, undefined会抛出类型错误异常，因为它们不能包含属性
+    - .
+    - [1]
+    - ["a"]
+- 调用表达式(invocation expression)
+    - 顺序
+        - 首先计算函数表达式，再计算参数表达式
+        - 传入实参的值赋值给形参
+        - 执行函数体
+        - return返回值给变量名，无return 函数名赋为undefined
+    - 左边是属性访问表达式时，称作方法调用(method invocation)
+        - 函数体的this是宿主对象(执行者)
+        - 非方法调用时，this是顶级对象
+            - ECMAScript 5中非方法调用时, this是undefined
+    - f(0)                                        # 非方法调用
+    - Math.max(x, y, z)                           # 静态方法调用, this为Math类
+    - a.sort()                                    # 动态方法调用, this为a实例
+- 对象创建表达式(object creation expression)
+    - 特点
+        - 创建一个对象并调用构造函数
+        - 与调用表达式相似
+    - 过程
+        - 创建空对象，该对象作为构造函数的this，可用来初始化动态属性
+        - 传入指定参数，执行构造函数。
+        - 返回值以构造函数返回值优先(本次对象废弃)，没有时则返回本次创建的对象
+    - new Point(2, 3)
+    - new Object()
+    - new Object                                  # 不传参时, ()可以省略
+- 关系表达式
+    - ==
+    - &lt;    - in
+    - instanceof
+- 逻辑表达式
+    - !
+    - &&
+    - ||
+- 赋值表达式
+    - (a=b) == 0
+    - i = j = k = 0;
+- [[JS 运算符]]
+- [[JS eval]]

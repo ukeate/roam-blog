@@ -1,0 +1,6 @@
+- 效率不高
+- PipedInputStream
+    - connect(PipedOutputStream)
+    - read(byte[])
+- PipedOutputStream
+    - write(byte[])

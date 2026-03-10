@@ -1,0 +1,30 @@
+- Java Database Connectivty，java rds client
+- 流程
+    - Class.forName()
+        - 加载驱动
+    - DriverManager.getConnection()
+    - 获得sql会话对象 Statement或PreparedStatement
+    - 设置参数setXxx(), 执行sql，处理结果集
+    - 关闭结果集、关闭会话、关闭连接
+- Statement
+    - execute
+    - executeQuery
+    - executeUpdate
+    - 不要使用Statement
+        - 容易sql注入
+        - 代码可读性可维护性差
+        - PreparedStatement性能高，db缓存机制，相同预编译语句调用不再编译
+- PreparedStatement
+    - 继承Statement, 预编译sql
+- 事务怎么写
+    - 编程式
+    - 声明式: 用aop注入
+- 三种连接
+    - Connection
+        - 默认自动提交
+        - 禁止自动提交开启事务, 后调commit
+    - Pooled Connection
+        - 使用完后不用关闭
+    - XA Connection
+        - 分布式事务
+        - XAResource获得

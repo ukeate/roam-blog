@@ -1,0 +1,2 @@
+- Enterprise Edition
+- 企业应用(ERP, CRM), 扩充API(javax包, 有些合入了JavaSE), 部署支持

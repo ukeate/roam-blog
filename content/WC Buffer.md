@@ -1,0 +1,1 @@
+- Writer Comblining Buffer，合并写, 一般4个字节

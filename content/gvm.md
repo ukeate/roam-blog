@@ -1,0 +1,9 @@
+- Go 版本管理
+- 命令
+    - gvm
+        - install go1.5
+        - use go1.5
+        - list
+        - listall
+        - implode
+            - 删除所有go版本和gvm本身

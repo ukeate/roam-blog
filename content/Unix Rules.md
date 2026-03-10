@@ -1,0 +1,17 @@
+- 模块化(modularity)          # 模块由精心设计的接口连接
+- 清晰化(clarity)             # 可读性、可维护性
+- 组合(composition)
+- 分离(separation)
+- 简单(simplicity)
+- 节俭(parsimony)             # 越小越好
+- 透明(transparency)          # log, tracing
+- 鲁棒(robustness)
+- 可展示(representation)      # 逻辑简单，数据复杂
+- 最小惊吓(least surprise)     # 少打破用户预期
+- 安静(silence)
+- 修复(repair)                # 产生足够报错
+- 经济(economy)               # 减少开发时间
+- 生成(generation)            # 避免手写, 用高阶抽象生成代码
+- 优化(optimization)            # 优化和收益平衡
+- 分化(diversity)             # 一开始设计不限制、优雅开放灵活
+- 扩展(extensibility)         # 协议可扩展

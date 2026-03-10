@@ -1,0 +1,1 @@
+- Surface Mount Technology,一种电子制造技术，主要用于生产电子产品中的表面贴装部件

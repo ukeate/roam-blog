@@ -1,0 +1,16 @@
+- LiveJournal下的Danga Interactive开发的，Facebook是主要用户。
+- [[Twemcache]]
+- [[Twemproxy]]
+- [[Mcrouter]]
+- 特点
+    - 集中式缓存，可分布式部署
+    - 多线程，KV存储，分布式
+    - 协议简单，基于libevent的事件处理
+- 概念
+    - Slab Allocation机制
+        - 内存分配
+        - Growth Factor因子
+            - 控制slab之间差异
+            - 默认1.2
+    - Item
+        - 要存的数据

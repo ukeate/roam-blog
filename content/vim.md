@@ -1,0 +1,66 @@
+- 编译
+    - -with-features=tiny                # 只包含最基本功能。small, normal, big, huge, :h feature-list查看
+- 命令
+    - vim -u NONE -N                      # -u NONE 不加载配置文件和插件，并进入vi兼容模式
+        - u code/essential.vim           # 加载指定配置文件
+        - N set nocompatible             # 不进入vi兼容模式
+        - -version                       # 可查看特性
+- mode
+    - 普通模式
+    - 插入模式
+    - 可视模式
+        - v/V                             # 面向字/面向行 可视模式
+        - &lt;C - v&gt;                         # 面向块 可视模式        - gv                              # 重选上次选区
+        - o                               # 切换到选区的开头, 再按切换回尾端　
+    - 替换模式
+        - R
+    - 命令行模式(Ex命令)
+        - :                               # 可视模式中选定范围，切换到命令行时，自动输入range'<,'>代表选中区
+    - 操作符待决模式                         # operator 与 motion之间的空闲时期
+        - 两个字符的operator, 字符间的空闲时期不是该模式，是命名空间，是普通模式的扩充
+        - 有了这个模式，能创建自定义映射项来激活或终结操作符待决模式，就可以自定义operator和motion
+    - 选择模式                              # 类似windows中选中
+        - &lt;C - g&gt;在可视和选择模式切换    - 历史
+        - q:                              # 命令历史
+        - q/                              # 搜索历史
+- operate
+    - 思想
+        - {operator}{motion}
+        - {operator}{text-objects}
+    - shortcut key
+        - ctrl + c                        # 同Esc
+    - motions
+        - .                               # 重复前一次修改, 目标做到一键移动，一键执行。修改是指: 一个normal模式下的按键, 插入内容, <ESC>; 或一组normal模式下按键
+        - K                               # 当前单词的:h 手册
+        - ga                              # 当前字符的unicode码
+    - Ex command                          # 可视模式下选中行, : 时前面有'<,'> 表示对选中的行执行操作
+        - :h e 或 :help e                 # 查看e的帮助
+            - vimtutor 查看教程
+            - operator 查看operator
+            - map-operator 查看自定义operator
+            - omap-info 查看自定义motion
+            - digraphs-default
+            - digraphs
+            - digraphs-table 查看二合字符表
+            - ex-cmd-index 查看所有Ex命令
+            - vi-differences vim 相对vi的特性
+        - :version                        # 查看版本和支持的功能
+        - :! command                      # 执行某shell命令(CR返回)
+            - !! 执行前一个命令
+            - r!command 执行结果插入当前位置
+            - w!command 当前文件作为输入执行
+        - :cd directory                   # 修改工作目录
+        - :sh                             # 跳到shell, 再执行exit返回
+        - :map bbc ia                     # 定义命令序列ia的别名为bbc
+        - :pwd                            # 显示当前目录
+        - :normal A;                      # 执行普通模式命令A;, 添加分号到行尾
+        - 系统命令
+            - :grep t * # 在当前所有文件中匹配t, 自动加-n参数(显示行号)
+            - :ls
+- [[VIM locate oper]]
+- [[VIM edit oper]]
+- [[VIM registers oper]]
+- [[VIM file oper]]
+- [[VIM配置]]
+- [[VIM插件]]
+- [[VIM方案]]

@@ -1,0 +1,1 @@
+- 基于Rsolr，以dsl结构用ruby调solr

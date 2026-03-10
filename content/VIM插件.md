@@ -1,0 +1,43 @@
+- netrw
+    - 自带插件
+    - edit ./                         # 查看目录树
+    - Ex                              # 同上
+    - Se                              # 下面弹出目录树 好用
+    - Ve                              # 左面弹出目录树 好用
+    - &lt;cr&gt;   netrw 进入目录或读入文件 |netrw-cr|    - &lt;del&gt;  netrw 试图删除文件/目录 |netrw-del|    - netrw 往上走一层目录 |netrw--|
+    - a    在以下三种方式间切换: 正常显示，|netrw-a|
+        - 隐藏 (不显示匹配 g:netrw_list_hide 的文件) 和
+        - 显示 (只显示匹配 g:netrw_list_hide 的文件)
+    - c    使浏览中的目录成为当前目录 |netrw-c|
+    - d    建立目录 |netrw-d|
+    - D    netrw 试图删除文件/目录 |netrw-D|
+    - i    在瘦、长、宽和树形的各种列表方式间切换 |netrw-i|
+    - &lt;c-l&gt;  netrw 刷新目录列表 |netrw-ctrl-l|    - o    打开新浏览窗口，进入光标所在的目录。使用水平分割。|netrw-o|
+    - p    预览文件 |netrw-p|
+    - P    在前次使用的窗口里浏览 |netrw-P|
+    - r    反转排序顺序 |netrw-r|
+    - R    给指定的文件/目录换名 |netrw-R|
+    - s    选择排序方式: 按名字、时间或文件大小排序 |netrw-s|
+    - S    指定按名字排序的后缀优先级 |netrw-S|
+    - t    在新标签页里打开光标所在的文件/目录 |netrw-t|
+    - v    打开新浏览窗口，进入光标所在的目录。使用垂直分割。|netrw-v|
+- ctags
+    - 将ec57w32.zip解压，在解压后文件夹中找到ctags.exe，将其复制到C:\ProgramFiles\Vim\vim72下，并编辑_vimrc文件，添加以下内容：
+    - set tags=tags;
+    - set autochdir
+    - 打开cmd命令行，切换到你要查看的源代码的根目录处，运行
+    - ctags -R
+    - 将会在此目录处生成一个tags文件。
+    - 用gvim打开一个代码文件，将光标放到某一函数名上，如下图的UpdateViewByPosNo()，按下"ctrl+]"，光标会自动跳转到定义处。按下"ctrl+T"会跳回到原来的位置。
+    - 变量、结构体、宏等等，都可以这样做。
+    - 当你的源文件有更新时，只能重新运行ctags -R命令，来更新tags文件。
+    - taglist
+        - 将taglist_45.zip解压，解压后包含一个doc文件夹和一个plugin文件夹，将其中内容分别复制到C:\Program Files\Vim\vim72下的doc及plugin中。
+        - 在_vimrc文件中加入以下内容：
+        - let Tlist_Show_One_File=1
+        - let Tlist_Exit_OnlyWindow=1
+        - 用gvim打开代码文件（已生成过tags文件），:Tlist，TagList窗口即出现在左侧。
+- visual-star
+- Qargs
+- nerdTreeToggle
+    - 目录显示插件

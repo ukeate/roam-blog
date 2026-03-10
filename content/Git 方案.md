@@ -1,0 +1,145 @@
+- 回退commit
+    - git reset --hard ea1
+        - 进行回退
+    - git push -f
+        - 强制提交
+    - git clean -xdf
+        - 一般配合git reset使用, 清除已有的改动
+- 补充commit
+    - git commit --amend
+    - git push origin +a:a
+- 合并commit
+    - git rebase -i cf7e875   # 合并Head到cf7e875 commit
+    - 修改rebase记录
+        - pick xxxx
+        - s yyyy
+        - s zzzz
+    - git status              # 查看冲突
+    - git add .               # 解决冲突提交
+    - git rebase --continue
+    - 修改commit记录
+- 远程回退
+    - git revert id
+- 忽略文件
+    - git add 逆操作
+        - git rm --cached a
+    - 远程保留，忽略本地
+        - git update-index --assume-unchanged a
+        - 恢复 git update-index --no-assume-unchanged a
+    - 远程删除，忽略本地
+        - git rm --cached a
+        - 恢复 git add -A a
+    - 远程不论，忽略本地
+        - .gitignore
+- 删本地分支
+    - git branch -D test
+- 删除远程分支
+    - git push origin --delete test
+    - 或
+        - git branch -r -d origin/test
+        - git push origin :test
+- 恢复历史版本文件
+    - git reset ba5798aff7778c95252b9e01e924dddb5811bcd7 courseModel.js
+    - git checkout -- courseModel.js
+    - git push origin +master:master                # 提交回退版本到远程
+- 查看修改的内容
+    - git show
+        - 与上个commit 比较
+    - git whatchanged
+    - git log --stat --date=relative
+- 删除历史
+    - git filter-branch --force --index-filter 'git rm -r --cached --ignore-unmatch .idea' --prune-empty --tag-name-filter cat -- --all
+    - git push origin main --force
+    - rm -rf .git/refs/original/
+    - git reflog expire --expire=now --all
+    - git gc --prune=now
+    - git gc --aggressive --prune=now
+- 合并commit历史
+    - git branch test-bak
+    - git reset --hard ea1
+    - git merge --squash test-bak
+    - git push origin test -f
+    - git branch -D test-bak
+- 打tag
+    - git tag                     # git tag -l 'v1.*' 通配查找
+    - git tag -a v1.0 -m "a"      # git tag -a v1.0 ba1 给commit打标签
+    - git tag -a v1.0 -m "a" ea1  # 指定commit
+    - git show v1.0
+    - git checkout v1.0
+    - git push origin v1.0        # git push origin -tags 将本地所有标签提交
+    - git tag -d v1.0
+    - git push origin --delete tag v1.0 
+        - git push origin :refs/tags/v1.0c
+- 查tag的commit
+    - git show 1.4.1
+    - git log --pretty=oneline 1.4.0 1.4.1
+- fork跨网站git
+    - git remote add upstream git@github.com:xuyuadmin/xxljob.git
+    - git fetch upstream
+    - git merge upstream/master --allow-unrelated-histories
+- 文件损坏错误error object file is empty
+    - find .git/objects/ -type f -empty | xargs rm
+    - git fetch -p
+    - git fsck --full
+- 统计某人代码
+    - git log --author="$(git config --get user.name)" --pretty=tformat: --numstat | gawk '{ add += $1 ; subs += $2 ; loc += $1 - $2 } END { printf "added lines: %s removed lines : %s total lines: %s\n",add,subs,loc }' -
+- 统计所有人代码
+    - git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }' -; done
+- 共添加或修改行数
+    - git log --stat|perl -ne 'END { print $c } $c += $1 if /(\d+) insertions/'
+- pr
+    - 介绍
+        - fork与pull request
+    - fork后本地
+        - git clone git@github.com:chenduo/auth.git
+        - git remote add upstream git@github.com:a/auth.git
+        - git merge upstream/main 
+        - git push origin main
+    - 本地合并更新
+        - git checkout master
+        - git fetch upstream
+            - fetch远程仓库
+        - git rebase upstream/master
+            - 合并远程master
+        - git push
+        - git checkout branch1
+        - git rebase master
+    - pr追加
+        - git commit --amend
+            - 更新本地的本次commit,不产生新的commit
+        - git push origin +branch1:branch1
+            - 使用本地的commit覆盖远程分支的有问题的commit
+    - 处理pr
+        - git fetch origin
+        - git checkout -b pr1 origin/pr1
+        - git checkout master
+        - git merge --no-ff pr1
+        - git reset --hard
+        - git revert -m 1 ea1
+            - 舍弃pr
+        - git commit -am 'revert'
+        - git revert revertid1 取消上次revert
+            - intellji - local history - revert
+        - git push origin master
+- 开发
+    - 提交
+        - git pull eoecn dev
+            - 等于git fetch加git merge
+        - git diff
+            - buffer与HEAD的差异(不包括新建文件)
+        - git add -A .
+            - 添加到stage
+        - git status
+            - stage与HEAD的差异
+        - git diff --cached/--stage
+            - stage与HEAD的详细差异
+        - git diff HEAD
+            - buffer, stage与HEAD的详细差异
+        - git commit -am 'a'
+        - git push origin dev
+        - 网站上点pull request
+- 代码审查
+    - git blame -L 60,60 [filename]
+    - git blame -L 60,60 --reverse 5534e1b4b..HEAD [filename]      
+        - 版本范围内某行代码提交记录
+    - git show [commit id]

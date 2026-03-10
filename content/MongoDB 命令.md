@@ -1,0 +1,46 @@
+- mongo 127.0.0.1:27017/admin
+    - 启动sell , 默认数据库为test
+- mongod –port 10000 –fork –logpath= logpath=/data/mongodb/log/mongodb.log -- logappend -- dbpath=/data/mongodb/data/db –config ~/.mongodb.conf 
+    - 启动服务 -auth开启身份验证
+    - --rest 开启http管理，其端口号比mongo端口号大1000
+        - --nohttpinterface关闭http管理
+    - --bindip localhost 设置只能有某ip访问
+    - --noscripting 完全禁止服务端js执行
+    - --repair 启动并修复
+    - 不要发送SIGKILL信号关闭(kill -9), 应发送SIGINT或SIGTERM
+    - mongod --remove                                
+        - 结束服务
+    - // mongodb.conf
+        - port = 5586
+        - fork = true
+        - logpath = mongodb.log
+- mongodump --host 127.0.0.1 --port 27017 --out ./dir/name
+    - 备份数据库
+- mongodump -h IP --port 端口 -u 用户名 -p 密码 -d 数据库 -o 文件存在路径
+- mongorestore --host 127.0.0.1 --port 27017 --directoryperdb ./dir/name
+    - mongorestore -h IP --port 端口 -u 用户名 -p 密码 -d 数据库 --drop 文件存在路径
+    - --drop 是先删除现有的数据
+- mongoexport -d tank -c users -o /home/outrun/mongo
+    - 导出整张表
+        - mongoexport -h IP --port 端口 -u 用户名 -p 密码 -d 数据库 -c 表名 -f 字段 -q 条件导出 --csv -o 文件名
+    - mongoexport -d tank -c users --csv -f uid,name,sex -o tank/users.csv 
+        - 导出表的部分字段
+    - mongoexport -d tank -c users -q '{uid:{$gt:1}}' -o tank/users.json
+        - 根据条件导出数据
+- mongoimport -d tank -c users --upsert tank/users.dat
+    - mongoimport -h IP --port 端口 -u 用户名 -p 密码 -d 数据库 -c 表名 --upsert --drop 文件名 
+        - 还原整表导出的非csv文件,  --upsert 表示插入或更新现有数据
+    - mongoimport -h IP --port 端口 -u 用户名 -p 密码 -d 数据库 -c 表名 --upsertFields 字段 --drop 文件名
+        - 还原部分字段导出的文件, --upsertFields跟upsert一样，如 mongoimport -d tank -c users  --upsertFields uid,name,sex  tank/users.dat
+    - mongoimport -h IP --port 端口 -u 用户名 -p 密码 -d 数据库 -c 表名 --type 类型 --headerline --upsert --drop 文件名  
+        - 还原导出的csv文件
+        - mongoimport -d tank -c users --type csv --headerline --file tank/users.csv
+- mongofiles put foo.txt
+    - 使用gridfs
+    - list
+    - get foo.txt
+    - search
+        - 按文件名查找
+    - delete foo.txt
+- mongostat
+    - 实时输出mongo状态

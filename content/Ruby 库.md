@@ -1,0 +1,10 @@
+- 接口
+    - [[Rails]]
+    - [[ROR]]
+    - grape
+        - 运行在rack或rails/sinatra配合使用的restful风格的ruby微框架
+- DSL
+    - sinatra
+        - 微型web
+- 搜索
+    - [[Sunspot]]

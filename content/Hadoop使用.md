@@ -1,0 +1,47 @@
+- 软件结构
+    - 0        jdk, Hadoop                        NameNode, DFSZKFailoverController
+    - 1        jdk, Hadoop                        NameNode, DFSZKFailoverController
+    - 2        jdk, Hadoop                        ResourceManager
+    - 3        jdk, Hadoop, Zookeeper        DataNode, NodeManager, JournalNode, QuorumPeerMain
+    - 4        jdk, Hadoop, Zookeeper        DataNode, NodeManager, JournalNode, QuorumPeerMain
+    - 5        jdk, Hadoop, Zookeeper        DataNode, NodeManager, JournalNode, QuorumPeerMain
+- Zookeeper
+    - 配置conf/zoo.cfg
+        - tickTime=2000                        # 心跳间隔(ms)
+        - initLimit=10                        # 初始化时最多容忍心跳次数
+        - syncLimit=5                        # 同步失败最多容忍心跳次数
+        - dataDir=/usr/local/Zookeeper/data        # 运行时文件目录
+        - clientPort=2181                # 运行端口号
+        - server.1=主机名或ip:2888:3888        # 服务运行端口与选举端口
+        - server.2=主机名或ip:2888:3888
+        - server.3=主机名或ip:2888:3888
+    - 命令
+        - ./bin/zkServer.sh start
+        - ./bin/zkServer.sh status
+        - jps                                        # 显示名为QuorumPeerMain
+- Hadoop
+    - Hadoop-env.sh
+        - export JAVA_HOME=
+    - core-site.xml
+        - &lt;configuration&gt;            - &lt;property&gt;                - &lt;name&gt;fs.defaultFS&lt;/name&gt;                - &lt;value&gt;HDFS://ns1&lt;/value&gt;            - &lt;/property&gt;            - &lt;property&gt;                - &lt;name&gt;Hadoop.tmp.dir&lt;/name&gt;                - &lt;value&gt;/usr/local/Hadoop-2.2.0/tmp&lt;/value&gt;            - &lt;/property&gt;            - &lt;property&gt;                - &lt;name&gt;ha.Zookeeper.quorum&lt;/name&gt;                - &lt;value&gt;192.168.56.13:2181, 192.168.56.14:2181, 192.168.56.15:2181&lt;/value&gt;            - &lt;/property&gt;        - &lt;/configuration&gt;    - HDFS-site.xml
+        - &lt;property&gt;            - &lt;name&gt;dfs.nameservices&lt;/name&gt;            - &lt;value&gt;ns1&lt;/value&gt;        - &lt;/property&gt;        - &lt;property&gt;            - &lt;name&gt;dfs.ha.namenodes.ns1&lt;/name&gt;            - &lt;value&gt;nn1,nn2&lt;/value&gt;        - &lt;/property&gt;        - &lt;property&gt;            - &lt;name&gt;dfs.namenode.rpc-address.ns1.nn1&lt;/name&gt;            - &lt;value&gt;192.168.56.10:9000&lt;/value&gt;        - &lt;/property&gt;        - &lt;property&gt;            - &lt;name&gt;dfs.namenode.http-address.ns1.nn1&lt;/name&gt;            - &lt;value&gt;192.168.56.10:50070&lt;/value&gt;        - &lt;/property&gt;        - &lt;property&gt;            - &lt;name&gt;dfs.namenode.rpc-address.ns1.nn2&lt;/name&gt;            - &lt;value&gt;192.168.56.11:9000&lt;/value&gt;        - &lt;/property&gt;        - &lt;property&gt;            - &lt;name&gt;dfs.namenode.http-address.ns1.nn2&lt;/name&gt;            - &lt;value&gt;192.168.56.11:50070&lt;/value&gt;        - &lt;/property&gt;        - &lt;property&gt;            - &lt;name&gt;dfs.namenode.shared.edits.dir&lt;/name&gt;            - &lt;value&gt;qjournal://192.168.56.13:8485;192.168.56.14:8485;192.168.56.15:8485&lt;/value&gt;        - &lt;/property&gt;        - &lt;property&gt;            - &lt;name&gt;dfs.journalnode.edits.dir&lt;/name&gt;            - &lt;value&gt;/usr/local/Hadoop-2.2.0/journal&lt;/value&gt;        - &lt;/property&gt;        - &lt;property&gt;            - &lt;name&gt;dfs.ha.automatic-failover.enabled&lt;/name&gt;            - &lt;value&gt;true&lt;/value&gt;        - &lt;/property&gt;        - &lt;property&gt;            - &lt;name&gt;dfs.client.failover.proxy.provider.ns1&lt;/name&gt;            - &lt;value&gt;org.Apache.Hadoop.HDFS.server.namenode.ha.ConfiguredFailoverProxyProvider&lt;/value&gt;        - &lt;/property&gt;        - &lt;property&gt;            - &lt;name&gt;dfs.ha.fencing.methods&lt;/name&gt;            - &lt;value&gt;sshfence&lt;/value&gt;        - &lt;/property&gt;        - &lt;property&gt;            - &lt;name&gt;dfs.ha.fencing.ssh.private-key-files&lt;/name&gt;            - &lt;value&gt;/root/.ssh/id_rsa&lt;/value&gt;        - &lt;/property&gt;    - mapred-site.xml
+        - &lt;property&gt;            - &lt;name&gt;mapreduce.framework.name&lt;/name&gt;            - &lt;value&gt;Yarn&lt;/value&gt;        - &lt;/property&gt;    - Yarn-site.xml
+        - &lt;property&gt;            - &lt;name&gt;Yarn.resourcemanager.hostname&lt;/name&gt;            - &lt;value&gt;192.168.56.12&lt;/value&gt;        - &lt;/property&gt;        - &lt;property&gt;            - &lt;name&gt;Yarn.nodemanager.aux-services&lt;/name&gt;            - &lt;value&gt;mapreduce_shuffle&lt;/value&gt;        - &lt;/property&gt;    - etc/Hadoop/slaves
+        - 192.168.56.13
+        - 192.168.56.14
+        - 192.168.56.15
+- 收尾
+    - ssh免登录(0到1,2,3,4,5)
+        - ssh-keygen -t rsa
+        - ssh-copy-id -i 192.168.56.11            # 这样就可以免登录访问192.168.56.11了
+            - ssh-copy-id -i localhost 免登录自己
+    - 复制Hadoop2.2.0(从0到1,2,3,4,5)
+    - 添加Hadoop_home到环境变量
+        - etc/profile
+            - export HADOOP_HOME=/usr/local/Hadoop-2.2.0
+            - export PATH=$PATH:$HADOOP_HOME/bin
+- 启动
+    - 0 上启动
+        - ./sbin/Hadoop-daemons.sh start journalnode
+    - 0 上格式化namenode
+        - Hadoop namenode -format

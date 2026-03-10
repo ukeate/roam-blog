@@ -1,0 +1,3 @@
+- 满了一起放行, 场景如I/O批量消费
+- new CyclicBarrier(4, ()->{})
+- await()

@@ -1,0 +1,130 @@
+- [[IOC]]
+- [[DI]]
+- [[AOP]]
+- 特点
+    - 容器, 也容纳管理了第三方框架         # 目的是解耦框架api
+    - 轻量级，模块化，无(少)侵入
+- 模块
+    - dao, orm, aop, jee, web, core
+- 结构
+    - 核心容器(core container)
+        - Core        # 最底层，资源访问，类型转换
+        - Beans       # IOC, DI, BeanFactory
+        - Context     # 以Core、Beans为基础，ApplicationContext。资源绑定，数据验证，国际化，JavaEE支持，容器生命周期，事件传播
+        - EL          # 表达式语言
+    - AOP, Aspects    # Aspects对AspectsJ集成, 功能多于spring asp
+    - 数据访问/集成
+        - JDBC
+        - ORM
+        - OXM         # object xml 映射
+        - JMS         # 消息与异步通信
+        - 事务
+    - Web/Remoting
+        - Web             # ioc窗口，rmi, hessian,burlap, web service
+        - Web-Servlet
+        - Web-Struts
+        - Web-Porlet      # portal认证
+    - Test
+- 设计模式
+    - 代理
+        - 目标对象实现接口，使用Proxy
+        - 未实现接口，使用CGLIB
+    - 单例
+        - bean默认单例
+    - 模板, 解决代码重复问题
+        - RestTemplate, JmsTemplate, JpaTemplate
+    - 控制器
+        - DispatherServlet对请求分发
+    - 视图帮助(view helper)
+        - 提供jsp标签、高效宏 帮助在视图中写代码
+    - 依赖注入
+        - BeanFactory, ApplicationContext核心理念
+    - 工厂
+        - BeanFactory
+- 循环依赖问题
+    - 构造器, 正在创建在Bean池标记，创建完删除标记，标记冲突报错      # 所以用@Autowired决定注入时机，不写在构造方法里
+    - 单例， 三级缓存, 提前暴露使双方都可初始化
+    - setter, 提前暴露bean
+- 版本
+    - 2.5
+        - 注解
+    - 3.2
+        - 基于注解的注入测试类@RunW..
+- 使用
+    - jar包 ：
+        - 核心包：/dist/modules                # 或是/dist中的spring.jar包
+            - core模块
+                - beans
+                - context
+                - context-support
+                - core
+        - 日志包：/lib/jakata-commons/commons-logging.jar
+    - 创建xml文件(最好在JavaBean的旁边)
+        - 绑定约束文件        /dist/resources/spring-beans-2.5.xsd
+        - copy xml文件的头：/sample/petclinic/war/web-inf/app...xml
+        - 创建JavaBean.java
+        - xml文件中配置bean                # src下
+            - &lt;bean id="" class=""&gt;                # id值唯一,class指定 javaBean的类目录                - &lt;property name="" value=""&gt;                - &lt;property name="" ref="girlID"&gt;                # 引用类型，其中girlID为spring配置的bean Id    - 业务类中
+        - ApplicationContext ac = new ClassPathXmlApplicationContext(new String [] {"配置xml文件路径"})
+            - 注意：ac创建时，其内部的JavaBean默认全部实例化一遍，并且全部注入了属性
+            - 该容器不用关闭
+        - if(ac.containsBean("boyID")){
+            - Boy boy = (Boy)ac.getBean("boyID");
+        - }
+- API
+    - ApplicationContext是一个接口，表示spring容器/ioc容器
+    - ClassPathXmlApplicationContext        # 只从类路径中读取xml配置文件（src/目录下能访问的路径）省略src/目录
+    - FileSystemXmlApplicationContext                # 文件路径 ,从src/开始
+        - ac.getBean("boyID")
+        - ac.containsBean("boyID")                # 通过此方法去判断是否存在 ，而不是得到的是否为null
+        - ac.destroy()                                        # ac中的bean实例全部销毁
+    - BeanFactory
+        - 基础IOC容器, 默认延迟初始化
+        - DefaultListableBeanFactory
+        - ApplicationContext
+        - XmlBeanFactory      # 根据xml中的定义加载bean
+    - Spring-DAO      # 提供规范, 翻译框架(JDBC<Hibernate,JPA等)异常为DataAccessException
+        - @Repository 注解DAO类
+    - Spring-JDBC     # 模板类
+        - DataSource
+        - JdbcTemplate
+        - JdbcDaoSupport  # 对dao扩展, DataAccessExceptions异常翻译器
+    - Spring-ORM      # 统称，对各模块(JPA,JDO,Hibernate,iBatis,TopLink,OJB)实现了spring的集成类
+        - 把DataSource注入到SessionFactory或EntityManagerFactory等bean中     # jdbc不需要，因为jdbc直接使用DataSource
+        - HibernateTemplate
+        - HibernateDAOSupport     # 继承它提供aop拦截器
+    - Web
+        - 在ApplicationContext基础上, 提供web上下文和面向web的服务
+        - ApplicationContext      # 以BeanFactory为基础,容器启动后默认全部初始化绑定
+            - FileSystemXmlApplicationContext     # 指定文件
+            - ClassPathXmlApplicationContext      # 从classpath找设置
+            - WebXmlApplicationContext
+- 注解
+    - applicationContext.xml
+        - &lt;context:annotation-config/&gt;        - &lt;!-- 添加注解扫描功能,启动的时候哪些包要检查是否有注解 --&gt;        - &lt;context:component-scan base-package="xxx" /&gt;    - @Required
+        - setter
+    - @Autowired
+        - setter、构造方法、变量
+    - @Qualifier("dataSource)
+        - 多类配置时，指定使用类
+    - @Bean
+        - 返回对象注册为bean
+    - @Configuration
+        - bean定义
+    - @Service
+        - 添加类名小写的spring bean id        也可以@Service(value="xx")自定义id
+        - action类前换成@Controller                @Service也是可以的
+    - @Scope(value="prototype")
+        - 工具类或其它组件类换成@Component 也可以@Service,如定时器TimerTask就是组件
+    - @Resource
+        - 按属性名注入资源
+    - 测试类
+        - @RunWith(SpringJUnit4ClassRunner.class)
+        - @ContextConfiguration(locations = "classpath:applicationContext*.xml")
+    - @PostConstruct
+        - 类加载时运行的方法，相当于xml中配置的init-method
+    - @PreDestroy
+        - 类销毁前运行的方法
+- [[Spring组件]]
+- [[Spring Boot]]
+- [[Spring Integration]]

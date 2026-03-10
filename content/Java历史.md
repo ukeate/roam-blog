@@ -1,0 +1,145 @@
+- 1995.5.23
+    - SunWorld大会公布Java1.0，"Write Once, Run Anywhere"
+- 1996.1.23
+    - [[JDK1.0]] 发布
+- 1996.5
+    - JavaOne大会
+- 1997.2.19
+    - [[JDK1.1]]
+- 1998.12.4
+    - [[JDK1.2]], 分出[[J2SE]]、[[J2EE]]、[[J2ME]]
+- 1999.4.27
+    - [[Sun HotSpot VM]]，最初Longview Techno-logies开发，1997年被Sun收购
+- 2000.5.8
+    - [[JDK1.3]]
+- 2001.5.17
+    - JDK1.3.1，开始两年发布一个主要版本，修订版用昆虫代号
+- 2002.2.13
+    - [[JDK1.4]], 成熟版本
+    - Compaq、SAS、Fujitsu、Symbian、IBM参与，实现独立发行版
+- 2002.9.16
+    - [[.NET Framework]]发布, 2014.11.12  [[.Net Core]] 开源
+- 2004.9.30
+    - [[JDK1.5]]，放弃1.x命名方式
+- 2006.11.13
+    - JavaOne大会，Sun宣布Java开源, [[GPL V2]]协议，建立[[OpenJDK]]，几乎拥有SunJDK 7的全部代码
+- 2006.12.11
+    - [[JDK6]]，发布了211个更新，2018.10.18发布Java SE 6 Update 211
+    - 终结JDK1.2开始的J2EE、J2SE、J2ME，改为Java EE 6、Java SE 6、Java ME 6
+- 2009.2.19
+    - [[JDK7]]，计划维护到2022年
+        - OpenJDK7和Sun JDK7几乎一样
+    - Oracle从JDK7开始接手
+        - Java SE定义商业版Java SE Support
+- 2009.4.20
+    - Oracle收购Sun，74亿美元
+        - Java商标归Oracle所有，Java语言不属于Oracle，由[[JCP]]管理
+        - Oracle收购[[BEA]]
+- 2011.7.28
+    - [[JDK7]]发布
+- 2014.3.18
+    - [[JDK8]]，使用[[JEP]]管理特性
+- 2017.9.21
+    - [[JDK9]]，开始每年3月、9月发布一个版本，每三年一个LTS版本
+        - 提出孵化器模块(Incubator)和预览特性(Preview)
+- 2018.3.20
+    - [[JDK10]]
+- 2018.3
+    - Java EE成为历史名称
+        - [[JDBC]]、[[JMS]]、[[Servlet]]赠予[[Eclipse]]基金会，不能用Java商标，更名为[[Jakarta EE]]
+- 2018.9.25
+    - [[JDK11]]
+    - 宣布同时发布两个JDK，[[Oracle OpenJDK]]，[[Oracle JDK]]
+        - 共享大部分源码
+        - 个人免费
+        - OpenJDK不付费，有半年更新支持
+        - Oracle JDK付费，三年更新支持
+- 2018.10
+    - 最后一届JavaOne大会，[[Java Mission Control]]解散
+- 2019.3.20
+    - [[JDK12]]
+    - RedHat接手OpenJDK 8 和OpenJDK 11
+- 2019.9.17
+    - [[JDK13]]
+- 2020.3.17
+    - [[JDK14]]
+- 2020.9.15
+    - [[JDK15]]，[[JDK14]]停止更新
+- 2021.3.16
+    - [[JDK16]]
+- 2021.9.14
+    - [[JDK17]]，计划支持到2029.9
+    - 
+- 历史
+    - 1991.4 Oak
+    - 1995.5 Java1.0 "Write Once, Run Anywhere"
+    - 1996.1 JDK1.0, 纯解释型JVM(Sun Classic VM), Applet, AWT
+    - 1996.5 JavaOne大会
+    - 1997.2 JDK1.1, JDBC, JAR文件格式, JavaBeans, RMI, 内部类(Inner Class), 反射(Reflection)
+    - 1998.12 JDK1.2, 分出J2SE、J2EE、J2ME。JVM内置JIT, EJB, Java Plug-in, Java IDL, Swing, Collections, strictfp关键字
+    - 1999.4 JVM HotSpot
+    - 2000.5 JDK1.3, 数学运算, Timer, JNDI成为平台服务, CORBA IIOP实现RMI, 2D API, JavaSound
+    - 2002.2 JDK1.4, 成熟版本，多公司参与。正则, 异常链, NIO, 日志类, XML, XSLT
+        - .NET发布
+    - 2004.9 JDK1.5, 自动装箱, 泛型, 动态注解, 枚举, 变长参数, foreach, 改进内存模型JMM(Java Memory Model), concurrent包
+    - 2006.12 JDK1.6, 改名为Java SE 6, Java EE 6, Java ME 6。动态语言支持(内置Mozilla JavaScript Rhino), 编译API, HTTP服务器API。JVM改进(锁、gc、类加载)
+    - 2006.11 JavaOne Java开源。建立OpenJDK
+    - 2009.2 JDK1.7, OpenJDK1.7和Sun JDK1.7几乎一样。Lambda项目, Jigswa项目(虚拟机模块化), 动态语言支持, GarbageFirst收集器, Coin项目(语言细节进化)。Oracle收购Sun后延迟部分项目。支持Mac OS X和ARM
+    - 2009.4 Oracle收购Sun
+    - o-> JVM历史
+    - Sun Classic                 # 1.0到1.3
+        - 解释器
+        - sunwjit                 # 外挂编译器, 还有SymantecJITt shuJIT等
+            - 编译器和解释器不能同时工作，编译器接管后，要对所有代码编译，不能用耗时稍高的优化，效率低
+    - Exact VM                    # 1.2到1.3
+        - 使用准确内存管理EMM(Exact Memory Management)而得名
+            - 虚拟机知道内存数据类型, gc时好判断数据是否被使用
+            - 抛弃Classic VM基于handler(句柄关联对象移动地址)的对象查找方式, 每次定位对象少一次间接查找
+        - 两级即时编译器
+        - 与解释器混合工作
+    - Sun HotSpot VM              # 1.2, Sun JDK和OpenJDK, 来源Strongtalk VM
+        - EMM
+        - 热点代码探测              # 与解释器协同，平衡最优响应时间和最佳执行性能
+            - 执行计数器找出最有编译价值的代码，通知JIT以方法为单位编译
+            - 方法频繁调用或有效循环多，触发标准编译和OSR(栈上替换)
+            - 不用等待本地代码输出就执行，编译时间压力小，可引入更多优化技术，输出更高效本地代码
+    - KVM                         # 强调简单、轻量、可移植，但运行慢。Android, iOS前手机平台广泛使用
+    - CDC-HI VM/CLDC-HI VM        # CDC/CLDC(Connected Limited Device Configuration)希望在移动端建立统一java编译接口, 这是它们的参考实现， Java ME的支柱
+    - Squawk VM                   # 运行于Sun SPOT(small programmable object technology, 一种手持wifi设备)。java本身实现大部分
+    - JavaInJava                  # 实验，java实现自身元循环(meta-circular), 需要运行在宿主虚拟机上，没有JIT, 解释运行
+    - Maxine VM                   # 几乎java实现, 有JIT和gc, 没有解释器，宿主或独立运行，效率接近HotSpot Client VM
+    - BEA JRockit                 # 专注服务器端，不太关心响应时间，没有解释器
+        - gc和MissionControl领先
+    - IBM J9 VM                   # IT4J(IBM Technology for Java Virtual Machine), SmallTalk虚拟机扩展而来, 面向各平台，主要应用于IBM产品
+    - Azul VM                     # HotSpot改进，Azul Systems公司运行于专有硬件Vega
+        - 每个实例管理数十cpu, 数百GB内存，可控gc时间，对硬件优化线程调度
+    - Zing JVM                    # Azul VM运行于x86平台
+    - BEA Liquid VM               # 现在的JRockit VE(virtual edition), BEA运行在自己Hypervisor系统上
+        - 实现专用操作系统的必要功能，如文件系统、网络支持
+        - 虚拟机直接控制硬件, 好处如 线程调度不用切换内核态、用户态等
+    - Apache Harmony              # 虚拟机，兼容Java1.5、1.6, 没得到TCK认证(Technology Compatibility Kit)兼容性测试的授权
+        - 许多代码吸纳进IBM的JDK1.7和Google Android SDK
+    - Google Android Dalvik VM    # Android平台核心组成部分之一
+        - 不能直接执行class, 执行dex文件可由class文件转化, 可直接使用大部分Java API
+        - 寄存器架构，非栈架构
+        - Android2.2提供JIT
+    - Microsoft JVM               # 微软想垄断Java，Sun打官司令开发停止
+    - 其它
+        - JamVM, cacaovm, SableVM, Kaffe, Jelatine JVM, NanoVM, MRP, Moxie JVM, Jikes RVM
+    - o->JDK发行版 
+    - Open JDK
+    - Oracle JDK
+    - IBM JDK
+    - 概念
+        - JDK(java development kit)       # java开发的最小环境
+            - Java语言
+            - JVM
+            - Java API类库
+        - JRE(java runtime environment)
+            - JVM
+            - Java SE API
+        - 平台
+            - Java Card                        # Applets, 运行在小内存设备
+            - Java ME(Micro Edition)           # 以前叫J2ME。手机, PDA, 精简API
+            - Java SE(Standard Edition)        # 以前叫J2SE, 桌面应用, 完整API
+            - Java EE(Enterprise Edition)      # 企业应用(ERP, CRM), 扩充API(javax包, 有些合入了JavaSE), 部署支持

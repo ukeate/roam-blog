@@ -1,0 +1,10 @@
+- Facebook出品
+- 特点
+    - 支持nfs存储
+- 结构
+    - scribe agent
+        - 向scribe发送数据
+    - scribe
+        - 接收数据，不同topic 的数据发送给不同的store中
+    - 存储系统(store)
+        - file, buffer, network, bucket, null, thriftfile, multi

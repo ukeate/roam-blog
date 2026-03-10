@@ -1,0 +1,44 @@
+- docker login --username=1@qq.com registry.cn-hangzhou.aliyuncs.com
+- 命令
+    - minikube
+        - start --vm-driver=virtualbox \
+            - -memory=4096 \
+            - -cpus=2 \
+            - -log_dir=/home/outrun/logs \
+            - -insecure-registry=192.168.99.1:5000 \
+            - -insecure-registry=registry.cn-qingdao.aliyuncs.com \
+            - -image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers
+            - -kubernetes-version v1.17.0
+            - -docker-env=HTTP_PROXY=$HTTP_PROXY \
+            - -docker-env=HTTPS_PROXY=$HTTPS_PROXY \
+            - -docker-env=NO_PROXY=$NO_PROXY \
+            - -image-mirror-country=cn \
+            - -registry-mirror=https://registry.docker-cn.com \
+            - -extra-config=kubelet.MaxPods=5.
+                - registry一定是minikube容器ip, 可用ifconfig查看
+                - --insecure-registry修改需要minikube delete
+        - stop
+        - delete
+        - status 
+        - docker-env
+        - ip      # 得到单机集群ip
+        - service  -n iot mosquitto --url
+            - 得到service的nodePort
+        - ssh
+        - dashboard
+        - addons
+            - list
+            - enable heapster
+            - enable ingress
+- 服务
+    - kube-system
+        - coredns
+        - etcd-minikube
+        - kube-addon-manager-minikube
+        - kube-proxy
+        - kube-scheduler-minikube
+        - nginx-ingress-controller
+        - storage-provisioner
+    - kubernetes-dashboard
+        - dashboard-metrics-scraper
+        - kubernetes-dashboard

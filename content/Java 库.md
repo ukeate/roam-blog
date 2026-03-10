@@ -1,0 +1,124 @@
+- 脚手架
+    - [[Spring Boot]]
+    - [[DrapWizard]]
+    - [[JHipster]]
+    - [[Spring]]
+    - [[Guice]]
+- 写法
+    - aopalliance
+        - java aop
+    - [[EJB]]
+    - [[Guava]]
+    - [[RxJava]]
+- 状态机
+    - [[Spring Statemachine]]
+    - [[squirrel]]
+    - [[stateless4j]]
+- 接口
+    - [[Spring MVC]]
+    - [[Struts2]]
+    - spring site
+        - spring整合
+    - tapestry
+        - 基于servlet的mvc框架
+    - jersey
+        - java restful服务
+    - naga
+        - java nio
+    - [[WebFlux]]
+    - [[Vert.x]]
+    - [[Spring Reactor]]
+    - [[AKKA]]
+    - [[Quarkus]]
+- 实时接口
+    - openfire
+        - java, 性能较差, 最多单机10w并发
+- 日志
+    - [[Log4j]]
+    - [[Logback]]
+    - [[Slf4j]]
+- 模板
+    - [[Velocity]]
+    - [[POI]]
+    - [[jFreeChart]]
+    - [[Jackson]]
+    - [[json-smart]]
+    - xstream
+        - java xml序列化
+    - snakeyaml
+        - java yaml
+    - xmlbeans
+        - java xml
+    - [[Dom4j]]
+    - [[FreeMarker]]
+    - [[Tiles]]
+- 编码、加密
+    - proguard
+        - Java 混淆
+    - snappy
+        - google java 压缩
+    - jbcrypt
+        - java加密, scrypt更强
+- 日期
+    - joda-time
+        - java日期
+- 文档
+    - [[Knife4j]]
+- 监控
+    - [[p6spy]]
+- 缓存
+    - [[JetCache]]
+- 邮件
+    - javamail
+        - java mail
+    - mailapi
+        - java mail
+- DSL
+    - [[Antlr]]
+- 客户端
+    - [[C3P0]]
+    - [[DBCP]]
+    - [[Druid连接池]]
+    - [[JDBC]]
+    - [[DBUtil]]
+    - [[Hibernate]]
+    - mybatis
+    - hsqldb
+        - java内置, 单文件/内存数据库
+    - kafka-clients
+    - driud
+        - 连接池，阿里开源
+    - [[Redisson]]
+- 运维控制
+    - testcontainers
+        - java, 运行docker
+    - jOptSimple
+        - java, 命令解析
+- 协议
+    - libthrift
+        - java thrift
+    - mqttv
+        - java mqtt客户端
+    - HttpClient
+        - java http
+    - spring-websocket
+        - java
+    - httpcore-nio
+        - java
+    - grpc-context
+        - java
+- 高性能
+    - [[Ehcache]]
+    - [[JetCache]]
+- 搜索
+    - [[Compass]]
+    - [[Nutch]]
+    - [[Lucene]]
+    - [[Solr]]
+    - [[Elasticsearch]]
+- 权限
+    - [[Shiro]]
+    - [[Spring Security]]
+    - [[Keycloak]]
+    - [[OpenAM]]
+    - [[Hadoop Ranger]]

@@ -1,0 +1,4 @@
+- 存储区域网络，Storage Area Network
+- 连接设备: 路由,  光纤交换机, 集线器(hub)
+- 接口: SCSI，FC
+- 通信协议: IP SCSI

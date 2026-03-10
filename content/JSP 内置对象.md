@@ -1,0 +1,14 @@
+- Request
+- Response
+- Session
+- Out
+    - 输出流
+- PageContext
+    - context
+- Page
+    - jsp的this
+- Exception
+    - &lt;%@ page isErrorPage="true"%&gt; 时使用，显示异常信息- Application
+    - 服务器
+- Config
+    - 服务器配置

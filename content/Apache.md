@@ -1,0 +1,32 @@
+- http容器，可容纳php, python。一请求一线程
+- 安装
+    - pacman -S apache
+    - mkdir /srv/http
+    - chown http:http /srv/http
+- 编译安装
+    - ./configure
+        - -prefix=/全路径/install_path
+        - -with-apxs2=/全路径/apxs            # 模块
+    - make
+    - make install
+- 命令
+    - httpd
+        - f                                  # 指定配置
+        - t                                  # 配置检查
+        - k
+            - start
+            - restart
+            - graceful
+            - stop
+            - graceful-stop
+    - apachectl
+        - graceful                            # 重载配置
+        - f /全路径/httpd.conf                # 指定配置
+        - t                                  # 配置检查
+- 配置
+    - /etc/httpd/conf/httpd.conf
+        - DocumentRoot "/srv/http"            # 项目路径
+        - Listen                              # 端口
+- 案例
+    - php
+        - docker解决

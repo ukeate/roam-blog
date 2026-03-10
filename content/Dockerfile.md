@@ -1,0 +1,11 @@
+- 指令
+    - FROM nginx                          # 基于镜像
+    - MAINTAINER outrun                   # 指定维护者信息
+    - EXPOSE 80                           # 内部服务开启的端口
+    - ENV NODE_ENV test                   # 环境变量
+    - WORKDIR /src                        # 指定工作目录
+    - COPY ./bin /data/a                  # 复制外部文件到内部
+    - VOLUME ["/data/log"]                # 创建挂载点
+    - ENTRYPOINT ["/data/a/a"]            # 启动命令，只有一个
+    - CMD ["-config", "config.toml"]      # docker run 时运行
+    - RUN echo 'test'                     # build过程中执行的命令

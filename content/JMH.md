@@ -1,0 +1,18 @@
+- Java Microbenchmark Harness
+- 概念
+    - Warmup                              # 预热
+    - Mesurement                          # 总执行次数
+    - Timeout                             # 每次执行超时时间
+    - Threads                             # fork线程数
+    - Benchmark mode                      # 模式
+    - Benchmark                           # 方法名
+- 环境变量
+    - TEMP或TMP                           # JHM临时文件存放
+- 使用
+    - @Benchmark
+    - @Warmup(iterations = 2, time = 3)           # 执行2次, 每次隔3秒
+    - @Fork(5)                                    # 多少线程
+    - @BenchmarkMode(Mode.Throughput)             # 显示每秒多少次
+    - @Measurement(iterations = 10, time = 3)     # 共测10次, 每次隔3秒
+    - public void testA() {
+    - }

@@ -1,0 +1,13 @@
+- Virtual Network Computing
+- 相关文章
+    - linux 自带远程桌面--VNC服务配置说明
+- 安装
+    - yum install vnc*
+    - yum install *vnc-server*
+- 启动
+    - vncserver :1
+- 登录
+    - vncviewer        # fedora 下gnome自带的vncviewer名为:Remote Desktop Viewer
+        - 输入192.168.0.62:1                      # 实际端口号为5901, 如果服务号为2则为5902
+    - 或者浏览器java-plugin
+        - localhost:5801                          # 需要安装java

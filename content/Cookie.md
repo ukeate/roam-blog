@@ -1,0 +1,20 @@
+- 介绍
+    - cookie的弊端
+        - 数据在客户端可以被修改，所以不能存重要数据
+        - cookie中字段太多会影响传输效率
+- 请求头
+    - set-cookie
+        - 规定cookie的格式为name = value
+- 响应
+    - path
+        - cookie发送的相对路径
+    - expires和maxAge
+        - expires是UTC时间, maxAge是cookie多久后过期
+            - 不设置这两个时产生的是session cookie, 它是transient的，用户关闭浏览器时清除。一般用来保存session_id
+    - secure
+        - true时, cookie在HTTP中是无效的, 在HTTPS中才有效
+    - httpOnly
+        - 通知浏览器不允许脚本操作document.cookie。一般都应设置为true, 可以避免被xss攻击拿到cookie
+- 签名( 信息摘要算法)
+    - 原user='alsotang'
+    - 现user=sha1('my_secret' + 'alsotang') === 'xxxx...xxx'

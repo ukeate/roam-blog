@@ -1,0 +1,1 @@
+- 日志管理, syslog的实现, 在systemd中被systemd-journal取代

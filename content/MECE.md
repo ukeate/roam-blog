@@ -1,0 +1,20 @@
+- mutually exclusive collectively exhaustive
+- 正交、穷尽
+- 独立、穷尽
+- 逻辑树: 还原论
+    - 议题树
+    - 假设树
+    - 是否树
+- 切入点
+    - 3C/4C，企业、造型要素
+        - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2FOq2BjAs3Pz.jpeg?alt=media&token=faf5b426-badf-4c23-9921-6ccf6a6efe01)
+    - 4P，市场营销
+        - 产品Product
+        - 价格Price
+        - 渠道Place
+        - 促销策略Promotion
+    - 流程
+        - 购买：认知、理解、动机
+        - 顾客：技术、生产、销售
+    - 效率/效果，质/量
+    - 事实/判断

@@ -1,0 +1,1 @@
+- 上传大Json Object, 利用Hash算法的伪随机性，制造Value不同但Hash碰撞的数据，耗尽CPU

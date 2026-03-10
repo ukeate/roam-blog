@@ -1,0 +1,1 @@
+- ripgrep-all，ripgrep (rg) 的包装器，先抽取pdf、word、压缩包、sqlite等非文本内容、再用 rg 搜索，再压缩的流程自动化

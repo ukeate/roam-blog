@@ -1,0 +1,1 @@
+- 大数据之父，创建了[[Hadoop]]，贡献了[[Lucene]], [[Nutch]], [[Avro]]

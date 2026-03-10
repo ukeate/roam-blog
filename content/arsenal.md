@@ -1,0 +1,169 @@
+- 数据{{table}}
+    - 
+    - [[AI 认知]]
+    - [[AI paper]]、[[论文]]
+    - [[AI code]]
+- AI{{table}}
+    - 
+    - 使用
+        - [[gt]]、[[claude]]、[[codex]]、[[gemini]]、[[openclaw]]
+            - [[AI 听说]]、[[SD]]
+    - 组装
+        - [[skills]]、[[mcp]]、[[plugin]]
+- 操作{{table}}
+    - 
+    - 跳动
+        - 跳词<alt b/f> <alt ↔>
+          跳行<ctr a/e> <cmd ↔>
+            - 跳符<ctr b/f>
+              [[标记切换]]
+              
+    - 删除
+        - 删行前<ctr u> 删行尾 <ctr k>
+          清屏<ctr l> <cmd k>
+            - 前删词<alt bs> 前删到空格<ctr w> 后删词<alt d>
+              删光标符<ctr d> 撤销删符 <ctr -/_> 
+              [[轮换删除]]
+    - 改写
+      
+        - 
+            - [[改写]]
+    - 搜索
+        - 后搜<ctr r> 前搜<ctr s>
+    - 其它
+        - 
+            - [[mac]]、[[KB]]、[[Awesome]]、[[ipad]]
+- TUI
+    - 操作{{table}}
+        - 
+        - sh
+            - [[alacritty]] & [[zellij]]、[[tmux]]
+                - kitty、[[wezterm]]、termius & [[nu]]
+        - 增强
+            - [[starship]]、[[mcfly]]、z(zoxide)
+                - [[atuin]]
+        - 查找
+            - [[eza]]、[[fd]]、[[fzf]]
+                - [[lsd]]、[[fselect]]
+        - UI
+            - [[yazi]]、[[broot]]
+                - [[nnn]]、[[xplr]]
+        - 任务
+            - [[pet]]、[[^z]]、[[expect]]、[[viddy]]、[[watch]] 
+                - mprocs、parallel、[[just]]、[[pueue]]、[[watchexec]]
+    - 字符{{table}}
+        - 
+        - 流
+            - [[bat]]、[[rg]]、[[sd]]、[[less]]、[[more]]、[[head]]、[[tail]]
+                - [[cat]]、[[paste]]、[[tac]]、[[wc]]、[[sort]]、[[grep]]、[[uniq]]、[[xargs]]、[[awk]]、[[sed]]
+        - 日志
+            - [[lnav]]、[[tspin]]
+        - 编辑
+            - [[vim]]
+                - nvim(lazyvim)、hx(helix)、kak(kakoune)、[[ast-grep]]
+        - 格式
+            - [[jless]]、[[jq]]、[[jqp]]、[[jc]]、[[fx]]、[[gron]]、[[yq]]
+                - [[glow]]、[[htmlq]]、[[dasel]]、[[vd]]、[[hexyl]]、[[rga]]、[[strings]]
+        - 差异
+            - [[delta]]、[[difft]]、[[diff]]
+                - [[vimdiff]]
+        - 同步
+            - [[rsync]]、[[patch]]
+                - [[rclone]]
+    - 开发{{table}}
+        - 
+        - k8s
+            - [[k9s]]、[[kubectx]]、[[kubens]]
+                - lazydocker、ctop、dive、[[krew]]、[[syft]]
+        - git
+            - gitui
+                - lazygit、[[gh]]、[[gh-dash]]、[[tokei]]
+        - 环境
+            - 
+                - [[mise]]、[[direnv]]、[[uv]]
+        - 性能
+            - 
+                - hyperfine、[[fio]]
+        - 请求
+            - [[mkcert]]、[[wuzz]]
+                - curlie、hurl、httpie、xh、[[grpcurl]]、
+        - 文件
+            - 
+                - restic、rclone、[[ouch]]
+    - 排查{{table}}
+        - 
+        - 综合
+            - [[glances]]、[[btm]]
+        - 进程
+            - [[procs]]
+        - 网络
+            - [[ip]]、[[ss]]、[[nft]]、[[bandwhich]]、[[iftop]]、[[ntopng]]
+                - [[netstat]]、[[nicstat]]、[[nethogs]]、[[vnstat]]、[[iptraf-ng]]、[[tcptrack]]、[[nload]]、[[ifstat]]
+                  
+        - 抓包
+            - [[tcpdump]]、[[tcptrace]]、[[tshark]]、[[termshark]]、[[scapy]]、[[netsniff-ng]]、[[tcpflow]]、[[ngrep]]
+                - [[ssldump]]、[[tcpick]]、[[pktstat]]、[[lft]]、[[pwru]]、[[xdpdump]]
+        - 扫描
+            - [[rustscan]]、[[nmap]]、[[masscan]]、[[zmap]]、[[dig]]、[[doggo]]、[[ethtool]]、[[telnet]]
+                - [[ping]]、[[gping]]、[[fping]]、[[hping]]、[[tcping]]、[[traceroute]]、[[mtr]]、[[nc]]、[[nmblookup]]、[[nslookup]]
+        - 测试
+            - [[iperf3]]、[[netperf]]、[[httperf]]、[[wrk]]、[[hey]]
+                - [[tcprewrite]]、[[tcpreplay]]、[[ab]]
+        - 工具
+            - 
+                - [[rinetd]]、[[python http]]
+        - 句柄
+            - [[iotop]]、[[iostat]]、[[lsof]]、[[file]]、[[ldd]]、[[fuser]]、[[ulimit]]
+                - [[rename]]
+        - 存储
+            - [[dust]]、[[dysk]]、[[du]]
+                - [[duf]]、[[ncdu]]、[[fclones]](查重)、smartctl
+        - 系统
+            - 
+                - [[strace]]、[[bpftool]]、[[bpftrace]]、journalctl
+- resource工具{{table}}
+    - 
+    - 系统
+        - [[Linux工具]]、[[Linux场景]]
+            - [[Linux]]、[[Linux系统编程]]、[[Windows]]、[[Android]]
+    - [[运维工具]] [[测试工具]]
+    - 
+- GUI
+    - {{table}}
+        - 
+        - 信息
+            - Reeder、ima
+                - Folo
+        - 代码
+            - [[Jetbrains]]、[[VSCode]]、Sublime、Antigravity
+                - Cursor、Windsurf、TRAE、Warp、Zed、[[Source Insight]]
+        - 接口
+            - Postman
+                - Reqable、Requestly
+        - 网络
+            - Astrill/Shadowrocket、Proxyman、Tunnelblick、[[Chrome]]、[[Firefox]]
+                - Charles、[[Wireshark]]、[[Burp Suite]]、[[Mitmproxy]]、[[Fiddler]]、[[Whistle]]、[[anyproxy]]、[[ProxyChains]]
+        - 组件
+            - Lens、RedisInsight
+        - 论文
+            - [[Roam]]、[[Typora]]、Zotero、Office
+                - Prism、MacTeX
+        - 维护
+            - Raycast、uTools、Synergy、CleanMyMac、QSpace、EuDic
+                - iBar
+        - 数据分析
+            - [[ParaView]]、Finereport、[[SPSS]]
+        - 设计
+            - [[Sketch]]、[[Rose]]、[[Visual Paradigm]]、[[PlantUML]]
+        - 存储
+            - OneDrive、百度网盘
+        - 远程
+            - [[Tailscale]]、向日葵、节点小宝、[[TeamViewer]]
+- Resources{{table}}
+    - 
+    - 硬件：主机、数据
+    - Read：[[Reading List: Archive]]、[[Unsorted]]、[[Readwise]]、[[Hypothesis]] 
+- Archives {{table}}
+    - 
+    - 工具
+        - [[Eclipse]]

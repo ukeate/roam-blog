@@ -1,0 +1,1 @@
+- Single Instruction Multiple Data, 单指令多数据

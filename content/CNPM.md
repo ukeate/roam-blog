@@ -1,0 +1,29 @@
+- 介绍
+    - cnpm是一个alibaba开发维护的，提供私有npm注册服务
+- 安装
+    - npm install cnpm
+        - 可以像使用npm一样使用
+    - cnpm sync gulp
+        - npm 中发布的包在cnpm中有延时，可以用这个命令来手动同步
+- 搭建cnpm服务器
+    - git clone https://github.com/cnpm/cnpmjs.org.git
+    - cd cnpmjs.org
+    - npm install npm -g
+        - 升级npm的版本
+    - npm install
+    - 创建mysql数据库，并在config/index.js中修改mysql数据库的用户名和密码
+    - config/index.js中注释bindingHost来对外网开放
+    - node --harmony_generators dispatch.js
+        - 启动了两个端口, 7001用于npm注册服务, 7002用于web访问
+- 使用私有库
+    - npm install ape-algorithm --registry=http://192.168.1.20:7001
+        - 如果私有库中没有，cnpm会到npm中同步一个到cnpm, 再传给客户端一份
+- 项目设置私有库
+    - npm config list
+        - 查看项目的默认设置。registry属性指向npm官方资源位置
+    - npm config set registry http://192.168.1.20:7001
+- 用户设置私有库
+    - // ~/.npmrc
+    - registry=http://192.168.1.20:7001
+        - 另外，淘宝翻墙库 https://registry.npm.taobao.org/
+- 

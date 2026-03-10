@@ -1,0 +1,19 @@
+- 动态语言支持(内置[[Mozilla JavaScript Rhino]])，
+- 编译器注解处理器([[Annotation Processor]])
+- 微型HTTP服务器API
+- JVM改进，锁、GC、类加载
+- AWT新类Desktop、SystemTray
+- JAXB2，把Bean变为XML
+- StAX XML处理
+- Compiler API动态生成class
+- Http Server API, 轻量http容器
+- Common Annotations补充, Annotations API
+- Console类
+- 脚本语言引擎: js, groovy, ruby
+- ui增强
+    - Java应用程序可以和本地平台更好的集成
+- web service支持增强：jax-ws2.0与jaxb2.0
+    - 优先支持编写 XML web service 客户端程序。
+    - 用过简单的annotaion将你的API发布成.NET交互的web services.
+- jdbc4.0
+- Scripting可以在Java源代码中混入JavaScript

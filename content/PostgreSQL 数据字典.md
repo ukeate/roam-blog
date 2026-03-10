@@ -1,0 +1,11 @@
+- pg_roles                        # 角色信息
+- pg_database                     # 数据库信息
+- information_schema
+    - select column_name from information_schema.columns where table_schema='public' and table_name='ad';
+        - 表的所有列名
+- pg_stat_user_tables
+    - select relname from pg_stat_user_tables;
+        - 所有表名
+- pg_stat_activity                # 活动状态
+    - SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE datname='garbage' AND pid<>pg_backend_pid();
+        - 查看数据库活动连接

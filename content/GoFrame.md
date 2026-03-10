@@ -1,0 +1,15 @@
+- 命令
+    - gf
+        - v/version
+        - h/help
+        - init
+        - build
+        - gen         # 生成模块
+            - gen dao
+        - run
+        - swagger
+        - pack
+        - get
+        - docker
+        - mod
+        - update

@@ -1,0 +1,4 @@
+- 不抓包，对网卡做长期流量统计，C实现
+- vnstat -l -i eth0
+- vnstat -d
+- vnstat -m

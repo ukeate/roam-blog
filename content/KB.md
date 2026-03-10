@@ -1,0 +1,6 @@
+- 初心者86 <fn g> 切换mac模式
+    - cat -v 检测 alt(3开头)和option(9开头)
+- RK100
+    - fn + q长按，连蓝牙
+    - 背后 B G开关：Bluetooth 或 Gaming(2.4G)
+    - fn + a/s，windows模式/mac模式

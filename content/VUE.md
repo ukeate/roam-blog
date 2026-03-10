@@ -1,0 +1,8 @@
+- &lt;div id="app"&gt;    - {{ message }}
+- &lt;/div&gt;- var app = new Vue({
+    - el: '#app',
+    - data: {
+        - message: "hi"
+    - },
+    - created: function () {}
+- })

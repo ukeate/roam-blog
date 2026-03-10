@@ -1,0 +1,50 @@
+- 特点
+    - hdfs存储，分布式，面向列
+    - 可利用map reduce
+    - Hadoop Database, 实时分布式, bigtable列簇数据库, 非结构化，自动切分, 并发读写
+    - 只能row key查询, master有单点问题
+- 特点
+    - 多版本
+    - 列权限控制
+    - 多个列划分为列族，可设置保留多少版本
+    - 多行划分为region
+    - 空列不占空间，可稀疏存储
+    - 无类型，所有类型都是字符串
+    - 行一致性，一行数据在一个server
+    - 查询方式有限：rowkey, rowkey的range, 全表扫描
+    - 协处理器coprocessors
+        - 观察者observer（监听器）
+        - 终端endpoint（rpc调用代码）
+- 版本
+    - 0.98
+    - 1.x
+    - 2.x
+- 原理
+    - 修改只追加记录，合并时删除
+- 架构
+    - Client
+        - 提供接口，维护客户端缓存
+    - Zookeeper
+        - 只有一个活跃master
+        - 存Region寻址入口
+        - 实时监控region server在线信息，通知master
+        - 存schema、table元数据
+    - Master
+        - 为region server分配region	
+        - region server负载均衡
+        - 失效region server重新分配region
+        - 管理table CRUD
+    - RegionServer
+        - 维护region
+        - 切分大region
+    - Region
+        - 表水平分region分配在多个region server, region增大时裂变
+    - HLog
+        - 写Store之前先写HLog, flush到HDFS, store写完后HDFS存储移到old，2天后删除	
+    - Store
+        - region由多个store组成, 一个store对应一个CF
+        - store先写入memstore, 到阈值后启动flashcache写入storefile
+        - storefile增长到阈值，进行合并
+            - minor compaction
+            - major compaction，默认最多256M
+        - region所有storefile达到阈值，region分割

@@ -1,0 +1,93 @@
+- 写法
+    - traits-decorator
+        - js mixin
+    - q
+        - js 流程控制
+    - co
+        - js generator to async
+    - async
+        - js 流程控制
+    - thunkify
+        - js函数Thunk化, 确保回调调用一次
+    - step
+        - async轻量库
+    - wind
+        - js定义的宏
+    - eventproxy
+        - js event回调
+- 接口
+    - [[Node.js connect]]
+    - [[Express]]
+    - [[Koa]]
+    - meteor.js
+        - 基于node.js + mongodb的网站开发平台，把这个基础构架延伸到浏览器端, 本地和远程数据通过DDP(Distributed Data Protocol)协议传输
+    - restify
+        - 基于nodejs的rest应用框架，去掉express中的 template, render等功能, 提供DTrace功能，方便调试
+- 实时接口
+    - [[Socket.IO]]
+    - sockjs
+        - node websock
+    - postal
+        - nodejs 在内存上构建的发布订阅框架
+    - pusher
+        - 发布订阅模式socketio框架
+    - juggernaut
+        - 基于socketio
+    - datachannel.io
+        - 基于socket.io和html5 webRTC的实时聊天室框架
+    - faye-websocket-node
+        - 扩展faye项目开发的websocket的一个实现, 非常简单，而且不依赖其他库
+    - websocket-node
+        - 一个简单的websocket库，支持draft-10及之前的各种版本, 支持同样是node的c/s交互模式
+- 日志
+    - [[Log4js]]
+- 格式、模板
+    - moment
+        - js格式化时间
+    - iconv
+        - nodejs调用c++ libiconv库来转码
+    - iconv-lite
+        - nodejs实现的转码，比调用c++ 的iconv更高效
+    - js-beautify
+        - js, html格式化
+- 邮件
+    - nodemailer
+        - node mail
+- 客户端
+    - node-mysql
+    - mongoose
+    - request
+        - js http
+    - superagent
+        - js http
+- 图形
+    - canvas
+        - node canvas
+    - tesseract
+        - node 验证码
+- 运维控制
+    - later
+        - nodejs corntab
+    - glob
+        - nodejs 匹配获得文件
+    - rd
+        - node 遍历文件
+    - commander
+        - node制作命令
+    - mkdirp
+        - node 递归makedir
+    - fs-extra
+        - node扩展fs包
+- 高可用 | 性能
+    - retry
+        - js retry
+    - tagg
+        - node线程池
+    - cluster
+        - node单机集群
+    - fiber
+        - node协程
+- 爬虫
+    - [[Cheerio]]
+- 模拟运行
+    - [[PhantomJS]]

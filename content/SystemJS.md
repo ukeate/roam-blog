@@ -1,0 +1,7 @@
+- 介绍
+    - 一个垫片库, 浏览器端l加载es6模块、AMD模块、CommonJS模块 到es5。内部调用traceur
+- &lt;script src='system.js'&gt;&lt;/script&gt;- &lt;script&gt;    - System.import('./app').then(function(m) {
+        - app.js是一个es6模块
+        - m.f()
+    - })
+- &lt;/script&gt;

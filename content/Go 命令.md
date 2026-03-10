@@ -1,0 +1,190 @@
+- go
+    - help
+        - importpath
+            - 说明 指定代码托管网站版本协议
+        - gopath
+            - vendor怎么使用
+        - list
+            - go list 说明
+    - version
+    - env
+        - 打印go环境信息
+    - run
+        - 编译并运行
+        - race
+            - 检查运行中的竞态冲突并报告
+    - build
+        - 库被舍弃，main包编译成二进制执行文件, 会检测mod
+        - go build gopl.io
+        - go build x.go
+        - race
+        - i
+            - 编译到指定位置
+    - install
+        - 编译安装, 会检测mod
+    - clean
+        - 清理build产生的文件
+        - c
+            - 清理.test文件
+        - i
+            - 清理生成的可执行文件
+        - r
+            - 包括依赖包的结果文件
+    - doc
+        - 命令
+            - go doc go/build
+        - 包
+            - go doc html/template
+        - 包成员
+            - go doc time.Since
+        - 方法
+            - go doc http.ListenAndServe
+    - fmt
+        - 代码格式化
+    - get
+        - 下载依赖, 默认目录是GOPATH下的pkg。下载后自动install
+        - go get gopl.io/... 
+            - ...通配
+        - get gopl.io@2
+            - 指定mod版本号
+        - u
+            - 更新到mod最新版本
+        - v
+            - 查看进度
+    - list
+        - 列出指定代码包的信息
+        - go list ...
+            - ...通配
+        - go list ...xml...
+        - json hash
+            - 输出json格式完整信息
+        - f
+            - 使用go模板
+    - fix
+        - 升级旧代码成新版本代码
+    - vet
+        - 检查静态错误
+    - test
+        - go test -cover -args -config config_it.toml -test.run "TestA"
+        - 执行当前目录下所有_test.go结尾的文件
+        - race
+        - file
+            - 可省略，测试单个文件, 如go test test_a.go a.go a.pb.go
+            - 测试单个文件需要引入原文件
+        - args
+            - 运行时参数
+        - run TestFoo
+            - 正则表达式匹配方法，NONE表示不匹配。如"^TestFoo", "F|F1"
+        - test.run "TestCreate"
+            - 同上
+        - v
+            - 每个测试用例的名称和时间
+        - bench=".*"
+            - 正则匹配benchmark测试函数
+        - benchmem
+            - 显示benchmark测试时内存分配
+        - -cpuprofile=cpu.prof
+            - 生成cpu分析文件，使用多个标记时(如cpu, mem), 一个类别会覆盖另一个。性能剖析启用时, go test不丢弃其临时可执行文件
+        - -blockprofile=block.out
+            - 生成阻塞分析文件
+        - -memprofile=mem.prof
+            - 生成内存分析文件
+        - c
+            - 生成可执行的二进制文件，名为x.test，它用来生成状态图
+        - cover
+            - 显示覆盖语句汇总信息
+        - coverprofile=c.out
+            - 生成日志文件c.out，记录语句覆盖信息
+        - covermode=count
+            - 语句覆盖信息不用bool而用count累加
+    - tool
+        - cover
+            - 测试覆盖率工具使用方法
+            - go tool cover -html=c.out
+                - html分析c.out
+        - pprof
+            - 交互式访问概要文件
+            - go tool pprof module1.test cpu.prof
+                - 性能测试状态图, 参数是可执行文件和剖析日志
+            - test
+                - 文本格式
+            - nodecount=10
+                - 限制输出10行
+            - web
+                - 渲染有向图web显示
+        - fix
+            - 同go fix
+        - vet
+            - 同go vet
+        - cgo
+            - 生成能够调用c语言代码的go源码文件
+        - compile
+            - help
+                - 可传给编译器的参数
+    - mod
+        - init packageName1
+            - 生成go.mod
+        - download
+            - 下载mod
+        - tidy
+            - 下载缺少，删除多余
+        - edit
+            - 编辑go.mod
+        - graph
+            - 打印依赖图
+        - vendor
+            - 复制依赖到vendor
+        - verify
+            - 验证mod
+        - why
+            - 打印依赖原因
+- godoc
+    - 提供html页面
+    - http=:6060
+        - 运行本地帮助网站
+    - analysis=type
+        - 提供静态分析结果
+        - analysis=pointer
+- gofmt
+- golint
+    - 检查风格
+- 常用命令
+    - go mod 配置
+        - 环境变量
+            - GO111MODULE
+                - off 总关闭
+                - on 总开启
+                - auto 默认，有go.mod开启
+        - 路径
+            - $GOPATH/pkg/mod
+                - 保存多版本依赖, 被多项目引用
+            - go.mod
+                - 被go命令维护, 融入了go命令的各个模块
+            - go.sum
+                - 记录lock
+        - 依赖加载顺序
+            - 最新release tag
+            - 最新commit
+        - 命令
+            - go mod vendor
+    - 代理
+        - go env -w GOPROXY=https://goproxy.cn,direct
+    - 包升级
+        - go list -m -u all
+            - 检查可以升级的package
+        - go get -u need-upgrade-package
+            - 升级
+    - 性能测试
+        - go test -bench=.  --cpuprofile=cpu.prof --memprofile=mem.prof -config ../conf/config_lc.toml -test.run TestCreateType
+    - 覆盖率
+        - go test -cover -args -config config.toml -test.run "TestCreate"
+    - 性能分析
+        - go tool pprof service.test cpu.prof
+        - go-torch -b cpu.prof
+    - 包管理
+        - go list -m -u all
+            - 列可升级包
+        - go list -u need-upgrade-package
+            - 升级可升级包
+        - go get -u
+            - 升级所有依赖

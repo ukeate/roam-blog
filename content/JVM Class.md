@@ -1,0 +1,93 @@
+- 工具
+    - javap -v a.class
+    - jetbrain jclasslib
+    - jetbrain BinEd
+    - JBE                         # 可编辑
+- 二进制存储方式
+    - Magic Number(4字节)
+        - cafe babe
+    - Minor Version(2字节)
+        - 小版本
+    - Major Version(2字节)
+        - 大版本
+        - JDK1.7是51.0
+        - JDK1.8是52.0
+    - constant_pool_count(2字节)
+        - 长度constant_pool_count-1的表
+    - constant_pool
+        - 索引、tag、类型
+        - 1 CONSTANT_Utf8_info
+            - 存一些描述字符串
+        - 2 标记
+        - 3 CONSTANT_Integer_info
+        - 4 CONSTANT_Float_info
+        - 5 CONSTANT_Long_info
+        - 6 CONSTANT_Double_info
+        - 7 CONSTANT_Class_info
+        - 8 CONSTANT_String_info
+        - 9 CONSTANT_Fieldref_info                
+        - 10 CONSTANT_Methodref_info
+            - 方法引用
+            - 指向CONSTANT_Class_info
+            - 指向CONSTANT_NameAndType_info
+        - 11 CONSTANT_InterfaceMethodref_info
+        - 12 CONSTANT_NameAndType_info
+            - 方法名与类型
+        - 15 CONSTANT_MethodHandle_info
+        - 16 CONSTANT_MethodType_info
+        - 18 CONSTANT_InvokeDynamic_info
+    - access_flags(2字节)
+        - bitmap按位与组合，class的修饰符
+        - ACC_PUBLIC 0x0001 public
+        - ACC_FINAL 0x0010 final
+        - ACC_SUPER 0x0020 JDK1.0.2之后必须为真, 表示invokespectial用新语义
+        - ACC_INTERFACE 0x0200 是否接口
+        - ACC_ABSTRACT 0x0400 抽象类
+        - ACC_SYNTHETIC 0x1000 编译器自动生成
+        - ACC_ANNOTATION 0x2000 
+        - ACC_ENUM 0x2000 
+    - this_class(2字节)
+        - 存名字对应指向常量池序号
+    - super_class(2字节)
+        - 存名字对应指向常量池序号
+    - interfaces_count(2字节)
+    - interfaces
+    - fields_count(2字节)
+    - fields
+        - access_flags(2字节)
+        - name_index
+            - 存常量池索引
+        - descriptor_index
+            - byte B
+            - char C
+            - double D
+            - float F
+            - int I
+            - long L
+            - short S
+            - boolean Z
+            - void V
+            - Object Ljava/lang/Object
+            - 数组
+                - 一维数组 [B
+                - 多维数组 [[C
+        - attributes_count
+            - 赋加属性
+        - attributes
+    - methods_count(2字节)
+    - methods
+        - access_flags(2字节)
+        - name_index
+        - descriptor_index
+            - 先参数列表，后返回值
+            - void m() -> ()V
+            - String toString() -> Ljava/lang/String;
+        - attributes_count
+        - attributes
+            - 赋加属性
+            - Code
+                - 指令列表, 一般先压栈this(aload_0)
+                - LineNumberTable
+                - LocalVariableTable
+    - attributes_count(2字节)
+    - attributes

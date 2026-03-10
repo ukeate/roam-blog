@@ -1,0 +1,7 @@
+- c                  # 执行命令字符串
+- set -o              # 设置快捷键模式，默认emacs
+- 快捷键
+    - &lt;Tab&gt; bash补全    - &lt;C-c&gt; 中断    - &lt;C-d&gt; eof    - &lt;C-tab&gt; ls    - &lt;C-l&gt; clean    - &lt;C-a&gt; 移到行首    - &lt;C-e&gt; 移到行尾    - &lt;C-u&gt; 删除到行首    - &lt;C-k&gt; 删除到行尾    - &lt;C-p&gt; 上一个命令    - &lt;C-n&gt; 下一个命令    - &lt;C-r&gt; 查看历史      # &lt;C-s&gt; 向前查看历史    - &lt;C-s&gt; 冻结    - &lt;C-q&gt; 解冻    - &lt;C-t&gt; 交换字符    - &lt;C-w&gt; 删word    - &lt;C-z&gt; 暂停到后台    - &lt;C-\&gt; 中断    - &lt;C-/&gt; 撤消    - &lt;C-_&gt; 删除一行    - &lt;M-r&gt; 取消历史变更- 场景
+    - 禁用<C-s><C-q>, 以使<C-s>变为向前查看历史
+        - stty -ixon -ixoff
+        - stty STOP ^w            # 把原<C-s>改成<C-w>

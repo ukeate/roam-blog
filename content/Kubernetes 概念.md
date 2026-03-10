@@ -1,0 +1,84 @@
+- 特点
+    - 不限语言
+    - 无侵入, 服务只写业务
+    - 适合微服务                       # 调整服务副本数, 横向扩容
+    - 无缝迁移到公有云                  # cluster ip实现不改配置迁移
+    - 自动化资源管理
+        - 服务发现，用dns解析服务名
+        - 内嵌负载均衡
+        - 部署实施
+        - 治理
+        - 监控
+        - 故障发现、自我修复
+        - 透明服务注册、发现
+        - 服务滚动升级、在线扩容, 根据负载自动扩容缩容
+        - 可扩展资源自动调度、多粒度资源配额
+    - 多层安全防护、准入
+    - 多租户
+    - 完善的工具
+    - pod运行容器
+    - etcd保存所有状态
+- 概念
+    - service                         # 服务网关
+        - 特点
+            - 唯一名字
+            - 唯一虚拟ip(cluster ip, service ip, vip)                  # 可多端口，每端口有名字
+            - 提供远程服务              # 目前socket
+            - 应用到一组pod
+    - event                           # 探针检测失败记录，用于排查故障
+    - rc                              # replication controller
+        - 副本数
+        - 筛选标签
+        - pod模板
+        - 改变pod镜像版本，滚动升级
+    - replica set                     # 1.2 rc升级, 支持基于集合的标签选择。被deployment使用
+    - deployment                      # pod编排, rc升级
+        - 特点
+            - 查看pod部署进度
+    - HPA
+        - horizontal pod autoscaler, 自动扩容缩容
+        - 指标
+            - cpu utilization percentage                              # 1分钟内利用率平均值
+            - 应用自定义指标(tps, qps)
+    - volume
+        - emptyDir
+        - hostPath
+        - gcePersistentDisk
+        - awsElasticBlockStore
+        - NFS
+        - persistent volume
+        - namespace
+        - annotation
+- 镜像
+    - kube-apiserver
+    - kube-controller-manager
+    - kube-scheduler
+    - kube-proxy
+    - pause
+    - etcd
+    - coredns
+- 架构
+    - cluster
+        - master
+            - api server              # 对外http rest接口, 管理资源对象(pod, RC, service)增删改查
+            - controller manager      # 管理控制器, node, pod, endpoint, namespace, serviceAccount, resourceQuota自动化管理
+            - scheduler               # 接收controller manager命令执行pod调度
+            - etcd                    # 配置
+        - node                        # 一master多node
+            - 特点
+                - node宕机，pod调度到其它节点
+            - pod                     # 一node几百个pod, 基本操作单元，代表一个运行进程，内部封装一个(或多个紧密相关的)容器。
+                - 特点
+                    - pod内通信高效，放密切相关服务进程
+                    - 可以判断一组相关容器的状态(用pause)
+                    - pause解决共享ip、容器通信、共享文件的问题
+                    - pod间通信用虚拟二层协议(flannel, openvswitch)实现
+                    - 普通pod在etcd存储，再调度到某node实例化，静态pod在node中存储，在node实例化
+                    - 对pod可进行资源(cpu,内存)限额
+                - label               # 标签，用标签选择器选择。key和value由用户指定，可附加到node, pod, service, rc等
+                - pause容器            # 根容器，共享网络栈、挂载卷
+            - docker/rocket           # 容器
+            - kubelet                 # master监视pod, 创建、修改、监控、删除
+            - kube-proxy              # 代理pod接口
+            - fluentd                 # 日志收集、存储、查询
+            - kube-dns                # 服务dns解析

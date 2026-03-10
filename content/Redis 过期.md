@@ -1,0 +1,14 @@
+- persist
+    - 移除键过期时间
+- ttl
+    - 键距离过期时间还有多少秒
+- pttl
+    - 多少毫秒
+- expire
+    - 给定键指定数秒后过期
+- pexpire
+    - 指定的毫秒后过期
+- expireat
+    - unix时间戳过期
+- pexpireat
+    - 毫秒unix时间戳

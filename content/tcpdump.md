@@ -1,0 +1,28 @@
+- 参数
+    - v                          # verbose输出
+    - vvv            # 最详细输出
+    - n                          # 网络地址显示数字
+    - nn                         # ip和端口显示
+    - i                          # 指定网卡
+    - c 100                      # 100条后退出
+    - w file1                    # 保存到文件
+    - r file1 tcp                # 从文件读取，指定tcp协议
+    - G 5 -w /opt/capfile-%Y_%m%d_%H%M_%S        # 滚动日志
+    - greater 200                 # 报文字节大于200
+    - host 192.168.0.1            # 包含ip
+    - port 80                     # 包含端口
+    - port !80
+    - dst host 192.168.0.1        # 目标ip
+    - dst port 80                 # 目标端口
+    - src host
+    - src port
+    - net 192.168.0.1/32          # 包含网段
+    - udp/tcp/icmp/igmp/arp       # 指定协议
+    - ip                          # ip协议
+    - ip proto ospf               # 类型为ospf的ip包
+    - ip[9]=6                     # ip包头第10字节为6（tcp协议）
+    - ether multicast                             # 二层类型为多播
+    - ether src host 00:0c:29:9a:1f:4e            # 二层mac
+- 常用
+    - tcpdump -i eth0 -vnn \(src host 8.8.8.8 and port 80 \) or \(src host 10.10.10.10 and dst port 443\)
+    - tcpdump -n tcp port 8383 -i lo and src host 183.14.132.117

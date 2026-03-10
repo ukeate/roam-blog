@@ -1,0 +1,20 @@
+- 免费额度：3用户，100设备
+- tailscale status，查看在线设备
+    - 可以直接 ssh/ping 设备名
+- tailscale ip -4，查看本机tailscale ip
+    - tailscale ping ip1
+- sudo tailscale up，注册本机
+    - tailscale down
+    - sudo tailscale up --advertise-routes=192.168.1.0/24，放一个网段
+- 服务
+    - tailscale serve 3000，端口变成https://<device>.<tailnet>.ts.net
+    - tailscale funnel 3000，端口到公网
+- 文件
+    - sudo tailscale file cp a device1:
+        - 放到device1的临时inbox(/var/lib/tailscale/files/)
+    - sudo tailscale file get dir1，从inbox移出文件
+- 网页控制台
+    - 可share设备
+    - Node设成流量出口：Run as exit node
+    - Apps让各云统一dns，Services让端口成为https服务
+    - 访问控制

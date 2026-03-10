@@ -1,0 +1,149 @@
+- 安装
+    - npm install -g express-generator
+    - npm install express -d                        # g代表安装到NODE_PATH的lib里面, d代表关联套件一起安装
+- cookie-parser
+    - 使用
+        - var cookieParser = require('cookie-parser');
+        - app.use(cookieParser());
+        - JSON.stringify(req.cookies);
+        - req.cookies.yourCookie
+- cookie-session
+    - 使用
+        - var cookieSession = require('cookie-session');
+        - app.use(cookieSession())
+        - req.session = null
+- express-session
+    - options可选参数
+        - name                        # 表示cookie中保存session的字段名称，默认为connect.sid
+        - store                        # session的存储方式，默认存放在内存中，也有redis、mongodb、等模块支持
+        - secret                        # 设置secrect来计算hash放在cookie中产生signedCookie，来防篡改
+        - genid                        # 规定产生一个新的session_id时所用的函数，默认用uid2这个包
+        - rolling                        # 每个请求都重新设置一个cookie，默认为false
+        - resave                        # 即使session没有被修改，也保存session的值
+    - 使用
+        - var session = require('express-session');
+        - app.use(session(options));
+- connect-redis
+    - 使用
+        - var express = require('express');
+        - var session = require('express-session');
+        - var redisStore = require('connect-redis')(session);
+        - app.use(session({
+            - store: new redisStore(),
+            - secret: 'somesecrettoken'
+        - }));
+- serve-static
+    - 静态文件
+- passport
+    - 介绍
+        - 登录验证中间件
+        - 支持connect express sails等web框架
+        - 支持Basic, Digest, OAuth(1.0和2.0的三种实现), Bearer等
+    - 安装
+        - npm i passport
+        - npm i passport-local
+    - o-> 配置
+    - var express = require('express');
+    - var cookieParser = require('cookie-parser');
+    - var session = require('express-session');
+    - var flash = require('express-flash');
+    - var passport = require('passport');
+    - ...
+    - app.use(cookieParser());
+    - app.use(session({...}));
+    - app.use(passport.initialize());
+    - app.use(passport.session());
+    - app.use(flash())
+    - passport.serializeUser(function (user, done) {
+        - done(null, user.id)
+    - })
+    - passport.deserializeUser(function (id, done) {
+        - User.findById(id, function (err, user) {
+            - done(err, user)
+        - })
+    - })
+    - app.post('/login', passport.authenticate('local', {
+        - passport.authenticate是个登录中间件，通过就走后面回调，否则返回401
+        - local是自定义的名称
+        - successRedirect: '/',
+        - failureRedirect: '/login',
+        - failureFlash: true,
+    - }, function (req, res) {
+        - res.redirect('/users/' + req.user.username)
+    - }))
+    - app.post('/login', passport.authenticate('local', function(err, user, info) {
+        - if (err) return next(err)
+        - if (!user) {
+            - req.flash('errors', {msg: info.message})
+            - return res.redirect('/login')
+        - }
+        - req.logIn(user, function (err) {})
+    - })(req, res, next))
+    - app.get('/logout', function(req, res) {
+        - req.logout()
+        - res.redirect('/')
+    - })
+    - app.get('/user', isAuthenticated, getUser)
+    - var isAuthenticated = function (req, res, next) {
+        - if (req.isAuthenticated()) {
+            - return next()
+        - }
+        - res.redirect('/login')
+    - }
+    - o-> local验证
+    - var LocalStrategy = require('passport-local').Strategy
+    - passport.use(new LocalStrategy(
+        - function(username, password, done) {
+            - User.findOne({username: username}, function(err, user) {
+                - if (err) {return done (err)}
+                - if (!user) {return done(null, false, {message: 'no user'})}
+                - if (!user.validPassword(password)) {...}
+                - return done(null, user)
+            - })
+        - }
+    - ))
+    - o-> usernameField
+    - passport.use(new LocalStrategy({
+        - usernameField: 'email',
+        - passwordField: 'passwd'
+    - }, function (username, password, done) {...}
+    - ))
+    - o-> OAuth
+    - 介绍
+        - 第三方登录协议
+        - 三个步骤
+            - 1. 获取未授权的request token
+            - 2. 获取用户授权的request token
+            - 3. 用授权的request token换取access token
+    - 使用
+        - 网页上申请开发github应用
+        - npm install passport-github
+            - 安装passport的github扩展
+        - // app.js
+        - passport.use(new GithubStrategy({        // 增加github认证策略
+            - clientID: 'XXXX',
+            - clientSecret: 'YYYY',        // 已从github上申请
+            - callbackURL: 'http://localhost:3000/auth/github/callback'
+        - }, function(accessToken, refreshToken, profile, done){
+            - done(null, profile);
+        - }));
+        - // 定义路由
+        - app.all('/github', isLoggedIn);
+        - app.get('/github', user.github);
+        - app.get('/auth/github', passport.authenticate('github', {scope: 'email'}));
+        - app.get('/auth/github/callback', passport.authenticate('github', {
+            - successRedirect: '/github',
+            - failureRedirect: '/'
+        - }));
+- kraken
+    - 介绍
+        - 基于express之上的基于设置结构化代码工具
+    - 功能
+        - post请求_csrf验证
+    - 基本用法
+        - 'use strict'
+        - var express = require('express'),
+            - kraken = require('kraken-js');
+        - var app = express();
+        - app.use(kraken());
+        - app.listen(8000);

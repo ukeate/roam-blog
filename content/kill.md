@@ -1,0 +1,12 @@
+- 9
+    - 3 QUIT 退出(同ctrl + \)
+    - 1 HUP 终端断线
+    - 2 INT 中断(同ctrl + c)
+    - 9 KILL 强制终止
+    - 15 TERM 终止
+    - 18 CONT 继续(与STOP相反, 同fg/bg)
+    - 19 STOP 暂停(同ctrl + z)
+- l                  # 列出所有信号名称和编号
+- 常用
+    - 删除名字的进程
+        - ps -ef|grep -v "grep"|grep aurora/app.js |awk '{print $2}'| xargs kill -9

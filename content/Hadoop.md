@@ -1,0 +1,44 @@
+- Apache开源, 分布式系统基础架构
+- 面临问题
+    - 硬盘
+        - 1块: 10TB-14TB 
+        - 1PB: 102块硬盘
+    - 算
+        - MySQL5.5: 300w-500w
+        - MySQL8: 1亿、1GB
+- [[Doug Cutting]]
+    - [[GFS]]-> [[HDFS]]
+        - 存储
+    - [[MapReduce]]-> [[MapReduce]]
+        - 计算
+    - [[Bigtable]]-> [[HBase]]
+        - 表式存储
+- 发展
+    - 2003-2004: Google公开部分GFS和MapReduce
+    - 2005: Hadoop成为Apache Lucene子项目Nutch了一部分
+    - 2006.3: MapReduce和NDFS(Nutch Distributed File System)纳入Hadoop
+- 版本
+    - Hadoop1.x
+        - HDFS(存), MapReduce(算、资源调度), Common
+    - Hadoop2.x
+        - HDFS(存), MapReduce(算), Yarn(资源调度), Common
+    - Hadoop3.x
+- 发行版本
+    - [[Apache]]: 开源
+    - Cloudera: Doug Cutting, 一键部署, 资源占用大
+    - Hortonworks: 雅虎工程师，贡献Hadoop 80%代码, 一键部署
+    - 阿里云
+- 特点
+    - 高可靠性：多副本
+    - 高扩展性
+    - 高效性: 并行运行
+    - 高容错性
+- 发行版
+    - Apache Hadoop
+    - [[CDH]]
+    - [[HDP]]
+    - [[宜信大数据]]
+- 运行平台
+    - [[Mesos]]
+- [[Hadoop使用]]
+- [[Hadoop 组件]]

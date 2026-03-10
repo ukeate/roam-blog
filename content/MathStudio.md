@@ -1,0 +1,62 @@
+- Basic Expressions
+    - 1+2
+    - 4*5
+    - 6!
+- Algebra
+    - a*a+b
+    - Expand((a+b)^10)
+    - Apart( (x^2) / ( x^2 + 1)^2)
+    - Factor( x^4 + 5x^2 - 6 )
+- Solving Quadratic Equations
+    - Solve( x^2 + 5x + 6 = 0 )
+    - Solve(1,5,6)
+- Limits
+    - Limit()
+- Derivatives
+    - D(sin(x))
+- Integrals
+    - Integrate( x^2 + 3x - 6 )
+- Graphing
+    - Plot(sin(x))
+- Parametric Plots
+    - ParametricPlot(cos(u), sin(u))
+- Polar Plots
+    - PolarPlot(sin(2@theta))
+- Time Graphing
+    - Plot(sin(x + T))
+- Vector Fields
+    - VectorPlot(-y, x)
+- Multiple Plots
+- Minimum, Maximum and Zero Values
+    - Plot(sin(x), min=1)
+- List Plots
+    - ListPlot([1,2,3,4,5,4,3,8,6,8])
+- Regression Analysis
+    - LinearFit([1,4,9,5,7,5,4,2,9], [3,4,5,7,8,10,4,7,6])
+    - LinearFitModel()
+    - LinearFitPlot()
+    - QuadraticFitPlot()
+    - SinFitPlot()
+- 3D Graphing
+    - Plot3D(2cos(x) * sin(y))
+- 3D Parametric Plots
+- Sliders
+    - Slider(n, 1..50)
+    - Slider(a, 2, 10, 0.1)
+- Scripting
+    - one = 1
+    - two = 2
+    - one + two
+    - cube(x) = x^3
+    - cube(5)
+    - for [row, column] in data
+    - end
+- Lists
+    - 1:100
+    - [1,2,3] * [4,5,6]
+- Matrices
+    - `[[1,2], [3,4]] * [[5,6], [7,8]]`
+    - Inverse([a,b], [c,d])
+    - Identity(5)
+- Units
+    - 2@feet + 24@inches

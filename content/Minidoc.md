@@ -1,0 +1,1 @@
+- 原smartWiki(php), 改成golang开发的minidoc

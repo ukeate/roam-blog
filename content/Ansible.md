@@ -1,0 +1,68 @@
+- __python实现的自动化部署工具__
+- 模式
+    - ad-hoc              # 批量命令
+    - playbook            # 任务编排，执行yml文件
+- 安装
+    - pip install ansible
+- 配置
+    - 优先级
+        - export ANSIBLE_CONFIG=/etc/ansible.cfg
+        - ~/.ansible.cfg
+        - /etc/ansible.cfg
+    - ansible.cfg
+        - inventory = /etc/ansible/hosts
+        - library = /usr/share/ansible
+        - forks = 5
+        - sudo_user = root
+        - remote_port = 22
+        - host_key_checking = False
+        - timeout = 60
+        - log_path = /var/log/ansible.log
+    - hosts
+        - [mysql_test]
+        - 192.168.0.1
+        - 192.168.0.2
+- 命令
+    - ansible
+        - 通配符
+            - 10.1.1.113
+            - '*'
+            - all
+        - m
+            - command                     # 执行命令
+                - a 'uptime'
+            - file                        # 操作文件
+                - a "dest=/tmp/t.sh mode=755 owner=root group=root"                  # 改属性
+                - a "src=/etc/resolv.conf dest=/tmp/resolv.conf state=link"          # 软链接
+                - a "path=/tmp/resolv.conf state=absent"                             # 删除软连接
+            - copy
+                - a "src=/a.cfg dest=/tmp/a.cfg owner=root group=root mode=0644"
+            - cron                        # 定时任务
+                - a 'name="custom job" minute=*/3 hour=* day=* month=* weekday=* job="/usr/sbin/ntpdate 172.16.254.139"'
+            - group                       # 操作组
+                - a 'gid=2017 name=a'    # 创建组
+            - user                        # 操作用户
+                - a 'name=aaa groups=aaa state=present'          # 创建用户
+                - a 'name=aaa groups=aaa remove=yes'             # 删除用户
+            - yum
+                - a "state=present name=httpd"
+            - service
+                - a 'name=httpd state=started enabled=yes'       # 开机启动
+            - ping
+            - script
+                - a '/root/test.sh'
+            - shell
+                - a 'ps aux|grep zabbix'
+            - raw                         # 同shell
+            - get_url
+                - a 'url=http://10.1.1.116/a.ico dest=/tmp'      # 下载
+            - synchronize
+                - a 'src=/root/a dest=/tmp/ compress=yes'        # 推送
+        - o-> 例子
+        - ansible '*' -m command -a 'uptime'
+    - ansible-doc         # 文档
+    - ansible-galaxy      # 上传/下载模块
+    - ansible-playbook    # 任务编排
+    - ansible-pull        # 拉配置
+    - ansible-vault       # 文件加密
+    - ansible-console     # REPL

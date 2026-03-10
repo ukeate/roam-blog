@@ -1,0 +1,28 @@
+- __Asynchronous JavaScript and XML__
+- 特点
+    - 异步，提升了用户体验
+        - 局部刷新
+    - 优化传输，减少了数据和带宽
+    - 客户端运行，承担服务器压力
+- XMLHttpRequest
+    - IE5首次引入
+    - readyState
+        - 0 未初始化, 1 正在加载, 2 已加载, 3 交互中, 4 完成
+    - status      # 服务器http状态码
+    - responseXML     # 响应结果，表示为xml
+    - responseText    # 响应结果，表示为串
+    - open("method", url)
+    - send()
+    - abort()     # 停止当前请求
+    - 创建
+        - new ActiveXObject()     # IE
+        - new XMLHttpRequest()        # firefox
+    - callback种类
+        - onSuccess
+        - onFailure
+        - onUninitialized
+        - onLoading
+        - onLoaded
+        - onInteractive
+        - onComplete
+        - onException

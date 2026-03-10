@@ -1,0 +1,11 @@
+- In-Memory
+    - 聚合根在内存，同步最新状态
+- 事件溯源（Event Sourcing）
+    - 没有CRUD，只有Append Event。数据不可变
+    - 对象最新状态通过事件溯源获得
+- Actor
+    - 通过Mailbox取代调用，保证消息线性处理
+- EDA(Event-driven Architecture)
+    - 节点只处理逻辑，节点间Event通信
+    - 是最终一致性的架构
+- [[CQRS]][[Event Sourcing]]

@@ -1,0 +1,20 @@
+- mysql
+    - -max-relay-logs-size=300           # 中继日志大小(sql语句数)
+    - -relay-log-purge={0|1}             # 中继日志自动清空
+    - -relay-log-space-limit=0           # 限制中继日志大小,0表示无限制
+    - o->
+    - mysql -h 127.0.0.1 -u root -p
+- mysqldump
+    - uroot
+    - p
+    - h127.0.0.1
+    - P3306
+    - -force
+    - -all-databases
+        - 所有库
+    - -databases db1 db2
+        - 多库
+    - 常用
+        - mysqldump -uroot -p db1 tb1> tb1.sql
+- mysqladmin -uroot -p status
+    - 查看当前连接数

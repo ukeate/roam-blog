@@ -1,0 +1,10 @@
+- 特点
+    - generator的语法糖, 自动执行generator, 处理promise
+    - 内置执行器，返回promise对象
+- 使用
+    - var asyncReadFile = async function () {
+        - try {
+            - var f1 = await readFile('/etc/fstab');
+        - } catch (e) {}
+        - await p2.catch(function (e) {})
+    - }

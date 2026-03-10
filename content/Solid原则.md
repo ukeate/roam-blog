@@ -1,0 +1,10 @@
+- 单一职则(single responsibility)
+    - 一个类负责一个功能
+- 开闭(open/closed)
+    - 对扩展开放，对修改关闭，如接口, 如数组扩展结构体状态
+- 里氏替换原则(liskov substitution)
+    - 子类继承超类的所有
+- 接口分离(interface segregation)
+    - 最小功能隔离
+- 依赖反转(dependency inversion)
+    - 低层依赖高层, 具体依赖抽象

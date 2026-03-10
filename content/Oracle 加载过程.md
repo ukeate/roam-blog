@@ -1,0 +1,30 @@
+- 启动Oracle服务
+    - oradim -startup -sid 数据库名                 # 相当于windows服务中启动该服务，会从windows注册表中加载配置
+    - oradim -shutdown -sid orcl -shuttype srvc    # 停止oracle 服务
+    - 普通登录
+        - sqlplus system/pwd                 # 从注册表中查找默认的数据库名称进行登录
+        - sqlplus system/pwd@orcl            # 指定数据库名登录，必须有监听的时候该命令可以执行，监听的进程是独立于oracle之外的进程
+    - 管理员登录
+        - sqlplus / as sysdba                 # windows管理员的身份进行登录，不需要用户名密码，可以在配置文件中禁用它
+    - 无连接登录
+        - sqlplus /nolog                      #用来设置sql/plus
+- 启动实例
+    - cmd> sqlplus / as sysdba                    # 连接到数据库的空闲实例
+    - sql> select status from v$instance          # 查看实例状态
+    - sql> shutdown abort                         # 立即终止当前的实例,实例结束后用户仍然登录状态，但没有连接实例
+    - sql> startup nomount                        # 启动默认实例（不加载数据库）
+    - sql> startup open                           # 启动、装载、打开默认的数据库
+    - cmd> set oracle_sid=orcl                    # 在windows下设置oracle的默认登录数据库
+    - 启动过程
+        - 加载参数文件database/init数据库名
+        - 分配sga (system global area)到内存空间，用于缓存数据库信息
+        - 创建后台进程
+- 挂载数据库
+    - sql> startup mount
+    - 挂载过程
+        - 装载数据库文件夹中的文件    # sga中有已经初始化了ctl文件的路径，通过ctl文件装载数据库
+        - ctl(从中得到数据库文件名) -> dbf
+            - 3种数据库文件: .ctl(控制文件) .dbf(数据库文件) .log(日志文件)
+        - 这时，数据库还是不能访问,但是管理员可以访问（debug数据库）
+- 打开数据库       # 使外界可以访问
+    - sql> alter database 数据库名 open                # 数据库文件夹中记录日志O

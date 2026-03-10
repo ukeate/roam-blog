@@ -1,0 +1,92 @@
+- 常识
+    - 基于socket                # socket可以跨语言访问
+        - 单用socket提供网络服务出现的问题：
+        - 1.不能处理不同协议的请求，如http协议发送的是请求头信息
+            - #　http调用socket:127.0.0.1:8888/或action="127.0.0.1:8888"
+        - 2.添加新参数，客户端也要修改
+    - 版本
+        - jdk6之后的版本开始支持web service
+        - jdk6不支持soap1.2
+    - 传输标准：xml或json                # 普遍使用xml,RestFul使用json
+- 优点
+    - 易推广、协议匹配、便于升级（加参数）
+- 服务方式
+    - 返回的结果均为xml
+    - http get
+    - http post
+        - get与post方式直接传递参数，参数易混淆，所以有soap发送xml的方式
+    - soap1.1
+    - soap1.2
+- soap
+    - 常识：
+        - soap:simple object access protocol
+        - soap是以post方式传输的
+    - 内容
+        - 请求soap
+            - &lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:q0="http://my.test/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;            - &lt;soapenv:Body&gt;                - &lt;q0:sayHello&gt;                - &lt;arg0&gt;小明&lt;/arg0&gt;                - &lt;/q0:sayHello&gt;            - &lt;/soapenv:Body&gt;            - &lt;/soapenv:Envelope&gt;        - 响应soap
+            - &lt;S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"&gt;            - &lt;S:Body&gt;                - &lt;ns2:sayHelloResponse xmlns:ns2="http://my.test/"&gt;                - &lt;return&gt;hello,小明&lt;/return&gt;                - &lt;/ns2:sayHelloResponse&gt;            - &lt;/S:Body&gt;            - &lt;/S:Envelope&gt;- wsdl
+    - 获得
+        - http://192.168.10.3:1234/hello?wsdl                # 发布url后面加?wsdl
+    - 内容                        # 查看时从后向前看
+        - &lt;service&gt;标签            - name属性：默认 发布类名 + Service
+            - &lt;port&gt;标签                - name属性：默认有soap1.1 soap1.2 get post(jdk1.6只有soap1.1)，默认 类名 + port
+                - binding属性:真正的实现者    # 指向<binding>标签
+                - &lt;soap:address&gt;标签                    - location属性:访问的地址
+        - &lt;binding&gt;标签：是真正的实现类,soap协议，是文本，方法名        - &lt;portType&gt;标签：            - input
+            - output
+        - &lt;message&gt;标签 用schema格式来描述参数类型        - xsd:schema关联的schema文件中
+            - &lt;element&gt;标签  ，约定了参数类型- 创建与发布
+    - 发布到eclipse的jetty容器
+        - @WebService
+        - MyWebService
+            - public String showName(Strng name)
+                - System.out.println("name=" + name);
+                - return name + "你好!";
+            - main
+                - Endpoint.publish("http://localhost:8888/hello",new MyWebService());
+                    - 发布webService
+                        - 1.6.0_13及之前的版本不支持,1.6.0_14之后的版本支持
+                        - 发布之后http://localhost:8888/hello?wsdl中有wsdl文件
+    - 可以发布成服务的方法
+        - 1.非final、static修饰的public方法
+        - 2.@WebMethod(exclude=true)方法前加该注解时不发布该方法
+- 调用
+    - HttpClient
+        - get
+        - post
+        - soap
+    - wsdl.xml
+        - web service提供给不同平台生成解决方案的配置文件
+        - HttpClient发送soap时充当了:wsdl.xml解决方案调用的过程
+        - o-> wsimport.exe(jdk1.6)
+            - 解析wsdl.xml文件
+                - 命令：wsimport -s . -p cn.itcast                # -s 保存源码（默认不保存）,-p指定包名
+                - 生成类：
+                    - jdk1.6中解析时忽略生成soap12服务类文件（jdk1.6不支持）与get post服务类文件(默认忽略)
+                    - XxxService
+                    - XxxServicePort
+                    - Xxx
+                    - ..
+                - 调用：
+                    - MyWSService mywsService = new MyWSService();
+                    - String retVal = mywsService.getMyWSPort().sayHello();
+        - o-> myeclipse的web service soap浏览器
+            - 可以从soap浏览器中查看请求和返回的soap.xml文件的源码
+            - |-> 右上角wsdl page
+            - |-> 左边栏 uddi main
+            - |-> 右边栏按提示输入即可
+        - o-> ajax
+            - 方式一：直接调用
+            - 缺点
+                - 新版浏览器（ie10等）不支持跨域请求(为了安全)，所以只能请求localhost
+                - 会把数据暴露在客户端
+- 注解
+    - @WebMethod(exclude=true)    # 对此方法不进行发布
+    - @WebService     # 声明为web service服务类
+        - 可选属性
+        - name="服务名",
+        - portName="端口名",
+        - serviceName="真正服务类的名字",
+        - targetNamespace="包名a.b.c"
+    - @WebResult(name="")     # 方法返回值类型前，指定返回值名（如果返回的是集合，则指定的是集合内元素的名）
+    - @WebParam(name="")     # 方法参数值类型前，指定参数名

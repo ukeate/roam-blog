@@ -1,0 +1,7 @@
+- [[JDK11]], 不分代，SingleGeneration
+- 特点
+    - STW设计10ms, 实际1ms
+    - 适用4T（JDK13 16T）
+    - 内存分块（有大有小）
+- 概念
+    - 没有RSet, 改进了SATB指针

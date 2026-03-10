@@ -1,0 +1,11 @@
+- netcat，TCP/UDP连通性测试，临时收发，C实现
+- U a.sock           # 指定socket
+- v                  # 显示详情
+- z                  # 只测试连通
+- u                  # 使用udp
+- nc -vz host 443，检查端口
+- o-> 测试udp端口
+- nc -vzu 127.0.0.1 1194
+- o-> 文件传输
+- nc -l -p 9999 | tar xf -
+- tar cf - $(find . -name "*") | nc -v 10.99.11.44 9999

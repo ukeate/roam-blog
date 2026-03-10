@@ -1,0 +1,14 @@
+- 配置
+    - 数据库目录
+        - /usr/lib/systemd/system/postgresql.service
+    - jdbc
+        - driver : org.postgresql.Driver
+        - url : jdbc:postgresql://localhost:5432/postgres
+        - 初始用户名 : postgres
+        - 初始数据库 : postgres
+- [[PostgreSQL 数据类型]]
+- [[PostgreSQL SQL]]
+- [[PostgreSQL 数据字典]]
+- [[PostgreSQL 存储过程]]
+- [[PostgreSQL 案例]]
+- [[PostgreSQL 命令]]

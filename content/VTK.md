@@ -1,0 +1,13 @@
+- The Visualization Tookit，三维计算工具
+- vtk DataFile Version 3.0                # 4.0已经出来，3.0广泛使用
+- vtk output                                # 一般不改变
+- ASCII                                        # 使用标准ASCII码， 也可以写binary
+- DATASET POLYDATA                        # 表示多边形面集，面由点组成
+    - __POLYDATA是数据类型, 可以是STRUCTED_POINTS, STRUCTURED_GRID, UNSTRUCTURED_GRID, POLYDATA, FIELD等。POLYDATA表示三角形或四边形数据。__
+- POINTS 35947 float                        # 表示该模型由35947个点组成，坐标分量是浮点型
+    - __这行的后面是35947 * 3个float型数字。每三个数字表示一个点__
+- POLYGONS 69451 277804                # POLYGONS是关键字, 69451表示模型有69451个多边形
+    - __后面行的 3 21216 21215 20399中3表示每个多边形三个顶点。每一行是一个多边形面。21216 21215 20399表示在POINTS 35947 float段中的索引。__
+    - __277804表示整个POLYGONS占据的数组的长度，计算公式是69451 * 4 = 277804, 乘数4是3 21216 21215 20399这组元素的长度。用于计算存储空间__
+- CELL_DATA 69451                        # 表示面的个数，和POLYGONS上定义的面个数一致。
+- POINT_DATA 35947                        # 表示点的个数, 和POINTS中定义的点个数一致。

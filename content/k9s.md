@@ -1,0 +1,20 @@
+- 搜索 /
+- 日志 l, 复制 Ctrl-c
+- 进入 s
+- 看yaml y
+- 编辑 e
+- 删除 d
+- 重启 r
+- Port-forward f 8080:80
+- 切容器 0-9
+- 视图
+    - ns :ns
+    - pod: po
+    - deploy: dp
+    - statefulset: ss
+    - daemonset: ds
+    - node: no
+    - svc: svc
+    - ing: ing
+    - events: ev
+    - crd: crd

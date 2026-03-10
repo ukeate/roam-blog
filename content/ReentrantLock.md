@@ -1,0 +1,7 @@
+- 可重入锁，CAS实现, state记重入多少次
+- new ReentrantLock(true)         # 公平锁
+- tryLock(long, TimeUnit)
+- lockInterruptibly()             # 响应interrupt()标记
+- newCondition()                  # 多一个等待队列
+- 源码
+    - 调NonfairSync

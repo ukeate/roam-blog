@@ -1,0 +1,6 @@
+- length
+    - 属性
+- newInstance()
+    - 泛型数组实例化
+        - T[] = (T[]) new Object[0];
+        - (T[]) Array.newInstance(type, size);

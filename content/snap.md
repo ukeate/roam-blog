@@ -1,0 +1,15 @@
+- list                    # 列已安装
+- info                    # 查看仓库所有版本
+- find                    # 搜索
+- install
+- remove
+- refresh                 # 更新
+    - refresh all
+- revert                  # 还原到上个版本
+    - -revision          # 指定版本
+- run                     # 运行命令
+- start                   # 运行service
+    - -enable            # 开机启动
+- stop                    # 停止service
+- save                    # 存配置快照
+- saved                   # 列出所有快照

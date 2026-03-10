@@ -1,0 +1,10 @@
+- [[kubectl]]
+- [[kubelet]]
+- [[kubeadm]]
+- kube-apiserver
+- kube-proxy
+- kube-scheduler
+- kube-controller-manager
+- hyperkube
+- apiextensions-apiserver
+- mounter

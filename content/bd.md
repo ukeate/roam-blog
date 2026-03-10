@@ -1,0 +1,27 @@
+- 管理
+    - bd init
+        - bd init --stealth，隐身模式，不提交到repo
+    - bd doctor --fix --rig a
+        - bd setup claude，配置claude
+        - bd hooks install，安装git hook
+    - bd sync，向git同步
+        - bd export，bd向jsonl同步
+- 任务
+    - bd create "" -p 1
+        - bd create "" -t epic --description="" --parent id2
+            - epic, task, feature, bug, chore
+    - bd close iss1 --reason ""
+    - bd ready，列task
+    - bd list，列issue
+    - bd stats，统计
+    - bd show iss1，看id
+- 任务修改
+    - bd dep add child1 parent1
+        - 关系有blocks/related/parent-child/discovered-from/conditional-blocks
+    - bd dep tree iss1 --direction=both，显示依赖
+    - bd update iss1 --claim
+    - bd update iss1 --status in_progress
+    - bd comments add iss1 ""，记comment
+- 文件
+    - .beads/*.db
+    - .beads/*jsonl

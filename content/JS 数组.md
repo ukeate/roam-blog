@@ -1,0 +1,100 @@
+- 介绍
+    - 数字索引                                             # 最大索引 2^32 - 2, 实现经过优化, 数字索引访问比访问常规属性快很多
+    - 元素无类型
+    - 数组是动态, 根据需要它们会增长或缩减
+    - 数组可能是稀疏的, 索引不一定连续, length对于稀疏数组取最大索引+1
+- 原理
+    - 数组对象使用小于0 ~ 2^32 - 2 非负整数属性名时, 自动维护其length属性值
+    - [] 索引内的数字作为索引创建和访问, 其它作为属性
+    - a['1'] 同 a[1] 同 a[1.000]
+    - 数组可以原型继承, 可以定义getter, setter方法
+    - 数组元素可以delete, in, for/in                        # delete a[0], 0 in a
+- 稀疏数组
+    - 稀疏数组比稠密数组更慢, 内存利用率更高, 查找元素与常规对象属性查找时间一样长
+    - for/in时会跳过未有元素
+    - a = new Array(5)
+    - a = [, , ,]
+    - a = [1, , 3]                                        # 旧版本实现中, [1,,3]与[1,undefined, 3]是一样的，不是稀疏数组
+    - a[1000] = 0
+- 创建与调用
+    - var misc = [1.1, , true]                            # 第二个是undefined
+    - new Array()
+    - new Array(10)                                       # 预分配数组空间
+    - new Array(5, 4, "testing")
+    - a[0]        
+    - a.length    
+        - length大于每一个索引
+        - 对lenght赋值, 小于length索引的元素将删除, 如length=0清空数组
+            - Object.defineProperty()让数组的length变成只读
+            - Object.defineProperty(a, "length", {writable: false})来避免删除元素
+            - 让数组无线不能配置也可以，如Object.seal, Object.freeze方法
+- 添加删除
+    - a[1] = "a";
+    - a.push("zero", "one")
+    - delete a[1]
+    - a.pop()                                             # 反push
+    - a.shift()                                           # 头部删除, 重改所有元素索引
+    - a.unshift()                                         # 反shift, 头部插入元素
+    - splice()                                            # 通用方法插入, 删除, 替换数组元素, 根据需要修改length属性
+- 遍历
+    - for(var i = 0; i < a.length; i++)                   # 判断undefined
+    - ```javascript
+      for(var index in a){
+        # 会遍历出Array.prototype中的方法, 要进行过滤, ECMAScript 允许for/in遍历顺序不同, 一般是升序的, 如果同时有属性和元素，很可能是创建顺序
+          if(!a.hasOwnProperty(i)) continue;
+          // if(String(Math.floor(Math.abs(Nuber(i)))) !== i) continue;        # 跳过不是正整数的i
+      }
+      ```
+    - a.forEach(function(x){})                            # ECMAScript 5定义的新方法
+- 多维数组                                                 # js不支持真正的多维数组，可以用数组模拟
+    - var a = new Array(10)
+    - a[0] = new Array(10)
+    - a[0][0]
+- 空位问题
+    - Array(3)    // [, , , ]                             # 没有0位置, 但length = 3, 不同于有0位置但值为undefined, es5中对空位处理很不一致, 一般是跳过, es6会将空位值转为undefined
+- 类数组对象                                               # 与数组相似的对象, 字符串虽然与数组类似，但length没有限制, 最好不看作类数组对象
+    - 特性
+        - 自动更新length属性, length设置后自动截断数组
+        - 从Array.prototype中继承了一些有用的方法
+        - 类属性(class)为"Array"(Date等类也是"Date")
+    - 创建                                                 # 数组的方法对于自定义的类数组对象是通用的, 虽然不能继承Array.prototype, 但可以间接调用Function.call
+        - 要求
+            - 自动维护length属性
+            - 下标是数字字符串并在数组下标范围内
+        - var a = {"0": "a", "1": "b"}
+- 作为数组的字符串
+    - 介绍
+        - ECMAScript 5中，字符串类似只读数组。访问如下
+            - s.charAt(0)
+            - s[0]
+        - Array.isArray(s)是false
+        - 通用字符串方法可以乃至字符串中，如                   # 但字符串是不可变值的，所以中push, sort, reverse, splice在字符串上是无效的, 出错时没有提示
+            - Array.prototype.join.call('abc', " ")        # "a b c"
+- 二进制数组
+    - 介绍
+        - ArrayBuffer, TypedArray, DataView
+        - TypedArray按小端字节序来处理ArrayBuffer, 大端字节序可以自定义DataView
+    - TypedArray
+        - 溢出
+            - 正向溢出(overflow)
+                - uint8[0] = 256    // 0                  # 值为 数据类型最小值 + 余值 - 1, 这里为 0 + 1 - 1
+                - int8[0] = 128    // -128                # -128 + 1 - 1
+            - 负向溢出(underflow)
+                - uint8[0] = -1    // 255                 # 值为 数据类型最大值 - 余值 + 1, 这里为 255 - 1 + 1
+                - int8[0] = -129    // 127                # 127 - 1 + 1
+            - Uint8ClampedArray负向溢出都为0, 正向溢出都为255
+    - 场景
+        - ajax中
+            - xhr.responseType设置为 'arraybuffer'来接收二进制数据(也可以设blob)
+        - canvas中
+            - ctx.getImageData(0, 0, canvas.width, canvas.height)
+            - uint8ClampedArray = imageData.data;
+        - websocket中
+            - socket.binaryType = 'arraybuffer'
+            - var arrayBuffer = event.data;
+            - socket.send(new Uint8Array(4).buffer);
+        - fetch api中
+            - 返回request.arrayBuffer()得到arrayBuffer数据
+        - file api中
+            - reader.readAsArrayBuffer(file);
+            - reader.onload = function() { var arrayBuffer = reader.result; }

@@ -1,0 +1,5 @@
+- curl -v             # 详细头信息
+- curl -H "Cookie: foo=bar; baz=val"          # 发送cookie
+- curl -X post -k http://localhost:9090/a -H "Content-Type: text/plain" -d '{"name": "a"}'
+    - # post请求
+- curl -O http://104.223.142.166/isu80        # 抓文件

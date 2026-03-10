@@ -1,0 +1,14 @@
+- 文件命令
+    - redis-server
+        - 端口为6379
+        - redis-server /etc/redis.conf  来加载配置文件
+    - redis-cli
+    - redis-benchmark
+        - 性能测试工具
+- redis-cli命令
+    - ping
+        - 成功时返回 PONG
+    - shutdown
+        - 关闭redis-server服务
+        - p 端口号
+    - quit

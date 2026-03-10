@@ -1,0 +1,4 @@
+- | tee -a a.log | less -R +F
+    - Ctrl + x 暂停 , F 继续
+- -S，不自动换行
+- -R，保留颜色控制符

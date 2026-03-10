@@ -1,0 +1,77 @@
+- Tuning
+- 前提
+    - 从业务场景开始
+    - 无监控(能压测), 不调优
+- 目标
+    - 减少Full GC
+    - 确定倾向                        # 吞吐量, 或响应时间
+        - 吞吐量好: PS + PO
+        - 响应时间好: G1 或 PN + CMS  # G1吞吐量少10%
+- 组成部分
+    - JVM预规划
+    - 优化JVM运行环境(慢、卡顿)
+    - 解决JVM运行时出现的问题(OOM)
+- 步骤
+    - 熟悉业务场景
+        - 响应时间
+        - 吞吐量
+    - 选择回收器组合
+    - 计算内存需求(小的快，大的少gc)
+    - 选CPU
+    - 设定年代大小、升级年龄
+    - 设定日志参数
+    - 观察日志情况
+- 问题分析
+    - 工具
+        - CPU经常100%
+            - top查进程CPU(top)
+            - 进程中线程CPU(top -Hp)
+            - 导出该线程堆栈(jstack)
+            - 查哪个方法(栈帧)消耗时间(jstack)
+        - 内存高
+            - 导出堆内存(jmap)
+            - 分析(jhat jvisualvm mat jprofiler ...)
+        - 监控JVM
+            - jstat jvisualvm jprofiler arthas top ...
+            - 网管: Ansible
+        - 流程
+            - 网管报警
+            - top -Hp 进程号
+            - [[jstack]]
+            - [[jps]]
+            - [[jinfo]]
+            - [[jstat]]
+            - [[jmap]]
+            - [[jhat]]
+            - [[Arthas]]
+            - [[MAT]]
+            - JProfiler
+            - [[jconsole]]
+            - [[JVisualVM]]
+    - 内存
+        - 现象
+            - OOM崩溃
+            - CPU飙高, 不断FGC
+        - 线程池不当运用
+        - 加内存反而卡顿
+            - GC, 应该用CMS或G1替换 PS+PO
+        - JIRA不停FGC, 没定位出来
+            - 扩内存到50G, GC换G1, 重启
+        - tomcat server.max-http-header-size过大
+            - 默认4096, 每个请求都分配
+        - lambda表达式导致方法区溢出
+            - java.lang.OutofMemoryError: Compressed class space
+        - disruptor不释放缓存
+        - 使用Unsafe分配内存, 直接内存溢出
+        - Xss设定小, 栈溢出
+        - 重写finalize()引发GC
+            - finalize()耗时长, GC时回收不过来，不停GC
+        - 内存不到10%，频繁FGC
+            - 有人显式调用System.gc()                         # 不定时调，但会频繁调
+        - 大量线程, native thread OOM
+            - 减少堆空间，留更多系统内存产生native thread
+        - G1产生FGC
+            - 降低MixedGC触发的阈值       # 默认45%
+            - 扩内存
+            - 提高CPU                     # 回收快
+- HotSpot调优

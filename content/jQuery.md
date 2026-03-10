@@ -1,0 +1,22 @@
+- 使用
+    - 对象命名方式
+        - `var $a = $("#inputID");`
+    - 特殊使用
+        - $(document)    # 得到document区  ，可以定义事件，如$(document).mousemove(fn);
+            - $(document).ready(fn); 相当于$(fn)
+        - $(fn)          # 相当于window.load ,在页面加载时执行，可以写多个，（而window.load只能一个生效，后面的会覆盖前面的）
+        - $("<div id='2013'>ss</idv>");      # 创建一个元素
+    - 与DOM之间的转换
+        - var $input = $(inputElemenet); // 注意，没有双引号
+        - var inputElement = $input.get(0); // jquery相当于存储了dom对象的数组 
+            - var inputElement = $input[0];
+- 问题
+    - 页面中引用jquery
+        - 只能用<script></script>的形式，而不能用<script/>的形式
+        - 引用的src必须写相对路径
+        - 引用的<script></script>代码必须写在使用之前
+        - webroot/web-inf/不能用相对路径访问webRoot/下的文件，所以不能包含jquery文件。所以要用${pageContext.request.contextPath}/来访问
+- [[jQuery选择器]]
+- [[jQuery函数]]
+- [[jQuery插件]]
+- [[jQuery Mobile]]

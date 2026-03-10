@@ -1,0 +1,8 @@
+- pageContext
+    - 当前页面有效
+- request
+    - 一次请求范围
+- session
+    - 会话
+- application context
+    - 同一服务器

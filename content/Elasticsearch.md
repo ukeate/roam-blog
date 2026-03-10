@@ -1,0 +1,28 @@
+- 介绍
+    - 分布式实时[[Lucene]]
+- 命令
+    - elasticsearch -Ecluster.name=my_cluster_name -Enode.name=my_node_name
+- 性能
+    - 第一次查秒级响应(5-10秒)，放到文件系统缓存(filesystem cache)
+    - 再查命令缓存毫秒级响应                              # 热点数据要预热
+    - 文件系统缓存(内存中分配)和数据量同样大，才有效率        # 冷热分离
+    - 分页，会查前面所有数据                              # 用scroll api, 快照 + 游标
+- 概念
+    - index
+        - type
+            - document中加_type field实现
+            - 所以不同type中的field在index要唯一，否则冲突
+            - 对field排序会载入所有type的document
+            - document
+                - 对应lucene中的key value倒排文档
+                - 对就一个请求的json对象
+                - field
+                    - mapping
+                        - 定义type的field，映射json到document field
+- [[Elasticsearch设置]]
+- [[Elasticsearch接口]]
+- [[Elasticsearch插件]]
+- 工具
+    - [[Elasticsearch Kopf]]
+    - [[Bigdesk]]
+- [[Elasticsearch Go客户端]]

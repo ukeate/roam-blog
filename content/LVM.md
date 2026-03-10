@@ -1,0 +1,19 @@
+- LVM逻辑卷的创建流程如下：
+    - 将一个磁盘或分区格式化为物理卷：pvcreate /dev/sdb1
+    - 将物理卷添加到一个卷组中：vgcreate linuxcast-vg /dev/sdb1 /dev/sdb2
+    - 基于卷组创建一个逻辑卷mylv：lvcreate -L 10G -n mylv  linuxcast-vg
+    - 格式化逻辑卷：mkfs.ext4 /dev/linuxcast-vg/mylv
+    - 挂载使用：mount /dev/linuxcast-vg/mylv  /mnt
+- 逻辑卷查看命令：
+- pvdisplay
+- pvs
+- vgdisplay
+- vgs
+- lvdisplay
+- lvs
+- 删除一个逻辑卷：
+- lvremove /dev/linuxcast-vg/mylv
+- 删除一个卷组：
+- vgremove linuxcast-vg
+- 删除一个物理卷：
+- pvremove /dev/sda1

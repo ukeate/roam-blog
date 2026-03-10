@@ -1,0 +1,58 @@
+- Enterprise Resources Planning, 企业资源计划
+- [[ERP II]]
+- 组成
+    - [[SA 存货核算]]
+    - 供销系统
+        - 配销计划
+        - [[SD 销售/分销]]
+        - 售后服务
+        - [[PUR 采购]]
+        - [[SCM 供应链管理]]
+        - [[SFA 销售自动化]]
+        - [[SRM 供应商关系管理]]
+        - [[CRM 客户关系管理]]
+        - [[WMS 仓库管理系统]]
+        - [[TMS 运输管理系统]]
+        - [[EAM 企业资产管理]]
+        - [[APS 高级计划与排程]]
+    - [[SMT行业]]
+        - [[PLM 产品生命周期管理]]
+        - [[MES 制造执行系统]]
+    - [[ECM 企业内容管理]]
+    - [[HCM 人力资本管理]]
+        - [[HR 人力资源]]
+        - [[EPM 企业绩效管理]]
+    - [[INV 库存管理]]
+    - [[URP 合并报表]]
+    - [[CST 成本核算]]
+    - [[AR 应收账款]]
+    - [[RCCP 粗略产能计划]]
+        - [[MPS 主生产计划]]
+        - [[MRP 物料需求计划]]
+        - [[CRP 产能需求计划]]
+    - [[FA 固定资产]]
+    - [[AP 应付账款]]
+    - [[URP 通用资源计划]]
+    - [[CSH 现金管理]]
+    - [[BOM 物料清单]]
+    - [[GL 总账]]
+    - [[PRV 预配]]
+    - [[PAY 工资单]]
+    - [[EC 费用报销]]
+- 工作流
+    - [[Activiti]]
+    - [[Flowable]]
+    - [[YAML]]
+    - [[Bossa]]
+    - Azkaban
+        - 开源oa
+    - [[BPM]]
+- 规则引擎(BRMS)
+    - 概念
+        - 组成
+            - 知识库(Knowledge base)
+            - 既定事实(Fact base)
+            - 推理机(Rule Engine)
+    - [[Drools]]
+    - [[OpenRules]]
+    - [[OpenLexicon]]

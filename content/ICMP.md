@@ -1,0 +1,12 @@
+- Internet Control Message Protocol   # Internet控制报文协议
+    - 是ip层的子协议
+    - 封装
+        - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2FE2yrhOgdPQ.jpg?alt=media&token=12413fae-498f-45f4-bd6e-4c8638a631b6)
+    - 报文格式
+        - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2FrhZrC6PxUv.jpg?alt=media&token=9fa285df-e7fa-40f6-9c28-5d57a778694f)
+    - 主要报文类型
+        - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2FyO6_dq3Vvt.jpg?alt=media&token=a7153b1e-1a01-42b4-ae5d-a211d48d1a6c)
+    - 时间戳报文举例
+        - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2FpaGi9UdoY_.jpg?alt=media&token=71b260a9-25bc-4c29-95f4-bc6d98fa6e5e)
+    - 重定向报文举例
+        - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2Fv0FNNOgFKV.jpg?alt=media&token=238eba31-c24a-42b6-9305-f09090614aba)

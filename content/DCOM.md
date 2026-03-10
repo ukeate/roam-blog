@@ -1,0 +1,1 @@
+- Distributed Component Object Model,分布式组件对象模型 Microsoft平台

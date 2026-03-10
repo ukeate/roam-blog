@@ -1,0 +1,21 @@
+- __internet scsi__
+- 优点
+    - 可以网络传输
+    - 服务器数量无限
+    - 在线扩容．动态部署
+- 架构
+    - 控制器架构: 专用数据传输芯片．专用RAID数据校验芯片．专用高性能cache缓存和专用嵌入式系统平台
+    - iSCSI连接桥架构:
+        - 前端协议转换设备(硬件)
+        - 后端存储(scsi磁盘阵列．fc存储设备)
+    - PC架构
+        - 存储设备搭建在pc服务器上，通过软件管理成iscsi, 通过网卡传输数据
+        - 实现
+            - 以太网卡 + initiator软件
+            - toe网卡 + initiator软件
+            - iSCSI HBA卡
+- iSCSI系统组成
+    - iSCSI initiator 或　iSCSI hba
+    - iSCSI target
+    - 以太网交换机
+    - 一台或多台服务器

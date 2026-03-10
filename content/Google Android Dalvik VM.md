@@ -1,0 +1,4 @@
+- Android平台核心组成部分之一
+- 不能直接执行class, 执行dex文件可由class文件转化, 可直接使用大部分Java API
+- 寄存器架构，非栈架构
+- Android2.2提供JIT

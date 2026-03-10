@@ -1,0 +1,1 @@
+- scp a.txt root@ip:~

@@ -1,0 +1,2 @@
+- Parallel New
+- 增强PS, 以配合CMS并行回收, CMS到某阶段时PN运行

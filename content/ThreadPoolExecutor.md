@@ -1,0 +1,29 @@
+- new ThreadPoolExecutor()                    
+    - int corePoolSize                    # 核心线程数, 永远存活。可设置参与回收
+    - int maximumPoolSize                 # 最大线程数
+    - long keepAliveTime                  # 生存时间
+    - TimeUnit
+    - BlockingQueue<Runnable>             # 任务队列
+    - ThreadFactory                       # 线程工厂, 设线程名
+    - RejectedExecutionHandler            # 拒绝策略
+        - Abort                           # 抛异常
+        - Discard                         # 忽略掉
+        - DiscardOldest                   # 忽略掉排除最久的
+        - CallerRuns                      # 调用者线程执行, 再多就阻塞
+- AtomicInteger ctl
+    - 高3位线程池状态，低29位线程数量
+- void execute()
+    - 判断添加核心线程
+    - 放入队列成功
+        - 拒绝或添加非核心线程
+    - 添加非核心线程失败
+        - 拒绝
+- boolean addWorker(Runable, boolean)
+    - 线程数量加1
+    - 添加Worker
+        - 加锁
+        - 加线程
+        - 启动
+- class Worker extends AbstractQueuedSynchronizer implements Runnable
+    - 本身是AQS锁, 被多任务(线程)访问
+    - Tread thread

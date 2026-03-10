@@ -1,0 +1,58 @@
+- 常量
+    - sysdate 当前日期
+- 单行函数
+    - nvl(comm,0)                        # 替换comm列中的空值为0
+    - nvl2(comm,comm,0)                # 替换comm列中的空值为0，非空时为comm
+    - select lower('AAA') from dual;                        # 取小写
+    - upper('')                # 取大写
+    - initcap('www.itcast.cn')        # 每一段字符串的首字符大写
+    - concat('','')                        # 拼接字符串
+    - substr('itcast',1,3)        # 取第一个和第三个字符，脚标从1开始
+    - length('')                # 字符的长度
+    - lengthb('')                # 字节的长度
+    - instr('itcast','t')      # 查找第一个匹配字符串的位置,区分大小写
+    - lpad('a',10,'*')                # 左填充，一直到10位,也可以截取左边的10位字节（并非字符）
+    - rpad('a',10,'*')                # 右填充，一直到10位,也可以截取右边的10位字节（并非字符）
+    - trim('x' from 'xxhelloxsx')                # 增强版trim(),去掉字符串中的所有'x'
+    - replace('hello','l','o')                # 替换字符串中的'l' 为 'o'
+    - round(3.45,2)                # 四舍五入，2代表小数点后的位数  -1代表个位，-2代表十位
+        - round(sysdate,'month')      # 四舍五入到月(15号前后判断)
+    - round(sysdate,'year')      # 四舍五入到年(6月30号前后判断)
+    - trunc(3.142,1)                # 截取小数点后1位
+    - mod(10,3)                        # 10mod3取余
+    - nullif(10,20)                # 比较两个数值，相同时返回空，不同时返回第一个数值
+    - (job,'analyst',sal + 1000,"manager",sal + 800, sal + 400) "新工资" from emp;
+    - decode(...)函数：例子
+        - select ename "姓名" , sal "原工资" , decode(job, 'analyst',sal + 1000, 'manager',sal + 800, sal + 400) "新工资" from emp;
+        - select ename "姓名" , sal "原工资" , case job when 'analyst' then sal + 1000 when 'manager' then sal + 800 else sal + 400 end "新工资" from emp
+            - #SQL99
+    - 日期函数
+        - sysdate +/- 1                # 增加或减少1天
+        - sysdate - hiredate                # 日期减日期，得到天数
+        - to_char(sysdate,'yyyy-mm-dd hh24:mi:ss')                # 格式化显示时间
+        - months_between('12-2月-13',sysdate)        # 日期之间的月数
+        - add_months(sysdate,1)                # 给当前日期增加1个月
+        - next_day(sysdate,'星期一')        # 下一个星期一的日期
+        - last_day(sysdate)                        # 反回这个月的最后一天
+    - 类型转换：
+        - 隐式转换                # 要求 1，格式正确。2，内容合理
+            - 字符串与Date,number相互转换
+        - 显式转换
+            - 到字符串：
+                - 日期到字符串：to_char(sysdate,'yyyy "年" mm "月" dd "日" day hh12:mi:ss:am')
+                    - day是星期、hh12是12进制计时(hh24代表24进制计时)、am是个变量,上午时是am，下午是pm
+                    - ##　双引号中的内容直接显示
+                - 货币值到字符串：to_char(1234,'L9,999')
+                    - L可以小写，代表当地货币，','可以省略
+            - 字符串到Date： to_date('1980-12-17','yyyy-mm-dd')
+            - 字符串转换到数字：        to_number('123')
+- 多行函数
+    - 多行函数分为接收多个输入，返回一个输出。
+        - 多行函数本身不会统计值为null的记录
+        - 多表的多行函数的统计多会用到group by ，因为where 只是筛选出了不符合条件的部分，剩下的部分分列在不同的表中，只有按照列名分组以后才能按列名执行多行函数
+    - having
+    - count([distinct] deptno)                # 统计deptno【不重复的】记录数
+    - sum(sal)                # 统计数值的和
+    - avg(sal)                # 统计平均值
+    - max(sal)                # 统计最大值，可以用在日期上
+    - min(sal)                # 统计最小值 ，可以用在日期上

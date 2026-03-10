@@ -1,0 +1,19 @@
+- 可以闪回的操作
+    - dml 
+    - ddl操作（回收站中存在）
+- 闪回记录
+    - 1.获取当前时间与改变号
+        - select to_char(sysdate,'yyyy-mm-dd:mi:ss') "系统时间", timestamp_to_scn(sysdate) "系统改变号" from dual;
+            - scn 是 系统改变号，每秒钟都会变，oracle根据它来进行闪回,如1216687
+    - 2.给普通用户授于闪回的权限
+        - grant flashback any table to scott;
+    - 3.alter table emp enable row movement;      # 更改rowid号可以更改
+    - 4.flashback table emp to SCN 1216687;      # 闪回表到时间改变号
+        - 如果没有做第三步，这里会出错 ，原因是 还原表记录时，递增的rowid后面不能插入数据。在rowid之间插入数据必须改变rowid的状态为可以'移动'，即还原记录后面的表记录可以'移动'。 
+- 闪回表（回收站中才可以）
+    - 1.确定回收站中有该表，可以用show recyclebin命令查看
+    - 2.flashback table emp to before drop;
+        - flachback table "BIN$Pu9C2euHQ96xySmn08e5aQ==$0" to before drop;        也是可以的
+    - 3.如果回收站中有两个相同的表需要闪回时，设置一个表名
+        - flashback table emp to before drop rename to newemp;
+            - 两张同名的表首先恢复最近删除的表

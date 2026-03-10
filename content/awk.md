@@ -1,0 +1,3 @@
+- awk '{print $1}'
+- awk '{cmd="kubectl delete pvc "$1;system(cmd)}'
+    - 按行执行命令

@@ -1,0 +1,1 @@
+-  抽象zookeeper, redis, hazelcast, consul的选举算法和通用状态模式实现接口

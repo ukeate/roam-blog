@@ -1,0 +1,52 @@
+- 场景
+    - alacritty启动
+        - export TERM=xterm-256color & lnav
+    - 先/搜，再 :filter-in 或 :filter-out
+- 控制
+    - hjkl 左上下右
+    - 空格/b 下一页/上一页
+    - g/G 顶部/底部
+    - e/Shift + e 下/上个err
+        - 前提是lnav解析出了log format
+    - w/Shift + w 下/上个warn
+    - /  搜索
+    - n/Shift + n 下/上个命中
+    - P 切换pretty
+    - m/Shift + m 标记/标记范围
+    - c/Shift + c 复制标记/清空标记
+    - q 返回或退出
+    - ?/F1 帮助
+    - F2 支持鼠标
+- 视图
+    - t/i/v 纯文本/直方图/DB 视图切换
+    - ` 切换左上角的源
+    - TAB 切换panel
+    - T 切换pass时间
+    - 日志格式
+        - Shift-p 或者 :set-text-view-mode raw/rendered
+    - 跳到项/底 g/G
+- 命令
+    - 过滤
+        - :filter-in ERROR
+        - :filter-out DEBUG TRACE
+        - :delete-filter 
+            - 或Ctrl-r
+        - :disable-filter .*
+        - :hide-lines-before/hide-lines-after here/6am 裁剪之前之后
+            - 这个filter不同，在tab的filters中不显示
+        - :show-lines-before-and-after 都显示出来
+        - :highlight <regex> 只高亮显示
+        - :clear-highlight 清除
+    - :open 打开新文件
+    - :write-to /tmp/a.txt 写到文件
+- SQL
+    - Ctrl + x执行
+    - ;SELECT * FROM logline 
+          WHERE log_level = 'error';
+    - ;SELECT log_level, COUNT(*) FROM logline 
+          GROUP BY log_level;
+- 启动时过滤
+    - -c ':filter-in ERROR'
+    - -c '; SELECT ...'
+    - -S '2 hours ago' 从此开始
+    - -U '2020-01-02T03:04:05' 到此结束

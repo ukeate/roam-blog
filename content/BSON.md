@@ -1,0 +1,18 @@
+- bson 是json的扩展
+    - 增加了数据类型
+    - 把json数据转换成二进制码存到文件
+- null
+- boolean
+- undefined
+- 数组                                # 如{gps: [20, 56]}
+- 32位和64位整数                # shell中不支持
+    - Node.js Python Java等高级语言的驱动中支持
+- 64位浮点                        # shell使用的全是这种类型, 如{x:3.14}
+- utf-8                                # 字符串类型
+- ObjectID
+- Date                                # 如{x:new Date()}
+- 正则                                # 如{x:/uspcat/i}
+- javascript块代码                # 如{x:function(){}}
+    - ## 相当于存储过程
+- 内嵌文档                        # 如{x: {xx: "a"}}
+- 二进制                                # shell中不能使用

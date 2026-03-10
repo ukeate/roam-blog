@@ -1,0 +1,2 @@
+- 收集、整理、组织、回顾、执行
+    - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2F6nSUEEWc-n.jpeg?alt=media&token=a66069f2-9dcd-4d18-aab4-86925ff691cd)

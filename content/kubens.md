@@ -1,0 +1,4 @@
+- 切k8s ns
+- kubens ns1
+- kubens -，切回上一个
+- kubens ns1 -f，force，即使ns不存在

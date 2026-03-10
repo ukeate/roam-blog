@@ -1,0 +1,5 @@
+- 分类
+    - 显示
+        - cursor is
+    - 隐式
+        - 执行insert, delete, update，返回单条记录的select时，pl/sql自动定义

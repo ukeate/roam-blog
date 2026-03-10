@@ -1,0 +1,4 @@
+- 介绍
+    - GNU General Public License，GNU发布的通用协议，共3个版本，最新为GPLv3，Linux使用此协议
+- 特点
+    - 发布的软件使用GPL的软件, 也要GPL

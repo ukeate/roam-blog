@@ -1,0 +1,36 @@
+- aspect oriented programming
+- 继承是纵向组织，AOP横切入业务
+- oop是静态概念，aop是动态概念（aop的切面可以替换或不使用）
+- 动态代理实现切入代码
+    - 权限控制
+    - 事务管理
+    - 记录日志
+- 概念
+    - 连接点:普通方法
+    - 切入点:名称满足条件的连接点
+    - 增强（通知）类:服务对象
+        - # 切入点与增强是多对多的
+    - 切面:切入点 + 增强类                        # 我们切入的是横切面
+    - 目标对象（服务对象）：要注入的对象
+- 通知
+    - before              # 执行前
+    - after               # 执行后
+    - after-returning     # 正常退出
+    - after-throwing      # 异常退出
+    - around              # 执行前后
+    - 代理对象(业务对象)：被注入的对象
+- 注解
+    - applicationContext.xml
+        - &lt;aop:aspectj-autoproxy/&gt;    - @Aspect
+        - 注册一个类为切面
+    - @Pointcut(value="execution(* cn.it.shop.service.impl.GoodsServiceImpl.save(..))")
+        - 配置切点表达式
+    - private void testAop(){}
+    - @AfterReturning(pointcut="execution(* cn.it.shop.service.impl.GoodsServiceImpl.save(..))")
+        - 配置通知，在通知中配置切点
+    - @AfterReturning(value="testAop()")
+        - 配置通知，使用已经配置的切点
+    - @Around(value="testAop()")
+        - 配置通知，使用已经配置的切点
+    - @Around(value="execution(* cn.it.shop.service.impl.GoodsServiceImpl.queryByWord(..))")
+        - 配置通知，在通知中配置切点,注意这里没有pointcut,只有value

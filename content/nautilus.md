@@ -1,0 +1,2 @@
+- 快捷键
+    - &lt;Ctrl+L&gt;            # 路径编辑    - &lt;Ctrl+W&gt;            # 关闭tab    - &lt;Ctrl+Shift+W&gt;      # 关闭所有tab    - &lt;Ctrl+T&gt;            # 新建tab    - &lt;F9&gt;                # 侧边栏

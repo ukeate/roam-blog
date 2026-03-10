@@ -1,0 +1,89 @@
+- 模型站
+    - https://civitai.com/
+    - https://huggingface.co/
+- 动漫模型
+    - 汇总
+        - [AI 绘画与作画 常见模型汇总及简介](https://www.tjsky.net/tutorial/583)
+    - 概念
+        - stable-diffusion
+            - 简称SD, 偏真人
+            - https://huggingface.co/CompVis
+            - 安装
+                - .ckpt文件放到models\Stable-diffusion\
+        - waifu-diffusion
+            - 简称Waifu，偏二次元
+            - https://huggingface.co/hakurei
+            - 安装
+                - .ckpt文件放到models\Stable-diffusion\
+        - Novel-AI-Leaks
+            - 简称Naifu，更二次元
+            - Naifu Leaks 4chan
+                - [https://pub-2fdef7a2969f43289c42ac5ae3412fd4.r2.dev/naifu.tar](https://www.tjsky.net/goto/?url=https://pub-2fdef7a2969f43289c42ac5ae3412fd4.r2.dev/naifu.tar)
+            - Naifu Leaks animefull-latest
+                - [https://pub-2fdef7a2969f43289c42ac5ae3412fd4.r2.dev/animefull-latest.tar](https://www.tjsky.net/goto/?url=https://pub-2fdef7a2969f43289c42ac5ae3412fd4.r2.dev/animefull-latest.tar)
+            - 安装
+                - naifu\models\animefull-final-pruned\model.ckpt放到models\Stable-diffusion\
+                - naifu\models\animefull-final-pruned\config.yaml放到models\Stable-diffusion\
+                - naifu\modules\*.pt放到models\hypernetworks\
+            - 设置
+                - Clip跳过层，2
+        - Counterfeit
+            - https://huggingface.co/gsdf/Counterfeit-V2.5
+            - 安装
+                - EasyNegative.*放到embeddings
+                - vae-ft-mse-840000-ema-pruned.ckpt放到models/VAE
+                - Counterfeit-V2.5.safetensors放到models/Stable-diffusion
+    - 类别
+        - {{table}}
+            - 大类
+                - 小类
+                    - 需求(512x512)
+                        - 效果
+                            - 用途
+            - SD
+                - emaonly 4GB
+                    - 2G显存
+                        - 10s出图，最大920x920
+                            - 出图用
+                - full ema 7GB
+                    - 4G显存
+                        - 
+                            - 训练用
+            - Waifu
+                - Float 16 EMA
+                    - 2G显存
+                        -  
+                            - 出图用
+                - Float 32 EMA
+                    - 2G显存
+                        -  
+                            - 出图用,与16差别小
+                - Float 32 Full
+                    - 4G显存
+                        -  
+                            - 出图或训练
+                - Float 32 Full + Optimizer
+                    - 8G显存
+                        -  
+                            - 训练用
+            - Naifu
+                - pruned 4GB
+                    - 8G显存
+                        -  
+                            - 出图用
+                - latest 7GB
+                    - 8-10G显存
+                        -  
+                            - 出图或训练
+- 真人模型
+    - ChilloutMix-Ni
+        - https://civitai.com/models/6424?modelVersionId=8958
+    - Zeipher
+        - 名字F222，欧美
+    - Basil_mix
+        - 亚洲
+        - 安装
+            - vae-ft-mse-840000-ema-pruned.ckpt到models/VAE
+    - Uber Realistic Porn Merge
+        - 简写URPM
+        - 

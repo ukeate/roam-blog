@@ -1,0 +1,16 @@
+- 命令
+    - ;或/结束
+    - /               # 执行最近一次的sql命令（不执行工具命令）
+    - host cls        # 清屏
+    - edit            # 用本地编辑器编辑
+    - 设置显示
+        - column deptno format 9999       # deptno是列名,9999 代表4个数字宽度
+        - column ename format a8          # a8代表8个字符宽度(date也用a)
+            - col ename for a8            # 简写
+        - set pagesize 40                 # 设置一页显示40条记录
+        - spool d:/a.sql                  # 假脱机,开始记录控制台信息
+            - spool off                   # 正式保存记录信息到文件
+            - @ d:/a.sql                  # 从脱机文件中导入命令并执行
+    - 监查时间
+        - set timing on / set timing off  # 每执行一段语句显示语句的执行时间
+        - set time on / set time off      # 在输入标记前面显示当前时间

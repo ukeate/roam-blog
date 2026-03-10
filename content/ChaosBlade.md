@@ -1,0 +1,25 @@
+- 阿里开源
+- 组件
+    - 基础资源
+        - os
+    - 应用服务
+        - jvm
+        - cplus
+        - nodejs
+        - golang
+    - 云原生服务
+        - docker
+        - operator
+            - kubernetes
+    - 云平台
+        - aliyun
+        - aws
+- 命令
+    - blade
+        - -h
+            - 帮助
+        - -d
+            - 后台运行
+        - create
+            - cpu fullload
+        - destroy [id]

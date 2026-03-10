@@ -1,0 +1,5 @@
+- [[Sun HotSpot VM]]
+-  Oracle官方, 8之后收费, OpenJDK为开源版本
+- 调优
+    - [[HotSpot参数]]
+    - [[HotSpot日志]]

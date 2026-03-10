@@ -1,0 +1,155 @@
+- _search
+    - query
+        - match
+            - 理解如何分词的, 会对field分词再查询
+            - field1:
+                - query: "a b"
+                - operator: "and"
+                - minimum_should_match: "75%"
+                    - 匹配的query分词的最低占比
+        - match_all
+            - 默认，会查出所有文档
+        - multi_match
+            - query: "a b"
+            - fields: ["field1", "field2"]
+        - match_phrase
+            - 所有term命中，并且位置邻接
+            - field1: "a b"
+        - term
+            - 确切查询
+            - field1: "value1"
+        - terms
+            - 多条件and
+            - field1: [1,2,3]
+        - range
+            - field1:
+                - gt: 20
+                - gte:
+                - lt:
+                - lte:
+        - exists:
+            - field: "field1"
+        - missing:
+            - field: "field1"
+        - regexp
+            - postcode: "W[0-9].+"
+        - wildcard
+            - postcode: "W?F*HW"
+        - prefix
+            - 以某些字符开头
+            - field1: "a"
+        - bool
+            - 分值计算来自must和should语句, must_not不影响
+            - must
+                - match
+            - must_not
+            - should: []
+            - minimum_should_match: 2
+        - filtered
+            - query
+            - filter:
+                - ilter的field会缓存起来
+                    - geo, and, or, not, script, numeric_range的默认不缓存
+                - term:
+                    - field1: "a"
+                    - _cache_key: "k1"
+                    - _cache: false
+                - range:
+                    - field1:
+                        - gte: 0
+    - aggs
+        - diy1:
+            - avg:
+                - field: "field1"
+        - diy2:
+            - terms:
+                - 聚合查询中的所有term
+                - field: "field1"
+    - post_filter:
+        - 对搜索结果进行过滤
+        - term:
+            - field1: "a"
+    - sort: []
+        - 默认升序，_score默认降序
+        - field1
+            - order: "desc"
+                - asc
+            - mode: "min"
+                - 对数组元素排序时的取值, 还有max, sum, avg, median
+            - missing: "field1"
+        - "_score",
+    - highlight
+        - pre_tags: ["<tag1>"]
+        - post_tags: ["</tag1>"]
+        - fields:
+            - content: {}
+    - simple_query_string:
+        - query: ""
+        - analyzer:
+        - fields: ["body^5", "_all"]
+        - default_operator: "and"
+- mappings
+    - type1:
+        - dynamic: true
+            - 默认true,自动给未知field建索引
+            - false: 忽略未知field， strict: 未知field报错
+        - include_in_all: false
+            - 默认不include
+        - _all:
+            - meta field
+            - enabled: false
+                - 关闭all作用域
+            - analyzer:
+                - 其实是search_analyzer
+            - term_vector: no
+                - 对field建立词频向量空间
+            - store: "false"
+        - _source:
+            - 是否保存内容
+            - enabled: true
+        - properties:
+            - field1:
+                - type: “text”
+                    - text分词，keyword不分词，numeric, date, string
+                    - multi_field可定义多个field
+                - fields:[]
+                    - field1:
+                        - type
+                - store: "yes"
+                - index: "not_analyzed"
+                    - analyzed
+                - analyzer: "ik_max_word"
+                - search_analyzer: "ik_max_word"
+                    - 默认为analyzer
+                - include_in_all: "true"
+                    - 是否加入_all作用域
+                - boost: 8
+- aliases
+    - alias1:
+        - filter:
+            - term: user: "kimchy"
+        - routing: "kimchy"
+- settings
+    - 有些设置不能动态修改
+    - index:
+        - number_of_shards: 3
+        - number_of_replicas: 2
+        - max_result_window: 10000
+            - from + size的上限，默认10000
+        - analysis:
+            - tokenizer:
+                - 处理原始输入
+                - tokenizer1
+                    - type: "pinyin"
+                    - pinyin_field1:
+            - filter:
+                - tokenizer作为输入
+                - filter1:
+                    - type: "pinyin"
+                    - pinyin_field1:
+            - analyzer:
+                - 组合tokenizer和filter
+                - analyzer1:
+                    - type: "custom"
+                    - tokenizer: "ik_smart"
+                    - filter: ["filter1", "word_delimiter"]

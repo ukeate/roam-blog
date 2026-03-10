@@ -1,0 +1,2 @@
+- VisiData，表格（csv, tsv, json, xlsx）查看和处理，python实现
+- brew install visidata

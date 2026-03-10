@@ -1,0 +1,20 @@
+- serial                      # 4字节，自增序列
+    - bigserial               # 8字节
+- `text default ''::text`
+- bigint default 0            # 8字节
+    - smallint                # 2字节
+    - int, integer            # 4字节
+    - decimal                 # 变长, 声明精度，精确
+    - numeric                 # 同上
+    - float
+    - real                    # 4字节，变精度，不精确
+    - double precision        # 8字节，变精度，不精确
+- boolean default false
+- text[]                      # text数组
+- date
+- time
+- timestamp with time zone
+- interval
+- bytea                       # 二进制
+- money
+- uuid

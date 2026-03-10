@@ -1,0 +1,2 @@
+- aux                 # 用在unix style中, BSD格式显示
+- ef                  # 用在system v style中, 标准格式显示

@@ -1,0 +1,2 @@
+- rsync -av --exclude=.git --exclude=logs/* ./* 192.168.0.14:/data/app/ext-marketing/
+- 

@@ -1,0 +1,36 @@
+- 介绍
+    - nodejs处理http中req、res的中间件框架
+    - 中间件分类
+        - pre-request用来改写request原始数据
+        - request/response功能各异
+        - post-response全局异常处理，改写response数据等
+- 内置中间件介绍
+    - logger
+    - csrf
+    - compress             # gzip压缩
+    - basicAuth            # basic认证
+    - body parser          # 请求内容解析
+    - json
+    - urlencoded           # application/x-www-form-urlencode请求解析
+    - multipart            # multipart/form-data请求解析
+    - timeout
+    - cookieParser
+    - session
+    - cookieSession
+    - methodOverride       # http伪造
+    - responseTime         # 计算响应时间
+    - staticCache          # 缓存
+    - directory            # 目录列表
+    - vhost                # 虚拟二级域名映射
+    - favicon
+    - limit                # 请求内容大小限制
+    - query                # url解析
+    - errorHandler         # 错误处理
+- 使用
+    - var connect = require('connect');
+    - var app = connect()
+        - .use(connect.logger('dev'))
+        - .use(function(req, res){
+            - res.end('hello world\n');
+        - })
+        - .listen(3000);

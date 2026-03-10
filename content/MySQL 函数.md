@@ -1,0 +1,41 @@
+- count(*)
+- count(name)                        # 不统计null，所以不推荐，会漏数据
+- sum(english)/count(*) as 英语平均分
+- avg(chinese)
+- max(english)
+- min(english)
+- password('jiaoningbo')
+- concat('jiao','ning','bo')                concat(38.8) # 连接                转换数字到字符串
+- cast(38.8 as char)                        # 转换数字到字符串  同 concat(38.8) 但这个更正式
+- strcmp('text','text2')                # 比较字符串，相同则返回0，不同则返回-1
+- abs('-1')                                        # 绝对值
+- crc32('mysql')                                # 计算循环冗余码校验值并返回一个 32比特无符号值
+- pi()                                                # pi
+- floor(1.2)                                        # 取整 返回一个bigint
+- mod(29,9)                                        # 取摩
+- is                                                        # select 1 is true,0 is false,null is unknown,null is not unknown  结果 ：1,1,1,0
+- coalesce(null,1)                        # 返回第一个非空值，全空则返回null
+- greatest(0,2,66,34)                        # 返回不定参数个数的 参数的最大值，个数为0时返回null
+- least(2,0)                                        # 返回不定参数个数的 参数的最小值，个数为0时返回null
+- 1 xor 0 xor 1                                # 异或，两个1消为0
+- ascii('ab')                                        # 返回最左字符的ascii码
+- bin(13)                                                # 返二进制
+- bit_length('text')                        # 返回二进制长度
+- char_length('str')                        # 返回字符长度
+- left('foobar',5)                        # 截取左数前5个
+- right('foobar',4)                        # 截取右数前4个
+- locate('bar','foobar')                # 返回位置4
+- locate('bar','foobarbar',5)        # 返回从5开始数的子串的位置，这里是7
+- ltrim(str)                                        # 去左空格
+- rtrim(str)                                        # 去右空格
+- trim(str)                                        # 去空格
+- make_set(1|4,'hello','nice','world')                # 第一位是bit,1|4 表示1+4=5 即二进制101，所以显示结果为"hello,world", 0 输出空字符串
+- repeat('m',3)                                # 重复
+- replace('wb','w')                        # replaceAll
+- reverse(str)                                # 倒序
+- space(6)                                        # 输出6个空格
+- adddate('1998-01-02',31)        # 加日期  同 adddate('1998-01-02',interval 31 day)同 date_add('1998-01-02',interval 31 day)
+- addtime('1997-12-31 23:59:59.999999','1 1:1:1.000002')        #加时间 同 '1997-12-31 23:59:59.999999','1 1:1:1.000002');
+- curdate()+ 3                                # 当前日期 + 3 天
+- date(str)                                        # 提取日期时间表达字符串中的日期部分
+- date('1997-11-12','1997-11-11')                # 前面减后面 得到天数

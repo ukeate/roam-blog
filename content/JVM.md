@@ -1,0 +1,19 @@
+- 基础
+    - 定义
+        - [[JVMS]]
+        - [[JLS]]
+        - [[虚拟机]]
+    - 过程
+        - x.java -> javac -> x.class -> [[ClassLoader]]-> (字节码解释器、JIT) -> 执行引擎
+    - [[JVM语言]]
+    - JRE, JDK
+        - JRE = JVM + Core Lib
+        - JDK = JRE + Development Kit
+- [[JVM 结构]]
+- [[JVM 类加载]]
+- [[JVM 内存]]
+- 过程
+    - [[JVM 编译]]
+    - [[JVM 类加载]]
+    - [[JVM GC]]
+- [[JVM 调优]]

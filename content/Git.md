@@ -1,0 +1,46 @@
+- [[Git 命令]]
+- [[Git 方案]]
+- 目录结构
+    - .git
+        - branches
+        - config  # 存放版本库git地址
+- 规定
+    - HEAD
+        - HEAD的版本号, HEAD^^ 表示HEAD之前两个的版本, HEAD~n 表示之前n个版本
+    - buffered stage branch head
+        - buffered表示当前修改所在的版本，stage是buffered中文件add之后到的版本，branch是stage commit后到的分支(版本)，head是远程仓库的最新版本
+- 工作流程
+    - fork + pull / merge request 更新代码
+    - commit message, pr messsage 提交说明
+        - pr是功能展示，前面加"WIP:"
+    - user.name, user.email用公司的
+    - pr必需有人review, assign到人, 推动review
+    - pr不要大
+- 设置
+    - .gitignore
+    - .git/config
+    - ~/.gitconfig
+        - ```yaml
+          [commit]
+          template=/t.txt
+              # 每次commit会打开模板
+          ```
+    - 代理
+        - git config --global https.proxy http://127.0.0.1:1080
+        - git config --global https.proxy https://127.0.0.1:1080
+        - git config --global http.proxy 'socks5://127.0.0.1:1080' 
+        - git config --global https.proxy 'socks5://127.0.0.1:1080'
+        - git config --global --unset http.proxy
+        - git config --global --unset https.proxy
+- 子模块
+    - .gitmodules
+        - [submodule "a"]
+            - path = a
+            - url = ssh://a.git
+    - git submodule update --init --recursive  
+- github
+    - ssh -T git@github.com
+        - 检查github ssh是否设置成功
+- 插件
+    - octotree
+        - 树形显示

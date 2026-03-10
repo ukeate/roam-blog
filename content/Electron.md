@@ -1,0 +1,2 @@
+- 基于Chromium和Node.js的框架，跨平台
+- Visual Studio Code基于Electron实现

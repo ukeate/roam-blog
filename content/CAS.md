@@ -1,0 +1,18 @@
+- Compare And Set/Swap, 无锁优化, 乐观锁, 自旋
+- Unsafe类支持
+- CPU原语
+    - cas(V, Expected, NewValue)
+        - if V == E                   # 无并发值判断问题，原语上加了屏障
+        - V = New
+        - else try again or fail
+- Java
+    - AtomicInteger
+        - incrementAndGet()
+- ABA问题
+    - 线程1读取标记, 线程2改过又改回来，线程1判断标记锁住了提交了业务数据
+    - 版本号                          # Java版本号类AtomicStampedReference
+- LongAdder
+    - LongAdder每次加数字, LongAccumulator用lambda
+    - 分段锁(CAS)。值分开放数组里, 多线程对应一个item
+- 性能测试
+    - LongAdder(713) > Atomic(2166) > Synchronized(3129)

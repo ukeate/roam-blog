@@ -1,0 +1,3 @@
+- Defective Parts Per Million，百万不良数
+- [[6西格玛]]
+- [[DMAIC]]

@@ -1,0 +1,2 @@
+- 虚拟机，兼容Java1.5、1.6, 没得到[[TCK]]认证兼容性测试的授权
+- 许多代码吸纳进IBM的JDK1.7和[[Google Android SDK]]

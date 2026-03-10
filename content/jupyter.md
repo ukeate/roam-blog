@@ -1,0 +1,9 @@
+- 命令
+    - jupyter
+        - notebook
+        - lab
+- 快捷键
+    - 执行：shift + enter
+- 场景
+    - 创建当前环境的kernel
+        - python -m ipykernel install --user --name=a

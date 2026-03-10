@@ -1,0 +1,1 @@
+- OLAP，开源为[[Apache Doris]]，原百度Palo

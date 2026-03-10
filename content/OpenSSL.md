@@ -1,0 +1,14 @@
+- 使用
+    - openssl genrsa -out server.key 1024
+        - 生成私钥
+    - openssl rsa -in server.key -pubout -out server.pem
+        - 生成公钥
+    - openssl req -new -key ca.key -out ca.csr
+        - 通过私钥生成csr(certificate signing request, 证书签名请求)文件
+    - openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt
+        - 通过csr生成自签名ca证书，用来颁发证书
+    - openssl x509 -req -CA ca.crt -CAkey ca.key -CAcreateserial -in server.csr -out server.crt
+        - 向自己的ca机构申请签名，需要ca.crt, ca.key, server.csr, 得到带有CA签名证书。用来给客户端验证公钥属于该域名
+        - 客户端发起安全连接前会获取服务器端的证书, 并通过ca证书验证服务器端证书的真伪，并对服务器名称, IP地址等进行验证
+    - openssl s_client -connect 127.0.0.1:8000
+        - 测试证书是否正常

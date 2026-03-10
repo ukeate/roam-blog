@@ -1,0 +1,2 @@
+- /etc/default/grub       # 设置文件
+- grub2-mkconfig -o /boot/grub2/grub.cfg      # 使设置生效，update-grub 是debian下做的包装

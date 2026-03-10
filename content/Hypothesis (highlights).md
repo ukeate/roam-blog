@@ -1,0 +1,18 @@
+- Author:: [[hypothes.is]]
+- Full Title:: Hypothesis
+- Category:: #articles
+- URL:: https://hypothes.is/welcome/945050a22d7e98fa
+- ### Highlights first synced by #Readwise [[December 7th, 2022]]
+    - annotations
+        - **Note**: 批注
+    - the
+        - **Note**: as
+    - button
+    - the
+- Author:: [[hypothes.is]]
+- Full Title:: Hypothesis
+- Category:: #articles
+- URL:: https://hypothes.is/groups/__world__/public
+- ### Highlights first synced by #Readwise [[December 7th, 2022]]
+    - Created
+        - **Note**: a

@@ -1,0 +1,7 @@
+- 热加载
+- 使用:
+    - myeclipse根目录下配置自定义 插件
+    - window -> preferences -> JRebel中关联jar包，设定自动部署时间
+    - window -> preferences -> services -> tomcat -> tomcat6(可以配置是否启用jrebel和打印jrebel的日志)->jdk 加上资源分配参数与tomcat要加载的jar包:
+        - noverify -javaagent:D:\(修改为自己的目录)\jrebel.jar -Xmx512M -Xms512M -XX:MaxPermSize=1024m
+        - 项目右键jrebel生成reble.xml,其中配置rebel要管理的项目在tomcat中的路径

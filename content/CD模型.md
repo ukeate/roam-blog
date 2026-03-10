@@ -1,0 +1,14 @@
+- Career Development
+- ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2Fk8MxVlaqlY.png?alt=media&token=06e4a2ad-e830-4b44-8ee4-b517e7d88e9e)
+- 明白
+    - 能力包装成价值
+    - 明白价值要求、个人需求
+- 策略
+    - 收益策略
+        - 容易做价值减法
+    - 价值策略
+        - 不断做价值加法
+            - 每三年溢出岗位
+            - 不要只做自己职责范围内的事
+            - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2FBudBmu5Ga2.jpg?alt=media&token=adba0425-52e4-4001-b5bb-eb7fc3776b22)
+                - 不要只看JD，要穿越组织看社会要求

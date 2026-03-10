@@ -1,0 +1,57 @@
+- 假错误（problem view中删掉）
+- 目录结构
+    - /Common/中存储的是jar包与配置
+        - plugins/存放插件
+        - features/存放外观
+    - /MyEclipse 10/中
+        - dropins/配置自定义插件
+- 调整format一行最大字符数        Java — Code Style — Formatter — Active profile — Edit — Line Wrapping — Maximum line width
+- 修改，自定义alt + / 模板        包括@anthor 等等        Java — Editor — Templates
+- 修改编码:window --> General --> Workspace
+    - Myeclipse --> files and editors
+- 忽略校验:右键 --> myeclipse --> exclude from validation
+- package Explor 中可以go into  和 up 缩小和扩大显示范围
+- 鼠标右键 -->Run As --> Run Configuration --> Arguments --> Program Arguments 设置运行传入的参数 
+- new 中可以生成测试文件
+- window --> preferences --> MyEclipse --> validation --> disableAll 取消验证
+- Package Explorer中什么也不显示（进入了已经关闭的包时） --> navigator --> open project
+    - 或者{workspaces}\.metadata\.plugins\org.eclipse.ui.workbench\workbench.xml文件中
+    - 搜索<input factoryID="org.eclipse.ui.internal.model.ResourceFactory"，把path的值改为"/"
+    - 其它原因：window --> reset perspective
+        - Package Explorer 上的倒三角中：deselect working set
+- struts2配置myeclipse编写xml文件时的提示
+    - 约束文件的相对路径：struts-2.3.15.1\src\core\src\main\resources\struts2.0.dtd
+    - xml文件中声明的url：http://struts.apache.org/dtds/struts-2.0.dtd
+    - myeclipse中：window        --> Preferences --> MyEclipse --> XML --> XML Catalog --> XML Catalog Entries 选中User Specified Entries --> 点击add
+    - Location中关联源码路径,Key Type 选择 URI,Key中写xml文件中声明的url 
+- 改变Package Explorer Vier中包的为分层显示方式：
+    - Package Explorer 视窗中 --> 点击倒三角 --> Package Presentation --> hierarchical ：
+- 导入war文件：
+    - 新建webPorject --> File===》import==》General中选择Archive File --> Form archive file中选择要导入的项目.war -> 导入
+- ctrl + shift + t 关联源码快捷键
+- 设置字体：eclipse preference-->Colors and Fonts-->basic-->Text Font-->edit
+- 导入dtd/xsd约束文件:window -> preferences -> XmlCatalog -> add
+    - dtd直接导入文件就可以了,xsd要在添加时key的选项中补上文件名
+- 自定义jar包library目录
+    - 项目 右键:building path -> addLiber->user liber配置userLibery右键:building path -> addLiber->user liber配置userLibery
+        - 只是作了外部的引用,workspace中没有包，但是别人导入时会搜索同名的userLibery自动进行配置
+- 改javaee版本    
+    - 1.修改项目中的javaee包
+    - 2.项目工程目录/settings/org.eclipse.wst.common.project.facet.core.xml/中修改javaee版本
+- 在线安装svn
+    - Help -> install from site(Myeclipse2013) -> add -> url=http://subclipse.tigris.org/update_1.6.x
+    - 不选择 Subclipse -> Subclipse Integration for Mylyn 3.x , 其它全选
+- 在线安装mylyn
+    - 同上，url(Myeclipse2013):http://download.eclipse.org/mylyn/snapshots/weekly
+- 插件
+    - myeclipse 2013 安装svn
+        - help -> Install from Site ->add
+            - name : Svn
+            - Location : http://subclipse.tigris.org/update_1.6.x
+                - 或
+                - http://subclipse.tigris.org/update
+        - 下一步
+            - 不要选择Subclipse选项下的Subclipse Integration for Mylyn 3.x(Optional)
+        - 一直下一步
+    - 本地安装svn插件
+- [[MyEclipse快捷键]]

@@ -1,0 +1,13 @@
+- update              # 更新brew
+- search
+- install
+- remove
+- upgrade
+- tap                 # 安装扩展
+- options             # 查看安装选项
+- info
+- home                # 访问包官网
+- services
+    - list            # 查看已安装
+    - cleanup         # 清除无用配置
+    - restart         # 重启

@@ -1,0 +1,37 @@
+- 异常机制
+    - 运行时出现错误，控制权交给异常处理器
+    - 方法立即结束，抛出一个异常对象。调用该方法的程序停止，搜索处理代码
+- Throwable
+    - Error
+        - JVM相关问题，如系统崩溃、虚拟机错误、内存不足、方法调用栈溢出
+    - Exception
+        - 指可处理的异常
+        - RuntimeException
+            - 非强制(unchecked)。除RuntimeException都是强制异常(checked)
+- Error
+    - java.lang.OutOfMemoryError      # 内存溢出
+    - java.lang.StackOverflowError        # 堆溢出
+- 运行时异常
+    - ArithmeticExecption     # 算术异常类
+    - IllegalArgumentException    # 方法传递参数错误
+    - NullPointerException        # 空指针异常类
+    - ClassNotFoundException  # 类找不到，加载路径错误
+    - ClassCastException      # 类型强制转换异常
+    - NoClassDefFoundException    # 未找到类定义
+    - ArrayIndexOutOfBoundsException      # 数组越界异常
+    - ArrayStoreException      # 数组存储异常，操作数组时类型不一致
+    - BufferOverflowException     # 缓冲溢出异常
+    - NegativeArrayException      # 数组负下标异常
+    - NoSuchMethodException       # 方法未找到异常
+    - IllegalStateException     # servlet过滤器中 chain.doFilter中request,response类型为ServletRequest，ServletResponse时出错
+    - NumberFormatException   # 字符串转换为数字异常
+    - SQLException        # sql语句出错
+    - InstantiationException      # 实例化异常
+    - DateTimeException   # 无效时间
+- 强制异常
+    - FileNotFoundException       # 文件未找到异常
+    - ParseException      # 解析时间字符串到时间类型出错
+    - ServletException        # servlet转发时出现过该异常
+    - IOException     # io异常
+    - java.sql.BatchUpdateException       # sql批处理
+    - com.mysql.jdbc.MysqlDataTruncation      # mysql 插入数据被截断,插入数据过长时遇到

@@ -1,0 +1,1 @@
+- jhat -J-mx512M x.hprof      # 分析堆dump文件, 有OQL

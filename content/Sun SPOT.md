@@ -1,0 +1,1 @@
+- Sun Small Programmable Object Technology，一种手持wifi设备

@@ -1,0 +1,18 @@
+- 阿里JVM在线诊断
+- 启动
+    - java -jar arthas-boot.jar
+- 常用命令                # 没有集成jmap功能
+    - jvm                 # jinfo
+    - thread              # jstack
+        - thread 1
+    - dashboard           # top
+    - heapdump            # jmap -dump
+    - dump
+    - redefine            # 热替换
+        - 目前只能改method实现，不能改方法名与属性
+    - jad                 # 反编译类
+        - 看动态代理生成的类
+        - 看第三方类
+        - 看版本
+    - sc                  # search class, 显示class信息
+    - watch               # watch method

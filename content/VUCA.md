@@ -1,0 +1,4 @@
+- volatility， 易变性
+- uncertainty，不确定性
+- complexity，复杂性
+- ambiguity，模糊性

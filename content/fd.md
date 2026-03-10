@@ -1,0 +1,2 @@
+- rust实现，替代find
+- fd -e，find后执行命令

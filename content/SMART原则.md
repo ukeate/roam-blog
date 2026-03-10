@@ -1,0 +1,9 @@
+- 关键是可衡量
+- 指标
+    - 具体的Specific
+    - 可衡量Measurable
+    - 可实现的Attainable
+        - 兴奋的Amazing
+    - 与其它目标相关性大Relevant
+        - 现实的Realistic
+    - 有截止期限Time-bound

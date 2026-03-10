@@ -1,0 +1,1 @@
+- 基于apr(apache portable runtime)技术，让tomcat在操作系统级别的交互上做的更好

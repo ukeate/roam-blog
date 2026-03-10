@@ -1,0 +1,6 @@
+- 空间
+    - 按块读取(cache line)
+        - 一次读64Bytes               # disruptor RingBuffer实现前后7个long，两个元素不同行，避免缓存一致性协议的通知
+        - Java1.8注解@Contended       # 保证不在同一行，需要JVM参数-XX:-RestrictContended
+- 时间
+    - 批量读指令

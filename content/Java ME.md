@@ -1,0 +1,2 @@
+- Micro Edition
+- 以前叫J2ME。手机, PDA, 精简API

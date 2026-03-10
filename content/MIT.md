@@ -1,0 +1,4 @@
+- 介绍
+    - 近1/3的开源 软件使用。如ssh, JQuery, Putty，XWindow
+- 特点
+    - 类似BSD，可使用原作者名义推广

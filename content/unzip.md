@@ -1,0 +1,3 @@
+- 常用
+    - unzip中转码
+        - unzip -P “$(echo 中文 | iconv -f utf-8 -t gbk)”

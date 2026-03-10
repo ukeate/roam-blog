@@ -1,0 +1,4 @@
+- varchar2(7)        # 可变字符串
+- char                # 字符
+- number(precision [, scale])    # presision是有效位（从左边第一个不为0的数算起，小数点和负号不计入有效位数），scale是精确位（正数为小数的精确位，负数为整数的精确位）
+- constant number                # 常量

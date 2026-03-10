@@ -1,0 +1,4 @@
+- Log-Structured Merge Tree, 日志结构合并树，HBase引入
+- 放弃部分读能力，换取写入能力。先写入内存中成为小树，变大后flush到磁盘
+- 读取比较慢
+    - 要在压缩的不同阶段检查不同的数据结构和SSTables

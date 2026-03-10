@@ -1,0 +1,1 @@
+- OLTP数据库, 支持Hbase和HDFS, jdbc, 更快sql查询

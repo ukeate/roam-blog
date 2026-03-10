@@ -1,0 +1,2 @@
+- continuation-passing style
+- 在函数式编程中, 多传一个参数k明确控制continuation

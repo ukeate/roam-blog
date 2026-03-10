@@ -1,0 +1,1 @@
+- compute unified device architecutre，Nvidia推出的通用并行计算架构

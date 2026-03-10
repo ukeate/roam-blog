@@ -1,0 +1,1 @@
+- 与pivotal cloudfoundry整合

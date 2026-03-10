@@ -1,0 +1,1 @@
+- direct memory access 不依赖cpu的内存存取

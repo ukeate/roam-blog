@@ -1,0 +1,21 @@
+- Domain Name System，域名系统
+- 分类
+    - 位于最右端的域称为顶级域
+    - 接下来是二级域名和三级域名，如www.jlu.edu.cn
+- 端口
+    - 53
+- 协议
+    - UDP
+- 过程
+    - 本机缓冲区 -> 本地域名服务器(缓冲区与数据库) -> 其它域名服务器
+- 报文格式
+    - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2FSQVGMwhebV.jpg?alt=media&token=ad157c75-7bfb-43fc-90a9-cc5e2e50542d)
+        - Queries
+            - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2F7FmIrptn7l.jpg?alt=media&token=334003c0-0872-437b-8652-b4a13c2f5957)
+- 命令
+    - [[nslookup]]
+    - [[dig]]
+- 包
+    - [[ldns]]
+- 工具
+    - [[Nscd]]

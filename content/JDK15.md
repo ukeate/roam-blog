@@ -1,0 +1,16 @@
+- Hidden Classes
+- Text Blocks
+- ZGC支持增加
+- sealed类(preview), 限制子类继承
+    - public sealed class Animal permits Cat, Dog {}
+    - public final class Cat extends Animal {}
+    - public sealed class Dog extends Animal permits Husky {}
+    - public final class Husky extends Dog {}
+- CharSequence interface添加default isEmpty()
+- TreeMap添加方法
+    - putIfAbsent()
+    - computeIfAbsent()
+    - computeIfPresent()
+    - compute()
+    - merge()
+- 正式版: 文本块

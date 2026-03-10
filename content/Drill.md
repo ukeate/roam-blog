@@ -1,0 +1,1 @@
+- Apache, [[Dremel]]的开源版本, 对多数据库生成query plan

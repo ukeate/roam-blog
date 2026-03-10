@@ -1,0 +1,2 @@
+- Internet Mail Access Protocol，交互邮件访问协议 ， 本地对邮件服务器中的邮件进行管理
+    - 端口 : 143

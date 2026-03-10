@@ -1,0 +1,51 @@
+- 理解What、Why、How，才能知行合一
+    - 很多人提出的其实不是真正的问题，而是一个他试图用来解决真正问题的答案
+        - 需要深挖
+    - 鸡同鸭讲，只因混淆了What、Why、How
+        - 我们问了一个关于What的问题，却得到了一个Why的答案，所以最终大家都没有听明白
+    - 怎么才能做到知行合一
+        - 什么叫“真的知道”，就是必须同时掌握What、Why、How
+        - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2FencaDWlX_n.jpeg?alt=media&token=e18ade70-e9b2-4b84-a27b-9c08432f3752)
+    - 解决了Why，What和How才真正有意义
+- 幽默，是溢出的智慧
+    - 幽默的三种理论
+        - 第一种是优越感理论
+            - 通过创造一个失败者，让人感觉自己是成功者，产生心满意足的优越感
+        - 第二种是错愕感理论
+            - 在两条逻辑线交叉的地方突然来一个“脑筋急转弯”
+        - 第三种是释放感理论
+            - 用“危险”给你制造紧张感，再用“安全”释放掉它
+    - 幽默，是举重若轻
+        - 什么是才华枯竭，就是大脑已经无法勾画出一个活灵活现的、得体的失败者的画面了，无法同时处理两条、三条甚至更多条逻辑线然后急转弯了，无法面对令人头在的问题时还有多余的精力来制造紧张感再释放了
+        - 只有当你的智慧多到溢出时，才有幽默感
+        - 当一个人的表达格外紧绷的时候，但你还是不明白他在说什么，那这个人对他所谈论的话题的驾驭能力，可能远低于他对自己的评估
+        - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2FWw9ox728kn.jpeg?alt=media&token=c71ef6b4-77e5-4cc1-916b-89d07c1d7887)
+- 所谓洞察本质，就是会打比方
+    - 洞察本质的人，都会打比方
+        - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2FdvMQ8s_2Ga.jpeg?alt=media&token=1dcd3f52-2a5c-46fa-9b2f-c96a84a7e426)
+        - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2F-vqiyne6R8.jpeg?alt=media&token=6aac7289-4926-4a08-aad6-13797cbd7e96)
+    - 如何打好一个比方
+        - 三个步骤
+            - 洞察复杂、陌生事物的本质
+            - 匹配到大家熟悉的事物
+            - 用熟悉的解释陌生的
+- 边界感的本质，是对所有权的认知
+    - 什么是边界感
+        - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2Fb4WXI0vlNH.jpeg?alt=media&token=978659c4-223e-48d8-abf4-9ef8125c80d6)
+    - 关系再好，也不能越界
+    - 守住边界
+- 每个创业者背后，都有大量多巴胺的支撑
+    - 行动催化剂：多巴胺
+        - 多巴胺是估确定动机后，支持着他不断攀登、享受过程、完成目标的化学物质
+            - 一旦动机的方向不对，就变成“劫持”，如打游戏
+        - 很多误以为是多巴胺给人带来了快乐，但其实多巴胺与快乐无关
+    - 快乐源泉：内啡肽、血清素
+    - 神经科学 = 认知科学？
+        - 都是研究大脑的，只是研究的方向不同
+        - 认知科学家往往从宏观的角度研究人的大脑比如大脑在做认知抉择与判断的时候，哪个脑区会出现变化
+        - 神经科学家则从底层的基因方面入手，去研究大脑的一些功能
+    - 从基因脑科学看商业世界
+        - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2FqVYn8i92bW.jpeg?alt=media&token=ea772b8a-6f9e-4a9e-be66-4d32249f86c5)
+    - 商业家该如何运用“奖励机制表”
+        - 所有行为都可以分为本能行为和习得行为
+            - 习得行为是上学后学到的，本能行为是趋利避害 

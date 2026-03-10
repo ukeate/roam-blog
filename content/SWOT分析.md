@@ -1,0 +1,4 @@
+- Strength，优势
+- Weakness，劣势
+- Opportunity，机会
+- Threat，挑战

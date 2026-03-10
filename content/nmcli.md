@@ -1,0 +1,3 @@
+- __设置网络连接__
+- sudo nmcli c mod 'Wired connection 1' ipv4.never-default false
+    - 解决manual ip不能设置路由的问题

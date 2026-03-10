@@ -1,0 +1,38 @@
+- {% autoescape true %} {{ myvar }} {% endautoescape %}
+- {% block body %} ... {% endblock %}
+- {% if false %}
+- {% elseif true%}
+- {% else %}
+- {% endif %}
+- {% extends "./layout.html" %}
+- {% filter uppercase %} oh hi, {{ name }} {% endfilter %}                # => OH HI, PAUL
+- {% filter replace(".", "!", 'g") %} Hi. My name is Paul. {% endfilter %}        # => Hi! My name is Paul!
+- {% for x in obj %}
+    - {% if loop.first %}<ul>{% endif %}
+    - &lt;li&gt;{{ loop.index }} - {{ loop.key }}: {{ x }}&lt;/li&gt;    - {% if loop.last %}</ul>{% endif %}
+- {% endfor %}
+- {% for key, val in arr|reverse %}
+- {{ key }} -- {{ val }}
+- {% endfor %}
+- {% import './formmacros.html' as forms %}
+- {{ form.input("text", "name") }}                        # => <input type="text" name="name">
+- {% import "../shared/tags.html" as tags%}
+- {{ tags.stylesheet('global')}}                        // => <link rel="stylesheet" href="/global.css">
+- {% include "./partial.html" %}
+- {% include "./partial.html" with my_obj only%}
+- {% include "/this/file/does/not/exist" ignore missing%}
+- {% macro input(type, name, id, label, value, error)%}
+    - &lt;label for="{{ name }}"&gt;{{ label }}&lt;/label&gt;    - &lt;input type="{{ type }}" name="{{ name }}" id="{{ id }}" value="{{ value }}" {% if error%} class="error" {% endif %}&gt;- {% endmacro %}
+- {{ input("text", "fname",  "fname", "First Name", fname.value, fname.errors) }}
+- {% extends "./foo.html" %}
+- {% block content %}
+    - My content
+    - {% parent %}
+- {% endblock %}
+- {% raw %}{{ foobar }}{% endraw %}
+- {% set foo = "anything!"%}
+- {{ foo }}
+- {% spaceless %}
+    - {% for num in foo %}
+    - &lt;li&gt;{{ loop.index }}&lt;/li&gt;    - {% endfor %}
+- {% endspaceless %}                                # 除去空白

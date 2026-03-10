@@ -1,0 +1,1 @@
+- 返回指定类的序列化号serialverUID

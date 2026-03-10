@@ -1,0 +1,4 @@
+- 解决CAP
+- 基本可用(basic available)
+- 软状态(soft state)
+- 最终一致性(eventually consistent)

@@ -1,0 +1,42 @@
+- 介绍
+    - haskell衍生语言
+    - 集成了面向对象和函数语言的特性
+    - 可以很简单地与已有的java代码交互，只需要反java相关类导入就可以了
+    - 面向对象语言同时结合命令式和函数式编程风格
+- 工具
+    - sbt
+        - simple build tool
+- 语法
+    - 表达式
+        - actor1 ! case1          # 异步消息
+        - actor1 !? case1         # 同步消息, 需要对方一定返回
+        - actor1 !! case1         # 异步消息, 需要对方一定返回
+    - Actor
+        - o->
+        - import scala.actors.Actor
+        - class HelloActor extends Actor {
+        - def act() {
+            - while (true) {
+            - receive {
+                - case name: String => println("Hello, " + name)
+            - }
+            - }
+        - }
+        - }
+        - val helloActor = new HelloActor
+        - helloActor.start()
+        - helloActor ! "leo"
+    - case                        # 模式匹配
+        - case class Login(username: String, password: String)
+        - class UserManageActor extends Actor {
+        - def act() {
+            - while (true) {
+            - receive {
+                - case Login(username, password) => println(username + password)
+            - }
+            - }
+        - }
+        - }
+        - val userManageActor = new UserManageActor
+        - userManageActor.start()
+        - userManageActor ! Login("leo", "1234")

@@ -1,0 +1,6 @@
+- 介绍
+    - 在线转换，将ES6代码编译为ES5
+- 使用
+    - npm install -g traceur
+    - traceur /path/es6                                # 运行ES6文件
+    - traceur --script /path/es6 --out /path/es5        # 转换

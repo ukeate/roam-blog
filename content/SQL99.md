@@ -1,0 +1,7 @@
+- SQL99标准，不区分大小写
+- PLSQL是Oracle对SQl99标准的扩展
+- 结构代查询语言
+    - DML select,insert,update,delete
+    - DDL create table,alter table, drop table
+    - DCL grant, revoke
+    - TCL(杜撰) commit, rollback,rollback to savepoint

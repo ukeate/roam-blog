@@ -1,0 +1,2 @@
+- Just In-Time compiler
+- 热点代码检测, 运行时编译和优化

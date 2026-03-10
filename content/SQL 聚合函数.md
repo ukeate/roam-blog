@@ -1,0 +1,5 @@
+- avg()
+- count()
+- max()
+- min()
+- sum()

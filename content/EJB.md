@@ -1,0 +1,7 @@
+- Enterprise JavaBean
+- 特点
+    - 分布式，j2ee一部分
+- 组成
+    - 会话bean(session)
+    - 实体bean(entity)
+    - 消息驱动bean(message driven)

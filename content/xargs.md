@@ -1,0 +1,12 @@
+- d "\t"         # 定义分隔符
+- t              # -t打印执行的命令
+- L 1            # 1行执行一次
+- n 1            # 一次使用1项
+- I arg1 sh -c 'echo arg1; mkdir arg1'       
+    - 执行多命令
+- -max-procs 0   # 并行执行，不限数量
+- 常用
+    - 代码行数
+        - find -name "*.go" -or -name "*.py" |xargs grep -v "^$" |wc -l
+    - 复制最近修改的文件
+        - ls -rt | tail -4 | xargs -i cp -r {} ~/sdb/work/ryxWork/架构/

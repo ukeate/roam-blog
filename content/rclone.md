@@ -1,0 +1,10 @@
+- __云存储同步__
+- config              # 配置向导
+- ls [name]:          # 显示文件
+- lsd [name]:         # 显示文件夹
+- copy a [name]:a     # 上传
+- cleanup             # 只保留最新版本
+- sync                # 本地向远程同步
+- mount               # 双向一致同步
+    - fusermount -u /path/to/local/mount
+        - # umount

@@ -1,0 +1,41 @@
+- docker-compose
+    - h                              # 帮助
+    - f                              # 指定模板
+    - version
+    - up                              # 所有模板创建容器
+        - d                          # 后台
+    - down                            # 删除容器、网络、卷、镜像
+    - rm                              # 删除容器
+    - create                          # 创建容器
+    - stop                            # 停止容器
+    - start                           # 启动容器
+    - restart
+    - pause                           # 暂停容器
+    - unpause
+    - kill                            # 强制停止容器
+    - scale                           # 指定容器个数
+    - ps                              # 列出所有容器
+    - logs                            # 查日志
+    - port                            # 显示容器映射端口
+    - run                             # 容器中执行命令
+    - exec
+    - config                          # 查看配置
+    - build                           # (重)构建容器
+    - pull                            # 拉依赖镜像
+    - push                            # 推送镜像
+- 配置
+    - version: '3'
+    - services:
+        - dokuwiki:
+            - restart: always
+            - image: bitnami/dokuwiki:latest
+            - ports:
+                - 8004:80
+            - environment:
+                - DOKUWIKI_FULL_NAME=outrun
+                - DOKUWIKI_EMAIL=1@qq.com
+                - DOKUWIKI_WIKI_NAME=Wiki
+                - DOKUWIKI_USERNAME=outrun
+                - DOKUWIKI_PASSWORD=pwd
+            - volumes:
+                - ./data:/bitnami                                         # 本地:镜像

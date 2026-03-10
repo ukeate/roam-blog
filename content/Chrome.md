@@ -1,0 +1,22 @@
+- 介绍
+    - webkit: chrome firefox safari的内核，来源于kde的khtml与kjs
+- 快捷键
+    - ctrl + f5 无缓存刷新
+    - f12 调试模式
+- 调试模式
+    - js调试
+        - sources-> js文件打断点调试
+            - “{}”按钮是格式化代码，右边按钮单步调试，依次为执行， 跳过进入方法，进入方法，跳出方法，开启／停止调试，暂停
+        - //# sourceURL=base.js
+    - console
+        - 可以查看js常量，如THREE.VERSION
+- 设置页
+    - about:about                                 # 进入查看所有设置页
+    - chrome:extensions
+    - chrome:flags                                # 可以开启硬件加速解码
+    - `chrome://net-internals/#dns`
+- 集成抓包工具
+    - chrome://net-internals/#events
+    - chrome://net-export 导出文件,netlog-viewer.appspot.com分析
+- 插件
+    - ARC Welder  # android模拟器

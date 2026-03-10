@@ -1,0 +1,21 @@
+- 属性
+    - Infinity                                # 表示正无穷大
+    - NaN                                     # 指示是不是数字, Infinity与NaNECMAScript中可读写， ECMAScript修正为只读, Infinity与NaN与任何值不相等(包括自身), 建议用非来判断
+    - undefined
+    - console
+        - log('abc %s', 'd')                  # 'abc d', 格式化输出
+- 方法
+    - parseFloat                              # 可以解析整数和浮点数, 跳过前导空格, 忽略后面非数字内容。第一个非空格字符是非法数字直接量时，返回NaN
+    - parseInt                                # 只解析整数, 可接收第二个可选参数，指定数字转换基数
+        - "0x", "0X"前缀, 解析为16进制数
+    - isNaN
+    - isFinite                                # NaN, Infinity 不通过, 非数字报错
+    - escape                                  # deprecated since ECMAScript v3
+    - decodeURI                               # 不处理 =, & 等
+    - decodeURIComponent                      # 会处理 =, & 等
+    - encodeURI
+    - encodeURIComponent
+    - eval                                    # 可以访问调用时的整个作用域，所以编译器不能裁剪作用域, 要间接调用, 如 (0, eval)(src)
+    - requestAnimationFrame
+    - fetch
+        - fetch(url).then(function (request) { return request.arrayBuffer })

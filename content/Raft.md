@@ -1,0 +1,1 @@
+- 三角色：Leader（领袖），Follower（群众），Candidtate（候选人）

@@ -1,0 +1,17 @@
+- o-> 结束
+- #!/usr/bin/expect
+- spawn ssh outrun@192.168.1.103
+- expect "*password"
+- send "pwd\n"
+- expect eof
+- o-> 交互
+- #!/usr/bin/expect -f
+- spawn sudo /usr/local/mysql/bin/mysqld_safe --user=mysql
+- expect "*password:*"
+- send -- "pwd"
+- send -- "\n"
+- interact            # interact留下交互, exit退出
+- o-> 后台执行        # 不要expect eof
+- if [fork]!=0 exit
+- disconnect
+- 

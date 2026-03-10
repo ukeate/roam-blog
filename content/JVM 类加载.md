@@ -1,0 +1,57 @@
+- [[Java 类加载器]]
+- [[JIT]]
+- HotSpot C++代码加载
+    - class对象加载到MethodArea
+        - metaspace(JDK1.8)
+        - permGeneration(JDK1.8之前)
+- class加载过程
+    - loading                 # 读到内存
+    - linking
+        - verification        # 校验
+        - preparation         # 静态变量赋默认值
+        - resolution          # 解析, loadClass()可指定是否解析。常量池的符号引用转换成内存地址引用
+    - initializing            # 静态变量赋初始值，执行静态代码
+- 对象加载
+    - new过程
+        - class加载
+        - 申请对象内存
+        - 成员变量赋默认值
+        - 调用构造方法<init>
+            - 成员变量顺序赋初始值
+            - 执行构造方法语句(先super)
+- 自定义类加载器
+- 懒加载                      # JVM未规定什么时候加载,但规定了什么时候初始化
+- 初始化
+    - new getstatic putstatic invokestatic指令，访问final变量除外
+    - java.lang.reflect对类进行反射调用
+    - 初始化子类时，父类首先初始化
+    - 虚拟机启动时，被执行的主类
+    - 动态语言支持java.lang.invoke.MethodHandle解析的结果为REF_getstatic, REF_putstatic, REF_invokestatic的方法句柄时, 该类初始化
+- 继承
+    - 被继承的对象是会单例，不会新创建。如果被继承的对象没有，则创建一个
+- 多态
+    - 父类(接口)中定义的引用变量，在运行时动态绑定到具体实例的方法执行
+- 内部unicode编码
+- 类
+    - 初始化时机
+        - new
+        - 访问静态变量，或对静态变量赋值
+        - 调用静态方法
+        - 反射 Class.forName("")
+        - 初始化子类，会先初始化父类
+        - jvm启动时标明的类 (java com.a.A中的A类)
+    - 步骤
+        - 类加载
+        - 链接
+            - 验证
+            - 准备
+                - 静态变量分配内存，设置默认初始值
+            - 解析
+                - 符号引用替换直接引用
+        - 初始化父类(非接口)
+        - 初始化
+            - 父类
+            - 初始化语句
+                - 如static块和static变量
+- 线程
+    - 运行时都有线程栈，保存变量值信息。访问对象值时，建立变量副本。修改后(线程退出前)副本值写到对象

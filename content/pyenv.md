@@ -1,0 +1,39 @@
+- 文件
+    - ~/.pyenv
+        - version
+            - 当前环境
+        - versions
+            - 安装的环境
+- 命令
+    - pyenv
+        - 查看
+            - --version
+                - pyenv的版本
+            - root
+                - 当前pyenv环境安装目录
+            - which python
+                - 当前python路径
+            - version
+                - 当前python版本
+            - versions
+                - 已安装的python版本
+            - install
+                - --list
+                    - 列出所有可用版本
+                - 3.10.10
+                    - 安装版本
+- 示例
+    - global设置、使用环境
+        - eval "$(pyenv init -)"
+        - pyenv global 3.10.6
+    - virtualenv创建、使用环境
+        - pyenv install 3.7.6
+        - pyenv virtualenv 3.7.6 37
+        - eval "$(pyenv init -)"
+        - eval "$(pyenv virtualenv-init -)"
+        - pyenv activate 37
+        - pyenv deactivate
+    - 改环境名
+        - mv $(pyenv root)/versions/oldenv $(pyenv root)/versions/newenv
+    - 删除环境
+        - pyenv uninstall paddle

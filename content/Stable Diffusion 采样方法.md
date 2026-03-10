@@ -1,0 +1,63 @@
+- Euler a
+    - 使用了祖先采样(Ancestral sampling)的Euler
+    - 有创造力，30-40步
+    - 影响参数
+        - sigma noise
+        - sigma tmin
+        - sigma churn
+- Euler
+    - 基于Karras的论文
+    - 简单，最快
+    - 影响参数
+        - eta
+- LMS
+    - 线性多步调度器(Linear multistep scheduler)
+    - Eular延伸，更稳定，30步
+- Heun
+    - 基于Karras的论文
+    - 影响参数
+        - sigma
+- DPM2
+    - Katherine Crowson在K-diffusion中自创
+        - 灵感来源Karras DPM论文
+    - 影响参数
+        - sigma
+- DPM2 a
+    - 使用祖先采样
+- DPM++ 2S a
+    - 基于Cheng Lu等人论文
+        - 2阶单步，祖先采样
+- DPM++ 2M
+    - 2阶多步
+- DPM++ SDE
+    - 使用随机微分方程(Stochastic Differential Equations)，祖先采样
+        - 替代原来的常微分方程(Ordinary Differential Equations)
+    - 影响参数
+        - eta
+- DPM fast
+    - 固定步长, 小于20步
+    - 影响参数
+        - eta
+- DPM adaptive
+    - 自适应步长
+    - 影响参数
+        - eta
+- Karras后缀
+    - 使用Karras noise schedule
+    - LMS Karras
+    - DPM2 Karras
+    - DPM2 a Karras
+    - DPM++ 2S a Karras
+    - DPM++ 2M Karras
+    - DPM++ SDE Karras
+- DDIM
+    - 官方采样器
+    - 收敛快, 20步
+    - 影响参数
+        - 单独的eta
+- PLMS
+    - 官方采样器
+    - LMS改进
+- UniPC
+    - 基于Wenliang Zhao等人论文
+    - 收敛快, 10步

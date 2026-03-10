@@ -1,0 +1,12 @@
+- x                  # 显示解释
+- e                  # 显示到底部
+- u                  # 指定unit名, 如kubelet
+- -no-pager          # 不输出到管道来分页
+- f                  # 追加显示
+- q                  # 只显示warn以上信息
+- -user-unit         # 指定用户
+- -since "2018-03-26" 
+- -until "2018-03-26 03:00"
+- 场景
+    - journalctl -f --user-unit onedrive
+    - journalctl -xefu kubelet --no-pager

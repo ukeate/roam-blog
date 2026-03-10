@@ -1,0 +1,59 @@
+- shell
+    - tmux new -A -s a，存在时attach
+    - tmux ls
+    - tmux attach -t a
+    - tmux detach，在已attach的session中执行
+    - tmux kill-session -t a
+    - tmux rename-session -t a aa
+    - tmux show-options -gw mode-keys，查看键映射
+    - tmux set-window-option -g mode-keys vi，键映射用vi
+- tmux中Ctrl+b
+    - d，session detach
+    - s，session 选择
+    - (，session上一个
+    - )，session下一个
+    - $，session重命名
+    - c，window新建
+    - n，window下一个
+    - p，window上一个
+    - l，window返回
+    - 0~9，window跳到编号
+    - '，window跳到输入编号
+    - , window重命名
+    - f，window搜索
+    - &，window关闭
+    - w，window选择
+    - %，pane横切
+    - "，pane竖切
+    - 空格，pane布局切换
+    - x，pane关闭
+    - 方向，pane切换
+    - {}，pane向前后交换
+    - o，pane下一个
+    - ;，pane上一个
+    - q，pane显示编号
+    - z，pane全屏切换
+    - !，pane成为window
+    - Alt+方向，pane大小
+    - [，复制模式(可滚历史)
+        - hjkl移动，pgUp/pgDn翻页，/搜索n下一个N上一个
+        - 复制，空格开始，回车完成
+    - ]，粘贴
+    - =，选择粘贴
+    - ?，显示帮助
+    - :，tmux命令，同执行"tmux ..."
+    - r，重载配置
+    - t，显示时钟
+    - Ctrl+b，Ctrl+b发给嵌套tmux
+- Ctrl+b : 命令
+    - list-keys， 看按键绑定
+    - list-sessions
+    - rename-session aa，重命名当前
+    - list-windows
+    - rename-window aa，重命名当前
+    - kill-window
+    - list-panes
+    - kill-pane
+    - setw -g synchronize-panes on/off，同步输入
+    - set -g mouse on/off，鼠标控制
+    - list-buffers，看复制缓冲区

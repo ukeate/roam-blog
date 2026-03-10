@@ -1,0 +1,11 @@
+- 权限中心，提供多语言客户端向多系统集成
+    - 用于控制资源访问权限，无权限时重定向到登录页面
+- 提供[[SSO]]功能
+    - 支持[[OpenID Connect]]
+    - [[OAuth 2.0]]
+    - [[SAML 2.0]]
+- 支持三方登录
+    - LDAP
+    - [[Active Directory]]
+    - Github
+    - Google

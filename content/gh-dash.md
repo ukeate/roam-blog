@@ -1,0 +1,1 @@
+- github TUI，看issue、pr

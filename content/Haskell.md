@@ -1,0 +1,34 @@
+- 源于ML
+- [[Haskell 库]]
+- [[Haskell 工具]]
+- [[Haskell 语法]]
+- [[Haskell API]]
+- [[Haskell 案例]]
+- 特点
+    - 纯函数式
+        - 模式
+            - 高阶函数
+            - 柯里化
+            - 组合子
+        - 好处
+            - 便于并发并行
+            - 易读
+    - 强静态类型
+    - 类型类
+    - 实现
+        - 惰性求值
+        - 模式匹配
+- 概念
+    - polymorphism
+        - 多态
+    - monomorphic
+        - 单态
+- 命令
+    - ghci
+        - set prompt "ghci> "
+            - 设置显示的提示符
+    - ghc
+        - ghc --make a.hs
+    - runhaskell
+    - ghc-pkg list
+        - 列出已安装的软件包

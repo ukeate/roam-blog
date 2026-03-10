@@ -1,0 +1,34 @@
+- 基础
+    - 特性
+        - 原型链, 面向对象, 动态语言(已超出脚本语言的范畴)
+        - 弱类型，变量都是var
+        - 解释器有自己的内存管理机制(garbage collection)
+        - 自由数据类型转换                        # 产生了==, ===的判断相等的不同定义
+    - v8引擎
+        - 直接生成机器码
+        - 分代式GC
+        - java jvm工程师参数了优化
+    - 历史
+        - Netscape(现Mozilla)创建JavaScript, 但JavaScript是Sun(现Oracle)的注册商标
+        - 作为标准提交给ECMA(欧洲计算机制造协会), 改名为ECMAScript
+            - ECMAScript 3(ES3) 作为标准广泛使用
+            - ECMAScript 5(ES5) 定义了新的语言标准
+            - JavaScript1.5是Mozilla的版本号, 相当于ES3,包含一些非标准语言扩展
+                - JavaScript1.8 在实现es7
+            - JavaScript解释器或引擎(engine)也有版本号
+                - Google的叫做V8(现在是4.0)
+        - 微软改动并取名Jscript
+- 标准
+    - [[ECMAScript 6]]
+    - [[CommonJS]]
+    - [[JS 异步加载]]
+- 浏览器
+    - js执行顺序
+        - 当页面载入时，会执行位于 body 部分的 JavaScript。
+        - 当被调用时，位于 head 部分的 JavaScript 才会被执行。
+- [[JS 词法]]
+- [[JS 语法]]
+- [[JS 风格]]
+- [[JS 函数模式]]
+- [[JS API]]
+- [[JS 库]]

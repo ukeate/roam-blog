@@ -1,0 +1,109 @@
+- 辅助
+    - XX:+PrintCommandLineFlags -version
+        - 打印启动参数, -version是随便一个命令
+    - XX:+PrintFlagsFinal -version
+        - 打印所有XX参数
+    - XX:+PrintFlagsInitial
+        - 打印默认参数
+    - XX:+PrintVMOptions
+        - 显示VM启动参数
+    - -   # 标准参数
+    - X                          # 显示非标参数
+    - XX                         # 显示不稳定参数
+- 内存
+    - XX:+HeapDumpOnOutOfMemoryError                 # OOM时产生堆转储文件 
+    - Xms40M                     # 堆起始大小
+    - Xmx60M                     # 堆最大大小, 最好和Xms一样以免堆弹大弹小
+    - Xmn                        # 年经代
+    - Xss                        # 栈空间
+    - XX:InitialHeapSize         # 起始堆大小，自动算
+    - XX:MaxHeapSize             # 堆最大大小，自动算
+- 内存模型
+    - XX:-DoEscapeAnalysis       # 去逃逸分析
+    - XX:-EliminateAllocations   # 去标量替换
+    - XX:-UseTLAB                # 去tlab
+    - XX:TLABSize                # 设置TLAB大小
+    - XX:+PrintTLAB
+    - XX:MaxTenuringThreshold    # 进老年代（升代）回收次数, 最大值15， CMS默认6，其它默认15
+- 对象和类
+    - XX:+UseCompressedClassPointers                 # class指针压缩
+        - 开启时4字节，不开启时8字节
+    - XX:+UseCompressedOops                          # 引用类型指针压缩, Ordinary Object Pointers
+        - 开启为4字节，不开启时8字节
+    - verbose:class              # 类加载详细过程
+    - XX:PreBlockSpin            # 锁自旋次数
+- 编译
+    - Xmixed                     # 混合模式
+    - Xint                       # 解释模式
+    - Xcomp                      # 编译模式
+    - XX:CompileThreshold = 10000                    # 检测热点代码次数
+- GC
+    - XX:+PrintGC                # 打印GC信息
+    - PrintGCDetails              # 打印GC更详细
+    - PrintGCTimeStamps           # 打印GC时间
+    - PrintGCCauses               # GC原因
+    - PrintHeapAtGC
+    - PrintGCApplicationConcurrentTime                # GC应用程序时间
+    - PrintCApplicationStoppedTime                    # 打印STW时长
+    - XX:+PrintReferenceGC       # 打印回收多少种引用类型
+    - XX:+UseConcMarkSweepGC     # 用CMS
+    - XX:+DisableExplictGC       # System.gc()不管用
+    - Parallel常用
+        - XX:SurvivorRatio           # 新生代Eden区和Surivor区的比例
+        - XX:PreTenureSizeThreshold  # 大对象到底多大
+        - XX:+ParallelGCThreads      # 并发线程数, 默认是CPU数
+        - XX:+UseAdaptiveSizePolicy  # 自动调所有区比例
+    - CMS常用
+        - XX:ParallelCMSThreads      # 并发线程数，默认是CPU数一半
+        - XX:CMSInitiatingOccupancyFraction 92%          # 老年代占多少时触发GC, 1.8 92%, 之前68%
+            - 设小一点，清除浮动垃圾
+            - 过大时，栈分配不下，Promotion Failure，触发FGC
+        - XX:+UseCMSCompactAtFullCollection              # GC时压缩，避免碎片片
+        - XX:CMSFullGCsBeforeCompaction                  # 多少次GC后压缩
+        - XX:+CMSClassUnloadingEnabled                   # 回收方法区
+        - XX:CMSInitiatingPermOccupancyFraction          # 到什么比例时进行Perm回收, 1.8之前
+        - GCTimeRatio                                     # GC占程序运行时间的百分比
+        - XX:MaxGCPauseMillis                            # GC停顿时间, CMS会减少年轻代大小
+    - G1
+        - XX:MaxGCPauseMillis                            # STW时间, 区别CMS, G1会调整Young区的块数
+        - GCTimeRatio
+        - XX:GCPauseIntervalMillis                       # STW之间间隔时间
+        - XX:+G1HeapRegionSize                           # Region大小, 1 2 4 8 16 32, 逐渐增大, GC间隔更长, 每次GC时间更长
+            - ZGC是动态调整的
+        - G1NewSizePercent                                # 新生代最小比例, 默认5%
+        - G1MaxNewSizePercent                             # 新生代最大比例，默认60%
+        - ConcGCThreads                                   # GC线程数
+        - InitiatingHeapOccupancyPercent                  # 启动GC的堆空间占用比例
+- JMX监控
+    - Djava.rmi.server.hostname=192.168.1.1
+    - Dcom.sun.management.jmxremote 
+    - Dcom.sun.management.jmxremote.port=11111 
+    - Dcom.sun.management.jmxremote.authenticate=false 
+    - Dcom.sun.management.jmxremote.ssl=false
+- 调优                            # 参数越来越少
+    - JVM参数800个
+    - CMS参数300个
+    - G1参数100个
+    - ZGC更少
+    - Zing1个
+- GC组合参数
+    - XX:+UseSerialGC
+        - S + SO
+    - XX:+UseParNewGC                # 已废弃
+        - PN + SO
+    - XX:+UseConc(urrent)MarkSweepGC
+        - PN + CMS + SO
+    - XX:+UseParallelGC               # 1.8默认
+        - PS + PO
+    - XX:+UseParallelOldGC
+        - PS + PO
+    - XX:+UseG1GC
+        - G1
+- 日志参数
+    - Xloggc:/logs/xx-xx-%t.log
+    - XX:+UseGCLogFileRotation           # 5个满了，覆盖第一个
+    - XX:NumberOfGCLogFiles=5
+    - XX:GCLogFileSize=1024M
+    - XX:+PrintGCDetails
+    - XX:+PrintGCDateStamps
+    - XX:+PrintGCCause

@@ -1,0 +1,12 @@
+- 主要是优化升级
+- 包装类编译时警告
+    - Integer i = new Integer(1)
+    - synchronized(i){}
+- 获取AM或PM
+    - DateTimeFormatter.ofPattern("B").format(LocalDateTime.now())
+- InvocationHandler添加方法
+    - invokeDefault()     # 调interface default方法
+- JVM优化: ZGC并发栈处理，弹性metaspace
+- Stream
+    - toList()
+- 正式版: record类型、instanceof模式匹配、jpackage

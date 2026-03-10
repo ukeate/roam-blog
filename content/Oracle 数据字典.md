@@ -1,0 +1,13 @@
+- dual                # dual表只有一行，用于执行一些特殊操作
+- dba_sequences
+    - select SEQUENCE_OWNER,SEQUENCE_NAME from dba_sequences
+        - 查询序列
+- dba_users
+    - select username,password from dba_users;
+        - 查询用户和密码
+- tab
+    - select * from tab
+        - 查看自己的可用表，视图，等
+- v$session
+    - select count(*) from v$session
+        - 查看当前数据库的连接

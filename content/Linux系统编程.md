@@ -1,0 +1,19 @@
+- 进程通信
+    - 对象
+        - ipc
+    - 种类
+        - 消息队列
+        - 共享内存
+        - 信号量
+    - 消息队列
+- 错误处理
+    - curedump机制, 产生core文件
+    - 命令
+        - ulimit
+    - 目录
+        - /proc/[pid]/
+- [[fork]]
+- [[epoll]]
+- [[Linux Signals]]
+- [[pf-kernel]]
+- [[libev]][[libevent]]

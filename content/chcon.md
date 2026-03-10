@@ -1,0 +1,8 @@
+- 修改文件安全上下文
+- R                  # 递归
+- t                  # type
+- u                  # user
+- r                  # role
+- -reference         # 参照更新
+- chcon -R -t mysqld_db_t /data
+- chcon -R --reference=/var/lib/mysql /data

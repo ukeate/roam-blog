@@ -1,0 +1,10 @@
+- AWS对象存储
+- 命令
+    - aws
+        - s3
+            - cp --recursive bin s3://a/crm-module/search/bin
+                - 级联复制
+            - sync s3://a/crm-module/search/bin bin
+                - 下载
+            - rm --recursive s3://a/crm-module/search
+                - 级联删除

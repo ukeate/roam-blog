@@ -1,0 +1,36 @@
+- bin目录
+    - [[javac]]
+    - [[java命令]]
+    - [[javadoc]]
+    - [[jdb]]
+    - [[javah]]
+    - [[javap]]
+    - [[jar]]
+    - [[native2ascii]]
+    - [[serialver]]
+    - [[appletviewer]]
+    - [[htmlconverter]]
+    - [[jad]]
+    - [[jps]]
+    - [[jinfo]]
+    - [[jstat]]
+    - [[jmap]]
+    - [[jconsole]]
+    - [[jstack]]
+- 工具
+    - [[MAT]]
+    - JProfiler
+    - [[perfino]]
+- 常见场景
+    - 分析GC效果，内存泄漏
+        - jstat -gcutil -t -h8 [pid] 1000
+    - dump内存
+        - jmap -dump:live,format=b,file=heap.bin [pid]
+    - 查死锁
+        - jstack |grep deadlock
+            - deadlock会列在最后
+    - CPU占用
+        - top
+        - top -Hp [pid]
+        - printf '%x' [tid]
+        - jstack [pid] | grep [16进制tid] -A 10

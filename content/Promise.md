@@ -1,0 +1,19 @@
+- promise/deferred        # promise/A, promise/B, promise/D模型
+    - promise在外部暴露接口(可变部分), deferred在内部维护状态(不可变部分)
+    - 状态
+        - 未完成，完成，失败
+        - 方向只能未完成->完成, 未完成->失败
+        - 状态转化不能更改
+    - api
+        - then()
+        - done()
+        - all()     # 所有成功成功，一失败失败
+        - any()
+- 流程控制库
+    - 尾触发     # 传next()函数
+    - async库(node.js)
+        - series()        # 串行
+        - parallel()      # 并行
+        - waterfall()     # 串行传结果
+        - auto()          # 计算依赖顺序执行
+    - bagpipe库(node.js)   # 限制并发, 任务可排队或拒绝, 超时控制

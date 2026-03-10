@@ -1,0 +1,47 @@
+- [[Docker 命令]]
+- [[Docker 方案]]
+- [[Dockerfile]]
+- [[Docker Compose]]
+- 基础
+    - 介绍
+        - 基于linux LXC，可以实现虚拟化
+    - 优点
+        - 低成本、高利用率、充分灵活、动态调度
+        - 核心网的最终形态
+    - 目录
+        - /var/lib/docker
+- 引擎
+    - 相当于VMware的ESXi
+    - [[OCI]]要求，采用模块化设计
+    - 组成
+        - Docker Client
+        - Docker daemon
+            - 大而全被摒弃
+        - containerd
+            - 容器执行逻辑
+            - shim
+                - 容器父进程
+                - 保持所有STDIN和STDOUT流开启
+                - 将容器退出状态反馈给daemon
+        - runc
+            - OCI运行时标准参考实现
+            - 用来创建容器
+- 配置
+    - 镜象网站
+        - https://hub.docker.com/
+    - 阿里云个人仓库
+        - 入口: cr.console.aliyun.com
+            - docker login -u 1@qq.com registry.cn-qingdao.aliyuncs.com
+            - docker tag java/device:1.0 registry.cn-qingdao.aliyuncs.com/mrs-iot/device:1.0
+            - docker push registry.cn-qingdao.aliyuncs.com/mrs-iot/device:1.0
+            - docker pull registry.cn-qingdao.aliyuncs.com/mrs-iot/device:1.0
+    - /etc/sysconfig/docker
+        - /etc/init.d/docker.conf
+        - OPTIONS='--selinux-enabled --log-driver=journald --insecure-registry 45.55.56.16:5000 --dns 8.8.8.8'
+        - DOCKER_CERT_PATH=/etc/docker
+- 仓库
+    - [[Habor]]
+    - [[Docker Registry]]
+- 工具
+    - [[nsenter]]
+    - [[Pipework]]

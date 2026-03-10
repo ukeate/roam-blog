@@ -1,0 +1,4 @@
+- 介绍　
+    - http live streaming 苹果创建, 延迟较高
+    - html5原生支持
+    - m3u8扩展名，里面封装ts小视频

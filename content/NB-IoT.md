@@ -1,0 +1,6 @@
+- Narrow Band Internet of Things
+- 物理层/数据链路层, 蜂窝网络上，消耗和带宽低
+- 场景
+    - Standalone
+    - Guard-band
+    - In-band

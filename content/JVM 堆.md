@@ -1,0 +1,12 @@
+- 保存
+    - 引用类型在堆分配类变量, 局部变量生命周期结束后，堆空间等待gc回收
+    - this
+- 特点
+    - 线程共享
+    - 以随意顺序，运行时分配和回收空间, 代码申请
+    - 大小、数量、生命期常常在编译时不确定
+    - 细分为新生代和老年代, 再具体为 eden survivor(from survivor、to survivor), tenured
+    - OutOfMemoryError
+- 实现
+    - 存放所有runtime data
+    - heap是jvm启动时创建

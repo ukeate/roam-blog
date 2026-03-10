@@ -1,0 +1,8 @@
+- 查内存分配
+- jmap -histo 进程号 | head -20                   # 列所有对象
+    - 有性能消耗，但不很高，可以在线执行
+- jmap -dump:format=b, file=x pid                 # 导出转储文件
+    - 内存特别大时，jmap会卡顿
+    - 多个服务器可用，停一个不影响
+    - 设定HeapDumpOnOutOfMemoryError产生堆转储文件                 
+    - 在线定位(中小型公司用不到)

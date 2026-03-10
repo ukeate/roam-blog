@@ -1,0 +1,10 @@
+- [[Elasticsearch Head]]
+    - 使用
+        - https://github.com/mobz/elasticsearch-head
+        - cnpm i
+        - npm i -g grunt-cli
+        - grunt server
+        - curl localhost:9100
+    - 配置
+        - Gruntfile.js
+            - port:9100

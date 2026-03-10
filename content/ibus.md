@@ -1,0 +1,1 @@
+- ibus-daemon -d -x -r，后台运行

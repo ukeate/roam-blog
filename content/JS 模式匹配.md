@@ -1,0 +1,51 @@
+- 特点
+    - 模式匹配只对自身属性起作用
+- 数组
+    - let [foo, [[bar], baz]] = [1, 2], 3     # var, const同样适用
+    - let [,, third] = [1, 2, 3]
+    - let [head, ...tail] = [1, 2, 3]
+    - let [x, y, z] = new Set(['a', 'b', 'c'])    # 只要有Iterator接口，都可以匹配
+    - var [foo = true] = []                       # 设置默认值，在值严格等于undefined时生效
+        - var [x = 1] = [undefined]
+            - x = 1
+        - var [x = 1] = [null]
+            - x = null
+        - let [x = f()] = [1]                     # 惰性求值
+        - let [x = y, y = 1]                      # 报错, y 未声明
+- 对象
+    - var {bar, foo} = {foo: 'a', bar: 'b'};
+    - var {foo: baz} = {foo: 'a'};                # baz = 'a'
+    - var {p: [x, {y}]} = {p: ['a', {'b'}]}       # 这里p是模式，不是变量，所以不声明或赋值
+    - let obj = {}, arr = [];
+    - ({foo: obj.prop, bar: arr[0]} = {foo: 1, bar: 0});              # 嵌套值, 不加()时{}会被解释成代码块
+    - var {x = 3} = {};
+    - let {log, sin, cos} = Math                  # 将对象的方法赋值到变量
+    - let n = {...{a: 3, b: 4}}                   # {a: 3, b: 4}, 扩展null, undefined会被忽略, 被扩展对象中的getter会执行
+        - let n = {x: 1, ...a}                    # a中的x属性会被覆盖掉, 原理同Object.assign
+        - let {x, y, ...z} = {x: 1, y: 2, a: 3, b: 4}                 # x // 1, y // 2, z // {a: 3, b: 4}, z 是引用
+- 基本类型
+    - const [a, b] = 'hello'
+    - let {toString: s} = 123                     # 如果右边不是对象，先包装, null 和 undefined不能匹配
+        - let {toString: s} = true
+- 函数
+    - function add([x, y]){}
+    - add([1, 2])
+    - function move({x = 0, y = 0} = {})          # function move({x, y} = {x: 0, y: 0}) 是错误的
+- 圆括号
+    - [(b)] = [3]
+    - ({p: (d)} = {})
+    - [(parseInt.prop)] = [3]                     # 只有非声明语句的非模式部分可以用圆括号
+- 用途
+    - [x, y] = [y, x]                             # 交换值
+    - function f(){return [1, 2]}
+    - var [a, b] = f();
+    - function f(){return {foo: 1, bar: 2}}
+    - var {foo, bar} = f();                       # 函数返回多个值
+    - function f([x, y]){}
+    - f([1, 2])
+    - function f({x, y, z = 3}){}
+    - f({y: 2, x: 1})                             # 参数定义
+    - let {id} = {id: 42, status: 'ok'}           # json匹配
+    - var map = new Map(); map.set('a', 1)
+    - for(let [, val] of map){}                   # 遍历map
+    - const {SourceMapConsumer, SourceNode} = require('source-map')   # 输入模块方法

@@ -1,0 +1,3 @@
+- chmod ugo+rwx
+    - u拥有者, g群组, o其他人, +添加, -删除, r读、w写、x执行
+- chmod a+rwx         # a指所有人

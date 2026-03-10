@@ -1,0 +1,8 @@
+- 号称Run Programs Faster Anywhere，被官方称为Universal VM，可能替代[[HotSpot VM]]
+- 支持语言
+    - 基于JVM
+        - Java、Scala、Groovy、Kotlin、Clojure
+    - 基于LLVM
+        - C、C++
+    - 动态语言
+        - JS、Ruby、Python、R

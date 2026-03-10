@@ -1,0 +1,1 @@
+- jq . a.json，验证json格式

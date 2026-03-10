@@ -1,0 +1,5 @@
+- 介绍
+    - The Mozilla Public License
+- 特点
+    - 可与其它授权的文件混合使用，新增代码可使用其它方式授权或闭源
+    - 使用MPL的部分，对MPL修改的部分，要MPL

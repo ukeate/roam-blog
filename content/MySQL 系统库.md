@@ -1,0 +1,12 @@
+- information_schema
+    - 默认内置元信息数据库
+    - INNODE_TRX
+        - 当前开启的事务
+- mysql
+    - 内置安全设置数据库
+- performance_schema
+    - 资源消耗，资源等待等情况
+- sys
+    - 5.7后，数据来源performance_schema, 降低复杂度
+- test
+    - 5.7移除，内置测试数据库

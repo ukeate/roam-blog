@@ -1,0 +1,79 @@
+- 特性
+    - JEP 126 Lambda函数表达式支持
+    - JEP 104 内置Nashorn JavaScript引擎
+    - JEP 150 新的时间日期API
+    - JEP 122 移除HotSpt永久代
+- interface default方法
+- lambda表达式
+- lambda作用域可访问实际final变量, 可访问对象字段和静态变量 
+- 函数式接口
+    - @FunctionalInterface
+- 函数引用
+    - ```java
+      Converter<String, Integer> f = Integer::valueOf
+      User::new
+      ```
+- Predicate类, Function接口, Supplier接口, Consumer接口, Comparator接口, Optional接口
+- Stream接口
+    - filter()...
+    - Collection
+        - stream()
+        - parallelStream()
+- Date API
+    - Clock
+        - static systemDefaultZone()
+        - millis()
+        - instant()
+    - Date.from(instant)
+    - ZoneId
+        - static getAvailableZoneIds()
+        - static of()
+        - getRules()
+    - LocalTime
+        - static now()
+        - static of()
+        - static parse
+        - plust()...
+    - LocalDate
+        - static parse()
+    - LocalDateTime
+        - static of()
+        - toInstant()...
+    - ChronoUnit.HOURS.between()
+    - DateTimeFormatter
+        - static ofLocalizedTime(FormatStyle.SHORT)
+        - static ofPattern()
+        - withLocale(Locale.GERMAN)
+- 多重注解, 同一注解使用多次
+    - @Repeatable
+- 接口中可以定义静态方法与默认方法
+    - 不能重写equals，hashCode或toString的默认实现。
+- Lambdas
+    - Lambda更好地利用多核处理器
+    - 与匿名内部类
+        - 匿名内部类编译成.class文件，lambda表达式编译成私有方法, 使用invokedynamic(java7)字节码指令动态绑定
+            - private static java.lang.Object lambda$0(java.lang.String)
+        - 匿名内部类this指向该匿名内部类, lambda的this总指向所有的外部类
+    - 内部变量
+        - 可以使用静态、非静态局部变量
+        - 只能引用final和局部变量，不能修改外部变量     # 不可变闭包
+    - 注解
+        - @Functionalnterface     # 函数式接口
+            - 有且公有一个抽象方法      # SAM(single abstract method)
+            - 允许定义静态方法、默认方法、Object中的public方法
+            - 不是必须的，接口符合以上定义就算函数式接口
+    - 函数
+        - (int x, int y) -> { return x + y; }
+        - Runnable r = () -> { System.out.println("Running!"); }
+    - SAM
+        - `new Thread(() -> System.out.println(""))`
+            - Thread有单个抽象方法run()
+    - 列表
+        - `list1.forEach(System::out::println)`
+- java.util.function包
+    - 声明于function包内的接口可接收lambda表达式
+    - Predicate
+    - Stream
+- Optional
+- Jigsaw
+    - jdk上的模块系统，使大块的代码更易于管理

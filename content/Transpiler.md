@@ -1,0 +1,6 @@
+- 介绍
+    - google的es6模块加载转为CommonJS或AMD模块加载的工具
+- 使用
+    - npm install -g es6-module-transpiler
+    - compile-modules convert es6.js es5.js
+        - compile-modules convert -o out.js file1.js

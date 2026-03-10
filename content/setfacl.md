@@ -1,0 +1,6 @@
+- setfacl [-bkndRLP] { -m|-M|-x|-X ... } file ...
+- b                  # 去掉所有acl设置
+- m u:sudo:rwx   filename    # 配置用户权限
+- m g:sudo:r-x  filename     # 配置组的权限
+- x u:user1 filename         # 删除一个ACL设置
+- d -m g:sudo:rwx            # 指定default

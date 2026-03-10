@@ -1,0 +1,5 @@
+- 介绍
+    - Apache项目，基于kafka, 快速持久化(O(1)时间开销)
+    - 高吞吐，一台普通服务器 100k/s
+    - 完全分布式，Broker, Producer, Consumer原生支持分布式，自动负载均衡
+    - 支持Hadoop并行加载

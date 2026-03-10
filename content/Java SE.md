@@ -1,0 +1,2 @@
+- Standard Edition
+- 以前叫J2SE, 桌面应用, 完整API

@@ -1,0 +1,2 @@
+- __manufacturing execution system, 制造生产过程执行系统__
+- __Manufacturing Execution System__

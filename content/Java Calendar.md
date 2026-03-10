@@ -1,0 +1,11 @@
+- getInstance()
+- get(Calendar.YEAR)   # YEAR, MONTH, DATE, HOUR_OF_DAY, MINUTE, SECOND
+- getTimeInMillis()   # 时间戳，毫秒
+- getTime()
+- set()   # 设置到时间
+- 使用
+    - Calendar c = Calendar.getInstance()
+    - c.set(Calendar.DAY_OF_MONTH, 1)     // 月第一天
+    - c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH))     // 月最后一天
+    - System.out.println(format.format(c.getTime(0))
+    - c.add(Calendar.DATE, -1)    // 昨天

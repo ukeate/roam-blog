@@ -1,0 +1,19 @@
+- 升级
+    - fedup --network 21
+    - 或
+    - fedora-upgrade
+- 升级21
+    - rpm --import https://fedoraproject.org/static/95A43F54.txt
+    - yum update yum
+    - yum clean all
+    - yum --releasever=21 distro-sync --nogpgcheck
+- group
+    - yum grouplist
+    - yum groupinstall "X Window System"
+    - yum groupinstall "GNOME Desktop Environment"
+    - yum groupinstall "KDE"
+- gnome的快捷方式存放地址
+- 安装unity  
+    - cd /etc/yum.repos.d/
+    - wget http://download.opensuse.org/repositories/GNOME:/Ayatana/Fedora_17/GNOME:Ayatana.repo
+    - yum install unity

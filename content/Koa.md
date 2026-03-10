@@ -1,0 +1,99 @@
+- 介绍
+    - express原班人马打造的，更小，更健壮，更有表现力的web框架
+    - 免除重复繁琐的回调函数嵌套，提高错误处理效率
+    - 不绑定任何中间件，只是提供一个轻量优雅的函数库
+    - > =node0.11.16
+- 配置
+    - app.name              # 应用名称
+    - app.env                  # 执行环境，默认是NODE_ENV 或 'development'
+    - app.proxy              # 决定哪些proxy header被加到信任列表中
+    - app.subdomainOffset      # 被忽略的.subdomains列表
+    - app.jsonSpaces          # 输出json时是否填充空格
+    - app.outputErrors        # 是否输出错误堆栈(err.stack)到stderr(app.env是'test'时，此值为false)
+- 使用
+    - $ npm install koa
+    - $ node --harmony app.js                        # 必需使用harmony模式运行程序
+    - var koa = require('koa');
+    - var app = koa();
+    - app.use(function *(){
+        - this.body = 'Hello World';
+    - });        # function*  声明的generator function支持yield
+        - ## yield是ES6定义的新语法
+    - app.listen(3000);
+- 使用(downstream & upstream)
+    - var koa = require('koa');
+    - var app = koa();
+    - // x-response-time
+    - app.use(function *(next){
+    - // (1) 进入路由
+    - var start = new Date;
+    - yield next;
+    - // (5) 再次进入 x-response-time 中间件，记录2次通过此中间件「穿越」的时间
+    - var ms = new Date - start;
+    - this.set('X-Response-Time', ms + 'ms');
+    - // (6) 返回 this.body
+    - });
+    - // logger
+    - app.use(function *(next){
+    - // (2) 进入 logger 中间件
+    - var start = new Date;
+    - yield next;
+    - // (4) 再次进入 logger 中间件，记录2次通过此中间件「穿越」的时间
+    - var ms = new Date - start;
+    - console.log('%s %s - %s', this.method, this.url, ms);
+    - });
+    - // response
+    - app.use(function *(){
+    - // (3) 进入 response 中间件，没有捕获到下一个符合条件的中间件，传递到 upstream
+    - this.body = 'Hello World';
+    - });
+    - app.listen(3000);
+    - this
+        - request
+            - header
+            - headers
+            - url
+            - accepts
+        - response
+            - header
+            - headers
+            - status
+        - cookies
+            - set('name', 'tobi', {signed: true})
+                - signed
+                - expires
+                - path
+                - domain
+                - secure
+                - httpOnly
+            - get
+        - type
+        - length
+        - path
+        - method
+        - state
+        - throw
+        - assert
+    - app
+        - use
+        - listen
+        - callback
+        - keys
+        - context
+            - db
+- 中间件
+    - koa-router
+    - trie-router
+    - route
+    - basic-auth
+    - etag
+    - compose
+    - static
+    - static-cache
+    - session
+    - compress
+    - csrf
+    - logger
+    - mount
+    - send
+    - error

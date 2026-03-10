@@ -1,0 +1,47 @@
+- C++编写
+- 端口
+    - 3306
+- [[MySQL 命令]]
+- 组件
+    - MySQL Enterprise Monitor Documentation
+    - MySQL Enterprise Monitor Connector
+    - MySQL Enterprise Monitor Service Manager
+    - MySQL Enterprise Monitor Agent
+    - MySQL Enterprise Backup
+    - MySQL Connector
+    - 工具
+        - [[MySQL Database]]
+        - [[MySQL Cluster]]
+        - [[MySQL Cluster Manager]]
+        - [[MySQL Workbench]]
+        - [[MySQL Utilities]]
+- 连接参数
+    - root:123456@tcp(abcdefg:3306)/a?
+        - charset=utf8mb4,utf8&
+        - characterEncoding=UTF-8&
+        - loc=UTC&
+        - interpolateParams=true&
+        - time_zone=%27%2B00%3A00%27&
+        - sql_mode=%27NO_ENGINE_SUBSTITUTION%2CSTRICT_TRANS_TABLES%27
+- [[MySQL 数据类型]]
+- [[MySQL 架构]]
+- MySQL 语句
+    - 事务
+        - 由存储引擎决定
+            - 与其它数据库产品不同
+        - 默认自动提交
+            - variables autocommit, 0 off 1 on
+        - 一些命令强制自动提交
+            - DLL命令
+            - lock tables
+    - [[MySQL 函数]]
+    - [[MySQL 存储过程]]
+    - [[MySQL 触发器]]
+- 目录
+    - /var/lib/mysql              # 默认数据库
+    - /var/log/mariadb            # 默认日志
+- [[MySQL 存储引擎]]
+- [[MySQL 系统库]]
+- [[MySQL 配置]]
+- [[MySQL 安全]]
+- [[MySQL 方案]]

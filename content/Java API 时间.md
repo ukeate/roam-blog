@@ -1,0 +1,104 @@
+- JDK8的新时间类实现JSR-310
+    - 特点
+        - 不变性, 内部状态不变、线程安全
+        - 关注点分离，定义了不同的类：Date, Time, DateTime, timestamp, 时区
+        - 策略模式，所有类定义format()和parse()方法
+        - 实用方法，所有类定义了方便操作的方法
+        - 扩展性，使用ISO-8601日历系统，也可扩展在其它系统
+    - 包
+        - java.time       # 基础包
+        - java.time.chrono     # 非ISO日历系统的泛化api
+        - java.time.format    # 格式化和解析，基本不用(基础包有封装)
+        - java.time.temporal  # 时态对象，用来改变时间
+        - java.time.zone      # 时区相关类
+    - JSR-310
+        - 精确到纳秒
+        - 对应人类观念，也不是像Date一样用零点时间表示日期
+        - 大部分基于Joda-Time，区别：
+            - 包名从org.joda.time到java.time
+            - 不接受null值，Joda-Time视null为0
+            - 机器用Instant和人用DateIme接口差别更明显
+            - 所有异常继承DateTimeException
+    - 方法
+        - Of  # 静态工厂
+        - parse   # 静态解析
+        - get
+        - is
+        - with    # 设置时间，不可变
+        - plus
+        - minus
+        - to      # 转换类型
+        - at      # 组合对象
+- [[Java Calendar]]
+- [[Java SimpleDateFormat]]
+- [[Java LocalDate]] 
+- LocalTime     # java8, 默认格式(hh:mm:ss.zzz)
+    - now()
+    - of()
+    - ofSecondOfDay()     # 从0开始多少秒后
+- LocalDateTime   # java8，默认格式(yyyy-MM-dd-HH-mm-ss.zzz)
+    - now()
+    - of()
+        - LocalDaeTime.of(LocalDate.now(), LocalTime.now())
+        - LocalDateTime.of(2014, Month.JANUARY, 1, 10, 10, 30)
+    - ofEpochSecond()
+    - ofInstant()
+    - parse()
+        - 按格式parse字符串
+        - `LocalDateTime.parse("27::Apr::2014 21::39::48", DateTimeFormatter.ofPattern("d::MMM::uuuu HH::mm::ss"))`
+    - getYear()
+    - getMonthValue()
+    - getDayOfMonth()
+    - getHour()
+    - getMinute()
+    - getSecond()
+    - minusDays()
+    - plush()
+- ZonedDateTime
+    - now()
+    - parse()
+        - ZonedDateTime.parse("2013-12-31T23:59:59Z[Europe/Paris]")
+- Clock     # java8
+    - systemDefaultZone()
+    - systemUTC()
+    - system(ZoneId.of("Europe/Paris"))
+    - fixed(Instant.now(), ZoneId.of("Asia/Shanghai"))    # 固定时区
+    - offset(c1, Duration.ofSeconds(2))   # 偏移
+    - millis()        # 时间戳
+- Instant     # java8, 机器可读格式，精确到纳秒
+    - now()
+        - now(clock1)     # 得到瞬间时间
+    - ofEpochMilli
+    - toEpochMilli()
+    - getEpochSecond()
+- Duration        # java8, 时间段
+    - between()
+    - ofDays()
+    - toDays()
+    - toHourse()
+- Period      # java8
+    - getMonths()     # 算成月数
+- DateTimeFormatter   # java8
+    - BASIC_ISO_DATE
+    - ofPatter()
+    - 使用
+        - DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
+        - System.out.println(LocalDate.now().format(formatter))
+- Chronology  # java8 年表
+    - localDateTime(LocalDateTime.now())
+    - 类
+        - HijrahChronology
+            - INSTANCE
+- 新旧转换
+    - // Date, Instant, LocalDateTime
+    - Instant timestamp = new Date().toInstant()
+    - LocalDateTime date = LocalDateTime.ofInstant(timestamp, ZoneId.of(ZoneId.SHORT_IDS.get("PST")))
+    - Date date = Date.from(Instant.now())
+    - // Calendar, Instant
+    - Instant time = Calendar.getInstance().toInstant()
+    - // TimeZone, ZoneId
+    - ZoneId defaultZone = TimeZone.getDefault().toZoneId()
+    - TimeZone timeZone = TimeZone.getTimeZone(defaultZone)
+    - // GregorianCalendar, ZonedDateTime
+    - ZonedDateTime gCalendarDateTime = new GregorianCalendar().toZonedDateTime()
+    - GregorianCalendar gCalendar = GregorianCalendar.from(gCalendarDateTime)

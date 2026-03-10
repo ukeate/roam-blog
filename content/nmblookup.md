@@ -1,0 +1,3 @@
+- 查ip域名， NetBIOS/SMP名称解析
+- 场景
+    - nmblookup -A ip

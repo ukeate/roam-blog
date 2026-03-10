@@ -1,0 +1,34 @@
+- 介绍
+    - 目标是js可写
+        - 复杂的应用程序
+        - 函数库
+        - 代码自动自成器(code generator)
+    - mozilla基于ECMAScript6 发布 JavaScript2.0
+    - V8, node.js使用
+- let                                 # 块级作用域中声明变量
+- const                               # 声明常量
+- Set对象                              # 同java Set, 是一个数组
+    - 属性
+        - size
+    - 方法
+        - add(value)
+        - delete(value)
+        - has(value)
+        - clear()
+- Map对象                              # 键值对，键可以是对象
+    - 使用
+        - var m = new Map();
+        - o = {p: "Helllo"};
+        - m.set(o, "content");
+        - m.get(o);
+    - 属性
+        - size
+    - 方法
+        - set(key, value)
+        - get(key)
+        - has(key)
+        - delete(key)
+        - clear()
+- ... (rest运算符)
+- yield关键字
+- class关键字

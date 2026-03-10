@@ -1,0 +1,42 @@
+- 没有完成计划的Lambdax项目、Jigsaw项目、动态语言支持、[[Gabage-First GC]]、[[Java Coin]]项目
+- G1
+    - 2009年 Experimental G1 GC
+    - 2011年 G1
+- 加强对非Java语言调用支持、可并行类加载架构
+- 支持Mac OS X和ARM
+- switch支持String
+- 泛型推断
+    - new ArrayList<>()
+- AutoCloseable interface，对象销毁时自动调用close()
+- FileSystem新方法, 取环境变量
+    - getJavaIoTempDir()      # IO临时文件夹
+    - getJavaHomeDir()        # JRE目录
+    - getUserHomeDir()        # 用户目录
+    - getUserDir()            # 运行目录
+- Boolean加方法
+    - negate()
+    - and()
+    - or()
+    - xor()
+- Character加方法
+    - equalsIgnoreCase()
+- Math加方法，安全计算
+    - safeToInt()
+    - safeNegate()
+    - safeSubtract()
+    - safeMultiply()
+    - safeAdd()
+- switch case可以匹配String
+- 数值可下划线, 二进制
+    - int i = 1_000_000
+    - int i = 0b1001_1001
+- 多异常类型
+    - catch(A|B e){}
+- try with resource自动关闭资源
+    - try (FileInputStream s1 = new FileInputStream(""); FileOutputStream o1 = new FileOutputStream("")) {}
+- switch中可以使用字符串了
+- 运用List<String> tempList = new ArrayList<>(); 即泛型实例化类型自动推断
+- 语法上支持集合，而不一定是数组
+    - final List<Integer> piDigits = [ 1,2,3,4,5,8 ];
+- map集合支持并发请求，且可以写成
+    - Map map = {name:"xxx",age:18};

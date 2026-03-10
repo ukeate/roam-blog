@@ -1,0 +1,11 @@
+- simple mail transfer protocol                    # SMTP协议的最大特点是简单，它规定了发送程序和接收程序之间的命令和应答格式。
+    - 基于DNS中的邮件交换（MX）记录路由电子邮件。
+    - 通过用户代理程序（UA）完成邮件的编辑、收取和阅读等功能；通过邮件传输代理程序（MTA）将邮件传送到目的地。
+    - 传输协议
+        - tcp
+    - 常用命令
+        - HELO  <domain> <CRLF>
+        - MAIL FROM：<邮件地址><CRLF>
+        - RCPT TO：<邮件地址><CRLF>
+        - DATA <CRLF>邮件内容，以＜CRLF＞.＜CRLF＞标识数据的结尾;
+        - REST <CRLF>退出/复位当前的邮件传输QUIT <CRLF>关闭传输;

@@ -1,0 +1,1 @@
+- fselect name, size from /home where ext = 'jpg' and size > 1mb

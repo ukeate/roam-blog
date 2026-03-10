@@ -1,0 +1,3 @@
+- JVM内置JIT, EJB, Java Plug-in, Java IDL, Swing, Collections
+- 内置[[JIT]]
+- JDK1.2的JVM有ClassicVM、HotSpotVM、ExactVM

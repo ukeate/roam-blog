@@ -1,0 +1,14 @@
+- 场景
+    - 查看网卡是否丢包
+        - ifconfig eno1
+    - 打开, 关闭网卡
+        - ifconfig eth0 up
+        - ifconfig eth0 down
+    - 临时修改ip
+        - ifconfig eth0 192.168.0.1 netmask 255.255.255.0 up
+            - up表示立即激活
+    - 临时mac
+        - ifconfig enp0s20u6u3 hw ether 00:50:56:c0:00:02
+    - 虚拟网卡
+        - ifconfig wlp7s0:1 ip netmask
+            - 共用一个ip

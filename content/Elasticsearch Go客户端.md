@@ -1,0 +1,20 @@
+- Search
+    - SearchService
+    - Do
+    - Index
+    - Query
+    - Sort
+    - From
+    - Pretty
+- Index
+    - IndexService
+    - Do
+    - Index
+    - Type
+    - Id
+    - BodyJson
+    - Refresh
+- Suggest
+    - SuggestService
+- query
+    - SimpleQueryString

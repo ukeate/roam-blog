@@ -1,0 +1,3 @@
+- Advanced Linux Sound Architecture
+- /etc/asound.conf
+    - defaults.pcm.card 1；defaults.pcm.device 1；defaults.ctl.card 1

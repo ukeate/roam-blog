@@ -1,0 +1,4 @@
+- 图形统计：heap, threads, classes, cpu, VM summary
+- 需要JMX
+- JMX会消耗性能生产服务器不开
+- JMX图形界面只用于压测

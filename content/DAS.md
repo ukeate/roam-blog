@@ -1,0 +1,1 @@
+- 直连式存储，Direct-Attached Storage

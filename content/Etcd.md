@@ -1,0 +1,1 @@
+- kubernetes用，保证CP

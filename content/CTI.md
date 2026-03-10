@@ -1,0 +1,4 @@
+- computer telephony integration
+- computer telecommunication integration
+    - 计算机技术应用到电话系统中，识别信令信息进行处理，传送预定录音文件
+    - 转接来话，处理传真，电子邮件等

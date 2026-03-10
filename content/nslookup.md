@@ -1,0 +1,14 @@
+- 被dig、doggo替代
+- 正向解析
+    - nslookup 域名
+- 反向解析
+    - nslookup -qt=ptr ip地址
+        - ptr Pointer Recore 指针记录
+            - 是电子邮件系统中的一种数据类型，被互联网标准文件RFC1035所定义。
+            - 与其相对应的是A记录、地址记录。二者组成邮件交换记录。
+            - A记录解析名字到地址，而PTR记录解析地址到名字。
+            - 另外两个与ptr平行的参数为mx和a
+    - 或
+    - nslookup
+    - set q=ptr
+    - ip地址

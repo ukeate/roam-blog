@@ -1,0 +1,47 @@
+- 方案
+    - user library发布
+        - 项目右键 -> properties -> Deployment Assembly -> add -> javaBuild Path Entries中选择发布包
+    - tomcat设置发布到外部
+        - new server -> 直接finish
+        - 右键server -> open        
+            - 修改server location -> use Tomcat installation
+            - 修改server location -> deploy path为webapps
+            - 修改TimeOuts ->所有时间为1200
+    - java版本
+        - window -> preferences -> java -> compiler
+        - window -> preferences -> java -> installed JREs
+    - 编码
+        - general -> workspace
+            - Text file encoding
+        - general -> content types
+            - Text -> java source file 
+                - defalt encoding输入UTF-8并点击update
+    - 快捷键
+        - general -> editors -> keys
+            - content assist                # 代码提示
+            - word comletion                # 代码补全
+- 插件
+    - market place
+        - http://www.eclipse.org/mpc/
+        - 在线网页
+            - http://www.eclipse.org/mpc/archive.php
+        - 在线安装(luna)
+            - http://download.eclipse.org/mpc/releases/1.3.0/
+        - yum
+            - eclipse-mpc
+    - subclipse
+        - yum
+            - eclipse-subclipse
+    - jdt java8 support
+        - help -> market place -> find: java 8
+            - java 8 support for eclipse 
+        - 在线安装(kepler)
+            - http://download.eclipse.org/eclipse/updates/4.3-P-builds/
+            - 网站
+                - http://wiki.eclipse.org/JDT/Eclipse_Java_8_Support_For_Kepler
+    - m2e
+        - 在线
+            - http://download.eclipse.org/technology/m2e/releases 
+    - [[Eclipse Maven]]
+- [[MyEclipse]]
+- [[JRebel]]

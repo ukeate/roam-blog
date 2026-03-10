@@ -1,0 +1,24 @@
+- __转换图片__
+- convert a.jpg a.png # 转格式
+- resize 1024x768
+    - convert -resize a.jpg a1.jpg
+- sample 50%x50%     # 缩略图
+- rotate 270         # 顺时针旋转270度
+- flip               # 左右翻转
+- paint 4            # 旋转角度
+- draw               # 加文字
+    - convert -fill black -pointsize 60 -font helvetica -draw 'text 10,80 "A" ‘  a.jpg  a1.jpg
+        - # 用黑色, 60磅, helvetica字体, 在位置10,80 写A
+- raise 5x5          # 右下增加
+- +raise 5x5          # 左上增加
+- bordercolor red -border 5x5                # 红色边框
+- mattecolor black -frame 5x5                # 黑色边框
+- noise 3            # 油画
+- monochrome         # 噪声
+- blur 80            # 高斯模糊
+- flop               # 底片
+- negate             # 黑白
+- charcoal 2         # 炭笔
+- spread 30          # 漩涡
+- swirl 67           # 凸起
+- 

@@ -1,0 +1,7 @@
+- 命令
+    - telepresence
+        - connect
+        - quit
+        - status
+        - intercept svc1 -nn1 --port 8080:80 --env-file x.env
+        - leave statusName1

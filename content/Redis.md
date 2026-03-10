@@ -1,0 +1,38 @@
+- remote dictionary server，C编写的KV内存数据库，单线程，可持久化
+- [[Redis 持久化]]
+- [[Redis 指令]]
+- [[Redis 命令]]
+- [[Redis 数据类型]]
+- 与memcache区别
+    - memcache全在内存，不能持久化，redis部分硬盘
+    - memcache类型支持简单
+        - memcache类型只有字符串，append字符串, blacklist删除麻烦
+    - emecache多线程, redis单线程
+    - 底层模型，与客户端通信协议不同，redis自己实现vm机制(冷热数据分离)
+    - value, memcache只能存1MB, redis可存1GB
+    - redis可设置expire, 支持排行榜, 浮点数
+- 功能
+    - [[Redis 发布订阅]]
+    - [[Redis 过期]]
+    - [[Redis 事务]]
+    - [[Redis 持久化]]
+    - [[Redis 主备复制]]
+- client
+    - [[Jedis]]
+- failover机制
+    - [[Redis Sentinel]]
+    - [[Redis Cluster]]
+- 代理/水平拆分
+    - [[Redis Cluster]]
+    - [[Twemproxy]]
+    - [[RedisMonitor]]
+    - [[Codis]]
+- 性能方案
+    - 内存数据库，需要预估内存，使用key过期节约
+    - 完整重同步占资源，可以部分重同步
+    - 重启数据加载慢
+    - master内存快照时，save命令调rdbSave阻塞主线程
+    - master AOF持久化，追加文件大时影响master重启恢复速度
+        - 用slave AOF
+    - master调用BGREWRITEAOF重写AOF文件时，cpu和内存负载高
+    - 主从复制最好同局域网

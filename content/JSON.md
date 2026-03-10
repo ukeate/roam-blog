@@ -1,0 +1,7 @@
+- 变体
+    - [[MessagePack]]
+    - [[BSON]]
+    - [[BJSON]]
+    - [[UBJSON]]
+    - [[BISON]]
+    - [[Smile]]

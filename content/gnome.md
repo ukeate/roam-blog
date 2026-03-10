@@ -1,0 +1,23 @@
+- 启动
+    - .xinitrc
+        - exec gnome-session
+    - startx
+- gnome3应用程序列表
+    - /usr/share/applications
+- 取消ctrl+alt+down/up
+    - gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['']"
+    - gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "['']"
+- gnome-shell
+    - alt + f2后输入lg
+- gnome terminate
+    - ctrl + shift + c/v                  # 复制/粘贴
+    - ctrl + shift + t/n                  # 打开新标签/新窗口
+    - ctrl + w 或 alt + backspace          # 删除最后的word
+    - ctrl + shift + w/q                  # 关闭当前term/所有term
+    - ctrl + shift + f/g/h                # 搜索/搜索下一个/搜索上一个
+    - ctrl + pageUp/pageDown              # 切换标签
+    - ctrl + shift + pageUp/pageDown      # 移动标签
+    - alt + 1/2/3/..../0                  # 切换到第1/2/3/....../10个标签
+- 系统快捷键
+    - 右键快捷键
+        - shift + f10

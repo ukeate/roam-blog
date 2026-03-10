@@ -1,0 +1,14 @@
+- 利用github hook测试
+- 使用
+    - 在travis上授权仓库，每当push代码到github, 会自动跑测试
+    - 配置根目录下的.travis.yml文件来配置测试内容，如
+        - language: node_js
+        - node_js:
+        - '0.8'
+        - '0.10'
+        - '0.11'
+        - script: make test
+        - services:
+            - mongodb
+            - 一个使用了mongodb的nodejs应用，用0.8、0.10、0.11三个版本来跑，跑测试的命令是make test
+    - travis测试的项目，可以得到一个图片地址，显示项目当前的测试通过状态，把这个图片添加到项目的README中

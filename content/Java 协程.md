@@ -1,0 +1,3 @@
+- quasar库                            # 需要设javaagent, 每个fiber生成栈
+    - fiber =  new Fiber<Void>()
+    - fiber.start()

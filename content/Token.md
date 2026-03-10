@@ -1,0 +1,16 @@
+- 类型
+    - access token
+        - __标识唯一用户__
+        - user_id
+        - issue_time
+            - __token发放时间，单位秒__
+        - ttl
+            - __有效时间，uint16,单位分钟__
+        - mask
+            - __int128, 按bit分组用户，用于批量封禁或其它功能__
+    - refresh token
+        - __用来换access token，与access token同时发放__
+        - __过期时间更长__
+- 实现
+    - redis存储
+    - token不要太长

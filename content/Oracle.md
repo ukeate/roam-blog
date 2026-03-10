@@ -1,0 +1,50 @@
+- 安装
+    - 运行services.msc
+    - 找到OracleServiceORCL 服务 （最后是数据库名）改为手动
+    - sqlplus / as sysdba 运行oracle测试是否安装成功
+    - 解锁scott用户
+        - sqlplus / as sysdba
+        - alter user scott account unlock;
+        - alter user scott identified by tiger;
+- 启动
+    - OracleServiceORCL
+    - OracleOraDb11g_home1TNSListener
+- 端口
+    - 1521    # 停了以后再开会变
+- 事务隔离级别
+    - 只支持读提交与序列化两种
+- 版本
+    - 标记
+        - i是internet
+        - g是grid网格(一个请求多个服务器运行)
+        - c是cloud
+    - 8i 9i 10i
+    - 11g
+        - 2009.9，基于JDK6
+    - 12c，2013.7
+    - 18c，2018.2
+    - 19c，2019.2
+    - 21c，2020.12
+- 连接类型
+    - normal sysdba sysoper
+- 分布式
+- [[Oracle 权限]]
+- [[Oracle 架构]]
+- [[Oracle 认证]]
+- [[SQL99]]
+- [[Oracle 加载过程]]
+- [[Oracle 数据类型]]
+- [[Oracle 数据字典]]
+- [[Oracle 存储过程]]
+- [[Oracle 触发器]]
+- [[Oracle 常量及函数]]
+- [[Oracle 游标]]
+- [[Oracle 闪回技术]]
+- [[Oracle 审计]]
+- 工具
+    - [[Oracle SQL Developer]]
+    - [[iSqlPlus]]
+    - [[dbconsole]]
+    - [[Toad]]
+    - [[SQL Plus]]
+    - [[PL/SQL]]

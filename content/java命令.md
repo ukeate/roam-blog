@@ -1,0 +1,8 @@
+- 解释器
+- jar a.jar
+    - -spring.config.location=/application.yml 
+    - -spring.profiles.active=prod 
+        - 指定spring config
+    - Xmx2g
+    - Dserver.port
+        - 覆盖properties

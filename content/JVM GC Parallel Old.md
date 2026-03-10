@@ -1,0 +1,3 @@
+- 特点
+    - 适用几个G
+    - mark-sweep-compact，多线程

@@ -1,0 +1,4 @@
+- format(Date)
+- 使用
+    - SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd")
+    - System.out.println(formatter.format(new Date()))

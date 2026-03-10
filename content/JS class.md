@@ -1,0 +1,62 @@
+- 特点
+    - 所有方法在prototype上(constructor, static外)，不可枚举
+    - 无变量提升
+    - 类内部即严格模式
+    - class A的A.name = 'A', 意义同函数名
+- 语法
+    - class Point {
+        - constructor(x, y) {                         # 不定义时，生成空constructor方法, this代表新生的实例
+            - this.x = x, this.y = y;
+        - }
+        - toString() {return 'a'}
+        - [methodName]() {}
+        - get prop() {...}
+        - set prop(val) {}
+        - [Symbol.iterator]() {}
+        - static sMethod() {}                         # 相当于直接在Point上定义, es6 内只有方法，没有属性
+        - prop: 1                                     # es6中忽略, es7提案
+        - static prop2: 2                             # es6中忽略 es7提案
+    - }
+    - Point.a = 1;                                    # es6 静态属性只能在class外部定义
+    - var point = new Point(2, 3);
+    - o->
+    - var A = class B{};                              # 这时类的名字是A, 而B只能在类内中指代自己
+    - var A = class {};
+    - var a = new class {}();
+- 继承
+    - 两条原型链
+        - Object.setPrototypeOf(B.prototype, A.prototype)
+        - B.prototype.__proto__ = A.prototype         # 作为构造函数, 子类B的prototype是A的实例
+        - Object.setPrototypeOf(B, A)
+        - B.__proto__ = A                             # 作为一个对象, 子类B的原型是A(强行成为继承关系来得到A的静态属性)
+        - B.__proto__.__proto__ = A.__proto__,        # 子类原型的原型是父类的原型
+    - 继承的特殊种类
+        - class A {}, A.__proto__ = Function.prototype, A.prototype.__proto__ = Object.prototype
+        - class A extends null {}, A.__proto__ = Function.prototype, A.prototype.__proto__ = undefined
+    - o->
+    - class A extends B {
+        - constructor(x, y, color) {                  # 默认construcotr为constructor(...args) {super(...args)};
+            - super(x, y);                            # 调用B的constructor, 必须调用super来创建父类对象作用自己的prototype, 否则整个继承失败，报错
+            - this.color = color                      # this必须在super调用之后才能使用, 否则没有prototype生成this, 报错
+        - }
+    - }
+    - let cp = new A(1, 2, 'a')
+    - cp instanceof A    // true
+    - cp instanceof B    // true
+    - o-> 继承原生构造函数(es5不可以)
+        - es5机制决定先新建子类实例this, 再将父类属性添加到子类上。父类的内部属性无法获取(如Array的[[DefineOwnProperty]])。
+        - es6允许继承原生父类构造函数定义子类, 即先新建父类this, 再用子类修饰, 父类的所有行为都可继承
+    - function MyArray() {Array.apply(this, arguments)}
+    - MyArray.prototype = Object.create(Array.prototype, {constructor: {
+        - value: MyArray,
+        - writable: true,
+        - configurable: true,
+        - enumerable: true,
+    - }})
+    - class MyArray extends Array {
+        - constructor(... args) {
+        - super(... args);
+        - }
+    - }
+    - o-> 用mixin来混合继承
+    - class A extends mix(B, C)

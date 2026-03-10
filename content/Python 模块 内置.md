@@ -1,0 +1,35 @@
+- os
+- sys
+    - argv
+        - 参数列表, 多维列表
+    - exit()
+        - 退出线程
+- imp
+    - reload
+        - 重载模块
+- time
+- timeit
+- profile
+- decimal
+- fractions
+- urllib
+- http
+    - http.server
+        - python3中的SimpleHTTPServer
+- re
+- glob
+    - 文件操作
+- functools
+- itertools
+- datetime
+- shutil
+    - shell
+- celery
+    - 定时调度
+- collections
+    - 对象
+        - defaultdict
+- pathlib
+    - 路径信息
+- pickle
+    - 序列化

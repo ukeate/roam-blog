@@ -1,0 +1,613 @@
+- 监听器
+    - 原理
+        - org.springframework.web.context.ContextLoaderListener中
+            - this.contextLoader.initWebApplicationContext(event.getServletContext());
+                - 加载Spring 的配置文件 ，加载Application内置对象中
+        - initWebApplicationContext方法中
+            - this.context = createWebApplicationContext(servletContext, parent);
+            - servletContext.setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, this.context);
+                - 创建并存储spring的application内置对象到ServletContext中，属性名称是WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE
+        - createWebApplicationContext方法中
+            - wac.setConfigLocation(sc.getInitParameter(CONFIG_LOCATION_PARAM));
+                - 该类文件中有：public static final String CONFIG_LOCATION_PARAM = "contextConfigLocation";
+                - 获得web.xml中配置的context-param初始化参数：contextConfigLocation的内容，并加载spring配置文件
+    - 使用
+        - servletContext.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+        - ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext)
+- properties
+    - spring xml配置文件中使用properties配置的属性
+        - 配置一个bean的class类是org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer的单例bean
+            - &lt;property name="locations" value="classpath:public.properties" &gt;                - &lt;array&gt;                    - &lt;value&gt;classpath:conn.properties&lt;/value&gt;            - 或
+            - &lt;property name="location" value="classpath:conn.properties" /&gt;        - xml文件中用"${driver}"的方式引用properties中配置的属性
+    - java类中用spring的注解注入properties配置的属性
+        - 要求必须是spring管理的类
+        - bean中的class类换成org.springframework.beans.factory.config.PropertiesFactoryBean
+        - id="Xxx"其它相同
+        - java类的属性或set方法上添加注解：
+        - @Value("#{public.basePath}#{public.filePath}")
+            - 其中public 是上面配置的bean的id(xml文件中注入属性的话用不到id,所以没有配置)
+                - '#{}'代表引用属性
+                - '.'可以用'[]'代替，如public[basePath]
+                - 字符串的拼接可以用+连接
+            - 第一次配置@Value的时候不会成功，改一次值再试就可以了
+- bean
+    - 创建bean的顺序
+        - xml中按配置顺序的先后
+        - 注解中按照字母的顺序
+    - 生命周期
+        - 配置中定义<bean></bean>
+        - 初始化
+            - 配置文件中init-method
+            - 实现org.springframework.beans.factory.InitializingBean接口
+        - 调用
+        - 销毁
+            - 配置文件中destroy-method
+            - 实现org.springframework.bean.factory.DisposeableBean
+    - scope
+        - 默认singleton
+        - prototype   # 每次产生新对象
+        - singleton   # 单例
+        - request     # 一个请求一个对象，只在ApplicationContext下有效
+        - session     # 一个session一个对象，只在ApplicationContext下有效
+        - global-session      # 一个全局session一个对象, 只在ApplicationContext下有效
+    - 内部bean
+        - &lt;property&gt;或&lt;constructor-arg&gt;中定义的&lt;bean&gt;,通常匿名    - 注入对象
+        - &lt;list&gt;        - &lt;set&gt;        - &lt;map&gt;        - &lt;props&gt;         # 键值都只能是string类型    - 自动装配
+        - 方式
+            - no      # 不自动装配，通过ref属性指定
+            - byName
+                - 查找类中setter
+                - 容器中找id
+                - 报空指针
+            - byType
+                - 容器中找类型      # 找到多个时抛异常
+            - constructor
+                - byType带构造函数参数
+            - autodetect
+                - 先试constructor, 再试byType
+        - 写法
+            - &lt;bean&gt;属性autowire="byName"            - @Autowired
+                - 类型自动装配
+                - 加上@Qualifier(value="a")
+                    - @Resource(name="a")注解的name装配
+                    - byName装配
+                    - byType装配
+    - 配置
+        - &lt;?xml version="1.0" encoding="UTF-8"?&gt;        - &lt;beans xmlns="http://www.springframework.org/schema/beans"            - xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+            - xsi:schemaLocation="
+                - http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                - http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+            - &lt;bean                - id="userDaoID"
+                - name=""
+                - class="cn.itcast.javaee.spring.bean.life.UserDao"
+                - init-method="getSession"
+                - destroy-method="closeSession"
+                - factory-method="getUserDao"
+                - scope="singleton"
+                - lazy-init="false"
+                - parent="userDaoID"
+                - abstract="true"
+                - autowire="no">
+                    - &lt;constructor-arg type="java.lang.Integer" index ref&gt;                        - &lt;value&gt;2013&lt;/value&gt;                    - &lt;constructor-arg type="java.lang.Double"&gt;                        - &lt;value&gt;6000&lt;/value&gt;                    - &lt;property name="name" value="aa"&gt;&lt;/property&gt;                    - &lt;property name="name" ref="dateID" /&gt;                    - &lt;property name="telSet"&gt;                    - &lt;set&gt;                        - &lt;value&gt;11&lt;/value&gt;                    - &lt;property name="cityList"&gt;                    - &lt;list&gt;                        - &lt;value&gt;&lt;/value&gt;                    - &lt;property name="telCityMap"&gt;                    - &lt;map&gt;                        - &lt;entry key=""&gt;                            - &lt;value&gt;&lt;/value&gt;                    - &lt;property name=""&gt;                        - &lt;props&gt;                            - &lt;prop key=""&gt;&lt;/prop&gt;    - 标签、属性分析
+        - bean标签：代表一个JavaBean
+            - 多个JavaBean配置时，先配置的先创建，先创建的后销毁
+            - id：该JavaBean的唯一标识
+            - name：可以和id一样用，但是name可以设置"/a"来绑定路径
+            - class：该JavaBean的类路径
+            - init-method：创建该JavaBean时运行的其中的方法
+            - destroy-method：销毁该JavaBean时运行的其中的方法
+                - ClassPathXmlApplicationContext类的实例不监听销毁方法
+                - 用AbstractApplicationContext中的close()与registerShutdownHook()方法
+                - close()直接马上销毁，registerShutdownHook()方法会注册关闭钩子,监听容器的销毁
+                - 
+            - factory-method：创建该Bean的函数
+                - 得到接口实现类的方法
+                - 1.通过实现类的无参构造器                # 没有factory-method属性
+                - 2.没有无参构造器时，工厂静态方法创建实例
+                    - &lt;bean id="userDaoID" factory-bean="daoFactoryID" factory-method="getUserDao"&gt;                        - class中的内容是工厂类，而非UserDao类，factory-method是工厂类中返回UserDao类的静态方法
+                - 3.没有无参构造器时，工厂非静态方法创建实例
+                    - &lt;bean id="daoFactoryID" class="cn.itcast.javaee.spring.bean.create.type3.DaoFactory"&gt;                        - &lt;bean id="userDaoID" factory-bean="daoFactoryID" factory-method="getUserDao"&gt;                            - 先实例化工厂（Spring 加载本xml文件默认实例化），然后静态方法的配置即可
+            - scope：作用域
+                - 1.singleton（单例）是默认值，是单例的，会调用init destory方法 
+                - 2.prototype（原型）每次创建一个实例， 调用init方法，但不调用destory方法（实例的维护 ：javase程序交给jvm,javaee程序交给服务器）
+            - lazy-init
+                - 1.false:为启动容器时立即创建一个实例                # singleton与prototype模式都会创建
+                - 2.true:启动时不加载,获取时创建
+            - parent：        继承一个Spring bean(包含其中的所有属性)
+                - javaBean类中不必有实际的继承关系（但是有继承关系则必要配置parent）
+            - abstract="true"        : 配置此Bean为抽象Bean
+            - autowire="no":自动装配，只能装配关联属性
+                - 还可以进行注解装配
+                - byName      装配时根据bean中的每个属性名从spring中找id同名的bean,通过setter方法注入到该属性中
+                - byType      根据bean中的每个属性的类型找到spring中映射该类型的bean进行装配,通过setter方法注入到该属性中
+                - constructor 找满参构造器装载，构造器中的参数以byType方式注入
+                - autodetect  先找构造器装载，再set方法注入。但实际使用中只能set方法注入
+                - no          不注入
+            - 可以配置init-method与destroy-method属性来配置该bean创建和销毁时执行的方法
+        - 注入值                  # 通过setter方法注入值 
+            - &lt;constructor-arg type="java.lang.Integer" index ref&gt;                        - &lt;value&gt;2013&lt;/value&gt;    # 传入构造方法参数注入值，,位置不能颠倒，不调用setter方法                    - type是注入参数的类型，index是参数的标号，从0开始，ref是引用类型,有引用类型时不用<value>标签
+                - &lt;property name="name" value="aa"/&gt;                # 基本类型直接赋值（包括包装类型与String）                - &lt;property name="name" ref="dateID"/&gt;        # 引用类型,dateID是一个Spring Bean                    - 可以直接引用Spring Bean 的id 
+                    - &lt;set&gt;                        - &lt;value&gt;&lt;/value&gt;                                                # set集合                    - &lt;list&gt;                        - &lt;value&gt;&lt;/value&gt;                                                # list集合                    - &lt;map&gt;                        - &lt;entry key=""&gt;                            - &lt;value&gt;&lt;/value&gt;                                        # map集合                        - 集合的值均可配置引用类型
+                    - &lt;property name=""&gt;                        - &lt;props&gt;                            - &lt;prop key=""&gt;&lt;/prop&gt;                        # 属性类型，只能配置基本类型 （包括包装类型与String）- AOP
+    - 实现      # 基于Aspectj
+    - 原理
+        - 启动容器时，创建目标对象与代理对象
+        - &lt;aop:config/&gt;加载完时,通过cglib创建目标对象的代理对象，运行时产生        - 程序员-代理对象-代理方法-目标对象-目标方法-代理对象
+    - 使用
+        - 写类文件
+        - 1.jar包  aspectjweaver.jar/aspectjrt.jar/cglib-nodep-2.1_3.jar(动态代理包)
+        - 2.配置xml文件头,保留aop
+            - &lt;bean id class/&gt;        # 目标对象            - &lt;bean id="serviceBeanID" class /&gt;    # 配置增强对象            - &lt;aop:config&gt;            # 相当于创建了代理对象                - &lt;aop:pointcut id="xxxx" expression="" /&gt;        # 切入点表达式：expression="execution(public void addUser() throws java.lang.Exception)"                    - 可以写成execution(public void 类名.*()),表示匹配所有方法
+                    - execution(* *(..))        第一个*是返回值，第二个*是方法，..表示参数不限
+                    - 可以声明抛异常
+                    - 条件命名为xxxx,升级连接点到切入点
+                - &lt;aop:aspect ref="serviceBeanID"&gt;                    - &lt;aop:before method="writeLog" pointcut-ref="xxxx"/&gt;    # 前置增强，method是注入的方法，xxxx是增强的条件,只能写一个方法                    - &lt;aop:after/&gt;                    - &lt;aop:after-returning/&gt;      # 方法返回后执行                    - &lt;aop:after-throwing/&gt;      # 抛出异常时执行                    - &lt;aop:around/&gt;              # 环线，执行目标方法前、后都执行,出错则之后的函数不执行                        - public void both(ProceedingJoinPoint pjp){      # ProceedingJoinPoint是连接代理对象 与目标对象的桥梁
+                            - open();
+                            - pjp.proceed();      # 执行目标代码
+                            - close();
+                        - }
+                        - 目标方法出错，后置增强仍然执行,after-throwing执行，前置增强不执行,after-returning不执行
+                        - &lt;aop:advisor advice-ref="txAdvice" pointcut-ref="xxxx"/&gt;                # 配置事务的切面    - 切入点表达式
+        - execution(方法的修饰符 方法的返回值类型 方法所属的类 方法名 方法中参数列表 方法抛出的异常)
+            - 方法的修饰符：    支持通配符*，可省略
+            - 方法的返回值类型：支持通配符*，表示所有返回值，不可省
+            - 方法所属的类：    支持通配符*，可省略
+            - 方法名：          支持通配符*，表示所有方法，不可省
+            - 方法中参数列表：  支持通配符*，不可省
+                - *表示【一个】任意类型的参数
+                - ..表示零个或一个或多个任何类型的参数【提倡】
+        - execution(方法的返回值类型 方法名（方法中参数列表））                # 一般形式
+        - 例如:
+        - execution(public void add()throws Exception)
+        - execution(public void add(..)throws Exception)
+        - execution(public void add(*)throws Exception)
+        - execution(* cn.itcast.web.spring.aop.UserDao.add(..))
+        - execution(* add()throws Exception)
+        - execution(public void *(..)throws Exception)
+            - execution(public void a*(..)throws Exception)：方法名以a字符开始
+        - execution(public void *d(..)throws Exception)：方法名以d字符结束
+        - execution(* add())
+        - execution(* *(..))
+    - 切点方法的编写
+        - public void Xxx(JoinPoint joinPoint){
+            - joinPoint.getTarget();                # 获取目标对象
+            - joinPoint.getSignature();        # 获取当前连接点的方法信息
+            - joinPoint.getArgs()[0];                # 获取当前连接点的第一个参数
+            - ..
+        - }
+        - public Goods Yxx(ProceedingJoinPoint joinPoint){
+            - Object object = joinPoint.proceed();        # 得到连接点的返回值
+            - ..
+            - return goods;                # 本切面返回的数据会作为切点返回的数据返回给调用它的函数
+        - }
+- DAO
+    - 使用
+        - 1.xml文件中
+        - &lt;!-- 配置C3P0连接池 --&gt;            - &lt;bean id="comboPooledDataSourceID" class="com.mchange.v2.c3p0.ComboPooledDataSource"&gt;                - &lt;property name="driverClass" value="com.mysql.jdbc.Driver"/&gt;                - &lt;property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/spring"/&gt;                - &lt;property name="user" value="root"/&gt;                - &lt;property name="password" value="root"/&gt;                - &lt;property name="initialPoolSize" value="60"/&gt;                - &lt;property name="acquireIncrement" value="5"/&gt;            - &lt;/bean&gt;            - &lt;!-- 配置JdbcTemplate --&gt;            - &lt;bean id="jdbcTemplateID" class="org.springframework.jdbc.core.JdbcTemplate"&gt;                - &lt;property name="dataSource" ref="comboPooledDataSourceID"/&gt;            - &lt;/bean&gt;            - &lt;!-- 配置UserDao --&gt;            - &lt;bean id="userDaoID" class="dao.UserDao"&gt;                - &lt;property name="jt" ref="jdbcTemplateID"/&gt;            - &lt;/bean&gt;        - 2.Dao中
+            - private JdbcTemplate jt;
+            - addUser()
+                - String sql = "";
+                - Object [] params = {user.getUsername(),user.getPassword()}
+                - jt.update(sql,params);
+                - 批量：
+                - for(int i = 0; i < ids.length; i++){
+                    - sqls[i] = "";
+                - }
+                - jt.batchUpdate(sqls);
+                - 查询一个
+            - return (User)jt.queryForObject(sql,params,new RowMapper(){
+                - public Object mapRow(ResultSet rs,int rowNum){          # rs是查询出来的结果集,rowNum是结果集的行号,从0开始
+                    - Integer id = rs.getInt("id");
+                    - User user = new User(id);
+                    - return user;
+                - }
+                - });
+                - 查询多个                # query方法把RowMapper帮助类中返回的user分别加入到list中，返回一个list
+                - list = jt.query(sql,new RowMapper(){
+                    - public Object mapRow()
+                        - ..
+                        - return bean;
+                    - })
+                - 分页
+                    - String sql = "select * from users limit ?,?";
+                    - Object[] params = {0,3};
+                - jt.query(sql,params,new RowMapper(){
+                - 记录
+                - jt.queryForInt(sql);
+- 事务
+    - TransactionInterceptor
+        - transactionManager          # 指定事务治理类
+        - transactionAttributes       # key方法名 value事务属性
+    - 注解
+        - @Transactional(propagation = Propagation.REQUIRED)
+    - 手写      # TransactionDefinition
+        - Public class BankServiceImpl implements BancService{
+            - Private BanckDao bankDao;
+            - private TransactionDefinition txDefinition;
+            - private PlatformTransactionManager txManager;
+            - public boolean transfer(Long fromId, Long toId, double amount) {
+                - TransactionStatus txStatus = txManager.getTransaction(txDefinition);
+                - boolean result = false;
+                - try {
+                    - result = bankDao.transfer(fromId, toId, amount);
+                    - txManager.commit(txStatus);
+                - } catch (Exception e) {
+                    - result = false;
+                    - txManager.rollback(txStatus);
+                    - System.out.println("Transfer Error!");
+                - }
+                - return result;
+            - }
+        - }
+    - 手写      # TransactionTemplate
+        - public class BankServiceImpl implements BankService {
+            - private BankDao bankDao;
+            - private TransactionTemplate transactionTemplate;
+            - public boolean transfer(final Long fromId, final Long toId, final double amount) {
+                - return (Boolean) transactionTemplate.execute(new TransactionCallback(){
+                - public Object doInTransaction(TransactionStatus status) {
+                    - Object result;
+                    - try {
+                        - result = bankDao.transfer(fromId, toId, amount);
+                    - } catch (Exception e) {
+                        - status.setRollbackOnly();
+                        - result = false;
+                        - System.out.println("Transfer Error!");
+                    - }
+                    - return result;
+                - }
+                - });
+            - }
+        - }
+    - 配置      # TransactionInterceptor
+        - &lt;bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor"&gt;            - &lt;property name="transactionManager" ref="transactionManager"/&gt;            - &lt;property name="transactionAttributes"&gt;                - &lt;props&gt;                    - &lt;prop key="transfer"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;                - &lt;/props&gt;            - &lt;/property&gt;        - &lt;/bean&gt;        - &lt;bean id="bankServiceTarget" class="footmark.spring.core.tx.declare.origin.BankServiceImpl"&gt;            - &lt;property name="bankDao" ref="bankDao"/&gt;        - &lt;/bean&gt;        - &lt;bean id="bankService" class="org.springframework.aop.framework.ProxyFactoryBean"&gt;            - &lt;property name="target" ref="bankServiceTarget"/&gt;            - &lt;property name="interceptorNames"&gt;                - &lt;list&gt;                    - &lt;idref bean="transactionInterceptor"/&gt;                - &lt;/list&gt;            - &lt;/property&gt;        - &lt;/bean&gt;    - 配置      # TransactionProxyFactoryBean
+        - &lt;bean id="bankServiceTarget" class="footmark.spring.core.tx.declare.classic.BankServiceImpl"&gt;            - &lt;property name="bankDao" ref="bankDao"/&gt;        - &lt;/bean&gt;        - &lt;bean id="bankService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"&gt;            - &lt;property name="target" ref="bankServiceTarget"/&gt;            - &lt;property name="transactionManager" ref="transactionManager"/&gt;            - &lt;property name="transactionAttributes"&gt;                - &lt;props&gt;                    - &lt;prop key="transfer"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;                - &lt;/props&gt;            - &lt;/property&gt;        - &lt;/bean&gt;    - 配置      # tx空间
+        - &lt;?xml version="1.0" encoding="UTF-8"?&gt;        - &lt;beans xmlns="http://www.springframework.org/schema/beans"            - xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            - xmlns:aop="http://www.springframework.org/schema/aop"
+            - xmlns:context="http://www.springframework.org/schema/context"
+            - xmlns:tx="http://www.springframework.org/schema/tx"
+            - xsi:schemaLocation="
+                - http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+                - http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                - http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+                - http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+        - &lt;!--配置c3p0连接池--&gt;        - &lt;!-- 配置JdbcTemplate类 --&gt;        - &lt;!-- 配置Dao --&gt;        - &lt;!-- 配置jdbc事务管理器 --&gt;        - &lt;bean id="dataSourceTransactionManagerID" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"&gt;            - &lt;property name="dataSource" ref="comboPooledDataSourceID"/&gt;        - &lt;/bean&gt;        - &lt;!-- 配置事务增强(服务对象) --&gt;        - &lt;tx:advice id="txAdvice" transaction-manager="dataSourceTransactionManagerID"&gt;        - &lt;tx:attribute&gt;            - &lt;tx:method name="addUsers"                      # 可以用通配符"*users"                - propagation="required"                  # 传播行为：事务开始、结束的时间。required 保证方法执行时事务已开始，事务开始时不创建，没有开始时创建
+                - isolation="default"                     # 隔离级别
+                - timeout="-1"                            # 事务超时,-1代表不超时，用数据库底层的配置
+                - rollback-for:"java.lang.Exception"      # 何时回滚
+                - read-only="false"                       # 不只读
+                    - name 方法名的匹配模式
+                    - required : 外部存在事务，则加入外部事务，不存在则新建事务
+                    - requires_new : 总是新建事务
+                    - mandatory : 外部必须存在事务
+                    - never : 外部不能存在事务
+                    - supports : 外部存在则加入，不存在则不以事务方式运行
+                    - not_supported : 总是非事务
+                    - nested : 外部存在事务，嵌套执行，不存在则新建
+                    - no-rollback-for 以逗号分隔异常，这些异常不会导致事务回滚
+                    - rollback-for 导致事务回滚的异常
+            - />
+        - &lt;tx:attribute&gt;        - &lt;!-- 配置AOP --&gt;        - &lt;aop:config&gt;            - &lt;aop:pointcut id="xxxx" expression="execution(public void *Users(..))"/&gt;            - ##
+            - 任意公共方法的执行：
+            - execution(public * *(..))
+            - 任何一个以“set”开始的方法的执行：
+            - execution(* set*(..))
+            - AccountService 接口的任意方法的执行：
+            - execution(* com.xyz.service.AccountService.*(..))
+            - 定义在service包里的任意方法的执行：
+            - execution(* com.xyz.service.*.*(..))
+            - 定义在service包和所有子包里的任意类的任意方法的执行：
+            - execution(* com.xyz.service..*.*(..))
+            - 定义在pointcutexp包和所有子包里的JoinPointObjP2类的任意方法的执行：
+            - execution(* com.test.spring.aop.pointcutexp..JoinPointObjP2.*(..))")
+            - &lt;!-- 将事务代码切入点addUser()方法中，从而产生事务 --&gt;            - &lt;aop:advisor advice-ref="txAdvice" pointcut-ref="xxxx"/&gt;        - &lt;/aop:config&gt;- spring mybatis
+    - 基础
+        - 与$
+            - #相当于解析成引号, 防止sql注入
+            - $变量引用, 不能防止sql注入，用于传入表名之类
+        - 特点
+            - sql易维护，传参方便
+            - orm
+        - Mapper接口
+            - 方法名与配置id相同
+            - 输入输出参数类型对应定义的parameterType类型和resultType类型
+            - 类路径是配置的namespace
+        - 缓存
+            - 基于PerpetualCache的HashMap
+            - 一级缓存
+                - 存在本地
+                - 作用域为session, session flush后清空
+            - 二级缓存
+                - 可定义存储服务
+                - 作用域为namespace
+                - 配置
+                    - &lt;cache/&gt;                        - readOnly="true" 时，缓存实例单例，false时返回缓存拷贝
+            - 更新
+                - create, update, delete后，作用域下所有select缓存clear
+    - 与hibernate区别
+        - 都通过SessionFactoryBuilder从配置生成SessionFactory, 再生成Session
+        - 都支持jdbc和jta
+        - mybatis可细致优化sql, hibernate移植性好
+        - mybatis学习成本低
+        - mybatis本身缓存不好，hibernate对象维护和缓存好
+        - hibernate dao层封开发简单(不用维护映射)，crud方便
+    - 使用
+        - 编程
+            - 创建SqlSessionFactory
+            - 创建SqlSession
+            - 执行数据库操作
+            - session.commit()
+            - session.close()
+        - 导入ibatis jar包
+        - 配置文件
+            - SqlMap.properties        # 属性名可以修改
+                - driver=oracle.jdbc.driver.OracleDriver
+                - url=jdbc:oracle:thin:@127.0.0.1:1521:orcl
+                - username=root
+                - password=root
+            - SqlMapConfig.xml                # 总配置文件
+                - &lt;sqlMapConfig&gt;                    - &lt;properties recource="SqlMap.properties"/&gt;                    - &lt;transactionManager type="JDBC"&gt;                        - &lt;dataSource type="SIMPLE"&gt;                            - &lt;property value="${driver}" name="JDBC.Driver"/&gt;                            - &lt;property value="${url}" name="JDBC.ConnectionURL"/&gt;                            - &lt;property value="${username}" name="JDBC.Username"/&gt;                            - &lt;property value="${password}" name="JDBC.Password"/&gt;                        - &lt;/dataSource&gt;                        - &lt;sqlMap resource="Student.xml"/&gt;                    - &lt;/transactionManager&gt;                - &lt;/sqlMapConfig&gt;            - Student.xml                                # 映射xml文件
+                - &lt;sqlMap&gt;                    - &lt;typeAlias alias="Student" type="com.Student"/&gt;                        - &lt;select id="selectAllStudent" resultClass="Student"&gt;                            - select * from Student
+                        - &lt;/select&gt;                    - &lt;/typeAlias&gt;                - &lt;/sqlMap&gt;            - 辅助类Student.java                 # 要求有无参构造方法
+                - private sid = 0;
+                - private String name = null;
+                - private String major = null;
+                - private Date birth = null;
+                - private float score = 0;
+        - Xxx.java
+            - private static SqlMapClient sqlMapClient = null;
+            - static{
+                - Reader reader = Resources.getResourceAsReader(总配置文件);
+                - sqlMapClient = SqlMapClientBuilder.buildSqlMapClient(reader);
+                - reader.close();
+            - }
+            - public List<Student> queryAllStudent(){
+                - List<Student> studentList = sqlMapClient.queryForList("selectAllStudent");
+                - return studentList;
+            - }
+            - @Test
+            - public void testHere(){
+                - for(Student student: this.queryAllStudent()){
+                    - System.out.println(student.getName);
+                - }
+            - }
+    - 配置
+        - sqlMapConfig.xml
+            - mybatis加载属性顺序
+                - properties中property中的属性
+                - properties中resource或url中的属性
+                - parameterType中传递一属性
+                    - properties中配的属性会影响到mapper.xml中${}的sql拼接，因为都是ognl
+            - 配置标签
+                - properties
+                - settings
+                    - ibatis有性能优化的参数，mybatis会自动调优，不用设置了
+                - typeAliases
+                    - 针对parameterType和resultType指定的类型定义别名
+                    - java.lang.Integer在mybatis中默认别名为int
+                - typeHandlers
+                    - 类型处理器，jdbc类型和java类型的转换
+                    - 一般mybatis提供的类型处理器够用了
+                - objectFactory
+                - plugins
+                - environments
+                - mappers
+        - mapper.xml
+            - 内容
+                - #{}接收简单类型, pojo的ognl属性注入
+                - ${}是字符串的拼接
+            - SELECT * FROM USER WHERE id=#{id}
+            - SELECT * FROM USER WHERE username LIKE '%${value}%'
+                - sql 注入
+        - 输入输出映射
+            - parameterType
+                - java类型
+                - hashmap
+                    - #{key}来取value
+                - pojo
+                - 包装类型
+            - resultType
+                - 指定一条数据的类型，在java方法的返回类型中list或pojo来体现数据条数
+                - mybatis判断mapper代理中使用selectOne或者selectType
+                - pojo
+                    - 返回字段可以是别名，但要与pojo中的属性名相同
+                    - 如果有记录返回但没有pojo中匹配的属性名对应，则直接不创建该对象
+                - java类型
+                    - 在返回结果只有一行一列时，可以是简单类型
+                - hashmap
+                    - key是字段的字，value是字段的值
+                    - 多条数据时，list里面存hashmap
+            - resultMap
+                - 查询出来的字段名与pojo属性名不一致
+                - 定义resultMap
+                - 使用resultMap
+        - 动态sql
+            - &lt;where&gt;            - &lt;if&gt;            - sql片段<sql>
+            - &lt;foreach&gt;        - 高级映射
+        - 缓存
+        - 逆向
+            - 要求
+                - 1. mapper.xml中namespace 写mapper接口
+                    - &lt;mapper namespace="com.otr.tea.mapper.UserMapper"&gt;                - 2. mapper.java中方法名与mapper.xml的statementid一致
+                - 3. mapper.java中方法的输入类型与mapper.xml中的parameterType一致
+                    - 由于传入的参数只有一个，所以用包装类型的pojo来传多个参数，不利于业务层的可扩展性
+                - 4. mapper.java中方法的返回类型与mapper.xml中的resultType一致
+            - 机制
+                - 如果Mapper中返回类型为pojo, 则调用selectOne, 如果是List, 则调用selectList
+    - api
+        - sqlSessionFactory
+        - sqlSession                        # 是线程不安全的，因为它的类中有数据和属性
+            - ＃ 是多例的，在方法中局部变量使用
+            - Executor                # 执行器操作数据库（基本执行器，缓存执行器）
+        - mapped statement                # 封装sql语句、输入参数、输出结果类型
+        - 例子
+            - InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
+                - Resources是mybatis提供的资源加载类
+            - SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
+            - SqlSession sqlSession = factory.openSession();
+            - User user = sqlSession.selectOne("test.findUserById", 1);
+                - ＃ selectList()
+                - insert("test.insertUser", user)
+                    - sqlSession.commit();
+                    - user.getId() 会主键返回
+                        - mysql中LAST_INSERT_ID()在insert语句后接着执行可以得到刚刚自成的id
+            - sqlSession.close();
+    - 案例
+        - 返回id
+            - mysql
+                - &lt;insert id="insert" parameterType="com.test.User" keyProperty="userId" useGeneratedKeys="true" &gt;            - oracle
+                - &lt;insert id="insert" parameterType="com.test.User"&gt;                    - &lt;selectKey resultType="INTEGER" order="BEFORE" keyProperty="userId"&gt;                        - SELECT SEQ_USER.NEXTVAL as userId from DUAL
+                    - &lt;/selectKey&gt;                    - insert into user (user_id, user_name, modified, state)
+                    - values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR},
+                    - #{modified,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER})
+                - &lt;/insert&gt;- spring struts2
+    - 原理
+        - tomcat启动日志：没有整合时不能加载struts-plugin.xml（spring-struts-plugin.jar包中的配置文件 ）
+        - struts中struts-default中常量配置加载com.opensymphony.xword2.ObjectFactory类作为默认struts创建action的类
+        - 加载后struts-plugin.xml 中 修改了常量为struts-spring-plugin中的类来创建struts的类，也就是整个struts2创建action类的类被更改了
+    - 整合
+        - jar包 struts2/lib/struts2-spring-plugin-2.3.1.1.jar                        # 为了在struts的xml配置文件中的class找spring 的容器
+        - 配置web.xml   # \samples\petclinic\war\WEB-INF\web.xml目录下有示例
+            - &lt;listener&gt;          # 监听器，web程序启动时加载spring bean            - &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener            - &lt;context-param&gt;     # （可选）配置spring 配置文件的路径，                - 从示例文件中查到，默认文件目录是/WEB-INF/applicationContext.xml(我们示例文件也是从源码/simple项目下的这个开头的文件中找的)
+                - &lt;param-name&gt;contextConfigLocation                - &lt;param-value&gt;/WEB-INF/classes/struts2/xxx.xml        - UserAction 中    # 不用值栈是因为通用性
+        - spring.xml        # action类由spring 产生
+            - &lt;bean id="userActionID" class="" scope="prototype"/&gt;        - struts2的配置文件中，替换class属性为spring beanid，其它一样
+    - 总结
+        - spring的web配置是由下向上，一个个依赖注入的过程
+            - comboPooledDataSourceID ->
+            - localSessionFactoryBeanID ->
+            - hibernateTemplateID ->
+            - SysStaffDaoID ->
+            - SysStaffServiceID ->
+            - SysStaffActionID ->
+            - struts.xml配置中的<action class="SysStaffActionID">
+        - 最后给Dao中的方法加入事务
+- spring mvc
+    - 原理
+        - DispatchServlet doService()捕获请求, doDispatch()用HandlerMapping映射url得到HandlerExcutionChain(执行链, 包括拦截器和handler)
+        - handler getHandlerAdapter得到适配器来处理handler, 返回ModelAndView
+            - HandlerAdapter分三类: Servlet、Controller, HttpRequest
+        - DispatchServlet用ViewResolver(视图解析器)解析ModelAndView成View
+            - ModelAndView是逻辑视图，DispatchServlet转化成视图View
+        - 返回View
+    - 与struts2区别
+        - spring mvc方法对应请求, struts2是类
+        - spring mvc请求是方法调用，struts2创建Action实例
+        - spring mvc用aop处理请求，struts2用独有的拦截器(interceptor)
+        - spring mvc入口是servlet, struts2入口是filter
+        - spring mvc集成ajax(@ResponseBody), struts2需要插件
+        - spring mvc验证支持JSR303, struts2不支持
+        - spring mvc与spring无缝
+        - spring mvc不需要配置
+    - 注解
+        - @RequestMapping             # url映射
+        - @RequestBody                # 转换参数到对象
+        - @ResponseBody               # 返回对象转json
+        - 开启注解处理器
+            - springmvc.xml
+                - &lt;mvc:annotation-driven&gt;    - 乱码问题
+        - post
+            - web.xml中配置CharacterEncodingFilter
+        - get
+            - tomcat配置文件修改项目编码
+            - new String(Request.getParameter("a").getBytes("ISO8859-1"), "utf-8")
+- quartz
+    - 执行：ApplicationContext类加载后自动执行
+    - 导包：quartz-all.jar包 与  commons-collections.jar包 与 commons-logging.jar
+    - xml配置：
+        - &lt;!-- 任务类 ,其中有个叫execute的方法--&gt;        - &lt;bean id="myTaskID" class="jee.quartz.MyTask"/&gt;        - &lt;!-- spring提供专用于定时任务类 --&gt;        - &lt;bean id="methodInvokingJobDetailFactoryBeanID" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"&gt;            - &lt;!-- 要定时执行的实例的spring bean id --&gt;            - &lt;property name="targetObject"&gt;                - &lt;ref bean="myTaskID"/&gt;            - &lt;/property&gt;            - &lt;!-- spring bean中定时执行的方法 --&gt;            - &lt;property name="targetMethod"&gt;                - &lt;value&gt;execute&lt;/value&gt;            - &lt;/property&gt;        - &lt;/bean&gt;        - &lt;!-- spring提供专用于任务频率类，给上面的任务指定频率 --&gt;        - &lt;bean id="cronTriggerBeanID" class="org.springframework.scheduling.quartz.CronTriggerBean"&gt;            - &lt;property name="jobDetail"&gt;                - &lt;ref bean="methodInvokingJobDetailFactoryBeanID"/&gt;            - &lt;/property&gt;            - &lt;property name="cronExpression"&gt;                - &lt;value&gt;0 0/1 * * * ?&lt;/value&gt;            - &lt;/property&gt;        - &lt;/bean&gt;        - &lt;!-- spring提供的专用于任务频率工厂类 --&gt;        - &lt;bean id="schedulerFactoryBeanID" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"&gt;            - &lt;property name="triggers"&gt;                - &lt;ref bean="cronTriggerBeanID"/&gt;            - &lt;/property&gt;        - &lt;/bean&gt;    - 任务频率cronTriggerBean的配置：
+        - cron解析器:
+            - 反斜线（/）字符表示增量值。例如，在秒字段中“5/15”代表从第 5 秒开始，每 15 秒一次。
+            - 问号（?）字符和字母 L 字符只有在月内日期和周内日期字段中可用。问号表示这个字段不包含
+            - 具体值。
+            - 所以，如果指定月内日期，可以在周内日期字段中插入“?”，表示周内日期值无关紧要。字母
+            - L 字符是 last 的缩写。放在月内日期字段中，表示安排在当月最后一天执行。在周内日期字
+            - 段中，如果“L”单独存在，就等于“7”，否则代表当月内周内日期的最后一个实例。所以“0L”
+            - 表示安排在当月的最后一个星期日执行。
+            - 在月内日期字段中的字母（W）字符把执行安排在最靠近指定值的工作日。把“1W”放在月内
+            - 日期字段中，表示把执行安排在当月的第一个工作日内。
+            - 井号（#）字符为给定月份指定具体的工作日实例。把“MON2”放在周内日期字段中，表示把任
+            - 务安排在当月的第二个星期一。
+            - 星号（*）字符是通配字符，表示该字段可以接受任何可能的值。
+        - 顺序：秒 分 时 日 月 周 年（年可以忽略）
+        - 例子
+            - 0 0 10,14,16 * * ?                  每天上午10点，下午2点，4点
+            - 0 0/30 9-17 * * ?            朝九晚五工作时间内每半小时
+            - 0 0 12 ? * WED                          表示每个星期三中午12点
+            - 0 0 12 * * ?                          每天中午12点触发
+            - 0 15 10 ? * *                          每天上午10:15触发
+            - 0 15 10 * * ?                          每天上午10:15触发
+            - 0 15 10 * * ? *                  每天上午10:15触发
+            - 0 15 10 * * ? 2013          2013年的每天上午10:15触发
+            - 0 * 14 * * ?                          在每天下午2点到下午2:59期间的每1分钟触发
+            - 0 0/5 14 * * ?                          在每天下午2点到下午2:55期间的每5分钟触发
+            - 0 0/5 14,18 * * ?                  在每天下午2点到2:55期间和下午6点到6:55期间的每5分钟触发
+            - 0 0-5 14 * * ?                          在每天下午2点到下午2:05期间的每1分钟触发
+            - 0 10,44 14 ? 3 WED                  每年三月的星期三的下午2:10和2:44触发
+            - 0 15 10 ? * MON-FRI                周一至周五的上午10:15触发
+            - 0 15 10 15 * ?                          每月15日上午10:15触发
+            - 0 15 10 L * ?                            每月最后一日的上午10:15触发
+            - 0 15 10 ? * 6L                    每月的最后一个星期五上午10:15触发
+            - 0 15 10 ? * 6L 2014-2018        2014年至2018年的每月的最后一个星期五上午10:15触发
+            - 0 15 10 ? * 63                        每月的第三个星期五上午10:15触发
+            - 0/1 * * * * ?                        每秒钟触发一次
+            - 0 0/1 * * * ?                        每分钟解发一次
+            - 0 0 0/1 * * ?                        每小时解发一次
+- 远程调用
+    - rmi:remote message invoke
+    - 服务端
+        - 1.自定义接口IServer,自定义抽象方法int rax(int)
+        - 2.写接口实现类ServerImpl
+        - 3.配置spring.xml 文件
+            - &lt;!-- 服务端实现类 --&gt;            - &lt;bean id="serverImplID" class="jee.server.ServerImpl"/&gt;            - &lt;!-- spring提供的专用于RMI服务端注册器 --&gt;            - &lt;bean id="rmiServiceExporterID" class="org.springframework.remoting.rmi.RmiServiceExporter"&gt;                - &lt;property name="serviceInterface"&gt;                    - &lt;value&gt;jee.server.IServer&lt;/value&gt;                - &lt;/property&gt;                - &lt;property name="service"&gt;                    - &lt;ref bean="serverImplID"/&gt;                - &lt;/property&gt;                - &lt;property name="serviceName"&gt;                    - &lt;value&gt;XXXX&lt;/value&gt;                - &lt;/property&gt;            - &lt;/bean&gt;    - 客户端
+        - 配置spring.xml 文件
+            - &lt;!-- spring提供专用于RMI远程服务代理工厂类 --&gt;            - &lt;bean id="rmiProxyFactoryBeanID" class="org.springframework.remoting.rmi.RmiProxyFactoryBean"&gt;                - &lt;!-- 协议名://远程提供服务的IP地址:提供服务的端口/提供服务的名称 --&gt;                - &lt;property name="serviceUrl"&gt;                    - &lt;value&gt;rmi://127.0.0.1:1099/XXXX&lt;/value&gt;                - &lt;/property&gt;                - &lt;property name="serviceInterface"&gt;                    - &lt;value&gt;jee.client.IServer&lt;/value&gt;                - &lt;/property&gt;            - &lt;/bean&gt;    - 执行：
+        - 服务端加载 ApplicationContext类
+        - 客户端
+            - 加载 ApplicationContext类 ac
+            - ac.getBean方法中得到RmiProxyFactoryBean实际类型（可变类型）的实例，强转成服务端自定义的接口IServer的实现类（实现类由服务器决定）
+            - 执行IServer实现类中的方法int rax(int)，实现了远程调用
+- websocket
+    - handler
+        - extends TextWebSocketHandler
+            - @Override
+            - handleTextMessge()                      # 处理client.send()的数据
+            - @Override
+            - afterConnectionEstablished(WebSocketSession)                    # 连接事件
+            - @Override
+            - handleTransportError()                  # 出错事件
+            - @Override
+            - afterConnectionClosed()                 # 断开事件
+            - @Override
+            - supportsPartialMessages()               # 并行处理
+    - config
+        - @EnableWebSocket
+        - implements WebSocketConfigurer
+            - @Override
+            - registerWebSocketHandlers()
+                - registry.addHandler(handler, "/ws")                         # 路由handler
+    - client
+        - extends WebSocketClient
+            - constructor(uri)
+                - super(new URI(uri))
+            - @Override
+            - onOpen()
+            - @Override
+            - onClose()
+            - @Override
+            - onError()
+            - @Override
+            - onMessage()
+    - service
+        - init()
+            - client = new Client("ws://127.0.0.1:8001/ws")
+            - client.connectBlocking()
+        - send()
+            - while(!client.getReadyState().equals(ReadyState.OPEN)){
+                - log("connecting")
+            - }
+            - client.send("")
+    - runner
+        - implements ApplicationRunner
+            - run()
+                - service.init()

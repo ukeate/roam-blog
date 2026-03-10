@@ -1,0 +1,2 @@
+- Data Distribution Service for Real-Time Systems，物联网协议，面向实时系统的数据分发服务，OMG提供
+- [[OpenDDS]]

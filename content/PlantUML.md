@@ -1,0 +1,10 @@
+- 分类
+    - salt
+        - wireframe
+    - uml
+        - activity
+        - class
+        - component
+        - sequence
+        - state
+        - use case

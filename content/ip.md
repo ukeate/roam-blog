@@ -1,0 +1,8 @@
+- ip addr 替换 ifconfig
+    - 查看地址：`ip addr`；启用接口：`ip link set dev eth0 up`
+- ip route 替换 route
+    - 例如：路由表：`ip route`
+- ip neigh 替换 arp -n
+    - 例如：邻居表：`ip neigh`
+- ss -ant 替换 netstat -ant
+    - 例如：`ss -ant`、`ss -lntp`（看监听端口与进程）

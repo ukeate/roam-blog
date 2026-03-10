@@ -1,0 +1,6 @@
+- 检索函数用http://www.Haskell.org/hoogle
+- GHC编译器
+    - Glasgow Haskell Compiler
+    - 特性
+        - JIT
+        - 多核并行

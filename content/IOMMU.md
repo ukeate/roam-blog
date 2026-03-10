@@ -1,0 +1,1 @@
+- Input-Output Memory Management Unit, AMD的I/O虚拟化

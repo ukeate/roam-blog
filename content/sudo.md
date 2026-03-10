@@ -1,0 +1,1 @@
+- sudo -i su outrun 切换登录

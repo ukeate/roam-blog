@@ -1,0 +1,13 @@
+- awesome常用键
+    - 独立
+        - 帮助<M - s>
+        - 菜单<M - w>
+    - client
+        - 终端<M - 回车>
+        - reload<M - ctrl - r>
+        - 自定义Chromium<M - c>
+        - 全屏<M - f>
+        - 关闭<M - shift - c>
+        - 切换到tag<M - 数字>
+        - 本tag切换client<M - j> <M - k>
+        - 变布局<M - 空格>

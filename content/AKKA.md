@@ -1,0 +1,26 @@
+- scala并发、分布式、容错工具
+- 使用
+    - system = ActorSystem.create("hello")
+    - system.actorOf() ## 前端 ### dwr
+- 介绍
+    - java函数通过ajax映射到前端js调用
+- 使用
+    - ajax框架
+    - 1.导入jar包 dwr.jar
+    - 2.web-inf/下的配置文件
+        - web.xml文件
+            - &lt;servlet&gt;                - &lt;servlet-name&gt;dwr-invoker&lt;/servlet-name&gt;                - &lt;servlet-class&gt;org.directwebremoting.servlet.DwrServlet&lt;/servlet-class&gt;                    - 固定写法
+                - &lt;init-param&gt;                    - &lt;param-name&gt;debug&lt;/param-name&gt;                    - &lt;param-value&gt;true&lt;/param-value&gt;                - &lt;/init-param&gt;                - &lt;init-param&gt;                    - &lt;param-name&gt;scriptCompressed&lt;/param-name&gt;        # 允许在javascript中执行                    - &lt;param-value&gt;false&lt;/param-value&gt;                - &lt;/init-param&gt;                - &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;        # web工程启动时加载            - &lt;/servlet&gt;            - &lt;servlet-mapping&gt;                - &lt;servlet-name&gt;dwr-invoker&lt;/servlet-name&gt;                - &lt;url-pattern&gt;/dwr/*&lt;/url-pattern&gt;            - &lt;/servlet-mapping&gt;        - dwr.xml文件
+            - &lt;dwr&gt;                - &lt;allow&gt;                    - &lt;create creator="new" javascript="DWRUserAccess"&gt;        # 生成js文件的名（页面中引用）                        - &lt;param name="class" value="outrun.dwr.DWRUserAccess" /&gt;                # 曝露的类                    - &lt;/create&gt;                    - &lt;convert converter="bean" match="outrun.dwr.User" /&gt;        # 注册实体类，可以在js中进行实例化                - &lt;/allow&gt;            - &lt;/dwr&gt;    - 3.写outrun.dwr.DWRUserAccess中的方法
+    - 4.页面调用
+        - test.html
+            - &lt;script src="/outrun/dwr/engine.js"&gt;&lt;/script&gt;            - &lt;script src="/outrun/dwr/util.js"&gt;&lt;/script&gt;            - &lt;script src="/outrun/dwr/interface/DWRUserAccess.js"&gt;&lt;/script&gt;            - &lt;SCRIPT LANGUAGE="JavaScript"&gt;                - DWRUserAccess.方法(参数,执行完运行的js函数)
+                    - 参数可以是一个map,如
+                        - var userMap = {};
+                        - userMap.id = regForm.id.value;
+                        - userMap.password = regForm.password.value;
+                        - userMap.name = regForm.name.value;
+                        - userMap.email = regForm.email.value;
+                        - DWRUserAccess.save(userMap, saveFun);
+                            - 其中的regForm是页面中的表单（的name属性,dom支持直接使用名字引用表单）
+            - &lt;/SCRIPT&gt;

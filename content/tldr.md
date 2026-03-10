@@ -1,0 +1,2 @@
+- 替代man，rust实现
+- tldr -u 更新db

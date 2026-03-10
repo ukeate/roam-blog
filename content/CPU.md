@@ -1,0 +1,100 @@
+- 介绍
+    - 单cpu串行工作，前任务完成，后任务才开始
+        - 串行不适合图形处理(多点，线，面要同时乘投影矩阵)
+    - cpu把大量空间和电量分配给控制器和缓存，不能集成太多计算单元
+    - cpu内存通过cpu总线连接, cpu总线与pci总线通过主桥(北桥)连接
+        - gpu在pci总线上
+        - 控制逻辑在cpu中运行, 生成渲染数据, 到内存, 再到显存显卡计算。
+        - 内存到显存数据传输最花费时间。
+- 原理
+    - 处理单元(processing unit)
+        - 算术逻辑单元(arithmetic logic unit)
+        - 处理寄存器(processor register)
+    - 控制单元(control unit)
+        - 指令寄存器(instruction register)
+        - 程序计数器(program counter)
+    - 指令集架构(ISA, instruction set architecture)
+        - 机器码易兼容, 软件易编程, 易升级cpu
+        - 精简指令集RISC(reduced instruction set computing)
+        - 复杂指令集CISC(complex instruction set computer)
+    - 时钟频率(clock speed)
+    - 生产
+        - 生产线散热决定生存率，决定cpu型号
+    - 多级缓存
+        - L1, L2, L3, L4
+    - 虚拟化
+        - 虚拟机监视器(VMM, virtual machine monitors)
+- 分类
+    - 指令流的重数分类
+        - SI(single instruction stream)单指令流
+        - MI(multiple instruction stream)多指令流
+    - 操作数流的重数分类
+        - SD(single data stream)单数据流
+        - MD(multiple data stream)多数据流
+    - SISD 串行计算机
+    - SIMD 阵列机(多处理单元)
+    - MISD 很少
+    - MIMD
+        - 多处理机
+        - 多计算机
+- 硬件并行
+    - 位级(bit-level): 32位, 64位计算机
+    - 指令级(instruction-level)              # 处理器内部并行度很高
+        - 流水线
+            - 指令分步骤(指令流), 每步专门部件处理
+            - 多指令流并行, 部件不空闲等待单指令流结束
+            - 六级流水线步骤
+                - 取指(FI), 译码(DI), 计算操作数地址(CO), 取操作数(FO), 执行指令(EI), 写操作数(WO)
+        - 多发射(超标量)
+            - 一时钟周期处理多指令
+        - 超线程
+            - 模拟多个逻辑线程
+        - 乱序执行
+        - 猜测执行
+    - 数据级
+        - 向量体系结构、图形处理器
+        - 单指令多数据(SIMD)架构
+    - 线程级                                 # 紧耦合硬件模型中开发数据级或任务级并行，线程间有交互
+    - 请求级                                 # OS或程序耦合任务间并行
+- 程序并行
+    - 数据级(DLP, data-level parallel)
+    - 任务级(TLP, task-level parallel)       # 多处理器, 超线程, 虽只有4个核，但可用核返回8
+        - 内存
+            - 共享内存模型
+            - 分布式内存模型
+        - 进程: 独有内存
+        - 线程: 共享进程内存(地址空间、文件描述符)
+            - 一个进程下的轻量进程
+            - POSIX线程api是对已有unix进程模型扩展, 与进程多方面类似
+                - 自己的信号掩码
+                - cpu affinity(倾向在某cpu尽量长时间运行)
+                - cgroups
+- 进程调度
+    - 等级
+        - 高级调度(High-Level Scheduling)
+            - 作业调度, 后备作业调入内存运行
+        - 低级调度(Low-Level Scheduling)
+            - 进程调度, 就绪队列中某进程获得cpu
+        - 中级调度(Intermediate-Level Scheduling)
+            - 虚拟存储器引入, 内外存对换区进行进程对换
+    - 方式
+        - 非剥夺方式
+            - 处理机分配给某进程后一直运行下去,直到阻塞时,才分配处理机到另一个进程
+        - 剥夺方式
+            - 进程运行时,系统基于某种原则,剥夺分配给它的处理机.
+            - 采用算法
+                - 先进先出算法
+                    - 批处理系统用. 总把处理机分配给最先进队的进程, 将一直执行下去,直到阻塞
+                - 短进程优先(SCBF  Shortest CPU Burst First)
+                    - 批处理系统用. 从就绪队列中选出下一个cpu执行期最短的进程,分配处理机
+                - 轮转法
+                    - 分时系统中,都采用时间片轮转法
+- [[程序计数器]]
+- [[WC Buffer]]
+- [[CPU 局部性原理]]
+- [[内存屏障]]
+- [[汇编]]
+    - lock指令
+        - 指令执行完之前，锁内存
+        - lock_add
+- CPU[[缓存一致性协议]]

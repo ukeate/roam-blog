@@ -1,0 +1,12 @@
+- 文字
+    - pillow
+        - ocr, 文字识别
+    - pytesseract
+        - ocr, 精确
+    - PDFminer
+        - pdf抽取
+- 图片
+    - PIL
+        - 图片处理
+    - qrcode
+        - 二维码

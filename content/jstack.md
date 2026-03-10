@@ -1,0 +1,5 @@
+- 查看线程(如死锁),得到java stack和native stack
+- jstack 进程号               # 列出所有线程号, 线程状态
+    - WAITING, 一直等不到, BLOCKED, 拿不到锁
+    - waiting on <0x0000> (a java.lang.Object)    # 找到目标等待的线程
+- jstack -l -F 16进制线程号      

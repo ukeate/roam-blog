@@ -1,0 +1,2 @@
+- This version of pip does not support python 3.6
+    - `python -m pip install --upgrade "pip < 21.0"`

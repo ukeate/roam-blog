@@ -1,0 +1,11 @@
+- Author:: [[1Point3Acres Team]] [[一亩三分地 1Point3Acres]]
+- Full Title:: 【创业感悟】我在旧金山做B2B Vertical AI创业|一亩三分地创业版
+- Category:: #articles
+- Description:: 过去两年，我旧金山做一家B2B Vertical AI创业公司，专注医疗器械的法规合规（medtech regulatory affairs）。我们在没有引进外部资金的情况下，坚持bootstrap，招募了优 ...
+- Document Tags:: 
+- Date Captured:: [[January 16th, 2026]]
+- URL:: https://www.1point3acres.com/bbs/thread-1142824-1-1.html
+- ![](https://www.1point3acres.com/bbs/static/image/common/mu_logo.jpg)
+- Notes
+    - [[January 16th, 2026]]
+        - 

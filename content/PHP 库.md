@@ -1,0 +1,7 @@
+- 接口
+    - [[Yii]]
+    - [[Laravel]]
+    - [[Codelgniter]]
+- 编译
+    - zend opcache
+        - php5.5集成，把php执行后的数据缓冲到内存中从而避免重复编译

@@ -1,0 +1,27 @@
+- conda命令
+    - 环境
+        - init bash
+            - 设置bash
+        - env
+            - create -f e.yml  
+                - 创建环境
+                - -n name1    
+            - list
+                - 列出所有环境
+            - remove -n name1
+                - 删除环境
+        - activate e1
+            - 使用环境
+    - 包
+        - list
+            - 当前环境已安装软件包
+        - search pillow
+            - 列出包所有版本
+        - install pillow=7.0.0
+        - uninstall pillow
+        - upgrade numpy
+    - 场景
+        - 创建环境
+            - conda create -n 36 python=3.6
+            - conda activate 36
+            - conda deactivate

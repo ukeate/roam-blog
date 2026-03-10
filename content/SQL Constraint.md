@@ -1,0 +1,16 @@
+- not null
+- unique
+- primary key
+    - primary key unique, not null auto_increment
+    - primary key(col1, col2)     # 联合主键
+- foreign key
+    - constraint fk_id2
+        - foreign key(id2) references tb2(id)
+            - 被引用的列要建索引
+            - 被引用的记录不可删除
+            - 被引用的值要级联修改
+        - on update cascade
+        - on delete cascade
+            - 级联约束
+- 检查约束
+    - Oracle支持

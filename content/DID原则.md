@@ -1,0 +1,2 @@
+- design, implement, deploy
+- 设计20倍, 实现3-20倍, 部署1.5-3倍

@@ -1,0 +1,1 @@
+- Cloudrea开源,实时视图计算框架, 分布式查询引擎。直接从HDFS或Hbase中用select, join, 支持事务, 需要Kafka

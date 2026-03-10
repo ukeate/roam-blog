@@ -1,0 +1,2 @@
+- rust实现，替代ls
+- eza -T --sort=size

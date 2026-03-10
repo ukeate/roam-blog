@@ -1,0 +1,4 @@
+- 介绍
+    - Affero General Public License。类似的协议有CPAL、OSL
+- 特点
+    - 除发布的软件，提供服务的软件，也要AGPL

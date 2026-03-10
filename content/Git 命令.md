@@ -1,0 +1,135 @@
+- git [command] --help
+- git help submodule
+- 设置
+    - config
+        - -global http.proxy 'http://127.0.0.1:8123'
+- 仓库
+    - clone
+        - --depth 1
+            - 只clone最后的commit
+    - checkout
+        - 切换到分支。检出原有文件替换
+        - -b
+            - 创建并切换到分支
+    - branch
+        - 创建并切换到分支
+        - -r
+            - 指定操作远程分支
+            - -r origin/dev
+        - -a
+            - 本地远程所有分支
+        - dev ef71
+            - 从ef71创建分支dev
+        - dev
+        - -d dev
+            - 删除
+        - -D dev
+            - 强制删除
+    - remote
+        - remove origin
+        - show
+            - 示仓库
+        - prune origin
+            - 删除远程没有而本地缓存的远程分支
+        - add origin git@bitbucket.org:outrun/www2.git
+            - 设置仓库
+        - set-url origin git@github.com:outrun/jeky
+            - 设置仓库url
+    - fetch
+        - pull加merge
+    - pull origin master
+        - -allow-unrelated-histories
+            - 本地有已存文件时，强行pull并检查冲突
+        - --all
+            - 拉取所有remote分支
+    - merge dev                   # 合并dev到当前分支
+        - -squash dev-bak
+            - dev-bak改动写到stash
+    - push origin master
+        - u origin master
+            - 设定git push 默认参数
+        - origin :dev
+            - origin +dev:dev
+                - 强制替换掉原来版本
+    - commit
+        - stage 提交到branch
+        - -a
+            - 提交删改，忽略增加
+        - -m
+            - 注释
+        - -amend
+            - 合并到上次commit
+    - revert
+        - git commit -am 'revert'
+        - git revert revertid1 取消上次revert
+            - ideaIDE操作 - local history - revert
+        - 示例
+            - revert  -m 1 ea1
+                - 舍弃最近一次commit
+    - rebase master
+        - 相当于当前改动代码之前merge master
+    - reset
+        - -hard ea1
+            - 回退
+    - stash
+        - 暂存buffered
+        - list
+            - 显示stash
+        - drop
+            - 删除暂存
+        - pop
+            - 恢复并删除暂存
+        - apply stash@{0}
+            - 恢复暂存
+    - tag
+        - -a tag1
+            - 添加tag1
+        - -m 'a'
+            - 注释
+        - -d tag1
+            - 删除tag1
+        - 示例
+            - git tag -a v1.0.1  -m 'a' e67
+    - show tag1
+        - 查看tag1的信息
+    - lfs
+        - git扩展，管理大型二进制文件
+- 文件
+    - add
+        - -A
+            - 递归
+    - mv a b
+        - 重命名
+    - rm
+        - buffered和stage中都删除
+        - -cached
+            - 只删除git stage中文件, 不实际删 
+    - log
+        - HEAD到指定版本号之前的log
+        - -oneline
+            - 每个记录显示一行
+        - -stat
+            - 文件名差异
+        - -p
+            - 细节差异
+        - 2
+            - 文件最近2次差异
+    - reflog
+        - 包括reset前的版本号
+    - diff master dev
+        - 对比分支差异，可指定到文件。默认对比buffered和stage的差异
+        - -cached
+            - 对比stage和branch的差异
+    - ls-files
+        - -u
+            - 显示冲突文件
+        - -s
+            - 显示标记为冲突已解决的文件
+        - -stage
+            - stage中的文件
+    - submodule
+        - init
+            - 初始化本地配置文件
+        - update
+            - -init --recursive
+                - 同步项目中的submodule

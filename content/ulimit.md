@@ -1,0 +1,9 @@
+- ulimit  -s unlimited
+    - 限制shell启动资源, 不限制堆栈大小
+- a 显示各种限制
+- u 10000 最大用户数
+- n 102400 文件句柄数
+- d unlimited 数据段长度
+- m unlimited 内存大小
+- t unlimited cpu时间
+- v unlimited 虚拟内存

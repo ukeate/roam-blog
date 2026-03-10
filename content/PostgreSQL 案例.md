@@ -1,0 +1,9 @@
+- 授权
+    - grant all privileges on database 'db1' to 'outrun'
+    - alter role 'outrun' createdb
+    - alter role 'outrun' superuser
+- 创建用户
+    - create user 'outrun' with password 'pwd'
+    - create role 'outrun' createdb password 'pwd' login
+- 修改密码
+    - alter user 'outrun' with password 'pwd'

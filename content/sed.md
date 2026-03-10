@@ -1,0 +1,5 @@
+- sed -i '1i\new line'
+    - 第一行前插入
+- 常用
+    - 替换文本
+        - sed -i "s/a/b/g" `grep -rl "a" ./`

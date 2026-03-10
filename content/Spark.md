@@ -1,0 +1,33 @@
+- 介绍
+    - in memory, 准实时的批处理，生态好于Storm
+    - 无事务
+- 集群
+    - Master
+    - Worker
+    - Driver
+    - Executor	
+- 组件
+    - Spark RDD(Resiliennt Distributed Datasets)
+    - Spark Core 批计算，取代MR
+        - 粗粒度资源申请，task自行分配启动快，executor不kill
+        - 内存计算
+        - chain
+    - Spark Streamming 流计算，取代Storm
+        - 批计算无限缩小，实时性差
+        - 默认无状态
+            - 用updateStateByKey保存上次计算结果，变成有状态
+            - 借助Redis或ES存
+    - Spark SQL 数据处理
+    - Spark MlLib 机器学习
+    - Spark R 数据分析
+- 使用
+    - val session = SparkSessionBase.createSparkSession()
+    - var sc = session.sparkContext
+    - var rdd = sc.makeRDD(List(1,2,3,4,5,6))
+    - val mapRDD = rdd.map(x -> {
+        - x
+    - })
+    - val filterRDD = mapRDD.filter(x => {
+        - true
+    - })
+    - filterRDD.count

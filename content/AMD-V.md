@@ -1,0 +1,2 @@
+- AMD Virtualization，提高虚拟化性能
+- 与Intel VT-x类似

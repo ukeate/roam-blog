@@ -1,0 +1,5 @@
+- 使用
+    - 复制到/plugins
+    - 场景中，指定type:"xx"使用
+- [[IK Analyzer]]
+- [[elasticsearch-analysis-pinyin]]

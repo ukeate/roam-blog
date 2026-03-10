@@ -1,0 +1,37 @@
+- [[CMD]]
+- 方案
+    - 附件 -> 系统工具 -> 字符映射表 -> 新宋体 中查看汉字的unicode编码
+    - 远程协助
+        - 端口：3389
+        - 1.系统属性 远程
+        - 2.附件：远程连接
+            - xp:单用户，远程操作时原用户无法操作
+    - chm 不显示内容
+        - 右键 -> 常规 -> 解锁
+- 命令
+    - route print
+    - route delete
+    - route add 0.0.0.0 mask 0.0.0.0 10.0.2.2
+    - nstsc   # 运程桌面
+- 注册表
+    - 使用UTC时间(兼容linux)
+        - cmd> Reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v RealTimeIsUniversal /t REG_DWORD /d 1
+- 工具
+    - 端口映射器
+        - 远程vpn代理到ssh
+    - everything
+        - 文件快速搜索工具
+        - 远程访问电脑文件的服务器
+    - 花生壳
+        - 动态域名软件，已申请域名，ip经常变换时使用
+    - xmanager
+        - ssh工具
+    - 端口映射
+        - portmap
+    - 格式转换
+        - [[UniConverter]]
+    - xshell
+    - secureCRT
+    - Xmanager                # 可运行图形界面如vnc
+    - teamViewer                # 可图形界面
+    - cmder          # windows命令行工具

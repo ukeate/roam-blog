@@ -1,0 +1,131 @@
+- stored procedure
+- 5.0加入
+- 结束符号(delimiter) //
+- 语法
+    - create procedure 存储过程名(参数类型 参数名 参数数据类型)
+    - begin
+        - 业务逻辑
+    - end//
+    - call pro1()//
+        - 执行
+    - drop function pro1;
+    - 语句
+        - 所有sql语句都是合法的
+        - declare a int default 2;
+        - set @name = 'admin';
+            - @name 为局部变量        @@name 为全局变量
+        - if
+        - then
+        - else
+        - end if;
+        - case variable1
+        - when 0 then
+        - when 1 then
+        - else
+        - end case
+        - while true do
+        - end while
+        - loop_label:LOOP
+        - LEAVE[ITERATE] loop_label;
+        - end loop [end loop_label]        # iterate是迭代
+        - LABEL label_name
+        - GOTO label_name
+        - repeat until
+        - end repeat # 执行后检查结果
+- 存储过程名
+    - 大小写不敏感
+    - 可以包含空格，最长为64位
+    - 最好数据库名.过程名
+    - 不要使用内建函数名
+- 参数类型
+    - IN参数    # 不修改传递进来的参数
+    - OUT参数   # 参数无法传进来，只修改参数
+    - INOUT参数 # 可读可写
+- 特征子句(characteristics clauses)
+- 查看
+    - show procedure status;
+    - show create procedure proc_name;
+    - show create function func_name;
+- 异常
+    - DECLARE
+    - { EXIT | CONTINUE }
+    - HANDLER FOR
+    - { error-number | { SQLSTATE error-string } | condition }
+    - SQL statement
+    - DECLARE EXIT HANDLER FOR 1216
+    - DECLARE CONTINUE HANDLER FOR not found        # 写在存储过程的begin后，当前程序出错后会自动触发代码 MySQL允许两种处理器，
+        - 一种是EXIT处理，上面所用的就是这种。另一种就是我们将要演示的，CONTINUE处理，
+        - 它跟EXIT处理类似，不同在于它执行后，原主程序仍然继续运行
+    - DECLARE CONTINUE HANDLER FOR SQLSTATE '23000' SET @x2 = 1; # 如果下面将@x2的值赋为1就会出错
+    - DECLARE EXIT HANDLER FOR `Constraint Violation` ROLLBACK;        # 回滚
+    - DECLARE `Constraint Violation` CONDITION FOR SQLSTATE '23000';
+    - DECLARE EXIT HANDLER FOR `Constraint Violation` ROLLBACK;                        # 先声明条件
+- 游标
+    - declare cur_1 cursor for select s1 from t;
+    - open cur_1
+    - fetch cur_1 into a
+    - close cur_1
+- 函数
+    - 与存储过程唯一不同必须有RETURN语句
+    - 不能在函数中访问表
+    - function example1:
+    - create function myadd(num1 int, num2 int)
+    - returns int
+    - begin
+    - return num1 + num2;
+    - end//
+- 例1
+    - create procedure pro(in name varchar(20))
+    - begin
+    - select name;
+    - set name='hello world';
+    - select name;
+    - end//
+    - set @name='jnb'//
+    - call pro(@name)//
+- 例2      # if语句，根据输入0/1 判断 男/女
+    - create procedure findGender(in op int)
+    - begin
+    - declare gendar varchar(20);                                # 在函数中定义变量gendar和其类型
+    - if op=0 then                                                        # =表示判断
+    - set gendar='male';
+    - else set gendar='female';
+    - end if;
+    - select gendar;
+    - end//
+- 例3      # switch语句，判断星期
+    - create procedure findday(in day int)
+    - begin
+    - declare findday varchar(20);
+    - case day
+    - when 1 then set findday='星期一';
+    - when 2 then set findday='星期二';
+    - when 3 then set findday='星期三';
+    - when 4 then set findday='星期四';
+    - when 5 then set findday='星期五';
+    - when 6 then set findday='星期六';
+    - when 7 then set findday='星期七';
+    - else set findday='无效';
+    - end case;
+    - select findday;
+    - end//
+- 例4      # while循环
+    - create procedure findsum(in n int)
+    - begin
+    - declare sum int default 0;
+    - declare i int default 0;
+    - while i<=n do
+    - set sum=sum+i;
+    - set i=i+1;
+    - end while;
+    - select sum;
+    - end//
+- 例5      # 验证登录
+    - create procedure prologin(in user_name varchar(20), in user_psw varchar(100), out flag int)
+    - begin
+    - if exists(select name from users where name=user_name and psw=password(user_psw)) then
+        - set flag = 1;
+    - else
+        - set flag = 0;
+    - end if;
+    - end//

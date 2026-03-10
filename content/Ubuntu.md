@@ -1,0 +1,12 @@
+- 包
+    - apt-cache madison xxx       # 查看仓库中所有版本
+    - apt-cache search xxx
+    - apt-get -f -y --assume-yes install
+    - aptitude
+        - search
+        - show
+        - install
+        - remove 
+        - purge                   # 删除包及配置
+        - clean                   # 删除下载的包文件
+        - autoclean               # 仅删除过期

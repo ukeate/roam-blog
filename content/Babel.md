@@ -1,0 +1,22 @@
+- 使用
+    - npm install -g babel-cli
+    - npm install --save babel-core babel-preset-es2015
+    - // .babelrc
+    - {
+        - "presets": ["es2015"],
+        - "env": {
+            - "dev": {
+                - 在NODE_ENV=dev时使用特性
+                - "presets": ["react-hmre"]
+            - }
+        - }
+    - }
+    - babel-node
+    - babel es6.js
+        - babel es6.js -o es5.js
+        - babel -d build source -s
+        - -s 是产生source-map
+- 插件
+    - babel-preset-react-hmre
+        - react热加载
+        - .babelrc中配置 "react-hmre"

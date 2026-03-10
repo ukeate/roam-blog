@@ -1,0 +1,3 @@
+- Security Assertion Markup Language
+- 用于SSO，XML格式
+- 定义了三个角色：委托人、身份提供者(IDP)、服务提供者(SP)。用户SP做访问控制

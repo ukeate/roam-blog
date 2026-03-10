@@ -1,0 +1,24 @@
+- 结构
+    - applications:                                                        如browser
+    - application framework(相当于api):                        如window manager
+    - libraries(库):                                                        如openGL,SQLite
+        - runtime(运行环境):                                                core libraries + Dalvik VM
+    - linux kernel(系统api):                                        如wifi Driver
+- android sdk
+    - 命令
+        - platform-tools/adb
+            - adb install *.apk                                      # 当前模拟器中安
+    - 装软件
+        - adb remount
+        - adb shell
+        - su                                                      # 当前模拟器中执
+    - 行linux命令
+        - tools/emulator-arm @test                                    # 启动一个模拟器
+- 框架
+    - atlas
+        - 阿里开源的android native容器化组件框架
+    - webview
+    - litho
+        - 声明式ui
+    - jetpack compose
+        - 声明式ui

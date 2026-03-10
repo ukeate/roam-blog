@@ -1,0 +1,12 @@
+- 宿主机VPN转发
+    - 宿主机
+        - 开启ip转发
+            - sysctl net.ipv4.ip_forward=1
+            - /etc/sysctl.d/30-ipforward.conf
+                - net.ipv4.ip_forward=1
+                - net.ipv6.conf.default.forwarding=1
+                - net.ipv6.conf.all.forwarding=1
+        - 配置NAT
+            - iptables -t nat -A POSTROUTING -o tun0 -s 10.146.81.0/24 -j MASQUERADE
+    - 虚拟机
+        - ip route add 10.99.11.6/32 via 10.146.81.29

@@ -1,0 +1,28 @@
+- [[JVM 引用方式]]
+- [[JVM 对象分配过程]]
+- [[JVM GC分代过程]]
+- 常见的回收器
+    - 概念
+        - Safe Point
+            - STW时机
+        - 没有无STW的回收器
+    - 分代
+        - Young
+            - [[JVM GC Serial]]
+            - [[JVM GC Parallel Scavenge]]
+            - [[JVM GC ParNew]]
+        - Old
+            - [[JVM GC Serial Old]]
+            - [[JVM GC Parallel Old]]
+            - [[JVM GC CMS]]
+    - 不分代
+        - [[JVM GC G1]]
+        - [[JVM GC ZGC]]
+        - [[JVM GC Shenandoah]]
+        - [[JVM GC Epsilon]]
+        - [[JVM GC Zulu]]
+    - 组合
+        - S + SO
+        - PS + PO                 # 1.8默认, 10G内存10+秒
+        - PN + CMS
+- [[JVM GC算法]]

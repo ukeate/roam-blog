@@ -1,0 +1,27 @@
+- 加分号
+    - jA;
+    - j.
+- 批量执行
+    - 选中多行, :normal .
+- 批量前缀
+    - 选中多行, I
+- 括起文字
+    - ci"        # 替换内容""
+    - ca"        # 替换所有
+    - di"        # 删除内容
+    - cit        # 替换标签
+- 执行python
+    - 选中代码, :!python
+- 缩进全文
+    - gg=G
+- 替换到"
+    - cf"
+- esc
+    - &lt;C-[&gt;- 目录窗口
+    - :Sex
+- console输出乱码
+    - language messages utf-8
+    - set termencoding=utf-8
+- 设置文件编码
+    - set encoding=utf-8
+    - set fileencodings=utf-8,chinese,latin-1

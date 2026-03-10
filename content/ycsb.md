@@ -1,0 +1,2 @@
+- Yahoo! Cloud Serving Benchmark,NoSQL服务压测
+- 支持Cassandra, MongoDB, HBase, Redis, [[Infinispan]]

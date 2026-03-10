@@ -1,0 +1,17 @@
+- Jigsaw模块化功能
+- [[JS Shell]]、[[JLink]]、[[JHSDB]]
+- CMS被废弃
+- JDK模块化加载，瘦身
+- AOT(Ahead of Time Compilation)
+- 接口私有方法
+- jshell
+- try with resource改进
+    - FileInputStream s1 = new FileInputStream("");
+    - FileOutputStream o1 = new FileOutputStream("");
+    - try (s1;o1){}
+- 下划线不能单独成为变量名，后续会成为关键字
+- String从char[]改为byte[]
+- stream加强，集合加强
+    - list.of()
+    - map.of()
+    - copyof()

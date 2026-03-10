@@ -1,0 +1,2 @@
+- 反向代理, http缓存
+- 3台Varnish代替12台Squid

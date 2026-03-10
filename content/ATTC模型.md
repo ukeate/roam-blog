@@ -1,0 +1,2 @@
+- 目的、目标、策略、执行
+    - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2F622o_UGdi8.png?alt=media&token=4e34ab2e-f02d-4835-ab88-31b1a861da88)

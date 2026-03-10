@@ -1,0 +1,152 @@
+- Links
+    - https://www.astrill.com/blog/
+    - https://www.astrill.com/wiki/Wiki
+- 客户端
+    - Windows, macOS, iPhone, iPad, Android, Linux, Router
+- 产品
+    - 个人版
+    - 商业版
+        - 移动安全，安全连接
+        - 加密协作
+        - 员工帐户
+        - 竞争对手分析
+        - 每个子帐户
+            - 限额一台台式机，一台移动设备
+    - 路由器
+    - 免费Android版
+- 服务器
+    - 服务器带宽1Gbit - 10Gbit
+    - 服务器连接到互联网上每个主要网络节点
+    - 裸机硬件
+    - 多核设置，加密CPU优化 AES加密解密
+    - 没有虚拟位置，真实物理位置
+    - 55国服务器106城市300多服务器
+        - 大量亚洲服务器，带宽成本极高
+    - 不限设备但同时5台，同时一台路由器，无限流量速度
+- 功能
+    - Split Tunneling
+        - 基于URL: Smart Mode(网站过滤器): Windows, MacOS, Linux, 路由器
+            - 多人共享VPN IP
+            - 智能模式PAC
+                - VPN IP流量不能被Local APP检测和封禁
+        - 基于APP: 程序过滤: Windows, MacOS, Linux, Android
+            - Application Filter
+            - Tunnel browses only
+            - 安全开关(Privacy -> Kill Switch): Windows, MacOS, Linux
+            - App Guard
+    - VPN Share
+    - 多跳VPN
+        - VPN IP和服务IP不同，不能嗅探
+        - 优化线路速度更快
+    - Onion over VPN
+    - VPN IP 端口转发
+        - 标*服务器
+        - 应用场景
+            - P2P洪流下载
+            - FTP服务器
+            - 远程摄像头
+            - TeamViewer, Plex, NAS, Xbox, PlayStation
+        - 技术
+            - 自动转发端口: 40000-49999
+            - 手动转发端口: Settings->Port Forward
+        - 服务规格
+            - 共享IP用户，所有服务器上1个指定端口
+            - 独立IP用户，指定IP3个自选端口
+    - VIP计划
+        - 亚洲定制
+        - VIP服务器，计流量
+        - 所有服务器上优先处理流量
+    - 专有IP
+        - 私有NAT防火墙，最多3个选定端口
+        - 不被IP风控
+        - “共享名额”邀请朋友共享IP
+    - 路由器程序
+        - 类型
+            - Asus Merlin
+            - DD-WRT
+            - Tomato
+        - 协议
+            - OpenVPN
+            - RouterPro
+    - Ads Blocker
+    - Clear Cookies
+    - VPN Setting改数据端口
+- 协议
+    - Openweb
+        - 2009年自研协议
+        - 基于TCP
+        - 多层加密
+        - 无连接协议，内部快速服务器间切换
+        - 轻量级
+        - 难被DPI(深度包检测)检查，流量类似网站浏览
+        - 流量AES-256加密
+    - StealthVPN
+        - 自研协议，OpenVPN启发，流量模糊处理应对DPI
+        - 双重加密技术
+        - UDP/TCP，可指定任何端口
+        - RSA-2048身份验证，流量AES-256加密
+        - 所有流量都通过路由，无IP/DNS泄漏
+        - 可靠性高
+        - 适合洪流下载
+    - Wireguard
+        - 通用VPN, 更简单、更快速、更安全、更高效、更易于使用
+        - 比IPSec快，比OpenVPN更高效
+        - 密码技术
+            - 噪声协议框架
+            - ECDH的Curve25519
+            - ChaCha20对称加密，Poly1305进行验证
+            - AEAD结构, RFC7539
+            - 散列和键控散列的BLAKE2，RFC7693
+            - 散列键的SipHash24
+            - HKDF密钥推导，RFC5869
+            - [技术白皮书](https://www.wireguard.com/papers/wireguard.pdf)
+        - 实现方式
+            - 没有缓慢复杂的交握过程
+            - 发现破坏攻击，新协议直接成为总包
+        - 适合漫游如切换WIFI和流量，持续保持连接
+        - 简单化易于实施
+            - 少于4000行代码
+                - Swan/IPsec 400,000+行
+                - OpenVPN/OpenSSL 600,000+行
+    - OpenVPN
+        - UDP/TCP
+        - 非常安全
+        - 加密算法
+            - AES
+            - BlowFish
+            - Camelia
+- 断开连接情况
+    - 防火墙
+    - 本地路由不稳定
+    - 不同地理位置LSP，协议稳定性不同
+        - UDP vs TCP
+        - StealthVPN vs Openweb
+- ISP
+    - 类型：拨号、DSL、调整有线电缆、光纤、卫星互联网
+    - 留下LSP足迹
+    - LSP完全访问所有数据
+        - 法律允许收集、出售给广告商和第三方
+        - 已暴露的计划(5,9,14 alliance)
+            - PRISM
+            - XKeyscore
+            - Tempora
+            - MUSCULAR
+            - STATEROOM
+        - 节流带宽
+            - 应用级区分：某些应用突破节流
+            - 种子文件限流
+- 路由选择
+    - RT-AC56U
+    - RT-N66U
+    - RT-AC66U
+    - RT-AC68U
+    - RT-AC68U
+    - RT-AC87U
+    - RT-AC3200
+- [[网络攻击]]
+- [[深层网络]]
+- router
+    - 替代安装命令
+        - ```shell
+          eval `wget -q -O - http://8.210.41.121/router/install/3168783/a37cb376c8e21c811946c31854d3fd37
+          ````

@@ -1,0 +1,1 @@
+- infomation data corporation, 互联网数据中心

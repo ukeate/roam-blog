@@ -1,0 +1,18 @@
+- [[Curator]]
+- 介绍
+    - google chubby的开源实现。用于服务发现
+    - 保证CP
+    - 分布式, hadoop中hbase的组件
+    - fast paxos算法        # paxos存在活锁问题, fast paxos通过选举产生leader, 只有leader才能提交proposer
+- 功能
+    - 配置维护
+    - 域名服务
+    - 分布式同步
+    - 组服务
+    - 分布式独享锁、选举、队列
+- 流程
+    - 选举leader        # 多种算法, leader有最高执行ID
+    - 同步数据
+    - 大多数机器得到响应follow leader
+- exhibitor
+    - supervisor for zk

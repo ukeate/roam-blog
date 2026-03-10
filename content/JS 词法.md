@@ -1,0 +1,67 @@
+- unicode编写的
+    - 转义
+        - 'café'表示为'caf\u00e9'
+        - 'é' 也可以表示为'e\u0301', e后面跟一个语调符
+- 区分大小写                                   # html中不区分大小写
+- 注释
+    - //, /**/
+- 标识符和保留字
+    - 要求
+        - 开头以字母、下划线、dollar符。
+        - 后续可以加数字
+        - 可以出现unicode字符集中的Mn类、Mc类、Pc类，如           # Mn表示非间距字符，Mc表示影响基字符标志位的间距字符, Pc是连接两个字符的连接符或标点符号。
+            - é, π,
+    - 保留字
+        - break, delete, function, return, typeof, case, do, if, switch, var, catch, else, in, this, void, continue, false, instanceof, throw, while, debugger, finally, new, true, with, default, for, null, try
+    - 未被使用的名保留字
+        - class, const, enum, export, extends, import, super
+    - 严格模式下的保留字
+        - implements, let, private, public, yield, interface, package, protected, static
+    - 严格模式下不能用做变量名
+        - arguments, eval
+    - es6新增保留字
+        - await
+    - ECMAScript3将所有java关键字列为保留字
+    - 全局属性和对象和函数
+- 直接量
+    - 直接量(numeric literal)
+        - 1
+        - 1.2
+        - "hi"
+        - 'hi'
+        - true
+        - false
+        - /javascript/gi
+            - 用于模式匹配
+                - 实际是一个RegExp对象
+                - gi是用来修饰匹配模式的含义
+        - null
+        - {x:1, y:2}
+            - {foo}                                   # 等同 {foo: foo}, 简化写法常用于函数返回值
+            - {method () {}}                          # 等同 {method: function () {}}
+            - {*m () {}}                              # generator
+            - {['a' + 'b']: 1}                        # object
+            - {['hello'](){reutrn 0;}}                # 对象属性是Symbol值时, name属性返回这个Symbol值的描述
+            - {get a () {}, set a (val) {}}           # 属性getter, setter。get, set函数的函数名name是 'get xxx', 'set xxx'
+        - [1,2,3,4]
+    - 整型直接量
+        - 0
+        - 10
+        - 0xff/0Xff                                   # 16进制
+        - 0o377                                       # 8进制
+            - 0377                                    # ECMAScript标准不支持八进制直接量，某些实现可以采用八进制表示
+                - ECMAScript6严格模式下, 八进制直接量是明令禁止的
+        - 0b11/0B11                                   # 2进制
+    - 浮点型直接量
+        - 3.14
+        - .333
+        - 6.02e23                                     # 6.02 x 10^23
+        - 1.4E-32
+    - 字符串直接量
+        - ECMAScript5可多行                             # ECMAScript3规定必须一行
+            - "one\
+            - long line"
+        - 模板字符串                                   # 保留换行，空格，缩进
+            - var name = 'Bob';
+            - `hello ${name}                          # ${}中可用任意表达式，包括函数
+            - how are you`

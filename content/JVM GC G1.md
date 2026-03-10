@@ -1,0 +1,39 @@
+- Garbage First，JDK7引入, JDK8完善, JDK9默认
+- 特点
+    - 适用上百G
+    - STW 10ms回收
+        - 容易预测STW时间
+        - 低latency, 但throughput也低
+    - 并发回收, 三色标记
+    - 只逻辑分代, 不物理分代 
+        - 内存分Region, Region组成不同大小块，块在逻辑分代中
+        - Eden和Old区的内存映射会变化
+    - 动态新老代空间                      # 如果YGC频繁，就Young调大
+        - 不要手工指定, 是G1预测YGC停顿时间的基准, 停顿时间通过参数设置
+- 概念
+    - CSet
+        - Collection Set
+        - 可回收Region集合, 回收时存活的对象被移动
+        - 占堆空间不到1%
+    - RSet
+        - Remembered Set
+        - 用于找到谁引用当前对象(对象级别), 记录其他Region的引用
+        - 赋值时有GC写屏障                # 非内存屏障
+    - CardTable
+        - YGC定位垃圾，要从Root查所有Old区对象，效率低
+        - Old区对象引用Young区时, bitmap标DirtyCard。YGC时只扫描DirtyCard
+    - MixedGC
+        - 默认45%, 同CMS
+        - 初始标记
+        - 重新标记
+        - 筛选回收
+            - 筛选Region回收，有用对象复制到其它Region
+- 日志
+    - [GC pause (G1 Evacuation Pause) (young) (initial-mark)]
+        - 复制存活对象, initial-mark在MixedGC时有
+    - [GC concurrent-root-region-scan-start]
+        - 混合回收
+    - [GC concurrent-mark-start]
+        - 混合回收
+    - [Full GC (Allocation Failure)]
+        - 无法evacuation时, G1中很严重

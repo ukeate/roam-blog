@@ -1,0 +1,618 @@
+- 介绍
+    - 减少配置, 习惯大于配置
+    - 支持groovy, gradle
+- 命令
+    - java -jar xxx.jar
+        - -server.port=8080                                      # --后内容，相当于application.yml设置
+        - -spring.profiles.active=two                            # 选择applicaton-two.yml配置
+- 基础文件
+    - 目录
+        - src
+            - main
+                - java
+                    - com.outrun
+                        - XxxApplication
+                - resources
+                    - static/
+                    - templates/
+                    - application.properties
+                    - application.yml
+                - webapp
+                    - WEB-INF
+            - test
+                - java
+                    - com.outrun
+                        - XxxApplicationTests
+        - pom.xml
+    - XxxApplication.java                                     # 程序入口
+        - @SpringBootApplication                              # 类，组合@Configuration, @EnableAutoConfiguration, @ComponentScan
+            - @EnableAutoConfiguration根据jar包依赖自动配置
+            - 扫描该注解同级下级包的Bean
+    - application.yml                                         # application.yml或application.properties, 放在src/main/resources或config目录下
+    - pom.xml
+- 配置
+    - 区分环境
+        - application-{profile}.properties                                    # profile比如是dev, test, prod
+        - 设置spring.profiles.active=dev来区分
+    - 加载顺序                                                                 # 为了外部人员维护，可覆盖定义
+        - 命令行
+        - SPRING_APPLICATION_JSON环境变量, json格式
+        - java:comp/env的JNDI属性
+        - java系统属性                                                         # System.getProperties()查看
+        - 系统环境变量
+        - random.*配置的随机属性
+        - jar包外文件名, 如application-{profile}.properties
+        - jar包内文件名
+        - @Configuration注解类中，@PropertySource修改的属性
+        - SpringApplication.setDefaultProperties定义的内容
+    - application.yml
+        - --                                                 # ---分隔多个配置，这里相当于建立了application-two.yml文件
+        - spring:
+            - profiles: two
+        - --
+        - spring:
+            - profiles
+                - active: dev                                 # 配置环境, 加载applicaton-dev.yml
+            - application:
+                - name: app1
+    - pom.xml
+        - &lt;packaging&gt;jar&lt;/packaging&gt;                          # 不用war包部署, 嵌入了tomcat, jar可服务        - &lt;parent&gt;            - &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;            - &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;             # 提供spring boot基础依赖和默认配置            - &lt;relativePath/&gt;                                 # 从仓库查找parent        - &lt;/parent&gt;        - &lt;properties&gt;            - &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;            - &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;            - &lt;java.version&gt;1.8&lt;/java.version&gt;        - &lt;/properties&gt;        - &lt;dependencies&gt;        - &lt;/dependencies&gt;        - &lt;build&gt;            - &lt;plugins&gt;                - &lt;plugin&gt;                    - &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;                    - &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;       # 方便启动停止应用, 如mvn spring-boot:run                - &lt;/plugin&gt;            - &lt;/plugins&gt;        - &lt;/build&gt;- 注解
+    - @SpringBootApplication                      # spring boot 启动类
+        - 组合了@Configuration, @EnableAutoConfiguration, @ComponentScan
+- 类  
+    - ApplicationRunner                           # 继承该类，注解@Component, 随容器启动运行
+        - run()
+- 插件
+    - maven
+        - 命令
+            - mvn spring-boot:run
+        - pom.xml
+            - &lt;plugin&gt;                - &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;                - &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;       # 方便启动停止应用, 如mvn spring-boot:run            - &lt;/plugin&gt;- 组件
+    - starter POMs            # spring-boot-starter开头的组件
+- 子域
+    - NamedContextFactory
+        - class Spec1 implements NamedContextFactory.Specification {
+            - @Override
+            - public String getName(){}
+            - @Override
+            - public Class<?>[] getConfiguration(){}
+        - }
+        - public class MyFactory extends NamedContextFactory<Specification1> {
+            - public MyFactory(Class<?> clazz) {
+                - super(clazz, "my", "my.name")
+            - }
+        - }
+        - @Configuration
+        - public class Config0 {
+            - @Bean
+            - Bean0 getBean(){
+                - return new Bean0()
+            - }
+        - }
+        - parent = new AnnotationConfigApplicationContext()
+        - parent.register(Config0.class)
+        - parent.refresh()
+        - factory = new MyFactory(Config00.class)
+        - factory.setApplicationContext(parent) 
+        - spec1 = new Spec1("1", new Class[]{Config1.class})
+        - factory.setConfigurations(List.of(spec1))
+        - factory.getInstance("1", Bean0.class)   // 子域共享
+        - factory.getInstance("1", Bean00.class)  // 子域复制
+        - factory.getInstance("1", Bean1.class)
+    - spring
+        - 配置
+            - 随机数用${random}
+                - ${random.value} 字符串
+                - ${random.int} int
+                - ${random.long} long
+                - ${random.int(10)} 10以内int
+                - ${random.int[10,20]} 10到20 int
+            - pom.xml
+                - &lt;dependency&gt;                    - &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;                    - &lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;                    - &lt;optional&gt;true&lt;/optional&gt;                - &lt;/dependency&gt;            - application.yml
+                - aa
+                    - bb: 1                                           # 可用properties类管理属性
+                - xxx: 1                                              # 自定义value
+                    - 配置文件中用"${xxx}"引用
+                    - 类中用@Value("${xxx}")注入到属性
+                    - SpEL中用"#{xxx}"引用
+            - AaProperties.java
+                - @Component
+                - @ConfigurationProperties(prefix = "aa")
+                - public class AaProperties {
+                    - private String bb;
+                    - ...getter和setter...
+                - }
+            - 注解    
+                - @Configuration
+                - @PropertySource(value = "classpath:test.properties")                    # 加载文件, 配合@ConfigurationProperties注入属性
+                - @EnableConfigurationProperties({ConfigBean.class, User.class})          # 加载bean, 配合@Autowired注入
+        - 基础
+            - 注解
+                - @Value("${xxx}")
+                - @Autowired                                  # 装载bean
+                - @Bean                                       # 实例化Bean, 属性名为方法名
+                    - @Bean
+                    - public RestTemplate restTemplate() {
+                        - return new RestTemplate();
+                    - }
+                    - 相当于
+                    - RestTemplate restTemplate = new RestTemplate();
+                - @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)                         # 生命周期
+                    - singleton                               # 单例
+                    - prototype                               # 多例
+                    - request                                 # web程序ContextApplication用, 随请求创建
+                    - session                                 # web程序ContextApplication用, 随session创建
+                    - global session                          # porlet的global用, 其它用降级为session
+                - @EventListener(XxxEvent.class)              # 修饰方法, 外部publishEvent()时触发
+        - 实体
+            - 注解
+                - @Entity                                     # 修饰bean类
+                - @Id                                         # id属性
+                - @GeneratedValue(strategy=GenerationType.AUTO)                           # 自增属性
+                - @Column(nullable = false, unique = true)
+        - 组件
+            - 注解
+                - @Component
+                - @ConfigurationProperties(prefix = "my")     # 注入properties对应名称的属性
+        - dao
+            - 注解
+                - @Repository                                 # 修饰类
+        - service
+            - 注解
+                - @Service                                    # 修饰类
+                - @PostConstruct                              # 修饰方法, 加载servlet时, init()前执行
+                - @PreDestroy                                 # 修饰方法, 销毁servlet时, destroy()后执行
+        - controller
+            - 注解
+                - @Controller                                 # 修饰类
+    - 测试
+        - pom.xml
+            - &lt;dependency&gt;                - &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;                - &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;                - &lt;scope&gt;test&lt;/scope&gt;            - &lt;/dependency&gt;        - 注解
+            - @Before
+            - @Test
+            - @RunWith(SpringRunner.class)                # 修饰类, 测试spring
+            - @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)                 # 修饰类, 测试spring boot
+            - @LocalServerPort                            # 注入端口号
+            - @AutoConfigureMockMvc                       # 使用mockMvc, 用@Autowired注入MockMvc
+            - @WebAppConfiguration                                # 模拟ServletContext
+        - XxxApplicationTests.java                        # junit测试
+            - @RunWith(SpringJUnit4ClassRunner.class)
+            - @SpringApplicationConfiguration(classes = XxxApplication.class)
+            - @WebAppConfiguration
+            - public class XxxApplicationTests {
+                - private MockMvc mvc;
+                - @Before
+                - public void setUp() throws Exception {
+                    - mvc = MockMvcBuilders.standaloneSetup(new XxxController()).build();
+                - }
+                - @Test
+                - public void hello() throws Exception {
+                    - mvc.perform(MockMvcRequestBuilders.get("/hello").accept(MediaType.APPLICATION_JSON))
+                        - .addExpect(status().isOk())
+                        - .addExpect(content().string(equalTo("hello")));
+                - }
+            - }
+    - 数据库
+        - pom.xml
+            - spring-boot-starter-jdbc
+            - spring-boot-starter-data-jpa                            # spring data JPA
+        - application.yml
+            - jpa:
+                - generate-ddl: false
+                - show-sql: true
+                - hibernate:
+                    - ddl-auto: none                          # create时, 第一次create之后update
+            - datasource:
+                - platform: h2
+                - schema: classpath:schema.sql                # 建表
+                - data: classpath:data.sql                    # 数据
+        - 注解
+            - @Transactional                                  # 修饰方法，开启事务，或在事务中
+    - mybatis
+        - pom.xml
+            - &lt;!-- mybatis --&gt;            - &lt;dependency&gt;                - &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;                - &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;                - &lt;version&gt;1.1.1&lt;/version&gt;            - &lt;/dependency&gt;            - &lt;!-- mysql --&gt;            - &lt;dependency&gt;                - &lt;groupId&gt;mysql&lt;/groupId&gt;                - &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;                - &lt;version&gt;5.1.21&lt;/version&gt;            - &lt;/dependency&gt;        - application.yml
+            - spring:
+                - datasource:
+                    - url: jdbc:mysql://127.0.0.1:3306/outrun?characterEncoding=UTF-8
+                    - username: root
+                    - password: a
+                    - driver-class-name: com.mysql.jdbc.Driver
+                - jpa:
+                - hibernate:
+                    - ddl-auto: update  # 新建连接必要
+            - mybatis:
+                - mapper-locations: classpath:mapper/*.xml        # 指定mapper.xml位置
+        - mapper.xml                      # 用mbg生成
+            - &lt;?xml version="1.0" encoding="UTF-8"?&gt;            - &lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;            - &lt;mapper namespace="com.outrun.erp.mapper.UserMapper"&gt;                - &lt;resultMap id="BaseResultMap" type="com.outrun.erp.entities.User"&gt;                    - &lt;id column="id" jdbcType="BIGINT" property="id" /&gt;                    - &lt;result column="name" jdbcType="VARCHAR" property="name" /&gt;                - &lt;/resultMap&gt;                - &lt;select id="selectUserById" parameterType="long" resultMap="UserMap"&gt;                    - SELECT name FROM user WHERE id=#{userId}
+                - &lt;/select&gt;                - &lt;insert id="inserUser"&gt;                    - &lt;selectKey keyProperty="id" resultType="int" order="BEFORE"&gt;                        - select field1 from seq1
+                    - &lt;/selectKey&gt;                - &lt;/insert&gt;                - &lt;sql id="userColumns"&gt;                    - ${alias}.id, ${alias}.username
+                - &lt;/sql&gt;                - &lt;select id="selectColumns" resultType="map"&gt;                    - select
+                        - &lt;include refid="userColumns"&gt;&lt;property name="alias" value="tb1"/&gt;&lt;/include&gt;                    - from tb1
+                - &lt;/select&gt;                - &lt;select id="dynamicSql" resultType="User"&gt;                    - select * from user
+                    - where state = 0
+                    - &lt;if test="title != null"&gt;                        - and title like #{title}
+                    - &lt;/if&gt;                    - &lt;choose&gt;                        - &lt;when test="title != null"&gt;                            - and title like #{title}
+                        - &lt;/when&gt;                        - &lt;when test="author != null and author.name != null"&gt;                            - and author_name like ${author.name}
+                        - &lt;/when&gt;                        - &lt;otherwise&gt;                            - and featured = 1
+                        - &lt;/otherwise&gt;                    - &lt;/choose&gt;                    - &lt;foreach item="item" index="index" collection="list" open="(" separator="," close=")"&gt;                        - #{item}
+                    - &lt;/foreach&gt;                    - &lt;trim prefix="where" prefixOverrides="and | or"&gt;                        - ...
+                    - &lt;/trim&gt;                    - &lt;bind name="a" value="'%' + _data.getTitle() + '%'" /&gt;                    - select * from blog
+                    - where title like #{a}
+                - &lt;/select&gt;                - &lt;update&gt;                    - update User
+                        - &lt;set&gt;                            - &lt;if test="username != null"&gt;username=#{username},&lt;/if&gt;                        - &lt;/set&gt;                - &lt;/update&gt;                - &lt;cache&gt;                 # 该命名空间缓存                - &lt;cache-ref&gt;             # 引用其它命名空间缓存                - &lt;delete&gt;                - &lt;resultMap&gt;                    - &lt;constructor&gt;       # 构造方法                        - &lt;idArg&gt;         # id参数, 标记id帮助提高性能                        - &lt;arg&gt;           # 普通参数                    - &lt;/constructor&gt;                    - &lt;id&gt;                # 标记id帮助提高性能                    - &lt;result&gt;            # 普通字段                    - &lt;association&gt;       # 关联                    - &lt;collection&gt;        # 结构体                    - &lt;discriminator&gt;     # 自动映射                - &lt;/resultMap&gt;            - &lt;/mapper&gt;        - mapper/UserMapper
+            - @Mapper           # 如果扫描mapper.xml，不用加@Mapper
+            - public interface UserMapper {
+                - List<User> selectUserById(@Param("userId") long userId)
+                - @Select("select * from user")
+                - List<User> findAll();
+            - }
+        - entities/User
+            - public class User {
+                - private Integer id;
+                - private String name;
+                - ...getter, setter...
+            - }
+        - 注解
+            - @Table(name = "user")                   # 修饰类，指定表
+            - @Id                                     # 修饰属性, 指定主键
+            - @Column(name = "name")                  # 修饰属性, 指定字段
+            - @Mapper                                 # 修饰类
+            - @Select("select * from user")           # 修饰方法
+            - @Param("userId")                        # 修饰参数
+        - api
+            - SqlSessionFactory
+                - build
+                - openSession                         # 重载事务方法
+            - SqlSesion
+                - selectOne()
+                - selectList()
+                - selectMap()
+                - insert()
+                - update()
+                - delete()
+                - commit()
+                - rollback()
+                - clearCache()
+                - close()
+            - Mapper
+                - o->
+                - @Insert("insert into tb1(id, name) values(#{id}, #{name})")
+                - @SelectKey(statement="next value", keyProperty="id", before=true, resultType=int.class)
+                - int insertTable1(String name)
+            - SQL
+                - INSERT_INTO()
+                - VALUES()
+                - o->
+                - new SQL(){{
+                    - SELECT("a.name");
+                    - SELECT("a.age");
+                    - FROM("tb1 a");
+                    - WHERE("a.name like ?");
+                - }}.toString()
+            - LogFactory
+                - useSlf4jLogging()
+                - useLog4jLogging()
+                - useStdOutLogging()
+    - web
+        - 用的spring mvc
+        - pom.xml
+            - &lt;dependency&gt;                - &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;                 # web模块, 有tomcat, spring mvc                - &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;            # 测试模块, 有JUnit, Hamcrest, Mockito            - &lt;/dependency&gt;        - application.yml
+            - server
+                - port: 8080                                      # 默认8080
+                - servlet
+                    - context-path: /hello                        # uri前缀
+        - 静态资源
+            - 默认映射public, resources, static到/
+        - 注解
+            - 控制器
+                - @RestController                             # 修饰类, 组合@Controller与@responseBody
+                - @RequestMapping("/index")                   # 修改类或方法, url
+                    - @GetMapping("/{id}")                    # 相当于@RequestMapping(method=RequestMethod.GET)
+                    - @PostMapping
+                    - @PutMapping
+                    - @DeleteMapping
+                    - @PatchMapping
+                - @CrossOrigin                                # 修饰方法, 允许跨域
+                - @RequestBody                                # 修饰方法, 解析body到参数
+                - @PathVariable Long id                       # 修饰参数, 接收url参数
+        - 内置对象
+            - ServerProperties                                # 单例可@Autowired, 存端口之类属性
+        - 自实现
+            - XxxController.java
+                - @RestController
+                - public class HelloController {
+                    - @RequestMapping("/hello")
+                    - public String index() {
+                        - return "hello";
+                    - }
+                - }
+    - 日志
+        - application.yml
+            - logging:
+                - level:
+                    - root: INFO
+                    - org.hibernate: INFO
+                    - org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+                    - org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+        - 注解
+            - @Slf4j                                      # 修饰类，其中可直接用log变量
+            - @EnableSwagger2                             # 修饰类
+            - @Api(tags = "")                             # 修饰类, 文档
+            - @ApiModel("")                               # 修饰类
+            - @ApiModelProperty(")                        # 修饰属性
+            - @ApiOperation(value="", notes="")           # 修改方法, 文档
+            - @ApiIgnore                                  # 修饰方法, 文档忽略
+    - jackson
+        - 注解
+            - @JsonInclude                                # 修饰类, 序列化时包含
+                - @JsonInclude(JsonInclude.Include.NON_EMPTY)                 # null或""时不序列化
+            - @JsonIgnore                                 # 修饰属性
+    - Scheduled
+        - scheduled
+            - 注解
+                - @Scheduled                                  # 修饰方法, 定时调度
+                    - @Scheduled(initialDelay = 1000, fixedRate = 1000)
+            - 类
+                - @Configuration
+                - implements SchedulingConfigurer             # 配置类
+                    - configureTasks(ScheduledTaskRegistrar)
+                        - registrar.setScheduler(Executors.newScheduledThreadPool(2));    # worker池
+        - async
+            - 注解
+                - @Async                                      # 修饰方法, 异步调用 
+            - 类
+                - implements AsyncUncaughtExceptionHandler    # 处理@Async异常
+                    - @Override
+                    - public void handleUncaughtException()
+                - @Configuration
+                - @EnableAsync
+                - implements AsyncConfigurer
+                    - @Bean
+                    - @Override
+                    - public Executor getAsyncExecutor()
+                    - @Override
+                    - public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler()             # 处理无返回值＠Async方法异常
+                        - return handler
+            - 使用
+            - @Async
+            - Future<String> fetch(){
+                - return new AsyncResult<String>("")
+            - }
+            - future = fetch()
+            - try{
+                - future.get()
+            - }
+    - 热部署
+        - pom.xml
+            - &lt;dependency&gt;                - &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;                - &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;                - &lt;optional&gt;true&lt;/optional&gt;                                       # 热部署            - &lt;/dependency&gt;        - application.yml
+            - spring:
+                - devtools:
+                - restart:
+                    - enabled: true
+                    - additional-paths: src/main/java
+    - jsp
+        - pom.xml
+            - &lt;!-- servlet依赖. --&gt;            - &lt;dependency&gt;                - &lt;groupId&gt;javax.servlet&lt;/groupId&gt;                - &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;                - &lt;scope&gt;provided&lt;/scope&gt;            - &lt;/dependency&gt;            - &lt;dependency&gt;                - &lt;groupId&gt;javax.servlet&lt;/groupId&gt;                - &lt;artifactId&gt;jstl&lt;/artifactId&gt;            - &lt;/dependency&gt;            - &lt;!-- tomcat的支持.--&gt;            - &lt;dependency&gt;                - &lt;groupId&gt;org.apache.tomcat.embed&lt;/groupId&gt;                - &lt;artifactId&gt;tomcat-embed-jasper&lt;/artifactId&gt;                - &lt;scope&gt;provided&lt;/scope&gt;            - &lt;/dependency&gt;        - application.yml
+            - spring:
+                - mvc:
+                - view:
+                    - prefix: /WEB-INF/views/
+                    - suffix: .jsp
+        - controller类
+            - @Controller
+            - public class XxxController {
+                - @RequestMapping("/xxx")
+                - public String xxx(Model m) {
+                    - m.addAttribute("a", 1);
+                    - return "view1";
+                - }
+            - }
+        - src/main/webapp/WEB-INF/views/view1.jsp
+            - &lt;%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%&gt;            - jsp ${a}
+    - lombok
+        - 注解
+            - @Builder                            # 修饰类, 可build方式设置属性
+            - @Getter                             # 修饰类, 生成getter
+            - @Setter                             # 修饰类, 生成setter
+            - @ToString                           # 修饰类, 生成toString方法
+            - @Data                               # 修饰类, 注入getter, setter, toString
+            - @NoArgsConstructor                  # 修饰类, 生成无参构造方法
+            - @AllArgsContructor                  # 修饰类, 生成带所有参数的构造方法
+            - @RequiredArgsConstructor            # 修饰类, 生成带常量、@NotNull修饰变量参数的构造方法
+                - @RequiredArgsConstructor(onConstructor_ = @Autowired)               # 构造类时，自动对private final 属性@Autowire
+    - remote shell
+        - pom.xml
+            - spring-boot-starter-remote-shell
+    - actuator
+        - pom.xml
+            - &lt;dependency&gt;                - &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;                - &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;            - &lt;/dependency&gt;        - 原生端点
+            - 应用配置类
+                - /autoconfig                                 # 自动化配置详情
+                    - positiveMatches	                        # 成功
+                    - negativeMatches
+                - /beans                                      # 所有bean
+                - /configprops                                # 属性
+                - /env                                        # 环境属性
+                - /mappings                                   # spring mvc映射关系
+                - /info                                       # 自定义信息，默认为空，用info前缀定义
+            - 度量指标
+                - /metrics                                    # 程序信息，内存、线程、gc等
+                    - nonheap.*                               # 非堆内存
+                    - gauge.*                                 # http请求性能，如gauge.response表示上次延迟
+                    - counter.*                               # 记录累计，如counter.status.200表示返回200的次数
+                - /metrics/{name}                             # 查看某项
+                    - /metrics/mem.free
+                - /health                                     # 启动状态，磁盘空间
+                    - DiskSpaceHealthIndicator                # 低磁盘空间
+                    - DataSourceHealthIndicator               # DataSource连接是否可用
+                    - MongoHealthIndicator
+                    - RabbitHealthIndicator
+                    - RedisHealthIndicator
+                    - SolrHealthIndicator
+                - /dump                                       # 线程信息
+                - /trace                                      # 跟踪信息
+            - 操作控制                                         # 用属性配置开启
+                - /shutdown                                   # 关闭端点
+                    - 通过endpoints.shutdown.enabled=true开启
+        - 自定义counter统计
+            - @Autowired
+            - private CounterService counterService;
+            - counterService.increment("didispace.hello.count")
+        - 自定义health检测器
+            - @Component
+            - public class RocketMQHealthIndicator implements HealthIndicator {
+                - private int check(){}
+                - @Override
+                - public Health health() {
+                    - int errorCode = check();
+                    - if (errorCode !=0) {
+                        - return Health.down().withDetail("Error Code", errorCode).build();
+                        - return Health.up().build();
+                    - }
+                - }
+            - }
+    - spring boot admin 
+        - application.yml
+            - spring:
+                - application:
+                    - name: erp-admin-server
+                - boot:
+                    - admin:
+                        - routes:
+                            - endpoints: env,metrics,dump,jolokia,info,configprops,trace,logfile,refresh,flyway,liquibase,heapdump,loggers,auditevents,hystrix.stream
+            - endpoints:
+                - health:
+                    - sensitive: false
+                    - enabled: true
+                - actuator:
+                    - enabled: true
+                    - sensitive: false
+                - beans:
+                    - sensitive: false
+                    - enabled: true
+    - spring initializer
+        - 介绍
+            - 生成spring基础项目
+    - spring security
+        - 配置
+            - application.yml
+                - security:   
+                    - basic:
+                        - enabled: false                          # 禁用security
+        - 注解
+            - @EnableWebSecurity                                  # 修饰WebSecurityConfigurerAdapter, 开启web验证
+            - @EnableGlobalMethodSecurity(prePostEnabled = true)  # 修饰WebSecurityConfigurerAdapter, 开启方法验证
+            - @PreAuthorize                                       # 修饰controller方法
+        - api
+            - Subject                                             # 主体数据结构, 如用户
+            - SecurityManager                                     # 安全管理器, 管理所有subject
+            - UserDetails
+                - getAuthorities()
+                - getUsername()
+                - getPassword()
+                - isAccountNonExpired()
+                - isAccountNonLocked()
+                - isCredentialsNonExpired()
+                - isEnabled()
+            - GrantedAuthority
+                - getAuthority()
+            - WebSecurityConfigurerAdapter
+                - configure(HttpSecurity)                         # 验证请求
+                - configure(AuthenticationManagerBuilder)         # 验证数据，需要授权服务配置AuthenticationManager
+                    - userDetailService
+                    - passwordEncoder
+                - authenticationManagerBean()                     # 指定管理bean
+    - spring security oauth2
+        - pom.xml
+            - spring-cloud-starter-oauth2
+        - 结构    
+            - OAuth2 Provider
+                - Authorization Service                           # 授权服务
+                - Resource Service                                # 资源服务
+                - Spring Security过滤器
+                    - /oauth/authorize                            # 授权
+                    - /oauth/token                                # 获取token
+        - 授权服务
+            - applicatoin.yml                                     # server
+                - security:   
+                    - oauth2:
+                        - resource:
+                            - filter-order: 3
+            - 注解
+                - @EnableAuthorizationServer                      # 修饰AuthorizationServerConfigurerAdapter, 开启授权服务
+            - api
+                - AuthorizationServerConfigurerAdapter            # 授权服务配置
+                    - configure(ClientDetailsServiceConfigurer)                           # 客户端信息
+                        - clientId
+                        - secret
+                        - scope
+                        - authorizedGrantTypes                    # password, refresh_token, client_credentials
+                        - authorities                             # 具体权限
+                    - configure(AuthorizationServerEndpointsConfigurer)                   # 使用token的服务
+                        - authenticationManager                   # 密码认证
+                            - authenticate(Authentication)
+                        - userDetailService                       # 获取用户数据
+                            - loadUserByUsername(String)
+                        - authorizationCodeServices               # 验证码
+                        - implicitGrantService
+                        - tokenGranter
+                        - tokenStore
+                            - InMemoryTokenStore
+                            - JdbcTokenStore
+                            - JwtTokenStore
+                    - configure(AuthorizationServerSecurityConfigurer)                    # 使用token服务的安全策略, 授权服务与资源服务分离时配置
+            - 接口
+                - Principal /users/current
+            - 测试
+                - insert into user(username, password) values('outrun', '$2a$10$l7.7AJEHtXukwUZiKAyVSO6lHJOyHhPxHvi7MHawe8SjlOKkCVbAe')
+                - curl erp-auth-resource:a@localhost:9016/uaa/oauth/token -d grant_type=password -d username=outrun -d password=a
+                - 浏览器
+                    - url: localhost:9016/uaa/oauth/token
+                    - header
+                        - 'Authorization': 'Basic ' + base64('erp-auth-resource:a')
+                    - data
+                        - username: 'outrun'
+                        - password: '123456'
+                        - grant_type: 'password'
+        - 资源服务
+            - application.yml                                     # client
+                - security:
+                    - oauth2:
+                        - resource:
+                            - user-info-uri: http://localhost:9016/uaa/users/current
+                        - client:
+                            - clientId: erp-auth-resource
+                            - clientSecret: a
+                            - accessTokenUri: http://localhost:9016/uaa/oauth/token
+                            - grant-type: client_credentials,password
+                            - scope: server
+            - 注解
+                - @EnableResourceServer                           # 修饰ResourceServerConfigurerAdapter, 开启资源服务
+                    - 修饰AuthorizationServerConfigurerAdapter, 因为授权服务提供token获取和验证接口
+                - @PreAuthorize("hasAuthority('ROLE_ADMIN'))      # 修饰controller方法，验证权限
+            - api
+                - ResourceServerConfigurerAdapter                 # 资源服务配置
+                    - configure(HttpSecurity)
+                        - authorizeRequests                       # 请求放行
+            - 测试
+                - curl -d "username=outrun&password=a" "localhost:9017/user/registry"
+                - insert into role values(1, 'ROLE_USER'), (2, 'ROLE_ADMIN')
+                - insert into 'user_role' values(user_id, 2)
+                - curl erp-auth-resource:a@localhost:9016/uaa/oauth/token -d grant_type=password -d username=outrun -d password=a
+                - curl -l -H "Authorization:Bearer 7df6669c-0c86-417b-827f-9a58297f57e5" -X GET "localhost:9017/hello"
+        - 客户端
+            - 注解
+                - @EnableOAuth2Client                             # 修饰[Oauth2ClientConfig], 客户端
+            - api
+                - [Oauth2ClientConfig]                            # 客户端配置, 自定义类，名称任意
+                    - ClientCredentialsResourceDetails            # bean, 资源信息
+                    - RequestInterceptor                          # bean, 保存请求上下文
+                    - OAuth2RestTemplate                          # bean, 用于向授权服务发送请求
+        - 表
+            - clientdetails
+            - oauth_access_token
+            - oauth_approvals
+            - oauth_client_details
+            - oauth_client_token
+            - oauth_code
+            - oauth_refresh_token

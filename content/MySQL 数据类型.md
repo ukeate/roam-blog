@@ -1,0 +1,13 @@
+- int             # int(5) zerofill
+- varchar(20)     # null不占空间
+- decimal(10,2)   # 小数
+- char(10)        # 空间已固定, 不论null与否
+- date
+- bool或boolean
+- double
+- float
+- longtext
+- longblob
+- timestamp       # 自动在插入、修改记录时添加，用于记录更新
+- enum('male','female') default male  # 枚举，只有一个
+- set(('football','sleep','film')     # 集合，可以多个

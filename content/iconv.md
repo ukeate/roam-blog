@@ -1,0 +1,3 @@
+- l
+    - 列出已知的编码
+- f gbk -t utf-8 -c orig.txt -o tgt.txt      # 转码

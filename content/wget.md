@@ -1,0 +1,18 @@
+- i filelist.txt         # 下载一个文件中的所有url
+- x  # 强制创建目录
+- P  # 目录prefix
+- r  # 递归下载
+- l  # 最大递归深度, inf或0代表无限制
+- k  # 修改链接，指向本地文件
+- p  # 下载所有用于显示页面的资源, 如图片
+- L  # 只跟踪relative链接
+- N  # 只获取比本地新的文件
+- np # 不追踪父目录
+- m  # 缩写-N -r -l inf --no-remove-listing
+- -no-remove-listing         # 不删除listing文件
+- 常用
+    - 爬网站
+        - wget -x -P curSite -r -l 100 -k -L -np http://nodeapi.ucdok.com/api/
+        - 带cookie
+            - wget --post-data="username=u1&password=pwd" --save-cookies=cookie --keep-session-cookies "http://www.abc.com/logging.php"
+            - wget -x -P curSite -r -l 1 -k -L -np --load-cookies=cookie --keep-session-cookies "https://www.abc.com/display/1"

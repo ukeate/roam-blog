@@ -1,0 +1,14 @@
+- 介绍
+    - 模块化标准
+    - require同步加载, 再执行代码，会阻塞。对服务器不是问题，对浏览器是大问题
+    - 输出的是值的拷贝
+    - require后的模块运行后缓存, 可手动清除缓存
+- CommonJS规范下的javascript
+    - node.js
+    - mongoDB
+    - ringojs
+- 使用
+    - var math = require('math');
+    - math.add(2, 3);
+    - let {stat, exists, readFile} = require('fs')
+        - 加载fs所有方法生成_fs, 再取其中3个方法。没法做静态优化

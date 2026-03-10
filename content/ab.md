@@ -1,0 +1,3 @@
+- Apache Benchmark，被wrk, key替代
+- ab -c 10 -n 100 https://www.baidu.com/
+    - 10并发100次, url结尾要有/

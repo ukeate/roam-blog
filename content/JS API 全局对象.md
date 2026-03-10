@@ -1,0 +1,102 @@
+- 顶级全局对象
+    - 介绍
+        - js代码最外层的this
+        - 初始化时, 定义所有预定义全局值
+        - 代码中定义的全局变量，实际是该对象的属性
+    - Global
+    - Window
+        - 介绍
+            - 初始化时定义了一部分其他全局属性
+- Math
+    - 属性
+        - PI
+        - E                                       # 自然对数底数
+        - LN10                                    # 同Math.log(10), 表示以e为低10的对数, Math.log(100)/Math.LN10 消底后表示以10为底100的对数
+        - LN2
+    - 静态方法
+        - trunc                                   # 去除小数部分
+        - sign                                    # 判断正负或零
+        - exp                                     # e的x次方
+        - log                                     # x的自然对数
+        - cbrt                                    # 立方根, 同Math.pow(Math.abs(x), 1/3)
+        - clz32
+            - 二进制下32位无符号整数有多少个前导0。小数会取floor
+                - count leading zero bits in 32-bit binary representations of a number
+            - Math.clz32(1000)        // 22
+            - Math.clz32(1000 << 1)        // 21
+        - imul                                    # 32位带符号整数的乘积, 在乘积越界时会返回正确的低位数值
+        - fround                                  # 返回一个数的单精度浮点数表示, 4位无法精确表示的小数，会返回最接近的数, 同new Float32Array([x])[0]
+            - Math.fround(1.337);        // 1.337000012...
+        - hypot                                   # 所有参数平方和的平方根
+        - expm1                                   # 返回Math.exp(x) - 1
+        - log1p                                   # 返回Math.log(1 + x)
+        - log10                                   # 返回以10为低x的对数, 同 Math.log(x) / Math.LN10
+        - log2
+        - sinh                                    # 双曲正弦 hyperbolic sine
+        - cosh                                    # 双曲余弦 hyperbolic cosine
+        - tanh                                    # 双曲正切 hyperbolic tangent
+        - asinh                                   # inverse hyperbolic sine
+        - acosh
+        - atanh
+    - 方法
+        - pow(x, y)                               # x的y次方, pow(x, 1/3) 表示立方根
+        - round(.6)                               # 四舍五入
+        - ceil(.6)                                # 向上求整
+        - floor(.6)                               # 向下求整
+        - abs(-5)                                 # 绝对值
+        - max(x, y)                               # 最大值
+        - min(x, y)                               # 最小值
+        - random()                                # >=0, < 1.0的伪随机数
+        - sqrt(3)                                 # 平方根
+        - sin(0)
+        - log(10)                                 # 自然对数
+        - exp(3)                                  # e的3次幂
+- JSON
+    - 方法
+        - parse(str)
+        - stringify(obj)
+- Reflect
+    - 静态方法
+        - ownKeys(target)                         # 返回对象自身所有属性
+        - enumerate(target)                       # 返回Iterator，遍历对象自身和继承的所有可枚举属性, 同for ... in
+        - apply(target, thisArg, args)
+        - construct(target, args)
+        - get(target, name, receiver)
+        - set(target, name, value, receiver)
+        - defineProperty(target, name, desc)
+        - deleteProperty(target, name)
+        - has(target, name)
+        - isExtensible(target)
+        - preventExtensions(target)
+        - getOwnPropertyDescriptor(target, name)
+        - getPrototypeOf(target)
+        - setPrototypeOf(target, prototype)
+- Symbol
+    - 属性
+        - hasInstance                             # Obj[Symbol.hasInstance]方法在instanceof运算时调用，如Foo[Symbol.hasInstance](foo)
+        - isConcatSpreadable                      # arr.concat时是否要展开
+            - let arr = [1, 2], arr[Symbol.isConcatSpreadable] = false,
+            - ['a', 'b'].concat(arr, 'c')        // ['a', 'b', [1, 2], 'c']
+        - species                                 # 如果this.constructor[Symbol.species]存在, 用它来做构造函数
+        - match                                   # str.match(obj)时, 调用obj[Symbol.match](str)
+        - replace                                 # str.replace(s, r)时, 调用s[Symbol.replace](s, r)
+        - search                                  # str.search(obj)时，调用obj[Symbol.search](str)
+        - split                                   # str.split(separator, limit)时, 调用separator[Symbol.split](str, limit)
+        - iterator
+            - for ... of指向调用的默认遍历器
+            - ```javascript
+              function A {*[Symbol.iterator] () {
+                  let i = 0; while(this[i] != undefined) {yield this[i]; i++;}
+              }}
+              ```
+        - toPrimitive                             # 对象转原始类型值时调用
+            - {[Symbol.toPrimitive] (hint) {}}        // hint值有 'number', 'string', 'default'
+        - toStringTag
+            - toString时拼在后面, 如 '[object xxx]'
+        - unscopables
+            - 排除with时的属性, Array.prototype[Symbol.unscopables]        // {copyWithin: true, ...}
+    - 方法
+        - s.toString()        // 'Symbol(foo)'    # 可以String(s) 得到字符串'Symbol(foo)'
+    - 静态方法
+        - for('foo')                              # 搜索以'foo'作参数登记的Symbol值, 没有时会新建、登记并返回, 这种登记是全局的
+        - keyFor(s)                               # 返回s登录的字符串，没有时返回undefined

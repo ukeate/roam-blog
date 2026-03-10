@@ -1,0 +1,1 @@
+- 分布式sql查询, Facebook开源, 称比Hive快10倍

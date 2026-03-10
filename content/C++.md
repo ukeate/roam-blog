@@ -1,0 +1,18 @@
+- 问题
+    - 野指针、迷途指针 Double Free问题
+    - 智能指针
+    - RAII资源获取就是初始化
+    - 二级指针
+- C++ 库
+    - 图像
+        - opencv
+            - iplimage
+                - 图像处理
+        - ccap
+            - 基于c++的图形CImg库，就是一个CImg.h文件
+    - 实时接口
+        - webrtc
+            - c++实现的web视频聊天
+    - DSL
+        - [[Lex]]
+        - [[YACC]]

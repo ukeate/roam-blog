@@ -1,0 +1,3 @@
+- n                      # 执行umount却不写入
+- l                      # lazy
+- f                      # force

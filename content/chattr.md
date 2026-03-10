@@ -1,0 +1,2 @@
+- 改变属性
+- chattr +i file

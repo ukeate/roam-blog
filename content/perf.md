@@ -1,0 +1,5 @@
+- 系统瓶颈分析
+- 场景
+    - 内核模块中，消耗最多CPU周期的函数
+        - perf top -e cycles:k
+    - perf top

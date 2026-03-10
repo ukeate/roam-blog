@@ -1,0 +1,3 @@
+- [[SSO]]
+    - sessionID存cookie, cookie禁用存头域
+- [[CAS协议]]

@@ -1,0 +1,2 @@
+- ES，事件源
+- 如OrderViewModel订阅Order Aggregate所发布的事件

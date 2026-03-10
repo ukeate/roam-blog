@@ -1,0 +1,14 @@
+- 包
+    - dnf install @development-tools
+    - yum install epel-release
+- 安装VBoxAdditions
+    - yum update kernel
+    - yum install kernel-headers kernel-devel gcc
+        - 可能要加软连接 /usr/src/kernels/
+    - mount /dev/cdrom /mnt
+    - /mnt/VBoxLinuxAdditions.run
+- gcc升级
+    - yum -y install centos-release-scl
+    - yum -y install devtoolset-6-gcc devtoolset-6-gcc-c++ devtoolset-6-binutils
+    - scl enable devtoolset-6 bash
+    - echo "source /opt/rh/devtoolset-6/enable" >>/etc/profile

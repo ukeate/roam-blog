@@ -1,0 +1,3 @@
+- 导出用pandoc
+    - Export -> .docx -> Extra Arguments
+    - -F /Users/runout/.pyenv/versions/3.12.2/bin/pandoc-tex-numbering -M number-sections=false -M number-equations=false -M number-theorems=false -M number-figures=false -M number-tables=false

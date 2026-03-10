@@ -1,0 +1,14 @@
+- 开发技术认证
+- Java认证
+    - 数据库开发语言SQL和PL/SQL认证
+- 数据库技术认证
+    - OCA，初级
+    - OCP，专家
+    - OCM，大师
+- 中间件技术认证
+    - OracleServer认证，WEB服务器认证
+- 专业领域技术认证
+    - ERP
+    - CRM
+    - HR
+    - OA

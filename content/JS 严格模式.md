@@ -1,0 +1,21 @@
+- 区别
+    - 所有变量都要先声明
+    - 增加了保留字(如await, protected, static, interface)
+    - eval, arguments当作关键字
+    - 不允许八进制整数直接量(0前缀)
+    - 不能给只读属性赋值，不能给不可扩展对象创建新成员
+    - arguments对象拥有参数的静态副本。               # 非严格模式中，都是引用，可以改变原值
+    - 限制调用栈检测能力                              # 具有caller和arguments属性，但访问时会抛出异常
+        - arguments.caller, arguments.callee都会抛出类型错误异常
+        - fn.caller, fn.arguments禁止使用
+    - 对象定义同名属性产生语法错误, 函数声明同名参数产生语法错误
+    - 禁止使用with语句
+    - this值在调用的函数中是undefined,                # this禁止指向全局变量
+        - 指非属性调用，如eval()，非a.test()
+    - eval()代码不能创建局部变量或函数
+        - 而是定义在eval创建的新作用域(在eval返回时弃用)中
+        - eval不包含外层作用域
+    - delete后非法标识符抛出异常
+        - 如delete prop, 只能delete global[prop]
+        - delete不可配置属性抛出异常
+    - es5, es6中尾调用优化只在严格模式下开启             # 因为arguments.caller会跟踪函数调用栈, 无法开启

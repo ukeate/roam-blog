@@ -1,0 +1,6 @@
+- new
+- list
+- search
+- exec
+- configure
+- sync

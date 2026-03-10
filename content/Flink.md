@@ -1,0 +1,48 @@
+- 特点
+    - 高吞吐、低延迟、高性能
+    - 支持事件时间(Event Time)
+    - 擅长有状态的计算	
+        - 内存
+        - 磁盘
+        - RocksDB
+    - 灵活的窗口（Window）操作： time, count, session
+    - 基于轻量级分布式快照（CheckPoint）实现容错，保证exactly-once
+    - 基于JVM实现独立内存管理
+    - Save Points方便代码升级
+- 批计算是流计算的特例
+    - unbound streams		# 定义开始不定义结束，流计算
+    - bounded streams		# 定义开始也定义结束，批计算
+- 迟到数据问题
+    - 温度窗口
+    - 水位线(Watermark)
+- 集群
+    - JobManager(JVM进程)
+    - TaskManager(JVM进程)
+        - Task Slot	
+            - 一组固定的资源，隔离内存，不隔离核
+            - 一般与核数对应，核支持超线程时一个算两个
+- 配置
+    - /etc
+        - /flink-conf.yaml
+        - /slaves
+        - /masters
+- 组件
+    - 部署
+        - Single JVM		# 多线程模拟
+        - Standalone
+        - YARN	
+    - 库
+        - CEP				# 复杂事件库
+        - Table
+        - FlinkML
+        - Gelly
+- 使用
+    - import org.apache.flink.streaming.api.scala._
+    - val env = StreamExecutionEnvironment.getExecutionEnvironment
+    - val initStream:DataStream[String] = env.socketTextStream("node01", 8888)
+    - val wordStream = initStream.flatMap(_.split(" "))
+    - val pairStream = wordStream.map((_, 1))
+    - val keyByStream = pairStream.keyBy(0)
+    - val restStream = keyByStream.sum(1)
+    - restStream.print()
+    - env.execute("job1")

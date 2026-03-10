@@ -1,0 +1,4 @@
+- 介绍
+    - 软件有Android, Apache Web Server, Swift
+- 特点
+    - 类似BSD，被修改的原始文件要著名版权

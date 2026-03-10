@@ -1,0 +1,14 @@
+- 通信协议，最初Google开发
+- 二进制编码格式
+    - 压缩程度相当于Thrift CompactProtocol
+- 命令
+    - protoc -I. -I-I$GOPATH/src  --go_out=plugins=grpc:. *
+        - -I import目录
+    - protoc --grpc-gateway_out=.
+- 插件
+    - 安装
+        - go build 出protoc-gen-go后，放入go/bin下
+    - protoc-gen-go
+        - 编译proto文件
+    - protoc-gen-grpc-gateway
+        - http服务

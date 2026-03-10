@@ -1,0 +1,11 @@
+- status
+- daemon-reload           # 修改service文件后重载
+- systemctl list-units                        # list known units
+- systemctl list-unit-files                   # 已知的services
+- systemctl list-sockets                      # list socket units ordered by the listening address
+- systemctl enable NAME                       # 设置开机启动, 生成service脚本命令
+- systemctl disable NAME
+- systemctl start NAME
+- systemctl stop NAME
+- systemctl restart NAME
+- systemctl reload NAME

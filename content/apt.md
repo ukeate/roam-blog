@@ -1,0 +1,12 @@
+- 源
+    - 阿里云mirror: https://developer.aliyun.com/mirror
+    - ubuntu
+        - sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list 
+- 场景
+    - 降级
+        - apt-cache policy p1
+            - 查看旧版本号
+        - apt install p1=1.48.158
+            - 降级
+        - apt-mark hold p1
+            - 保留p1包不升级

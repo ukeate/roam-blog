@@ -1,0 +1,6 @@
+- YGC -> s0
+- YGC, eden + s0 -> s1
+    - 年龄足够 -> old
+    - s区装不下 -> old
+- YGC, eden + s1 -> s0
+- old满了 -> FGC

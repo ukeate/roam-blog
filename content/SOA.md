@@ -1,0 +1,5 @@
+- 面向服务架构 service oriented architecture
+- EAI
+    - Enterprise Application Integration 建立底层结构将异构应用集成
+- ESB
+    - Enterprise Service Bus 企业服务总线， 是连接中枢

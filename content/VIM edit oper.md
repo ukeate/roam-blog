@@ -1,0 +1,113 @@
+- shortcut key
+    - &lt;C - r&gt;                         # 撤销的撤销    - &lt;C - a&gt;/x                       # 数字增加/减少1, 对0开关数字进行八进制操作, 0x进行十进制操作。可以设置nrformats改变    - 插入模式/命令模式
+        - &lt;C - h&gt;                     # 删除前一个字符        - &lt;C - w&gt;                     # 命令模式可用，删除前一个单词        - &lt;C - u&gt;                     # 命令模式可用，删至行首        - &lt;C - [&gt;                     # 返回普通模式        - &lt;C - o&gt;                     # 到插入-普通模式        - &lt;C - v&gt;                     # 命令模式可用，插入编码对应的字符            - 065                     # 两位的编码
+            - u00bf                   # 超过3位的unicode码
+            - 非数字                   # 直接插入, 如expandtab开启后插入tab
+        - &lt;C - k&gt;{char1}{char2}       # 命令模式可用，插入以二合字母表示的字符            - 12
+            - &lt;&lt;            - ?I
+        - &lt;C - r&gt;{register}           # 命令模式可用，插入寄存器内容    - 补全
+        - &lt;C - n&gt;/p                   # 自动补全下/上        - &lt;C - x&gt; 接着按如下            - &lt;C - L&gt;                 # 整行补全            - &lt;C - N&gt;                 # 根据当前文件里关键字补全            - &lt;C - K&gt;                 # 根据字典补全            - &lt;C - T&gt;                 # 根据同义词字典补全            - &lt;C - I&gt;                 # 根据头文件内关键字补全            - &lt;C - ]&gt;                 # 根据标签补全            - &lt;C - F&gt;                 # 补全文件名            - &lt;C - D&gt;                 # 补全宏定义            - &lt;C - V&gt;                 # 补全vim命令            - &lt;C - U&gt;                 # 用户自定义补全方式            - &lt;C - S&gt;                 # 拼写建议- operator                            # num + operator 来多次操作, 合并命令如A(同$a), 是为了普通模式下一个按键进行插入，这样能够在.命令中重复
+    - @:                              # 重复Ex命令
+    - &                               # 重复substitute命令
+    - x/X                             # 删除当前字符/删除前一个字符， x等于dl，X 等于dh
+    - u/U                             # 撤销(Undo)/撤销对整行的操作
+    - r/R                             # 替换一个字符/持续替换字符，tab是一个字符
+        - gR                          # 一个tab由tabstop个字符才能替换
+        - gr
+    - y/yy/Y                          # yank 复制/复制一行/同yy
+        - :y
+    - p/P                             # 粘贴/前面粘贴
+        - :p
+    - a/A                             # s当前字符后插入
+        - A同$a, 行尾插入
+    - o/O                             # 向后插入行
+        - o同A<CR>
+        - O同ko, 向前插入行
+    - s/S                             # 替换当前字符/替换当前行
+        - s同cl
+        - S同^C
+    - i/I                             # 当前字符前插入/行首插入
+        - I同^i 
+    - c/cc/C                          # 替换/替换一行/同cc
+        - :0,10c 与 :c
+        - C同c$
+    - d/dd/D                          # 删除/删除一行/删到行尾
+        - dd 同 :d
+        - 10d表示删除10行
+        - D同d$
+        - :0,10d 与 :d
+    - &lt;&lt;/&gt;&gt;        - 可视模式下 </>
+        - 命令下 1>>2 表示从1行开始, 作用2行>>, 可以1>>>>2
+        - 1,2> 表示 1到2行>>, 可以1,2>>
+        - `>G` 缩进当前到最后一行
+    - =                               # 自动缩进
+        - == 自动缩进当前行
+    - !                               # 用外部命令过滤指定行
+        - 如!j, 自动进入命令模式, 选定了指定行进行!
+        - !!当前[count]行
+    - J                               # 与下行合并
+    - g                               # :[range]global/{pattern}/{command}
+        - global命令在[range]指定的文本范围内（缺省为整个文件）查找{pattern}，然后对匹配到的行执行命令{command}，如果希望对没匹配上的行执行命令，则使用global!或vglobal命令。
+        - g/^/m 0 倒序文件行
+    - g_                              # 到本行最后一个不是blank字符的位置
+    - gd                              # 智能跳到当前变量定义的位置
+    - gu/gU                           # 转换到小写/大写, 如gUw
+        - gugu / guu / gUgU / gUU
+    - g~                              # 大写转小写，小写转大写
+        - g~g~ / g~~ 转换一行
+    - 可视模式下
+        - U/u                     # 大写/小写
+- ex command
+    - :1,10 co 20                     # 将1-10行插入到第20行之后。
+        - :1,$ co $ 复制整个文件添加到尾部
+    - :1, 10 m 20                     # 第1-10行移动到第20行之后
+    - :ab attr attribute              # 缩写, 输入模式中输入attr,再输入非字母字符(空格, 点等)，自动补全
+        - ab查看所有缩写
+        - una/unab attr 取消缩写　
+    - :!                              # 执行外部命令
+    - :[range]copy{address} /:t /:co  # 复制range到address后, :t 2 表示复制当前行到第2行后
+    - :[range]move{address}           # 移动
+    - :[range]join                    # 连接
+    - :[range]delete[x]               # 删除指定范围内的行到寄存器中
+    - :[range]yank[x]                 # 复制
+    - :[line]put[x]                   # 指定行后粘贴寄存器中内容
+    - :[range]normal{commands}        # 指定范围执行命令
+    - :[range]print / p               # 在vim下方回显指定行的内容
+- text-object
+    - i"
+        - " 表示 光标所在""的内容
+        - '
+        - `
+        - ) 表示 ()的内容
+        - ( 同上
+        - ]
+        - [
+        - `>`
+        - &lt;        - }
+        - {
+        - B 表示 {}的内容
+        - t 表示 tag之间的内容，如<h2>aaaa</h2>
+        - w 表示 光标所在word
+        - s 表示 光标所在句子
+        - p 表示 段落
+    - a"                              # 包括外围，命令同i
+    - 视图模式下
+        - vit                         # 在可视模式下选中标签内容，如<a>xxx</a>的xxx
+- patterns oper
+    - operator
+        - &                               # 重复:s上次执行的命令, 不包含g
+            - g& 全局重复:s上次的命令
+        - n/N                             # 查找下一个/上一个
+    - Ex command
+        - :[range]substitude/{pattern}/{string}/[flags]
+            - :s 用new替换old，替换当前行的第一个匹配
+            - 前面是正则, 用()分组，后面用\1引用分组
+            - :s/old/new/g 作用到整行
+            - :%s/old/new/ 作用到每行第一个
+            - :10,20 s/^/    /g 作用到10到20行的每一个
+            - :%s/old/new/g 作用到全文
+            - :s/old/new/gc 每次修改前询问
+        - :[range]global/{pattern}/[cmd]
+            - :g 查找text的行执行命令,如:g/text/s/old/new/g
+            - v/text/command 查找到行不执行命令,其它行执行
+        - :&                              # 同operator中&

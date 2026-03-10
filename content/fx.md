@@ -1,0 +1,2 @@
+- 交互式看json，也支持yaml、toml。go实现
+- fx --yaml

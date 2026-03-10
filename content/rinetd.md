@@ -1,0 +1,4 @@
+- TCP端口转发
+- rinetd.conf
+    - 0.0.0.0 80 192.168.1.2 80    
+- rinetd -c /etc/rinetd.conf

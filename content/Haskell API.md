@@ -1,0 +1,590 @@
+- 内置变量
+    - pi
+- 模块
+    - :m Data.Char Data.Map
+        - 加载模块
+        - chr
+            - `chr :: Int -> Char`
+        - ord
+            - `ord :: Char -> Int`
+        - toUpper
+        - toLower
+    - import Data.Char
+        - 导入到全局命名空间
+        - import Data.List (nub, sort)
+        - import Data.List hiding (nub)
+        - import qualified Data.Map as M
+            - 这样其中命名冲突的filter, null函数，只能用Data.Map.filter或M.filter方式调用
+    - 可用模块
+        - prelude
+            - 默认载入的模块
+        - Data
+            - Char
+            - List
+            - Map
+            - Set
+    - 自定义模块
+        - ```haskell
+          module Geometry.Sphere
+          (sphereVolume
+          , sphereArea
+          , Shape(..)
+              # 导出类型和其所有构造子
+          ) where
+          sphereVolum :: Float -> Float
+          sphereVolum radius = (4.0 / 3.0) * pi * (radius ^ 3)
+          ```
+- 内置函数
+    - prelude
+        - $
+            - 函数调用符，优先级最低。而空格是最高优先级
+            - $右结合。而空格左结合
+            - 等价于在右而写一对括号
+        - .
+            - f . g = \x -> f (g x)
+            - 函数组合
+        - main
+            - `main :: IO ()`
+            - main = do
+        - signum
+            - 根据数字返回 -1, 0, 1
+        - not
+        - id
+            - identity
+        - unlines
+            - unlines ["a", "b"]
+                - 成为 "a\nb\n"
+        - unwords
+            - unwords ["a", "b"]
+                - 成为 "a b"
+        - show
+            - 接受各种类型，转换为String, 再转义打印
+        - read
+            - `read "5" :: Int`
+            - read "5" - 2
+            - read "[1,2,3]" ++ [4]
+        - reads
+            - 读取失败返回[]而不报错
+        - negate
+            - 取反数字
+        - abs
+            - 绝对值
+        - length
+            - 列表的长度, [a] -> Int , a在这里是一个type variable, 以小写字母开头(具体类型都大写开头)
+        - map
+        - compare
+            - 返回 LT, GT, EQ其中一个
+        - min
+        - max
+        - compare
+            - 返回LT, GT, EQ
+            - ```haskell
+              "Abc" `compare` "Zyx"
+              ```
+        - mod
+            - 取模
+        - odd
+            - 奇数
+        - even
+            - 偶数
+        - succ
+            - 取Enum的后继
+        - pred
+            - 取Enum的前置
+        - minBound
+            - 取Bound下限
+        - maxBound
+        - substract
+            - 减
+        - head
+        - tail
+            - 除第一个
+        - last
+        - init
+            - 除最后一个
+        - null
+            - 检查list是否空
+        - reverse
+            - list反转
+        - take
+            - take 1 [1,2,3]
+        - takeWhile
+            - 取list值，直到某条件
+        - drop
+            - drop 1 [1,2,3]
+        - maximum
+            - list中最大元素
+        - minimun
+            - list中最小元素
+        - sum
+            - list和
+        - product
+            - list积
+        - elem
+            - 判断元素是否在list中
+            - ```haskell
+              4 `elem` [3,4,5]
+              ```
+        - cycle
+            - take 7 (cycle [1,2,3])
+                - [1,2,3,1,2,3,1]
+        - repeat
+            - repeat 5
+        - replicate
+            - replicate 3 10
+                - [10, 10, 10]
+        - fst (1, 2)
+            - 只适合2元组
+        - snd (1, 2)
+            - 只适合2元组
+        - zip
+            - zip3, zip4 ... zip7
+            - zip [1,2,3] [4,5,6]
+                - [(1,4), (2,5), (3,6)]
+        - zipWith
+            - zipWith1 ... zipWith7
+            - zipWith (\x y -> x + y) [1,2] [3,4]
+                - [4,6]
+        - fromIntegral
+            - 返回更通用的数字类型
+        - error ""
+            - 抛错
+        - flip
+            - 翻转两个参数调用
+        - map
+        - filter
+        - foldl
+            - foldl (\acc x -> acc + x) 0 xs
+        - foldr
+            - foldr (\x acc -> f x : acc) [] xs
+        - foldl1
+            - 以第一个元素为初始值，空list报错
+        - foldr1
+        - foldl'
+            - foldl的strict版
+        - foldr'
+        - scanl
+            - 返回累加过程的list
+        - scanr
+        - scanl1
+        - scanr1
+        - o-> I/O action
+            - 只有在main中执行
+            - 类型为 IO a
+            - putStrLn
+                - 只接受String，不转义打印，加换行符
+                - `putStrLn :: String -> IO () `, 表示接收String, 是IO动作, 结果类型是()。表示是一个"IO monad"动作
+            - putStr
+                - 由putChar递归定义，边界条件是空字符串
+            - putChar
+            - print
+                - 打印Show typeclass的值
+            - getLine
+                - 控制台读一行
+                - `getLine :: IO String`
+                - name <- getLine
+            - getChar
+            - sequence
+                - 顺序执行I/O action
+            - mapM
+                - mapM print [1,2,3]
+                    - 对list元素执行sequence f
+            - mapM_
+                - 同mapM，不打印[(),()]
+            - getContents
+                - 读直到 eof (ctrl + d)
+            - interact
+                - 用函数处理输入，返回到输出
+    - Data.List
+        - 每个元素存在thunk中
+        - \
+            - 差集
+            - [1..3] \\ [2]
+                - [1,3]
+            - "Im a big baby" \\ "big"
+                - 输出 "Im a baby"
+        - union
+        - intersection
+        - insert
+            - 插入一个元素到可排序list相对位置
+        - nub
+            - 去重复元素,常用Set转换取代,提高很多效率
+        - map
+            - 导出到了prelude
+        - filter
+            - 导出到了prelude
+        - intersperse
+            - intersperse '.' "abc"
+                - "a.b.c"
+        - intercalate
+            - 同intersperse, 但插入list
+        - transpose
+            - 二元list列为行
+        - foldl'
+            - fold的严格版，直接计算出中间值，而非用惰性"承诺"塞满堆栈
+        - foldl1'
+        - concat
+            - 移除一级嵌套
+        - concatMap
+            - 先map再concat
+            - concatMap (replicate 2) [1..3]
+                - [1,1,2,2,3,3]
+        - and
+            - list中全true返回true
+            - and $ map (>4) [5,6,7,8]
+        - or
+        - any
+        - iterate
+            - 无限迭代值到函数，结果形成list
+            - take 10 $ iterate (*2) 1
+        - splitAt
+            - 断开list, 返回二元组
+            - splitAt 3 "abcdef"
+                - ("abc", "def")
+        - takeWhile
+            - 取元素，直到不符合条件
+        - dropWhile
+        - span
+            - 同takeWhile, 不过返回分割list的二元组
+        - break
+            - 同span, 但在条件首次为true时断开
+        - sort
+            - list元素要求Ord类型，排序list
+        - group
+            - 合并相邻并相等的list元素
+        - inits
+            - init递归调用自身
+            - inits "abc"
+                - ["", "a", "ab", "abc"]
+        - tails
+            - tail递归调用自身
+            - tails "abc"
+                - ["abc", "bc", "c", ""]
+        - isInfixOf
+            - list中搜索子list, 有则返回true
+            - ```haskell
+              "cat" `isInfixOf` "im a cat"
+              ```
+        - isPrefixOf
+            - 是否以某list开头
+        - isSuffixOf
+            - 是否以某list结尾
+        - elem
+            - 是否包含某元素
+        - notElem
+        - partition
+            - 条件划分list为二元组
+            - ```haskell
+              partition (`elem` ['A'..'Z']) "AbCD"
+              ```
+                - ("ACD", "b")
+        - find
+            - 条件查找list, 返回第一个符合元素的Maybe值
+        - elemIndex
+            - 返回elem第一个元素的索引的Maybe值
+        - elemIndices
+            - 返回所有匹配索引的list
+        - findIndex
+        - findIndices
+        - lines
+            - 字符串分行到list
+        - unlines
+        - words
+            - 字符串分词到list
+        - unwords
+        - delete
+            - 删除list中第一个匹配元素
+            - delete 'h' "hha"
+                - "ha"
+        - replace
+        - lookup
+            - 用a查找[('a', 'b')]中的b
+        - genericLength
+            - 换Int类型为Num类型
+        - genericTake
+        - genericDrop
+        - genericSplitAt
+        - genericIndex
+        - genericReplicate
+        - nubBy
+            - 传递函数判断相等性，取代==
+        - deleteBy
+        - unionBy
+        - intersectBy
+        - groupBy
+        - sortBy
+        - insertBy
+        - maximumBy
+        - minimumBy
+    - Data.Monoid
+        - Monoid
+        - Product
+        - Sum
+        - Any
+        - All
+    - Data.Foldable
+        - foldr
+        - foldl
+        - foldr1
+        - foldl1
+    - Data.Function
+        - on
+            - ```haskell
+              ((==) `on` (> 0))
+              ```
+                - 判断相等性，等价于 (\x y -> (x > 0) == (y > 0))
+            - ```haskell
+              (compare `on` length)
+              ```
+                - 判断大小
+    - Data.Char
+        - isControl
+            - 是否控制字符
+        - isSpace
+            - 包括空格, tab, 换行等
+        - isLower
+        - isUpper
+        - isAlpha
+            - 是否字母
+        - isAlphaNum
+            - 字母或数字
+        - isPrint
+            - 可打印
+        - isDgit
+        - isOctDigit
+        - isHexDigit
+        - isLetter
+            - 同isAlpha
+        - isMark
+            - unicode注音字符
+        - isNumber
+        - isPunctuation
+            - 是否标点符号
+        - isSymbol
+            - 货币符号
+        - isSeperater
+            - unicode空格或分隔符
+        - isAscii
+            - unicode 前128位
+        - isLatin1
+            - unicode 前256位
+        - isAsciiUpper
+        - isAsciiLower
+        - GeneralCategory
+            - 得到字符的分类，一共31类, 属于Eq类型
+            - generalCategory ' '
+                - Space
+        - toUpper
+        - toLower
+        - toTitle
+        - digitToInt
+            - 数字，大小写字母list 转成 int list
+        - intToDigit
+        - ord
+        - char
+    - Data.Map
+        - 用avl树实现
+        - fromList
+            - 重复键会忽略，要求key有相等性和排序性
+        - fromListWith
+            - 重复键给函数处理
+        - toList
+        - empty
+            - 返回空map
+        - insert
+            - insert 3 10 map
+        - insertWith
+            - 已包含键时函数处理
+        - null
+            - 检查map是否空
+        - size
+            - 返回map的大小
+        - singleton
+            - singleton 3, 9
+                - fromList [(3,9)]
+        - lookup
+        - member
+            - key 是否在map中
+        - map
+        - filter
+        - keys
+        - elems
+    - Data.Set
+        - 要求元素可排序，自动排序、唯一
+        - 用avl树实现
+        - fromList
+        - intersection
+        - difference
+            - 存在于第一集合而不在第二集合的元素
+        - union
+        - null
+        - size
+        - member
+        - empty
+        - singleton
+        - insert
+        - delete
+        - isSubsetOf    
+            - 子集
+            - fromList [1,2] isSubsetOf fromList [1,2]
+        - isProperSubsetOf
+            - 真子集
+        - filter
+        - map
+    - Data.ByteString
+        - strict bytestring
+        - Empty相当于[], cons相当于:
+    - Data.ByteString.Lazy
+        - 每个元素存在chunk中，每个chunk 64k，每个chunk相当于一个strict bytestring
+        - cons在chunk不满的时候会新建chunk, cons'是strick版的cons, 会填充chunk
+        - pack
+            - `pack :: [Word8] -> ByteString`
+            - pack [80,81]
+        - unpack
+        - fromChunks
+            - 转换strick bytestring 到lazy
+        - toChunks
+            - lazy转strick
+    - Data.Ratio
+    - Control.Applicative
+        - Applicative
+            - ```haskell
+              class (Functor f) => Applicative f where
+                  pure :: a -> fa
+                  (<*>) :: f (a -> b) -> f a -> f b
+                  f <$> x = fmap f x
+              ```
+        - ZipList
+            - ZipList3
+            - ZipList7
+        - getZipList
+        - liftA2
+            - liftA2 f x y = f <$> x <*> y 
+        - sequenceA
+    - Control.Monad
+        - when
+            - Bool true时，返回后面的I/O action, 否则return ()
+        - forever
+            - 不断执行后面的I/O action
+            - forever $ do
+                - putStr "a"
+        - forM
+            - 同mapM, 但两个参数顺序相反
+        - liftM
+            - monad中的fmap
+        - liftM2 liftM3 liftM4 liftM5
+        - ```haskell
+          `ap` 
+          ```
+            - monad中的<*>
+        - join
+            - ```haskell
+              join :: (Monad m) => m (m a) -> m a
+                  join mm = do
+                      m <- mm
+                      m
+              ```
+        - filterM
+        - foldM
+    - Control.Monad.State
+        - State
+            - `newtype State s a = State {runState :: s -> (a, s)}`
+        - get
+        - put
+    - Control.Monad.Error
+    - System.IO
+        - openFile
+            - `openFile :: FilePath -> IOMode -> IO Handle`
+            - data IOMode = ReadMode | WriteMode | AppendMode | ReadWriteMode
+            - ```haskell
+              do
+                  handle = openFile "a.txt" ReadMode
+                  contents <- hGetContents handle
+                  putStr contents
+                  hClose handle
+              ```
+        - withFile
+            - `withFile :: FilePath -> IOMode -> (Handle -> IO a) -> IO a`
+            - 处理完关掉
+            - ```haskell
+              withFile "a.txt" ReadMode (\handle -> do
+                  contents <- hGetContents handle
+                  putStr contents)
+              ```
+        - readFile
+            - `readFile :: FilePath -> IO String`
+            - ```haskell
+              do
+                  contents <- readFile "a.txt"
+                  putStr contents
+              ```
+        - wirteFile
+            - `writeFile :: FilePath -> String -> IO ()`
+            - ```haskell
+              do
+                  writeFile "a.txt" contents
+              ```
+        - appendFile
+        - hSetBuffering
+            - 读binary file时的buffer，默认是系统值
+            - data BufferMode = NoBuffering | LineBuffering | BlockBuffering (Maybe Int)
+            - `hSetBuffering handle $ BlockBuffering (Just 2048)`
+        - hFlush
+            - 写入时自动Flush
+        - openTempFile
+            - (tempName, tempHandle) <- openTempFile "." "temp"
+        - hGetContents
+        - hClose
+        - hGetLine
+        - hPusStr
+        - hPutStrLn
+        - hGetChar
+    - System.IO.Error
+        - catch
+            - `catch :: IO a -> (IOError -> IO a) -> IO a`
+            - ```haskell
+              toTry `catch` handler
+                  handler e
+                      | isDoesNotExistError e = 
+                          case ioeGetFileName e of Just path -> putStrLn $ "a" ++ path
+                              Nothing -> putStrLn "b"
+                      | otherwise = ioError e
+              ```
+        - isDoesNotExistError
+        - isAlreadyExistsError
+        - isFullError
+        - isEOFError
+        - isIllegalOperation
+        - isPermissionError
+        - isUserError
+        - ioeGetFileName
+            - `ioeGetFileName :: IOError -> Maybe FilePath`
+        - ioError
+            - 丢出接到的error
+    - System.Directory
+        - removeFile
+            - removeFile "a.txt"
+        - renameFile
+            - renameFile tempName "a.txt"
+        - copyFile
+        - doesFileExist
+    - System.Environment
+        - getArgs
+        - getProgName
+    - System.Random
+        - mkStdGen
+            - `mkStdGen :: Int -> StdGen`
+        - getStdGen
+            - IO类型, 得到系统启动时的global generator
+        - newStdGen
+            - 把现有的random generator分成两个新的generators, 其中一个指定成新的，返回另一个
+        - random
+            - `random :: (RandomGen g, Random a) = g -> (a, g)`
+            - `random (mkStdGen 100) :: (Int, StdGen)`
+        - randoms
+            - `take 5 $ randoms (mkStdGen 11) :: [Int]`
+        - randomR
+            - 区间random
+            - randomR (1,6) (mkStdGen 2)
+        - randomRs
+            - `take 10 $ randomRs ('a', 'z') (mkStdGen 3) :: [Char]`

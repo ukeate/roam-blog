@@ -1,0 +1,4 @@
+- 切k8s ctx
+- kubectx ac
+- kubectx -，切回上一个
+- kubectx ac_new=ac，改名

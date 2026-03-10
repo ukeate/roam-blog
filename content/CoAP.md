@@ -1,0 +1,7 @@
+- Constrained Application Protocol，物联网协议
+- 适合资源紧张的设备
+- 请求、响应, 非长连接。REST, 有url, POST, GET, PUT, DELETE
+- 二进制格式, 最小长度4B
+- 订阅观察, 接收通知
+- 支持可靠传输、数据重传、块传输, 确保到达
+- 支持ip多播

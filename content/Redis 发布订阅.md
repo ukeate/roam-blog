@@ -1,0 +1,10 @@
+- 指令
+    - subscribe
+        - 订阅模式
+            - sort
+                - 列表、集合、有序集合排序，返回结果或生成存储
+    - psubscribe
+        - 订阅给定模式匹配的所有频道
+    - unsubscribe
+    - punsubscribe
+    - publish

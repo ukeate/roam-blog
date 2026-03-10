@@ -1,0 +1,4 @@
+- 介绍
+    - Berkly Software Distribution
+- 特点
+    - 可以自由修改，修改可再次闭源发布。只需要BSD许可协议文件，但不能使用原作者名义宣传

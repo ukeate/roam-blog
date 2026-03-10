@@ -1,0 +1,34 @@
+- [[python 命令]]
+- 版本
+    - [[pyenv]]
+    - [[pipenv]]
+    - [[conda]]
+    - [[anaconda]]
+- 环境
+    - [[jupyter]]
+    - [[mybinder]]
+    - [[ipython]]
+- 包管理
+    - [[steuptools]]
+    - [[pip]]
+- 调试
+    - bpython
+        - 更好的repl
+    - pdb
+        - 调试
+    - cprofile
+        - 性能测试
+- 容器
+    - gunicorn
+        - python实现
+        - sudo pip install gunicorn
+        - gunicorn -w4 -b0.0.0.0:8001 app.wsgi
+    - uwsgi
+        - c语言实现
+        - sudo pip install uwsgi
+        - uwsgi --http :8001 --chdir /path/to/project --home=/path/to/env --module project.wsgi
+            - --home指定virtualenv的路径
+    - nginx
+    - shell
+- 语法检查
+    - [[flake8]]

@@ -1,0 +1,32 @@
+- 介绍
+    - 基于dsl(Groovy)声明项目自动化构建
+- 环境
+- 命令
+    - gradle
+        - q                                      # --quiet, 只显示error
+        - init
+            - -type pom                          # 转换maven项目
+        - wrapper                                 # 生成可独立运行的打包脚本gradlew和gradlew.bat
+- 配置
+    - build.gradle
+        - task hello {
+            - doLast {
+                - println 'Hello world!'
+            - }
+        - }
+        - task hello << {
+            - println 'Hello world!'
+        - }
+        - buildscript{}
+        - allprojects{}
+        - subprojects{}
+    - settings.gradle
+        - rootProject.name = 'choice-scm'
+        - include 'choice-scm-dao'
+    - gradle.properties
+        - org.gradle.parallel=true                # 开启并行编译
+        - org.gradle.daemon=true                  # 守护线程，在第一次编译时开线程并保持
+        - org.gradle.configureondemand=true       # 用新的孵化模式，加快编译
+        - org.gradle.caching=true                 # 启用缓存
+        - org.gradle.warning.mode=none            # 屏蔽warning
+        - org.gradle.jvmargs=-Xmx2g -XX:MaxMetaspaceSize=1g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8

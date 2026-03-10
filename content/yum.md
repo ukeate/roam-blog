@@ -1,0 +1,28 @@
+- list                                # 列出所有包
+    - updates                         # 列可更新的包
+    - installed                       # 列已安装
+    - extras                          # 已安装但不在yum repository的包
+- search
+- install
+- remove
+- info                                # 包详情
+    - updates
+    - installed
+    - extras
+- provides                            # 包文件
+- whatprovides 'bin/isstat'           # 查看命令属性哪个包
+- history
+    - list
+    - redo 序号                        # 重新做序号
+    - undo 序号                        # 恢复历史中执行的动作
+- groups list                         # 查看安装的组
+- 设置代理
+    - /etc/yum.conf
+    - proxy=http://XXX.XXX.XXX.XXX：XXXX
+    - 或
+    - proxy=FTP://XXX.XXX.XXX.XXX:XXXX
+    - proxy_username=你的用户名
+    - proxy_password=你的用户名的密码
+- 编译用包
+    - build-essential                     # yum中基本编译依赖包
+    - yum install make cmake apr* autoconf automake curl-devel gcc gcc-c++ zlib-devel openssl openssl-devel pcre-devel gd  kernel keyutils  patch  perl kernel-headers compat* mpfr cpp glibc libgomp libstdc++-devel ppl cloog-ppl keyutils-libs-devel libcom_err-devel libsepol-devel libselinux-devel krb5-devel zlib-devel libXpm* freetype libjpeg* libpng* php-common php-gd ncurses* libtool* libxml2 libxml2-devel patch freetype-devel ncurses-devel libmcrypt libtool flex pkgconfig libevent glib libgnomeui-devel

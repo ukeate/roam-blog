@@ -1,0 +1,6 @@
+- 打包命令
+- 打包标签
+    - 把包目录和class类放到jnb目录
+    - jnb/META-INF/tld文件添加<uri>http:# www.xxx.com</uri>
+    - jar cvf jnb.jar *
+- jar cvfm ul.jar manifest.mf com

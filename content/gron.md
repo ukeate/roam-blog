@@ -1,0 +1,1 @@
+- json摊平成properties

@@ -1,0 +1,7 @@
+- 介绍
+    - Cross-Site Request Forgery, 跨站请求伪造
+    - client登录A, 本地生成cookie
+    - client登录B, B给执行js，带参数请求站点A
+- 解决
+    - token验证     # 加入自定义头域
+    - 验证Referer头域

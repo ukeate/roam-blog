@@ -1,0 +1,45 @@
+- 方式
+    - 无持久化
+    - RDB
+        - 一段时间备份一个RDB文件，RDB文件很紧凑。用fork子进程的方式备份，恢复速度快
+        - 服务器故障时，会丢当前时段数据。数据集大时，fork耗时出现停止服务(毫秒至1秒)
+        - point-in-time dump
+            - dump-to-disk二条命令
+    - AOF
+        - 记录写操作, AOF先于RDB
+        - fsync不fork在后台执行, 追加写文件，文件大时自动重写
+        - AOF文件结构不紧凑，AOF速度慢于RDB(关闭fsync一样快)
+        - append-only文件
+        - fsync策略
+            - 从不同步
+            - 每秒同步一次      # 只丢一秒数据
+            - 一命令同步一次
+- 指令
+    - bgsave
+        - fork线程创建快照, windows不支持
+    - save
+        - 停止响应创建快照
+    - sync
+        - 向主服务器要求复制时，主服务器bgsave，非刚bgsave过
+    - bgrewriteaof
+        - 重写aof文件使它缩小
+- 策略
+- 配置
+    - save 60 1000
+        - 60秒内有1000次写入时，自动save
+    - stop-writes-on-bgsave-error no
+    - rdbcompression yes
+    - dbfilename dump.rdb
+    - appendonly no
+        - 打开AOF
+    - appendfsync everysec
+        - always
+            - 每个写命令都马上同步
+        - everysec
+            - 每秒
+        - no
+            - 操作系统决定
+    - no-appendfsync-on-rewrite no
+    - auto-aof-rewrite-percentage 100
+    - auto-aof-rewrite-min-size 64mb
+    - dir ./

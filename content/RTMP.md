@@ -1,0 +1,1 @@
+- adobe专利, flash支持,

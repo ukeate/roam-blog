@@ -1,0 +1,79 @@
+- [[bd]]
+- session
+    - gt session list
+        - tmux attach -t s1
+    - gt session status rig1/p1
+    - gt session capture rig1/p1，看事输出
+    - gt session stop rig1/p1
+- crew
+    - gt crew add outrun --rig rig1，创建工作区(git clone)
+    - gt crew start rig1 outrun，创建工作区和tmux session
+    - gt crew stop outrun --rig rig1
+    - gt crew status c1 --rig rig1
+    - gt crew at c1 --rig rig1，attach人
+- polecat
+    - gt polecat add rig1 p1
+    - gt polecat list rig1
+    - gt polecat nuke，witness收到gt done后调用删除polecat
+- mayor
+    - gt mayor start --agent codex
+    - gt mayor attach --agent codex，进mayor
+    - gt mayor detach，不能attach时先detach
+        - gt prime，打印状态供AI查看
+- witness
+    - gt witness status rig1
+- refinery
+    - gt refinery status rig1
+    - gt refinery status/queue/ready/blocked rig1
+- mq
+    - gt mq submit
+    - gt mq list rig1
+    - gt mq status mq1
+- mail
+    - gt mail send rig1/refinery -s "MERGE_READY polecat1" -m ""
+    - gt mail inbox --identity rig1/refinery
+- sling
+    - gt sling iss1，派给自己
+    - gt sling iss1 rig1 --agent codex
+- convoy
+    - gt convoy create "做web测试" [issues...] --notify --human
+    - gt convoy add-issuse iss1
+    - gt convoy refresh iss1，卡住时刷新
+    - gt convoy list
+    - gt convoy show iss1
+- rig
+    - gt rig add rig1 git地址
+    - gt rig list
+    - gt rig boot rig1
+    - gt rig stop rig1
+    - gt rig park rig1
+    - gt rig unpark rig1
+    - gt rig start rig1
+    - gt rig status rig1
+- doctor
+    - gt doctor --rig agent --fix
+- hooks
+    - gt hooks list
+    - gt hooks repair
+    - gt hook show rig1/polecats/p1，看人的任务
+- config
+    - gt config agent list
+    - gt config agent set alias1 "command"，agent alias
+    - gt config default-agent alias1
+    - gt config agent list
+    - gt completion zsh > 
+- 其它
+    - gt install ~/gt --git
+    - gt down -all
+    - gt up --restore
+    - gt done，在人目录执行
+    - gt dashboard --port 8000
+    - gt status --watch --verbose
+    - gt agents，看谁在干活
+    - gt costs --by-role --by-rig
+    - gt whoami
+        - GT_*环境变量决定
+- 文件
+    - gt/settings/config.json，gt的配置
+    - go install github.com/steveyegge/beads/cmd/bd@latest
+    - go install github.com/steveyegge/gastown/cmd/gt@latest

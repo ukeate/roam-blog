@@ -1,0 +1,4 @@
+- software as a service
+- AWS线上云
+- 微服务 + gRPC + k8s + Istio
+- Golang + TypeScript + Python

@@ -1,0 +1,11 @@
+- async io, linux, 业务线程不阻塞
+- 通过回调(信号)传递数据，不必像epoll线程(业务线程)阻塞等待
+- 仅linux下有, 只O_DIRECT方式读取，不能利用系统缓存
+- 模拟AIO(IO线程池)
+    - 业务线程的io操作, 起io线程, io线程完成通信到业务线程触发回调
+    - 库
+        - [[glibc]]
+        - [[libeio]]
+        - node.js的[[libuv]]封装
+            - linux下自实现
+            - windows下IOCP

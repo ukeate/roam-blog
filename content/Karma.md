@@ -1,0 +1,8 @@
+- 介绍
+    - 是google Testacular的新名字，自动化完成单元测试
+- 使用
+    - npm install -g karma
+    - karma start
+    - karma init
+        - 初始化karma配置文件
+    - npm install karma-jasmine

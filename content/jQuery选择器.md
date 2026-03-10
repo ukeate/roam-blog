@@ -1,0 +1,61 @@
+- 选择多个时形成数组
+- 基本选择器
+    - `$("#inputID");`
+        - id选择
+    - $("input"); // 标签名,默认获取第一个                # 标签名选择
+        - $(".className"); // 按样式名定位                # 样式名选择
+        - `$("#div1ID,.myClass,p");`                # 选择多个
+        - $("*");                        # 所有元素
+- 层级选择器
+    - $("form input")                        # form所有后代元素中input元素的个数
+    - $("form>input")                        # form子元素中input元素个数，不包括下层元素
+    - $("form+input")                        # form同级并且下面的第一个input元素
+    - $("form~input")                        # form同级并且下面的所有input元素
+- 子元素选择器                # 只选择一个
+    - $("ul li:first")                # ul中第一个子元素li
+    - $("ul li:last")                        # ul中最后一个子元素li
+    - $("input:not(:checked)")                        # input标签中所有未选中的元素
+    - $("table tr:even")                # 表格的奇数行（索引号为偶数）
+    - $("table tr:odd")                # 表格的偶数行（索引号为奇数）
+    - $("table tr:eq(1)")                # table中索引号等于1的行
+    - $("table tr:gt(0)")                # table中索引号大于0的行（不包括0）
+    - $("table tr:lt(2)")                # table中索引号小于2的行（不包括2）
+    - $(":header")                        # 匹配如 h1, h2, h3之类的标题元素
+- 内容选择器
+    - $("div:contains('Join')")                # div 标签的html()中包含'Join'字符串的元素
+    - $("p:empty")                        # p 标签的html()的内容为空的元素
+    - $("div:has(p)")                        # div标签中包含p标签的该div标签
+    - $("p:parent");                        # 非空的p标签元素，即p为父元素
+- 可见性选择器
+    - $("tr:hidden")                        # 查找隐藏的tr元素，如<tr style="display:none">
+        - &lt;td&gt;Value 1&lt;/td&gt;        - &lt;/tr&gt;    - $("tr:visible")                        # 查找可见的tr元素
+- 属性选择器
+    - $("div[id]")                        # 含有id属性的div元素
+    - $("input[name='newsletter']")                        # 所有name属性是newsletter的input元素
+    - $("input[name!='newsletter']")                        # 所有name属性不是newsletter的input元素
+    - $("input[name^='news']")                                # name以'news'开始的input元素
+    - $("input[name$='leter']")                                # name 以'letter'结尾的input元素
+    - $("input[name*='news']")                                # name包含'news'的input元素
+    - $("input[id][name$='leter']")                        # 含有id属性，并且它的name属性是以"letter"结尾的input 元素
+- 子元素选择器
+    - $("ul li:first-child");                        # 匹配多个ul中的第一个子li元素的li元素集合
+    - $("ul li:last-child");                                # 匹配多个ul中的最后一个子li元素的li元素集合
+    - $("ul li:nth-child(1)");                        # 匹配多个ul中的第一个子li元素的li元素集合,注意：标记从1开始(eq 从0开始)
+    - $("ul li:only-child");                                # 匹配多个ul中的只有一个li元素的li元素集合
+- 表单选择器
+    - $(":input");        # 所有input元素，包括select textarea button等
+    - $(":text");        # 所有文本框
+    - $(":password");    # 密码框
+    - $(":radio");        # 单选框
+    - $(":checkbox");    # 复选框
+    - $(":submit");      # 提交按钮
+    - $(":image");        # 有提交功能的图片
+    - $(":reset");        # 重置按钮
+    - $(":button");      # 按钮，包括<button></button>
+    - $(":file");        # 文件域
+    - $(":input:hidden");    # 隐藏域
+- 表单对象属性
+    - $(":input:enabled");        # 所有可用的input元素
+    - $(":input:disabled")        # 所有不可用的input元素
+    - $(":checkbox:checked");    # 所有已选中的checkbox(有checked属性的)元素    $(":checkbox:not(:checked)");  未选中的checkbox
+    - $(":select option:selected");      # 所有已选中的option元素

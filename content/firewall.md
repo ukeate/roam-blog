@@ -1,0 +1,15 @@
+- systemctl start firewalld
+- o-> ftp
+- firewall-cmd --zone=public --add-port=20/tcp --permanent
+- firewall-cmd --zone=public --add-port=21/tcp --permanent
+- firewall-cmd --permanent --add-port=1000-2000/tcp
+- firewall-cmd --complete-reload
+- o-> 8080
+- firewall-cmd --query-port=8080/tcp
+    - -add-port=8080/tcp --permanent --zone=public
+    - -reload
+    - -get_active-zones
+    - -list-all
+    - -set-default-zone=public
+- o->
+- firewall-cmd --permanent --remove-port=8080/tcp

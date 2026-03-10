@@ -1,0 +1,5 @@
+- 列JVM信息，输出、修改opts
+- 命令
+    - jinfo 进程号
+        - -flag MetaspaceSize
+            - 指定查看某个

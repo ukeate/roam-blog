@@ -1,0 +1,3 @@
+- rust实现，替代diff，比delta加了语法感知
+- 全名 difftastic
+- git -c diff.external=difft diff

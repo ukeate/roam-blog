@@ -1,0 +1,2 @@
+- paste file1 file2，左右拼接
+- -d 分隔符

@@ -1,0 +1,10 @@
+- 三种状态
+    - 进行中(pending)
+    - 完成(fulfilled)
+    - 失败(rejected)
+- 状态转换
+    - 状态可以由pending转换成fulfilled，或pending转换成rejected
+    - promise的状态转换只发生一次，之后代码会执行，但抛出的错误不捕获
+    - p2中return p1, 则p1的状态决定了p2的状态, 如果p1是resolved或reject, p2的回调立即执行
+    - 所以返回promise对象时, then的回调相当于返回promise的then的回调
+    - 新建即执行，不能取消。内部错误不抛出。无法得到具体pending状态

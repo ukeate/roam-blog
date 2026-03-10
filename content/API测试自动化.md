@@ -1,0 +1,23 @@
+- 工具: Jenkins+Newman, JMeter, 
+- 思想: 模块化，测试库，数据驱动，关键字驱动，BDD
+- 框架
+    - Jenkins+Python(UnitTest/Pytest, Requests, HTMLTestRunner/Allure) 
+    - Jenkins+Java+Maven+JUnit/TestNG+HttpClient/RestAssured+ExtentReport/Allure
+- 框架思想
+    - 框架分层解耦: 用例层，组件/业务层，API层，公共基础层
+    - 数据分类处理: 公共数据，隔离数据，运行时数据
+    - 多协议封装: 接口协议，接口定义及调用
+    - 多环境处理: 发布流，框架管理(切换、可维护性可扩展性)
+- 结果自动验证
+    - 框架扩展: Pytest
+    - 对比策略
+    - 数据库设计: 自动化用例nodeid，请求URL，运行环境，用例路径，request_id，请求体，cURL，Response
+    - 对比引擎设计：JSONPath匹配对比策略
+- API覆盖率统计
+    - 分类
+        - 白盒覆盖率: 代码
+        - 灰盒覆盖率：接口
+        - 黑盒覆盖率：需求
+    - 实践
+        - 分子：结合日志，生成RequestID扩展py.test
+        - 分母：代码，文档系统

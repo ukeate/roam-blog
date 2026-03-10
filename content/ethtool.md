@@ -1,0 +1,5 @@
+- 网卡检查，C实现
+- ethtool eno1
+- 场景
+    - 查看网卡是否丢包
+    - ethtool -S eno1 | grep -i error

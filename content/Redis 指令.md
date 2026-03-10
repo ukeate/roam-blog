@@ -1,0 +1,91 @@
+- set mykey somvalue
+- get mykey
+- del mykey
+- incr
+- decr
+- incrby
+- decrby
+- incrbyfloat
+- append
+- getrange
+- setrange
+- getbit
+- setbit
+- bitcount
+    - 二进制位串位为1的数量
+- bitop
+    - 二进制位串执行and, or, xor, not
+- rpush list-key item
+- lpush
+- lrange list-key 0 -1
+    - -1为结束索引
+- lindex list-key 1
+- rpop
+- lpop list-key
+- lrange
+- ltrim
+    - 修剪
+- blpop
+    - timeout秒内阻塞并等待弹出元素
+- brpop
+- rpoplpush
+    - 一个列表中右弹元素推入另一个列表左端，最后返回这个元素
+- brpoplpush
+- sadd set-key item
+- smembers set-key
+- sismember set-key item
+- srem set-key item
+    - 删除，返回删除的数量
+- scard
+    - 元素数
+- srandmember
+    - 随机返回一个或多个元素。count正数时，返回的元素不重复, 负数时可重复
+- spop
+    - 随机移除一个元素
+- smove
+    - 一个集合中移除，并在一个集合中添加。返回移除的数量
+- sdiff
+    - 差集
+- sdiffstore
+    - 差集生成集合
+- sinter
+    - 交集
+- sinterstore
+- sunion
+    - 并集
+- sunionstore
+- hset hash-key sub-key value
+- hget hash-key sub-key
+- hdel hash-key sub-key
+- hlen
+- hexists hash-key sub-key
+- hkeys hash-key
+- hvals
+- hgetall hash-key
+- hincrbyfloat
+- hincrby hash-key field -1
+- hmget
+- hmset hash-key field1 "foo" field2 "bar"
+- zadd zset-key 728 member
+- zrange zset-key 0 -1 withscores
+- zrevrange zset-key 0 -1 withscores
+- zrangebyscore zset-key 0 800 withscores
+    - 根据score范围查找
+- zrevrangebyscore
+- zrem zset-key member
+- zremrangebyrank
+- zremrangebyscore
+- zincrby
+- zinterstore sum 3 sub1 sub2 sub3
+    - 生成交集, 重复值score相加, 3 指定可变参数的数量
+- zunionstore
+    - 并集
+- zcard
+    - 成员数量
+- zcount        
+    - 分值之间的成员数量
+- zrank
+    - 返回排名
+- zrevrank
+- zscore
+    - 返回分值

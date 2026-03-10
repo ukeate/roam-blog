@@ -1,0 +1,6 @@
+- X/Open组织提出的分布式事务架构
+- 组成
+    - 事务管理器(Transaction Manager)
+        - 全局
+    - 资源管理器(Resource Manager)
+        - 局部

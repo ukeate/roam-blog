@@ -1,0 +1,27 @@
+- [[Struts2]]
+- 分层
+    - 视图层
+        - JSP
+    - 控制层
+        - Servlet
+    - 业务层
+        - 过滤数据
+    - manager层
+        - 封装第三方，service能力下沉，dao中间件
+    - 数据访问层对象  封装对象
+    - 数据库
+- Java Web 13种技术
+    - [[JDBC]]
+    - [[JNDI]]
+    - [[EJB]]
+    - [[RMI]]
+    - [[Java IDL]]/[[CORBA]]
+    - [[JSP]]
+    - [[Servlet]]
+    - [[XML]]
+    - [[JMS]]
+    - [[JTS]]
+    - [[JTA]]
+    - [[JavaMail]]
+    - [[JAF]]
+- [[JSP]]

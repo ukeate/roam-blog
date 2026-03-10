@@ -1,0 +1,3 @@
+- vrrp
+    - virtual router redundancy protocol 虚拟路由器冗余协议
+    - 解决静态路由出现的闪单点故障问题，它能够保证网络的不间断．稳定运行

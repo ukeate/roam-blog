@@ -1,0 +1,265 @@
+- Basic Input/Output System
+- 功能模块
+    - 信息
+        - 机器
+            - Asset Tag
+                - 设备标签，用于设备跟踪
+            - Machine Type Model
+                - 机器型号
+            - System-unit serial number
+                - 主机序列号
+            - Express Service Code
+                - DELL产品跟踪用
+            - Service Tag
+                - DELL服务跟踪，比较短，印在条码上
+        - 产品
+            - OA3 ID
+                - 用于Windows激活，由OEM预装在BIOS中
+            - OA2
+                - 用于激活Office
+    - BIOS设置
+        - Restart
+            - Exit Discarding
+            - Exit Saving
+            - Save
+            - Load Setup Defaults
+                - OS Optimized Defaults
+                    - 设置为特定操作系统的默认值
+        - 启动
+            - POST Behavior
+                - 自检行为设置
+                - Mode
+                    - Quick
+                        - 跳过启动自检(POST)和设备检测
+                    - Diagnostics
+                        - 有启动自检和设备检测
+            - Boot
+                - Priority Order
+                    - Windows Boot Manager
+                    - USB FDD
+                        - 软盘镜像写入USB
+                    - USB CD
+                    - USB HDD
+                    - ATA HDD0
+                        - ATA就是IDE并口协议的硬盘
+                    - NVMe0
+                    - PCI LAN
+            - Boot模式
+                - UEFI/Legacy Boot
+                    - Legacy就是传统BIOS
+                    - CSM(Compatibility Support Module)
+                        - 自动检测是否支持UEFI，不支持自动切换成Legacy
+                - Legacy Option ROMs
+                    - 启用传统BIOS的ROM程序 
+                - UEFI Network Stack
+                    - 允许加载UEFI的网络模块
+            - Network Boot
+                - 网络OS存储启动
+            - Option key Display
+                - 按esc选择启动方式
+            - Boot device List F12 Option
+                - 按F12显示设备
+            - Boot Order Lock
+                - 改启动顺序需要密码
+        - BIOS Downgrade
+            - 是否可以降级
+        - Data Wipe
+        - BIOS Recovery
+        - First Power On Date
+            - 设置初次启动日期
+        - System Logs
+        - 帮助
+            - Auto OS Recovery Threshold
+                - 启动失败多少次进Recovery
+        - 设备
+            - System board serial number
+                - 主板序列号
+            - Embedded Controller Version
+                - 嵌入式控制器的版本
+            - ME Firmware Version
+                - Management Engine, Intel开发，用于控制Intel设备
+                - 有安全问题
+            - HT Capable
+                - 是否支持超线程
+        - 管理
+            - USB Provision
+                - USB可远程访问 Intel AMT
+            - MEBx Hotkey
+                - 独立的管理引擎，快捷键进入
+                    - DELL是F12
+        - Beep and Alarm
+            - Password Beep
+            - Keyboard Beep
+    - 硬件设置
+        - 硬盘
+            - 模式
+                - IDE
+                - AHCI
+                    - Advanced Host Controller Interface
+                    - 高级特性
+                        - 热插拔
+                        - 提高性能和可靠性
+                - RAID
+            - SMART
+                - Self-Monitoring, Analysis and Reporting Technology
+                - 硬盘自我监测、分析、报告
+            - Drives
+                - 控制硬盘是否连接
+        - CPU
+            - 性能控制
+                - Multi Core Support
+                - Intel SpeedStep
+                    - 动态调整频率和电压来节能
+                - C-States Control
+                    - 进入不同的C状态（休眠状态）来节能
+                - TurboBoost
+                    - 高负载时自动提高频率
+                - Intel Hyper-Threading Technology
+        - 电源
+            - AC Behavior
+                - Wake on AC
+            - Auto On Time
+                - 指定时间开机
+            - USB Wake Support
+                - Enable USB Wake Support
+                - Wake on Dell USB-C Dock
+            - Wake on LAN
+            - Block Sleep(S3 State)
+                - 不进入休眠
+            - Peak Shift
+                - 设置在高峰外的时间才充电
+            - Advanced Battery Charge Configuration
+                - 设置不同时间的充电级别
+            - Primary Battery Charge Configuration
+                - 设置充电策略
+        - 节能
+            - Intel SpeedStep technology
+                - 动态调整CPU频率和电压
+            - ATM
+                - Adaptive Thermal Management，根据温度调整CPU频率和电压
+            - CPU Power Management
+                - 根据CPU负载调节CPU频率和电压
+        - Wireless
+            - Wireless Switch
+                - 设备开关行为
+        - USB
+            - USB Boot Support
+            - USB PowerShare
+                - 关闭里，可以USB充电
+            - USB UEFI BIOS Support
+            - Always On USB
+                - 关机时USB有电，可用键盘鼠标启动
+                - Charge in Battery Mode
+        - Network
+            - Wake On LAN
+            - UEFI IPv4 Network Stack
+                - UEFI IPv4 联网
+            - UEFI IPv6 Network Stack
+            - Wireless Auto Disconnection
+                - 无线不活动时自动断开
+            - MAC Address Pass Through
+                - 网络包通过交换机、路由器时保持MAC
+                    - 可以解决虚拟化设备指定MAC的情况
+        - Thunderbolt Adapter
+            - Support
+                - Thunderbolt Technology Support
+                - Thunderbolt Adapter Boot Support
+                - Thunderbolt  Adapter Pre-boot Modules
+            - Security level
+        - Dell Type-C Dock
+        - Audio
+        - Keyboard Illumination
+        - Miscellaneous Devices
+            - 外围设备
+            - Enable Camera
+            - Enable SD Card
+            - SD Card Boot
+            - SD Card Read-Only Mode
+        - Virtualization
+            - Intel Virtualization Technology
+                - 虚拟化时提高性能
+                - [[AMD-V]]
+            - Intel VT-d Feature
+                - I/O虚拟化
+                - AMD的[[IOMMU]]
+            - VT for Direct I/O
+                - 允许虚拟机直接访问I/O设备
+    - 安全
+        - 软件
+            - Password
+                - Admin Password
+                - System Password
+            - Secure Boot
+                - 启动时验证引导组件签名
+                    - 固件、启动管理器、OS内核
+                - Platform Mode
+                    - Setup Mode
+                        - 可以设置
+                    - User Mode
+                        - 设置完
+                    - Audit Mode
+                        - 诊断用，签名出错也启动
+                - Restore Factory Keys
+                    - 在UEFI固件中恢复默认密钥
+        - 主板
+            - UEFI BIOS Update Option
+                - Secure RollBack Prevention
+                    - 不能回退版本
+                - Windows UEFI Firmware Update
+                    - 允许Windows Update更新UEFI
+            - Security Chip
+                - Security Chip Type
+                    - [[TPM 2.0]]
+                - Security Reporting Options
+                    - 安全报告放在哪
+                    - SMBIOS Reporting
+                        - System Management BIOS
+                        - 记在SMBIOS Table中
+                            - 在NVROM中
+                    - Clear Security Chip
+                    - Physical Presence for Clear
+                        - 执行Clear前身份验证，特定物理按键或插入特定物理令牌
+            - OROM Keyboard Access
+                - Option ROM是否有权访问键盘
+                    - OROM是启动时加载执行的固件程序
+            - SMM Security Mitigation
+                - 对SMM(System Management Mode)漏洞修复
+                    - SMM有高访问权限
+        - 硬件
+            - Fingerprint
+                - 指纹
+            - CPU
+                - CPU XD Support
+                    - 设置执行禁止（Execute Disable）标识，CPU防止执行非代码区域代码
+                    - 对OS和软件透明
+                - Intel SGX
+                    - Software Guard Extensions，程序可创建enclave保护内存数据
+                        - 比Execution Prevention更高级别
+                    - Enclave Memory Size
+                    - Change Owner EPOCH
+                        - 修改Intel的TPM(Trusted Platform Module)设置的CMOS中的EPOCH值
+            - Memory Protection
+                - Execution Prevention
+                    - 标记内存为NX(不可执行)，恶意软件改写其它程序内存时触发CPU异常
+                        - OS层用MMU(内存管理单元)设置
+                        - 硬件层用CPU的Execution Prevention,如NX bit、XD bit
+        - I/O Port Access
+            - Ethernet LAN
+            - Wireless LAN
+            - Wireless WAN
+            - Bluetooth
+            - USB Port
+            - Memory Card Slot
+            - Integrated Camera
+            - Microphone
+            - Fingerprint Reader
+        - Internal Device Access
+            - Bottom Cover Tamper Detection
+                - 底部传感器，检测底部盖子被打开时报警和锁定
+            - Internal Storage Tamper Detection
+                - 检测存储器被替换时，报警和锁定
+        - Anti-Theft
+            - Computrace
+                - 只要联网就向Absolute Software发定位
+        - Device Guard
+            - OS中用硬件虚拟化保护硬件

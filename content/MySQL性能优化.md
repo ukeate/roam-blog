@@ -1,0 +1,10 @@
+- 引擎选择
+- limit 1
+    - 只查一条时，加limit 1, 引擎会找到一条马上返回
+- limit基数大用between, 分页时要找到id, 避免offset之前全查的问题
+    - 优化前
+        - select * from admin order by id limit 10000,10
+    - 优化后
+        - select * from admin where id between 10000 and 10010 order by id
+    - 子查询id
+        - select a.* from 表1 a, (select id from 表1 where 条件 limit 100000,20) b where a.id=b.id

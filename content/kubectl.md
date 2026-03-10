@@ -1,0 +1,148 @@
+- 全局参数
+    - -help                  # -h
+    - -output="jsonpath={.data.\.dockerconfigjson}"
+    - -output=yaml
+    - -context=iot
+    - -namespace=iot 
+    - -all-namespaces=true
+    - n [namespace] 
+    - -all                           # 如匹配所有deploy文件
+- Other Commands
+    - api-resources           # 查所有resource
+        - namespace/ns
+        - endpoints/ep
+        - nodes/no
+        - configmap/cm  
+        - replicationcontrollers/rc
+        - deployments/deploy
+        - statefulsets/sts
+        - service/svc 
+        - ingresses/ing
+        - persistentvolumes/pv
+        - persistentvolumeclaims/pvc
+        - storageclasses/sc
+        - pods/po
+        - cronjobs/cj
+        - daemonset/ds                    # 每个node运行一个
+        - certificatesigningrequests/csr  # csr证书
+    - api-versions            # 所有可用的apiVersion
+    - config                  # 设置集群
+        - config set current-context c1
+    - plugin                  # 设置插件
+    - version
+- Basic Commands:
+    - create
+        - f y1.yml
+    - expose                          # 修改端口
+        - expose deployment/[deployName]
+        - -target-port=8080 
+        - -type=NodePort
+    - run   
+        - run [deployName] 
+        - -image=gcr.io/google-samples/hello-app:1.0
+        - -port=8080
+    - set                             # 更新配置
+        - set image deploy/[deployName] *=image1:1.1
+            - 所有镜像更新为image1:1.1
+    - explain                         # 查resource文档
+        - pv
+    - get
+        - o                          # 格式
+            - yaml
+            - wide
+            - jsonpath='{.items[0].metadata.name}'
+        - l app=a1                   # select label
+        - c gateway
+        - -show-labels
+        - -selector app=a1
+        - -all-containers=true
+    - edit                            # 修改配置
+        - edit ingress ingress1
+    - delete 
+        - -force  
+        - -grace-period=0
+- Deploy Commands:
+    - rollout
+        - history deploy/deploy1
+        - pause deploy/deploy1
+        - restart
+        - resume deploy/deploy1
+        - status
+            - --watch
+                - 阻塞到成功
+            - --timeout=600s
+        - undo deploy/deploy1         # 回滚到上一版本
+    - scale
+        - scale deploy/deploy1
+            - -replicas=1
+    - autoscale
+        - autoscale deploy/deploy1
+            - -min=1
+            - -max=3
+            - -cpu-percent=80
+- Cluster Management Commands:
+    - certificate
+        - approve [csrName]           # 手动签发证书，/etc/kubernetes/ssl/*
+        - deny
+    - cluster-info                    # 集群信息 
+        - dump
+    - top                             # cpu 内存负载
+        - node
+        - pod
+    - cordon [nodeName]               # node不可调度
+    - uncordon                        # node可调度
+    - drain [nodeName]                # 移除node
+    - taint                           # node污点
+        - taint nodes node1 key1=val1:NoSchedule
+- Troubleshooting and Debugging Commands:
+    - describe     
+    - logs
+        - -l "app.kubernetes.io/name=neo4j,app.kubernetes.io/component=core"
+    - attach                          # 当前终端成为entrypoint
+    - exec         
+        - it device-7b8965d85d-xz4qm bash
+        - it device-7b8965d85d-xz4qm --container device -- /bin/bash
+    - port-forward                    # 端口映射
+        - port-forward [podName] 本地端口:pod端口
+    - proxy                           # 映射ApiServer到本地端口
+        - -port=8080
+    - cp                              # copy容器文件
+        - cp [namespaceName]/[podName]:[filePath] .
+    - auth         
+        - can-i list pods             # judge权限
+        - reconcile -f rbac.yaml      # 应用权限配置
+            - -dry-run               # 仅测试，列出变更
+            - -remove-extra-subjects         # 删除除外subject
+            - -remove-extra-permissions      # 删除除外权限
+    - debug                           # pod调试模式, alpha版功能，需要--feature-gates="EphemeralContainers=true"
+        - it pod1 
+        - -image=image1              # 排错工具镜像
+        - -share-processes           # 共享进程
+        - -copy-to=pod1-debug
+- Advanced Commands:
+    - diff      
+        - diff -f a.yml               # dry run 找出将实行的变更
+    - apply           # 升级
+        - f y1.yml
+        - k overlays/
+    - patch                           # 更新属性
+        - patch deploy/deploy1
+        - p '{"spec":{"unschedulable":true}}'
+    - replace                         # 替换resource
+        - replace -f a.yml
+    - wait                            # 等待直到满足条件
+        - f a.yml
+        - -for=condition=Available
+        - -timeout=1h
+    - kustomize                       # 多环境部署的overlays补丁
+        - kustomize [dir with kustomization.yml]
+- Settings Commands:
+    - label
+        - label pods/pod1 a=b
+        - -overwrite                 # 覆盖更新
+        - -resource-version=1        # 匹配没修改过的情况
+    - annotate
+        - annotate pods/pod1 a='b'
+        - -overwrite
+    - completion                      # 生成终端命令补全配置
+        - completion bash > /etc/bash_completion.d/kubectl

@@ -1,0 +1,6 @@
+- 功能
+    - js压缩
+    - 自动发布
+- build.xml
+    - 示例
+    - &lt;?xml version="1.0" encoding="UTF-8"?&gt;    - &lt;project default="execute"&gt;        - &lt;target name="compile"&gt;            - &lt;javac destdir="." srcdir="."/&gt;        - &lt;/target&gt;        - &lt;target name="execute" depends="compile"&gt;            - &lt;java classpath="." classname="HelloWorld"/&gt;        - &lt;/target&gt;    - &lt;/project&gt;

@@ -1,0 +1,1 @@
+- itrace S ./hello，跟踪所有系统调用

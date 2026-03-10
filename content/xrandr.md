@@ -1,0 +1,12 @@
+- q                         # 列出所有屏幕
+- -verbose                   # 列出所有屏幕详情
+- -output eDP1               # 指定屏幕
+- -off                       # 禁用屏幕
+- -primary                   # 指定主显示器
+- -mode                      # 分辨率
+- -pos                       # 指定屏幕在背景板的位置, 根据各屏幕分辨率、位置算
+- -rotate                    # 旋转屏幕
+    - normal
+    - left
+    - right
+    - inverted

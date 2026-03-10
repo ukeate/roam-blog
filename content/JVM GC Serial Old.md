@@ -1,0 +1,3 @@
+- 特点
+    - 适用几十M
+    - mark-sweep-compact，单线程

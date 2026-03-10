@@ -1,0 +1,3 @@
+- [[Arch 安装]]
+- 依赖
+    - base-devel

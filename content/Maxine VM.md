@@ -1,0 +1,1 @@
+- 几乎java实现, 有JIT和GC, 没有解释器，宿主或独立运行，效率接近HotSpot Client VM

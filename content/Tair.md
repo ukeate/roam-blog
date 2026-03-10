@@ -1,0 +1,13 @@
+- 淘宝KV缓存
+- 概念
+    - 对照表(lookup table)
+        - 键值对映射到桶中便于查询
+- 组成
+    - Config Server
+        - 执行操作
+            - 扩容
+            - 宕机处理
+                - 数据迁移
+    - Data Server
+        - 数据物理存储
+    - Client

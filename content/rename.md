@@ -1,0 +1,2 @@
+- 重命名
+- rename 's/.bak$//' *.bak

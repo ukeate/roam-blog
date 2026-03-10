@@ -1,0 +1,3 @@
+- Open Policy Agent, 权限决策，解决云原生应用访问控制、授权和策略
+- 策略语言Rego
+    - 用JSON传递

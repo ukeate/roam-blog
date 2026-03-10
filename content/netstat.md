@@ -1,0 +1,8 @@
+- a                  # 显示所有
+- n                  # 显示数字，而不是别名
+- t                  # 仅显示tcp
+- u                  # 仅显示udp
+- p                  # 显示建立链接的程序名
+- l                  # 仅列出listen的服务
+- o                  # 显示timer, 如keepalive
+- antpu              # 端口

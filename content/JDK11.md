@@ -1,0 +1,15 @@
+- LTS
+- 17个JEP功能
+- 引入ZGC
+- 直接运行源码
+    - java a.java
+- String
+    - strip()             # 可去除unicode空白字符
+    - isBlank()           # 长度为0或空格
+    - repeat(4)           # 重复4次生成新串
+- lambda var类型推断
+    - (var a) -> a
+- Optional加强
+- InputStream
+    - transferTo()
+- HTTP Client API

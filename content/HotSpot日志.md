@@ -1,0 +1,32 @@
+- GC                          # PrintGCDetails
+    - [GC
+        - GC表示YGC, Full GC是FGC
+    - (Allocation Failure)
+        - 原因
+    - [DefNew:4544k->259k(6144k), 0.0873 secs]
+        - DefNew表示年轻代, 回收前后的大小, 6144是年轻代总大小，回收时间
+    - 4544k->4356k(19840k), 0.0812 secs]
+        - 堆的前后大小, 19840是堆总空间, 回收时间
+    - [Times: user=0.01 sys=0.00, real=0.01 secs]
+        - linux time命令，用户态时间，内核态时间，总时间
+- 异常退出dump堆
+    - def new generation total 6144k, used 5504k [0x00, 0x00, 0x00]
+        - 新生代总共多少，用了多少。内存起始地址，使用空间结束地址，整体空间结束地址
+        - total = eden + 1个survivor
+    - eden space 5504k, 100% used []
+        - eden
+    - from space 640k, 0% used []
+        - s0
+    - to space 640, 0% used []
+        - s1
+    - tenured generation total 13696k, used 13312k []
+        - old
+    - the space 13696k, 97% used []
+        - old
+    - Metaspace used 2538k, capacity 4486k, committed 4864k, reserved 1056768k
+        - used真正使用的大小
+        - capacity目前指定的容量 
+        - committed 表示预先占用的大小
+        - reserved表示共保留的大小
+    - class space used 275k, capacity 386k, committed 512k, reserved 1048576k
+        - metaspace中存class的部分

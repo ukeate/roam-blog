@@ -1,0 +1,25 @@
+- htpasswd  -Bbn outrun pwd > auth/htpasswd
+- 客户端使用
+    - /etc/docker/daemon.json
+        - {"insecure-registries":["127.0.0.1:5000"]}
+    - sudo systemctl daemon-reload
+    - sudo systemctl restart docker
+    - docker login 127.0.0.1:5000
+    - docker tag java/device:1.0 127.0.0.1:5000/java/device:1.0
+    - docker push 127.0.0.1:5000/java/device:1.0
+    - curl --user outrun:pwd 127.0.0.1:5000/v2/_catalog
+        - v2表示版本 registry:2
+    - docker pull 127.0.0.1:5000/java/device:1.0
+- 常用API
+    - curl --user outrun:pwd -X GET  registry:5000/v2/_catalog
+        - 列表
+    - curl --user outrun:pwd -X GET  registry:5000/v2/ubuntu/tags/list
+        - tags
+    - curl --user outrun:pwd -X GET  registry:5000/v2/ubuntu/manifests/latest
+        - tag
+    - curl --user outrun:a -X GET -v --silent -H "Accept: application/vnd.docker.distribution.manifest.v2+json" registry:5000/v2/ubuntu/manifests/latest 2>&1 | grep Docker-Content-Digest | awk '{print ($3)}'
+        - digest
+    - curl --user outrun:a -X DELETE -v --silent -H "Accept: application/vnd.docker.distribution.manifest.v2+json" registry:5000/v2/ubuntu/manifests/sha256:134c7fe821b9d359490cd009ce7ca322453f4f2d018623f849e580a89a685e5d
+        - 删除
+    - docker exec -it 4ebff4cdc646 /bin/registry garbage-collect  /etc/docker/registry/config.yml
+        - 删除后, 运行垃圾回收

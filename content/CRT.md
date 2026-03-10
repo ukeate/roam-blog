@@ -1,0 +1,4 @@
+- cathode ray tube 阴极射线管显示器
+- 随机扫描方式
+- 光栅扫描方式
+- DPU distributed processing unit 分散处理单元

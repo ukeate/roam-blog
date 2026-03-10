@@ -1,0 +1,3 @@
+- 设置alsamixer
+- store                      # 保存
+- restore                    # 加载

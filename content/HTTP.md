@@ -1,0 +1,138 @@
+-  Hypertext transfer protocol 超文本传输协议
+- 1.0与1.1区别
+    - 扩展性
+        - 1.1消息中增加版本号
+        - 1.1增加OPTIONS方法
+        - 1.1增加Upgrade头域, 客户端使服务器知道它支持的其它备用通信协议
+    - 缓存
+        - 1.0使用Expire头域判断资源的fresh或stale，使用条件请求(conditional request)判断资源是否仍有效
+        - 1.1加了新特性，当缓存对象的Age超过Expire时变为stale对象, cache不是直接抛弃stale对象，而是与源服务器进行重新激活(revalidation)
+    - 带宽
+        - 1.0中只能下载全部文档
+        - 1.1请求消息引入range头域，只请求资源某个部分。响应消息Content-Range头域声明这部分对象的偏移值和长度。
+            - 返回范围内容时，响应码为206(Partial Content)，可防止Cache误以为是完整对象
+        - 1.1新状态码100(Continue), 事先发送只带头域的请求，服务器因权限拒绝就返回401(Unauthorized)，服务器接收就返回100。避免发送完整请求浪费带宽
+        - 1.0不支持状态码100, 可加入Expect请求头, 值设置为100-continue
+        - 压缩传送的数据，Content-Encoding是对消息端到端(end-to-end)的编码，可能是资源在服务器上的固有格式(如jpeg图片格式)。请求头加入Accept-Encoding头域，通知服务器客户端能够解码的方式
+    - 长连接
+        - 1.0只有短连接,请求后立即断开TCP连接。多数网页请求流量小，一次TCP连接很少通过slow-start区，带宽利用率低
+        - 1.1支持长连接(persistent connection), 和请求的流水线(Pipelining)处理。
+            - 数据传完不发RST包，不四次握手，等待同域名继续用这个通道。
+            - 在一个TCP连接上传送多个HTTP请求和响应。
+            - 允许客户端不等待上一次请求结果返回，就发出下一次请求。服务端必须按照接收到客户端请求的顺序返回响应结果。
+    - 消息传递
+        - 1.1引入Chunkedtransfer-coding, 发送方将消息分割，每块附上长度，最后用零长块作为结束标志。允许发送方只缓冲消息的一个片段，避免缓冲整个消息带来过载
+            - 结束块之后，再传递一个拖尾(trailer)，包含传递完所有块计算出的头域
+        - 1.0有个Content-MD5头域，计算它需要发送方缓冲整个消息。Content-Length需要计算整个消息的大小
+    - Host头域
+        - 1.0认为每台服务器有唯一绑定的ip，实际一台物理服务器可以存在多个虚拟主机(Multi-homed Web Servers)，共享一个ip
+        - 1.1请求和响应消息都应支持Host头域, 请求消息中没有Host头域会报错(400 Bad Request)。
+    - 错误提示
+        - 1.0只定义了16个状态响应码
+        - 1.1引入Warning头域，增加对错误或警告的描述
+        - 1.1新增了24个状态响应码
+- 2.0
+    - 二进制分帧
+        - 流(stream), 虚拟通道，有id
+        - 消息(message), 逻辑上的http请求, 多帧组成
+        - 帧(frame), 8字节首部, 首部放headers帧，request body放data帧
+    - 多路复用                    # request用id标记
+        - 1.1前面请求阻塞后面阻塞
+        - 帧在一个链接并行交错发送
+        - 全双工
+    - 请求优先级
+        - 每个流带有31bit优先值, 0最高              # 服务器不支持时，可能阻塞低优先级
+    - 首部压缩
+        - key小写
+        - 首部表渐进更新, 相同不发送
+    - 服务器推送
+        - 请求定义首部，响应即发数据
+        - 对一请求发多响应
+    - 流量控制
+        - 针对每一跳, 非端到端
+        - 针对窗口，即接收方广播接收字节数
+        - 目前只能控制data帧, 保证重要帧不阻塞
+- 状态码
+    - 200 OK
+    - 301 Moved Permanently       永久移除
+    - 302 Found                   重定向
+    - 400 Bad Request             请求有语法错误
+    - 401 Unauthorized            请求未经授权
+    - 403 Forbidden               拒绝服务
+    - 404 Not Found               资源不存在
+    - 500 Internal Server Error   服务器发生不可预期的错误
+    - 503 Server Unavailable      服务器当前不能处理请求
+    - 409 Conflict                请求资源与资源当前状态冲突
+    - 410 Gone                    资源永久性删除
+- http/1.1 请求动作
+    - get
+        - 数据在url, 最多1024字节(各浏览器实现有差异,受操作系统限制)
+    - post
+    - options         # 返回服务器支持的所有http请求方法
+    - head             # 同get, 但不传回文本部分
+    - put             # 同post, 但是idempotent的，后面相同的请求会覆盖前面的请求,服务器状态会被crawler修改
+    - delete             # 请求删除被请求的资源
+    - trace             # 回显服务器收到的请求
+    - connect      # 预留给能够将连接改为管道方式的代理服务器。通常用于SSL加密服务器的链接（经由非加密的HTTP代理服务器）
+    - patch             # 给服务器资源打补丁
+- 缓存头
+    - response.setHeader("pragma", "no-cache");                        # http1.0设置不缓存的参数
+    - response.setHeader("cache-control", "no-cache");        # http1.1设置不缓存的参数，只用这个就可以了
+    - response.setHeader("expires", "0");                                        # 支持缓存时，设置缓存有效时间。不支持缓存时，无效
+        - &lt;meta http-equiv="pragma" content="no-cache"&gt;            - jsp页面中的meta设置方式：jboss可以解析,tomcat不支持【只能服务器设置】
+        - post方式不缓存时提示页面过期，刷新后重新提交请求。get方式不缓存时则会直接重新提交请求
+        - 缓存的配置只对ie浏览器有效。面对未知编程(浏览器兼容，flex可以解决浏览器兼容问题【flash页面】)
+            - cache-control=no-store
+- 端口
+    - httpd                80
+    - ssh                22
+    - telnet                23
+    - ftp                21/20
+    - smtp                25
+    - pop2                109
+    - pop3                110
+    - pop3s                995
+    - imap                143
+    - irc                194
+    - https                443
+    - who                513(udp)
+    - login                513(tcp)
+    - whoami        565
+    - svn                3690
+    - vnc                5901/5801 5902/5802 ...
+    - mysql                3306
+    - mycat                3128
+- 报文
+    - request消息头(请求头)
+    - Accept:text/html,image/*,*/*
+    - Accept-Charset:ISO-8859-1
+    - Accept-Encoding:gzip,compress
+    - Accept-Language:en-us,zh-cn
+    - Host:www.itcast.cn:80
+    - If-Modified-Since:Tue,11 Jul 2000 18:23:51 GMT
+    - Referer:http://www.itcast.cn/index.jsp
+    - User-Agent:Mozilla/4.0(compatible; MSIE 5.5; Windows NT 5.0)x
+    - Cookie
+    - Connection: close/Keep-Alive
+    - Date: Tue, 11 Jul 2000 18:23:51 GMT
+    - response消息头（响应头）
+    - HTTP/1.1 200 OK
+    - Server: Microsoft-IIS/5.0
+    - Date: Thu, 13 Jul 2000 05:46:53 GMT
+    - Content-Length: 2991
+    - Content-Type: text/html; charset=GB2312
+    - Content-Encoding:gzip
+    - Content-Language: zh-cn
+    - Cache-control: private
+    - Location:http://www.itcast.cn/index.jsp
+    - Last-Modified: Tue, 11 Jul 2000 18:23:51 GMT
+    - Refresh: 1; url=http://www.itcast.cn
+    - Content-Disposition: attachment; filename=aaa.zip       # 设置响应类型是下载文件，文件名是aaa.zip
+        - inline   表示在浏览器中显示,非w3c标准，像innerHTML一样。但是主流浏览器都支持。
+            - appllication/octet-stream    表示任意二进制文件（有的浏览器也会解析成文件下载，但是没有指定文件名）
+            - attachment;filename=文件名   附件，文件下载
+    - Transfer-Encoding: chunked   //标记以分块传输
+    - Set-Cookie:SS=QQ=5Lb_nQ; path=/search
+    - Expires: -1
+    - Cache-Control: no-cache
+    - Pragma: no-cache

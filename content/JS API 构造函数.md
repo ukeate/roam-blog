@@ -1,0 +1,509 @@
+- 包装对象函数
+    - 介绍
+        - 基本类型(数字，布尔，字符串)在构建时，会通过new String(s)的方式转换成对象，有了对象的方法，这个过程就是包装对象
+    - undefined没有包装对象，所以访问属性会造成类型错误。
+    - String
+        - 介绍
+            - 是Object类型, 是基本类型string的包装类型
+                - 引用字符串类型的属性时,js会调用new String(s)来转换成对象
+                    - 属性引用结束, 该新对象销毁
+                    - 实际上有优化
+        - 包装测试
+            - 自动包装测试
+                - 1.toString                          # 异常
+                - (1).toString                        # => "1"
+            - 原始类型属性只读
+                - var s = "test";
+                - s.len = 4;                          # 相当于new String("test").len = 4
+                - s.len   // undefined                # 相当于new String("test").len
+            - 运算
+                - ==                                  # 原始类型与包装类型相等
+                - ===                                 # 原始类型与包装类型不相等
+        - 语法
+            - ECMAScript 5中，可以用数组方式访问16位值, 如
+                - s[0]
+        - 属性
+            - length                                  # 4字节的字符会误判为2
+        - 静态方法
+            - localCompare()                          # 参照本地语言字母表字符次序
+            - fromCodePoint()                         # 支持4字节字符值转换, 多参数时合并成字符串
+            - raw                                     # 一个tag函数, 转义模板字符串到字符串
+                - ```javascript
+                  String.raw`\n${2 + 3}`
+                    # '\\n5'
+                  String.raw({raw: 'test'}, 0, 1, 2)
+                    # 正常调用时, 第一个参数对象中必要有raw属性，其值为tag函数的第一个字符串数组的参数。其余参数与tag函数其余参数对应
+                  ```
+        - 方法
+            - substring(1, 4) // => 返回第2~4个字符     # 与java不同，java是第1~3个
+            - slice(1, 4)
+            - indexOf("")
+            - lastIndexOf("")
+            - toUpperCase()
+            - charAt(0)                               # 取2个字节的字符
+            - charCodeAt()                            # 取2个字节字符的十进制值
+            - codePointAt()                           # index位的4字节字符当作一个字符，正确处理，得到十进制值, index+1位会取该4字节字符的后2字节, 为了匹配length属性
+            - at()                                    # 支持4字节字符, 匹配正确长度的方法
+            - fromCharCode()                          # 2字节字符值转换到字符
+            - normalize()
+                - '\u01D1'.normalize() === '\u004F\u030C'.normalize()
+                    - 原重音符号与 (字符 + 重音)合成符等价
+                - 不支持3个及以上字符合成
+            - includes                                # s.includes('o', 6) 从6位置开始搜索o是否出现
+            - startsWith
+            - endsWith                                # s.endsWith('o', 6) 前6个字符是否以o结尾
+            - repeat(3)                               # 字符串重复3次返回
+            - padStart                                # 'x'.padStart(5, 'ab') 返回 'ababx', padStart(5)会填充空格
+            - padEnd
+            - 正则                                    # es6中内部调用RegExp.prototype[Symbol.match]等方法
+                - search(pattern)                     # 返回首次匹配成功的位置
+                - match(pattern)                      # 所有匹配位置的数组
+                - replace(pattern, "")                # 所有匹配替换
+                - split(pattern)                      # 匹配分割
+    - Number
+        - 属性
+            - NaN
+            - POSITIVE_INFINITY
+            - NEGATIVE_INFINITY
+            - MAX_VALUE
+            - MIN_VALUE
+            - EPSILON                                 # 极小的常量 2.22....e-16, 用来设置浮点计算的一个合理误差范围
+            - MAX_SAFE_INTEGER                        # 越界最大值
+            - MIN_SAFE_INTEGER                        # 越界最小值
+        - 静态方法
+            - isFinite
+            - isNaN
+            - isInteger
+            - isSafeInteger                           # 判断是否越界
+            - parseInt
+            - parseFloat
+        - 方法
+            - 字符串解析
+                - 构造方法                            # 只基于十进制转换
+                - 调用全局函数parseInt(), parseFloat()
+            - 转换为字符串
+                - toString()                          # Number类的toString()可接收转换基数, 来转换进制
+                    - 如 n.toString(2); n.toStrng(8); n.toString(16)
+                - toFixed(0)                          # 保留几位小数, 从不使用指数计数法
+                - toExponential(1)                    # 转换为指数, 参数为指数前保留几位小数
+                - toPrecision(4)                      # 保留有效数字，多出位数转换成指数, 以上三个方法自动补0
+    - Boolean
+- Object
+    - 属性
+        - __proto__
+            - 用来读取或设置当前对象的prototype对象，只有浏览器必须部署这个属性
+            - 语义上是内部属性，被支持仅因为被广泛使用
+    - 动态方法
+        - hasOwnProperty
+            - 是否有某属性，可判断属性值为undefined的情况
+            - 没prototype的对象, 该方法直接调用失败，需要Object.prototype.hasOwnProperty.call来调用
+        - propertyIsEnumerable
+        - isPrototypeOf
+            - b.isPrototypeOf(c)                  # b是否出现在c的prototype链中
+        - toString
+        - toLocaleString
+            - 返回对象的本地化字符，默认时仅调用toString方法
+            - Date和Number对toLocaleString做了定制
+            - Array的toLocalString对每个数组元素调用toLocaleString方法
+                - toString会对每个数组元素调用toString方法
+        - toJSON
+            - Object.prototype没有定义这个方法, JSON.stringigy会调用要序列化对象的toJSON方法,如Date.toJSON()
+        - valueOf
+            - 要将对象转换为原始值时调用
+            - 如果需要使用原始值的上下文中使用了对象，会自动调用这个方法
+    - 静态方法
+        - create                                  # new会执行构造方法，有副作用
+            - Object.create(null)                 # 创建的对象没有prototype，不同于{}
+        - getPrototypeOf                          # 用于判断继承
+            - Object.getPrototypeOf(B) === A
+        - getOwnPropertyNames                     # 所有自身属性
+        - getOwnPropertyDescriptor(obj, 'foo')    # 获得属性的描述对象
+        - getEnumPropertyNames                    # 可枚举自身属性和继承属性
+        - setPrototypeOf                          # 标准可靠的方法修改对象prototype的关联
+            - Object.setPrototypeOf(Bar.prototype, Foo.prototype)     # 同Bar.prototype = Object.create(Foo.prototype)
+        - keys                                    # 可枚举自身属性
+        - defineProperty                          # 数据描述符，getter、setter是访问描述符
+            - 修改属性，在原型链上层属性为writable: false或有对应属性的setter时，不会发生屏蔽。使用defineProperty可发生屏蔽
+            - ```javascript
+              Object.defineProperty(Object, 'is', {
+                      value: function (x, y) {...},
+                      configurable: true,         # false时，delete该属性会静默失败
+                      enumerable: false,
+                      writable: true,
+                      get: function(){return 1}
+              })
+              ```
+        - toLocaleString
+        - toString                                # toString(16) 转换为16进制
+        - is('foo', 'foo')                        # 比较两个值是否相等, 基本是===，不同在于, +0 等于 -0, NaN 等于 NaN
+        - assign(target, source1, source2)
+            - 复制源对象自身可枚举属性到目标对象, source2覆盖source2覆盖target
+            - Symbol值的属性也会被拷贝
+            - _.defaultsDeep方法可以深拷贝
+            - 常用于给对象添加静态方法或方法，合并对象，为属性指定默认值
+                - Object.assign({}, DEFAULTS, options);
+        - preventExtensions                       # 使对象不可设置属性
+        - isExtensible
+        - seal                                    # 创建“密封”对象, 在现有对象上调用preventExtensions并把现在属性标记为configurable: false
+        - freeze                                  # 调用seal并标记现有属性为writable: false
+- Array
+    - 静态方法
+        - isArray(a)                              # ECMAScript 5 判断是否数组
+            - [] instanceof Array的问题
+                - 多frame中有多个js环境, 都有自己的全局对象与构造函数。一个窗体中的对象是当前窗体构造函数创建，而另外窗体构造函数判断该对象则不成立。
+                    - 但窗体间的混淆不常发生
+            - ECMAScript 3 可以检查对象类属性来判断。
+                - 实际上就是ECMAScript 5中Array.isArray的代码
+                - ```javascript
+                  var isArray = Array.isArray || function(o){
+                      return typeof o === "ojbect" && Object.prototype.toString.call(o) == "[object Array]"
+                  };
+                  ```
+        - from
+            - 类数组对象或可遍历对象(如Set, Map)转为数组，转换后的数组具有了iterator接口
+            - 类数组对象同[].slice.call(arraylike), 可遍历对象同[...traversable]
+            - Array.from(arraylike)
+            - Array.from([1, , 2, , 3], (n) => n || 0)
+            - Array.from('abc')
+                - 字符串转数组
+            - Array.from(new Set(array))
+                - 去除重复元素
+        - of
+            - 一组值转换为数组, 用于替代Array(), new Array()
+            - 弥补Array()的返回不一致问题, 如Array(3) // [, , ,]
+            - Array.of(1, 2, 3)        // [1, 2, 3]
+    - 动态方法
+        - join, ...                               # firefox1.5 后 动态方法也写入到了静态方法中。但不是标准, 是String.split()的逆向操作
+            - a.join()                                // => "1,2,3"
+            - a.join("")                        // => "123"
+            - new Array(2).join('-')                // => "--"
+        - reverse                                 # 倒序
+            - a.reverse()
+        - sort                                    # 排序
+            - a.sort()                            # 默认以字母表排序, 自动转字符串 undefined排到最后
+            - ```javascript
+              a.sort(function(a, b){
+                  return a-b;
+                    # a在前, 返回负数。b在前返回正数。0表示相等，顺序无关紧要, 此处是升序排列
+              })
+              ```
+        - concat                                  # 连接数组, 创建返回一个新数组, 传入数组, 连接数组元素而非本身, 但不扁平化数组的数组
+            - a.concat(4, [5, [6, 7]])
+        - slice                                   # 截取新数组
+            - var a = [1,2,3,4,5]
+            - a.slice(0,3)    // 返回 [1,2,3]
+            - a.slice(3)      // 返回 [4,5]
+            - a.slice(1, -1)  // 返回 [2,3,4]
+            - a.slice(-3, -2) // 返回 [3]
+        - splice                                  # 修改数组
+            - 第一个参数起始位置(包含), 第二个参数删除个数(省略则从起始到结束都删除)
+            - 后面任意个参数指定插入到数组中的元素
+            - 返回由删除元素组成的数组
+        - push 和 pop                              # 数组作为栈(先进后出)来用, push在结尾添加, pop在结尾删除, 插入元素时不解封数组
+        - unshift 和 shift                         # unshift在头部添加元素, shift在头部删除。都改变索引, 插入元素时不解封数组
+        - toString                                # 调用每个元素的toString()方法, 输出有逗号分隔的字符串列表(没有方括号), 与不使用任何参数的join()是一样的
+        - toLocaleString                          # 调用元素的toLocaleString
+        - copyWithin                              # 当前数组中复制一段到另一位置
+            - [1, 2, 3, 4, 5].copyWithin(0, 3)        // [4, 5, 3, 4, 5]
+                - 第三个参数是结束位置(不包含), 默认是结尾。把4, 5 复制替换到1, 2
+            - [1, 2, 3, 4, 5].copyWithin(0, -2, -1)        // [4, 2, 3, 4, 5]
+                - 4到5(不包含)复制到1
+        - find                                    # 返回第一个符合条件的元素, 没有时返回undefined, 可处理NaN, 第二个参数绑定回调函数的this对象
+            - [1, 4, -5, 10].find((n) => n < 0)
+        - findIndex                               # 返回第一个符合条件的index, 没有时返回-1
+        - fill                                    # 用某元素填充数组, 可标识起始位置
+            - [1, 2, 3].fill(0)        // [0, 0, 0]
+            - [1, 2, 3].fill(0, 1, 2)        // [1, 0, 3]
+        - includes                                # 是否包含元素，可识别NaN, 返回布尔值, 第二个参数表示起始位置, indexOf 使用===判断, 会对NaN误判
+            - [1, 2, 3].includes(2, 0)
+        - 遍历类方法
+            - 对稀疏数组，不存在的元素不调用传递的回调函数
+            - 方法第一个参数是回调函数, 第二个参数是回调函数的this
+            - 多数情况下, 传入的回调函数传递三个参数: 数组元素, 元素的索引, 数组本身
+            - forEach                             # 没有break语句，用抛出异常替代
+                - ```javascript
+                  a.forEach(function(value){})
+                      function foreach(a, f, t){
+                      try{a.forEach(f, t);}
+                      catch(e){
+                          if(e === foreach.break) return;
+                          else throw e;
+                      }
+                  }
+                  foreach.break = new Error("StopIteration");
+                  ```
+            - map                                 # 映射数组元素, 稀疏数组也返回相同的缺失元素
+                - [1,2,3].map(function(x){return x * x})  // 返回 [1, 4, 9]
+            - filter                              #  回调返回true的元素保留，返回新数组, 返回的数组总是稠密的，可用于压缩空缺并删除undefined 和 null元素
+                - [5, 4, 3, 2, 1].filter(function(x){ return x < 3}) // 返回 [2, 1]
+            - every和some
+                - every表示所有, 在都返回true时返回true
+                - some表示存在, 都返回false时返回false
+                    - 在确定返回值时停止遍历
+                - a.some(func)
+            - reduce和reduceRight                  # 使用指定函数将数组元素进行组合，称为"注入"和"折叠"
+                - a.reduce(function(x, y){ return x + y}, 0)
+                    - 第一个是回调函数。第二个可选，是初始值，无初始值时一开始直接传入第一第二个元素
+                        - 回调函数中第一个是累积的结果, 第二个是当前元素
+                    - 空数组无初始值调用会导致类型错误异常。
+                    - 只有一个值并没有初始值时, reduce只简单抬这个值
+                - reduceRight同reduce，但索引从高到低处理数组
+            - indexOf和lastIndexOf
+                - 搜索数组元素, 返回第一个匹配元素的索引, 失败则返回 -1
+                    - indexOf从前往后, lastIndexOf从后往前
+                - 第二个参数可选，指定起始索引。负索引代表相对末尾的偏移量
+                - 字符串也有indexOf和lastIndexOf, 针对每个字符
+        - 返回遍历器
+            - entries
+                - for(let [ind, ele] of ['a', 'b'].entries()) {}
+                    - 得到 0 'a', 1 'b'
+                    - 不用for of , entriesIterator.next().value        // [0, 'a']
+            - keys
+            - values
+- Function
+    - 使用
+        - var f = new Function("x", "y", "return x*y;");
+            - 任意数量实参。最后一个实参是函数体，语句间用分号隔开
+            - 创建一个匿名函数
+    - 特点
+        - 允许js在运行时动态创建并编译函数
+        - 每次调用，都解析函数体并创建新函数对象，效率低
+            - 循环中嵌套函数和函数定义表达式不会每次都重新编译
+        - 总在全局作用域创建，可以认为其构造函数是全局作用域中执行eval()
+    - 函数体代码内
+        - arguments
+            - callee
+            - caller                              # 调用栈的上层函数, 出于安全考虑，大部分编译器已不支持caller, 用非标准的 fn.caller来取代, fn为当前函数名
+    - 属性
+        - length
+            - 只读属性，代表函数形参数量。不包含设置了默认值的形参，也不包含...rest参数
+            - arguments.length是实际实参个数, arguments.callee.length是期望实参个数, 同本length
+        - name
+            - 函数名, es5中只支持具名函数如function a(){}, es6支持var a = function(){}
+            - (new Function).name        // 'anonymous'
+            - foo.bind({}).name        // 'bound foo'
+        - prototype                               # 指向原型对象(prototype object)，从该函数创建对象时，从原型对象上继承属性
+    - 方法
+        - call(o, 1, 2)                           # 传入可变调用时参数
+        - apply(o, [1, 2])                        # 传入调用时参数数组或类数组对象, 这样可以将arguments数组直接传入另一个函数来调用
+            - ECMAScript 严格模式中，o传入什么,this就是什么。其它情况下，o为null或undefined时替换为顶级对象，原始值会被包装。
+        - bind(o, ...)
+            - ECMAScript 5新增方法。在函数a上调用bind, 传入对象o，反回以o调用a的新函数b
+                - bind返回的是一个闭包, 返回的函数不包含prototype属性
+                - 普通函数固有的prototype属性是不能删除的
+                - 除第一个实参外，其它实参按顺序绑定到调用bind函数f的实参上，称为柯里化(currying), 如
+                - f = function(x, y); ff = f.bind(o, 1); ff(2);        // 此时x绑定为1, y传入为2
+                - ECMAScript 5中的bind, 返回的函数对象的length属性，值是返回函数的形参个数减其实参个数
+                - 返回的函数可以用作构造函数，此时以原始函数的形式调用作为构造函数(实参也会原封不动地传入)
+                    - 用作构造函数时, 使用原始函数的prototype
+        - toString()
+            - ECMAScript规定返回和函数声明语法相关的字符串
+            - 大多数toString()方法返回函数的完整源码，内置函数往往返回类似"[native code]"的字符串作函数体
+- Date
+    - var now = new Date()
+    - var then = new Date(2011, 0, 1)
+    - var later = new Date(2011, 0, 1, 17, 10, 30)
+    - var elapsed = now - then;
+    - now.setMonth(now.getMonth - 1);
+    - 方法
+        - getFullYear()
+        - getMonth()
+        - getDate()
+        - getDay()
+        - getHours()
+        - getUTCHours()
+- Error
+- RegExp
+    - 构造
+        - new RegExp('xyz', 'i'); // /xyz/i
+        - new RegExp(/abc/ig, 'i') // /abc/i
+    - 修饰符
+        - i
+        - g                                       # 全局多次匹配, 下次匹配从剩余中重新开始
+        - u                                       # 正确处理4字节字符, 存在u修饰符时, /\u{61}/可以表示unicode字符, 否则会匹配61个连续的u
+        - y                                       # 粘连，基本同g，不同在于剩余第一个字符开始必须匹配上, 确保匹配之间不会有漏掉的字符
+            - var s = 'aaa_aa_a', r1 = /a+/g, r2 = /a+/y;
+            - r1.exec(s), r2.exec(s)              # ['aaa'] ['aaa']
+            - r1.exec(s), r2.exec(s)              # ['aa'] null
+    - 属性
+        - flags                                   # 修饰符
+        - lastIndex                               # 从这个index开始匹配
+        - sticky                                  # 是否设置了y字符
+    - 静态方法
+    - 方法
+        - test
+            - /\d+/g.test("testing: 1, 2, 3")
+        - exec                                    # 返回带有特殊属性的Array match
+            - match
+                - 属性
+                    - index
+                        - 在index上匹配成功
+- Set
+    - 构造
+        - new Set()
+        - new Set([1, 2, 3])
+    - 属性
+        - size                                    # Set实例成员数
+    - 方法
+        - add(x)
+        - delete(x)
+        - has(x)                                  # 是否有x
+        - clear()                                 # 清除所有成员
+        - keys()
+        - values()                                # values同keys完全一致, 返回遍历器
+        - entries()                               # 返回[key, key]的遍历器
+        - forEach(function (value, key, obj) {}, boundThis)
+- WeakSet
+    - 构造
+        - new WeakSet()
+        - new WeakSet([1, 2, 3])                  # 任何可遍历对象
+    - 属性                                         # 没有size
+    - 方法
+        - add(x)
+        - delete(x)
+        - has(x)
+- Map
+    - 构造
+        - new Map()
+        - `new Map([['a', 1], ['b', 2]])`
+    - 属性
+        - size
+    - 方法
+        - set(key, value)
+        - get(key)
+        - delete(key)
+        - has(key)
+        - clear()
+        - keys()
+        - values()
+        - entries()                               # map[Symbol.iterator] === map.entries
+        - forEach(function(value, key, map) {}, boundThis)
+- WeakMap
+    - 方法
+        - get
+        - set
+        - delete
+        - has
+- Proxy
+    - new Proxy(target, handlers)                 # target表示要拦截的对象, handler是回调方法
+    - 拦截器
+        - get(target, propKey, receiver)          # 属性读取。propKey是属性名, receiver是继承该proxy的对象
+        - set(target, propKey, value, receiver)   # 属性设置
+        - has(target, propKey)                    # in操作，返回布尔值
+        - deleteProperty(target, propKey)         # delete操作，返回布尔值
+        - enumerate(target)                       # for in , 返回遍历器
+        - ownKeys(target)                         # Object.getOwnPropertyNames, Object.getOwnPropertySymbols, Object.keys, 返回数组
+        - getOwnPropertyDescriptor(target, propKey)                       # Object.getOwnPropertyDescriptor, 返回描述对象
+        - defineProperty(target, propKey, propDesc)                       # Object.defineProperty, Object.defineProperties, 返回布尔值
+        - preventExtensions(target)               # Object.preventExtensions, 返回布尔值
+        - getPrototypeOf(target)                  # Object.getPrototypeOf, 返回对象
+        - isExtensible(target)                    # Object.isExtensible, 返回布尔值
+        - setPrototypeOf(target, proto)           # Object.setPrototypeOf, 返回布尔值
+        - apply(target, object, args)             # 拦截proxy作为函数调用的操作, 如proxy(), proxy.call, proxy.apply
+        - construct(target, args, proxy)          # 拦截proxy作用构造函数的操作, 如new proxy
+    - 静态方法
+        - revocable(target, handler)              # 返回有proxy, revoke属性的对象实例, proxy是Proxy实例, 调用revoke()函数可以取消Proxy
+            - et {proxy, revoke} = Proxy.revocable({}, {})
+- ArrayBuffer
+    - 构造
+        - var buf = new ArrayBuffer(32)           # 生成32字节的内存区域，每个字节默认值为0
+        - if(buf.byteLength === 32)               # 由于内存可能不够大，要检查是否分配成功
+    - 属性
+        - byteLength                              # 内存区字节长度
+    - 方法
+        - slice(0, 3)                             # 拷贝前3个字节，生成新的ArrayBuffer
+        - isView(v)                               # 检查某视图是否为该buf的视图
+- (TypedArray)
+    - 9种类型数组
+        - Int8Array
+        - Uint8Array
+        - Uint8ClampedArray                       # 自动过滤溢出。用于处理图像颜色, 只取值0 - 255, 过滤掉高位, ie10不支持该类型
+        - Int16Array
+        - Uint16Array
+        - int32Array
+        - Uint32Array
+        - Float32Array
+        - Float64Array
+    - 构造
+        - var x1 = new Int32Array(buf)
+            - 带符号整形方式读buf
+            - new Int32Array(buf, 2, 2) 开始于字节2, 长度为2(2 * 32bit)。第3个参数不填则到末尾
+                - 开始字节数要符合视图类型, 如16位类型视图单位是2个字节, 不能从1字节开始, 否则将报错
+                - 用于构建复合视图
+        - x1[0] = 1;                              # 第0位4个字节赋值
+        - var x2 = new Uint8Array([0, 1, 2])      # 数组会直接分配内存生成ArrayBuffer
+        - new Float64Array(8)                     # 直接分配8字节生成ArrayBuffer来创建视图
+        - new Int8Array(new Uint8Array(4))        # 会开辟新的ArrayBuffer，复制原有数据来建立视图
+            - new Int8Array(new Uint8Array(4).buffer)可以用同一个buffer
+    - 属性
+        - length
+        - BYTES_PRE_ELEMENT                       # 表示当前数据类型占用的字节数
+        - buffer                                  # 该视图的ArrayBuffer对象
+        - byteLength                              # 该视图中buffer占内存的长度，是只读属性
+        - byteOffset                              # 该视图从哪个字节开始, 只读属性
+    - 静态方法
+        - of                                      # 将参数转为TypedArray实例
+        - from                                    # 可遍历数据转TypedArray, 可将TypedArray转为另一种TypedArray。可以接map函数
+            - Int16Array.from(Int8Array.of(1, 2, 3), x => 2 * x)
+    - 方法                                        # 没有concat方法
+        - set                                     # 复制数组，整段内存覆盖
+            - b.set(a, 2)                         # 从b的index2开始复制a
+        - subarray                                # 建立新视图
+            - a.subarray(2, 3)                    # 从index2复制到index3(不包含), 参数2不填默认复制到结尾
+        - slice
+- DataView
+    - 构造
+        - new DataView(buf)                       # DataView(ArrayBuffer buffer [, startIndex [, length]])
+    - 属性
+        - buffer
+        - byteLength
+        - byteOffset
+    - 方法
+        - getInt8(0, true)                        # 以带符号整形格式读第0个字节, 第二个参数默认false, 使用大端字节序解读(两个或以上字节的数据需要), 设置true则为小端字节序
+        - getUint8
+        - getInt16
+        - getUint16
+        - getInt32
+        - getUint32
+        - getFloat32
+        - getFloat64
+        - setUint8(0, 1, true)                    # 开始序号, 数据, 小端字节序
+        - setInt16
+        - setUint16
+        - setInt32
+        - setUint32
+        - setFloat32
+        - setFloat64
+- WebSocket
+    - 构造
+        - new WebSocket('ws://127.0.0.1:8081')
+    - 属性
+        - binaryType                              # 设置成'arraybuffer'来接收和发送arraybuffer
+- FileReader
+    - 构造
+        - var fileInput = document.getElementById('fileInput');
+        - var file = fileInput.files[0];
+        - var reader = new FileReader();
+        - reader.readAsArrayBuffer(file);
+        - reader.onload = function () { var arrayBuffer = reader.result; }
+        - 或
+        - reader.addEventListener('load', processimage, false);
+        - function processimage(e) { var buffer = e.target.result; }
+- Promise
+    - 构造
+        - var promise = new Promise(function (resolve, reject) {resolve(0); /* reject(err)*/})
+    - 方法
+        - then(func1, func2, func3)               # func1对就fulfilled回调, func2对应rejected回调, func3用于处理进度信息
+        - catch                                   # 是then(null, rejection)的别名，尽量使用catch而非then(null, rejection), 这样看起来更接近同步写法
+    - 静态方法
+        - all([p1, p2, p3])                       # 成员不是promise对象时，先promise.resolve(data), 全部完成, fullfilled。一个rejected, rejected, 返回第一个reject的错误
+        - race([p1, p2, p3])                      # 一个完成, fullfiled, 返回该promise
+            - ```javascript
+              Promise.race([p1, new Promise((resolve, reject) => {
+                  setTimeout(() => reject(new Error('time out.')), 5000)
+              })])
+              ```
+        - resolve
+        - reject
+        - done                                    # 不在规范内, 总是在回调链尾端, 保证抛出任何可能出现的错误
+        - finally                                 # 不在规范内, 接受一个回调函数，永远执行

@@ -1,0 +1,17 @@
+- __无线热点__
+- yum install hostapd
+- vi /etc/hostapd/hostapd.conf
+    - wpa_passphrase=pwd
+    - ssid=myflowers
+    - interface=p3p1
+- yum install dhcp
+- vi /etc/dhcp/dhcpd.conf
+    - option domain-name-servers 192.168.0.1,8.8.8.8;         # 自己的dns提供商
+    - option routers 192.168.0.42;    # 本机ip
+    - option domain-name "mydhcp";
+    - option domain-name-servers 192.168.0.1;
+    - log-facility local7;
+    - subnet 192.168.0.0 netmask 255.255.255.0 {
+        - range  192.168.0.160 192.168.0.170;
+        - option broadcast-address 192.168.0.255;
+    - }

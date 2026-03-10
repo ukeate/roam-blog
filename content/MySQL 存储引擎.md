@@ -1,0 +1,21 @@
+- [[MyISAM]]
+- [[InnoDB]]
+- XtraDB
+- Memory(Heap)
+    - 之前叫Heap, 存到内存
+- NDB Cluster
+    - 特点
+        - 集群设计
+        - share nothing, 高可用，可扩展
+        - 存到内存, 主键查找快
+        - join操作在数据库层完成，不是引擎完成。需要网络开销大，查询慢
+- Archive
+    - 适合归档数据，只支持insert和select,提供高速插入和压缩功能
+- Federated
+    - 不存数据, 指向远程表，类似oracle的透明网关
+- Maria
+    - 开源，用于取代M主ISAM
+- Merge
+- BDB
+- BlackHole
+- CSV

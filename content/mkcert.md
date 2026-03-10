@@ -1,0 +1,11 @@
+- 本地https，方便生成本地信任的证书
+- mkcert -install
+- mkcert -CAROOT
+- `mkcert localhost 127.0.0.1 ::1`，当前目录生成公钥pem、私钥key
+    - mkcert "*.m.com"
+- kubectl create secret tls my-tls --cert=cert.pem --key=key.pem
+- 场景
+    - firefox信任
+        - brew install nss
+        - mkcert -install
+          

@@ -1,0 +1,1 @@
+- pivotal开源, 根据应用模板，动态生成很多tomcat, mysql, nosql, 动态控制这些实例的启停。

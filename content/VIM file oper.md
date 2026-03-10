@@ -1,0 +1,88 @@
+- shell
+    - $ vim file1 file2..
+    - $ vimtutor                      # vim的教程
+- operator
+    - o-> 折叠
+    - zf                              # 创建折叠
+        - zf% 创建括号折叠
+        - zf56G 创建从当前行起到56行代码的折叠
+    - zo/zO                           # 展开当前/递归展开当前(folding open, z这个字母看上去比较像折叠的纸)
+    - zc/zC                           # 再折叠/递归再折叠(folding close)
+    - [z                              # 到折叠的开始处
+    - z]                              # 到折叠的结束处
+    - zk                              # 向上移动到前一个折叠的结束处
+    - zd/zD                           # 删除当前光标下的折叠/嵌套删除折叠
+    - o-> 文件对比
+    - vim -d file1 file2
+    - diffsplit file2
+    - diffthis
+    - diffupdate
+    - [c                              # 跳到前一个不同点
+    - ]c                              # 跳到后一个不同点
+    - dp                              # 合并增加另一个 （diff put）
+    - do                              # 合并增加当前 （diff get）
+- Ex command
+    - :help                           # 显示帮助, 同F1
+        - 帮助文件中位于||之间的内容是超链接，可以用Ctrl+]进入链接，Ctrl+o（Ctrl + t）返回
+        - :help tutor 显示vimtutor的教程
+        - :help xx 显示某个帮助, 如help CTRL-[
+        - :help 'number' 显示vim选项的帮助
+        - :help <Esc> 显示特殊键的帮助
+        - :help -t 显示vim启动参数的帮助
+        - :help i_<Esc> 插入模式下Esc的帮助，某个模式下的帮助用 模式_主题的模式
+    - :r/nr filename                  # 插入一个文件的内容/插入到第n行
+    - :f                              # 显示当前文件状态
+    - :.=                             # 打印当前行号
+        - := 打印总行号
+    - :open file                      # 新窗口打开文件
+    - :saveas filename                # 另存为并切换到文件
+    - :tabnew                         # 新建标签页
+    - :split file/:new                # 屏幕分割
+    - :vsplit 纵向打开窗口
+    - :q                              # q! 强制退出
+    - :w/:write                       # :w filename 写入新文件
+    - :x                              # 有改动时保存并退出, 无改动只退出
+    - ZZ
+    - :e/:edit                        # 重新打开文件, e! 放弃所有修改重新打开文件
+        - e filename 当前窗口打开另一个文件
+    - :bn/:bp                         # 切换上个/下个文件
+    - :saveas <path/to/file>          # 另存为到 <path/to/file>
+    - :!command                       # 执行shell命令，如 :!ls
+        - :!perl -c script.pl 检查perl脚本语法，可以不用退出vim，非常方便。
+        - :!perl script.pl 执行perl脚本，可以不用退出vim，非常方便。
+    - :suspend                        # 挂起vim，回到shell，命令fg返回vim。
+    - :buffers/:ls                    # 缓冲区列表
+    - :bprev                          # 上一缓冲区
+    - :bnext                          # 下一缓冲区
+    - o-> 多视窗
+    - :vert                           # 横向打开
+    - :vsplit                         # 横向打开
+    - :split
+    - :prev                           # 上一个文件
+    - :next                           # 下一个文件
+    - :close                          # 最后一个窗口不能使用此命令，可以防止意外退出vim。
+    - :only                           # 关闭所有窗口，只保留当前窗口
+    - o-> 标签窗口                      # 启动 Vim 时用 "vim -p filename ..."
+    - :tabe[dit]                      # 打开文件到标签
+    - :tabnew                         #  在当前标签页之后打开带空窗口的新标签页。
+    - :tabc[lose][!]{count}           #  关闭当前标签页。 {}表示关闭第count个标签
+    - :tabo[nly][!]                   # 关闭所有其它的标签页。
+    - :tabn[ext] {count}              # 切换到后面的标签页
+    - :tabp[revious] {count}          # 切换到前面的标签页
+    - :tabr[ewind]                    # 回卷跳转
+    - :tabfir[st]                     #  转到第一个标签页。
+    - :tabl[ast]                      # 转到最后一个标签页。
+    - :tabm[ove] [N]                  # 重排标签页
+        - 把当前标签页移到第 N 个标签页之后。用 0 使当前标签页成为首个标
+        - 签页。如果没有 N，当前标签页成为最后一个。
+    - :tabs                           # 列出标签页和它们包含的窗口信息。
+        - 当前窗口显示 ">"。
+        - 修改过的缓冲区显示 "+"。
+    - :tabd[o] {cmd}                  # 对每个标签页执行 {cmd}
+- shortcut keys
+    - ctrl - z                    # 同 :suspend
+    - ctrl + g                    # 同 :f
+    - o-> 多视窗
+    - ctrl + w + hljk
+    - ctrl + w + w                # 跳到下一个
+    - ctrl + w + p                # 跳到前一个

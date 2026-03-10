@@ -1,0 +1,23 @@
+- [[JSP 域对象]]
+- static final JspFactory        _jspxFactory
+- static java.util.List        _jspx_dependants
+- javax.el.ExpressionFactory    _el_expressionfactory
+- org.apache.AnnotationProcessor    _jsp_annotationprocessor
+- 在_jspService中的变量
+- HttpServletRequest        request
+- HttpServletResponse        response
+- PageContext        pageContext = null;
+    - pageContext = _jspxFactory.getPageContext(this,request,response,null,true,8192,ture);
+- HttpSession        session = null;
+    - session = pageContext.getSession();
+- ServletContext        application = null;
+    - application = pageContext.getServletContext();
+- ServletConfig        config = null;
+    - config = pageContext.getServletConfig();
+- JspWriter            out = null;
+    - out = pageContext.getOut();
+- Object            page = this;
+- JspWriter            _jspx_out = null;
+    - _jspx_out = out;
+- PageContext        _jspx_page_context = null;
+    - _jspx_page_context = pageContext;

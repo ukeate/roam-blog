@@ -1,0 +1,1 @@
+- myTrace, 合并ping与traceroute，默认发送ICMP包, 做持续探测, 避免节点波动的影响

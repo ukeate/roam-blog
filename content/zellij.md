@@ -1,0 +1,33 @@
+- 路径
+    - ~/.config/zellij
+- layout
+    - zellij action dump-layout > ~/.config/zellij/layouts/a.kdl
+    - zellij --layout a
+- alacritty
+    - 新标签 <Cmd t> 新窗口 <Cmd n> 关闭 <Cmd q/w>
+    - 向后/前搜索 <Cmd f/b> 
+- Ctrl + 
+    - &lt;g&gt; LOCK     - &lt;p&gt; PANE         - **n** New **←↓↑→** Change Focus **x** Close **c** Rename **f** Toggle Fullscreen **w** Toggle Floating **e** Toggle Embed **r** Split Right **d** Split Down **ENTER** Select pane
+    - &lt;t&gt; TAB        - **n** New **←→** Change focus **x** Close **r** Rename **s** Sync **b** Break pane to new tab **[]** Break pane left/right **TAB** Toggle **ENTER** Select pane
+    - &lt;n&gt; RESIZE         - **+-** Increate/Decrease size **←↓↑→** Increase to **HJKL** Decrease from **ENTER** Select pane
+    - &lt;h&gt; MOVE        - **←↓↑→** Switch Location
+    - &lt;s&gt; SEARCH        - **s** Enter search term **e** Edit scrollback in default editor **ENTER** Select pane
+        - **n** Search down **p** Search up **c** Case sensitive **w** Wrap **o** Whole words
+        - **↓↑** Scroll **PgDn PgUp** Scroll page **d u** Scroll half page 
+    - &lt;o&gt; SESSION        - **d** Detach
+            - zellij attach
+        - **w** Session Manager 
+            - **TAB** 换标签 
+            - **↓↑** 选**Ctrl r** 重命名 **Ctrl x** 断开其它client **Del** 删除session **Ctrl d** 删除看到的所有session
+            - **Ctrl f** 新session目录
+        - **c** Configure
+            - **←↓↑→** 选 **SPACE** 选 **ENTER** 应用到当前session **Ctrl a** 保存并刷新 **Ctrl c** 重置配置更改
+        - **p** Plugin Manager
+            - **←↓↑→** 选 **ENTER** 跳到这个插件显示 **TAB** Reload这个插件 **Del** Close **Ctrl a** New
+        - **a** About
+    - &lt;q&gt; QUIT- Alt + 
+    - &lt;n&gt; New Pane     - &lt;←↓↑→&gt; Change Focus     - &lt;+-&gt; Resize     - &lt;w&gt; Floating - 操作
+    - pane
+        - ctr + p, d/r
+        - cmd + 上下左右
+        - alt +/-

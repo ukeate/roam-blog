@@ -1,0 +1,10 @@
+- __改变以匹配第二个文件__
+- diff -y a b
+- diff dir1 dir2
+- diff -uN a b > b.patch
+- patch -p0 < b.patch
+- patch -RE -p0 < b.patch
+- diff -uNra a b > b.patch
+- cd a
+- patch -p1  < ../b.patch
+- patch -RE -p1 < ../b.patch

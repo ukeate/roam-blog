@@ -1,0 +1,3 @@
+- $()     # 简写document.getElementById()
+- $F()    # 返回表单
+- $A()    # 参数转成数组对象

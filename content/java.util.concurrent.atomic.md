@@ -1,0 +1,31 @@
+- 基本数据
+- AtomicBoolean
+    - get()
+    - set()
+    - getAndSet()
+    - compareAndSet()
+- AtomicInteger
+    - get()
+    - set()
+    - getAndSet()
+    - compareAndSet()
+    - getAndIncrement()
+    - getAndDecrement()
+    - getAndAdd()
+- AtomicIntegerArray  # 对int[]类型封装，使用Unsafe类通过cas方式实现线程安全
+    - get()
+    - length()
+    - getAndSet()
+    - compareAndSet()
+    - getAndIncrement()
+    - getAndDecrement()
+    - addAndGet()
+- AtomicLong
+- AtomicLongArray
+- Semaphore
+    - 信号量控制并发
+    - semaphore(5, true)  # 5个信号量，公平(先启动线程大概率先获得锁)
+    - o->
+    - Semaphore semaphore = new Semaphore(5, true)
+    - semaphore.acquire()
+    - semaphore.release()

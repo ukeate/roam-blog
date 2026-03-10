@@ -1,0 +1,9 @@
+- 系统权限：创建数据库，创建用户
+- 对象权限：表操作
+- sys create database权限
+- system  没有create database权限
+- scott
+- hr
+- 角色  # 超管以角色进入，普通用户输入用户名密码
+    - dba
+    - dbaoperator

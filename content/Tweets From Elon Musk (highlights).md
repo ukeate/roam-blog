@@ -1,0 +1,6 @@
+- Author:: [[@elonmusk on Twitter]]
+- Full Title:: Tweets From Elon Musk
+- Category:: #tweets
+- URL:: https://twitter.com/elonmusk
+- ### Highlights first synced by #Readwise [[December 19th, 2022]]
+    - @BillFOXLA @FoxNews @RepTonyGonzales Why do so few report about millions of people crossing the border? ([View Tweet](https://twitter.com/elonmusk/status/1604659441517101056))

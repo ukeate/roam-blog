@@ -1,0 +1,5 @@
+- start transaction;
+- savepoint a;
+- rollback to [savepoint] a;
+- rollback;
+- commit;

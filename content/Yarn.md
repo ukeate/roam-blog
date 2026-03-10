@@ -1,0 +1,21 @@
+- 介绍
+    - Yet Another Resource Negotiator, 任务管理, 调度算力资源, 在HDFS上运行计算框架(如MapReduce, Storm, Spark)
+- 组成
+    - ResourceManager(RM)
+        - 处理请求
+        - 监控NodeManager
+        - 启动、监控ApplicationMaster
+        - 资源分配调度
+        - 常驻
+    - NodeManager(NM)
+        - 常驻
+    - ApplicationMaster(AM)
+        - 数据切分
+        - 为应用程序申请资源再分配给内部任务
+        - 任务监控、容错
+        - 非常驻，job拉起
+    - Container
+        - 运行APP
+        - 某节点上多维度的资源
+        - 由NodeManager调度
+        - 非常驻

@@ -1,0 +1,1 @@
+- Central Authentication Service，一种基于Web的单点登录协议

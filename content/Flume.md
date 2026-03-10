@@ -1,0 +1,13 @@
+- cloudera开源, 日志收集
+- 特点
+    - 可靠性(节点故障时，日志传送到其他节点)
+        - 三种级别
+            - end-to-end 发送前写磁盘，成功时删除
+            - store on failure 失败返回时写磁盘
+            - best effort 不确认数据是否成功
+    - 可扩展性
+        - agent collector storage三层架构，每层可扩展。
+            - agent: 将数据源数据发送给collector
+            - collector: 将多个agent数据汇总后, 加载到storage中
+            - storge: 存储系统, 可以是file, hdfs, hive, hbase等
+        - agent collector 由master统一

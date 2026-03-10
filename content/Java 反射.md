@@ -1,0 +1,101 @@
+- 类中成分映射为类
+- 字节码
+    - Class类型对象指向类加载器中加载的字节码
+    - Class对象不可以new, 因为字节码是类加载器中加载的, 不可能new出来
+    - 虚拟机中同一个类的字节码只有一份
+    - 预定义的class实例对象9个
+        - 包装类型中Type就是class，如int.class == Integer.Type
+        - void的包装类型为Void
+        - void
+        - byte short int long
+        - float double
+        - boolean
+        - char
+    - 获得字节码三种方法
+        - Class.forName(类名)
+        - 类名.class
+        - this.getClass()
+    - 内部类
+        - 内部类不为public时，会在前面加上public 的类的类名和$，所以不能用其类名.class来得到它的字节码
+    - 泛型
+        - 父类可以通过反射泛型类得到泛型的class, 通过该class创建泛型实例
+        - 方法中泛型类实例通过传入class创建(如dbutils)
+- 用途
+    - 1. 根据配置文件实例化并注入对象(如spring)
+    - 2. 实现框架
+        - 运行时调用自定义类的指定方法(如struts的Action)
+- 代理
+    - 动态代理机制  # 运行时确定, 用来AOP编程
+        - 没有接口的类：CGlib通过派生子类实现。运行时动态修改字节码
+        - 有接口的类:Proxy生成代理，但是生成的类是接口类型
+    - 静态代理    # 代理指定类，编译时确定
+- Class
+    - Type        # 该类对应的字节码对象
+    - isPrimitive()       # 是否是基本类型
+    - isArray()       # 是否是数组
+    - getConstructor(Class<?>... parameterTypes)
+    - newInstance()                    # 用不带参数的构造方法创建对象
+    - getField("y") : Field                    # 得到属性
+        - field.get(该class的对象);            # 得到属性的值
+    - getDeclaredField("x") : Field
+        - field.setAccessible(true);
+        - field.get(该class的对象);            # 暴力反射
+    - getFields() : Field[]
+        - field.set(该class的对象, 新的值);
+    - getMethod(方法名, 方法参数类型的字节码对象) : Method
+        - method.invoke(该class的对象, 该方法的参数);
+            - invoke中调用对象为null表是调用静态方法
+            - 注意，jdk1.5中为了兼容jdk1.4(jdk1.4中如果用到可变参数传递的是一个参数的数组),
+                - 在invoke中第二个参数为数组时，会把数组拆开成可变参数传递。但是这样的话，当我们传递的参数本身就是数组时，
+                - 如main(String[] args)中的参数, 就会变成多个参数。解决办法是：对要传递的数组参数进行打包，
+                - 如new Object[]{new String[]{"aa", "bb", "cc"}},
+                    - 注：基本类型的数组是Object对象，String[]不是Object对象，而是Object[]对象
+                - 参数也可以写成(Object)new String[]{"aa", "bb", "cc"};
+                    - 这里把Object[]强转为是个Object对象, 这样jdk就不会对数组对象Object[]进行拆分了
+    - getClassLoader()
+        - getResourceAsStream("")                    # 相对路径从class根目录开始。没有绝对路径，"/"会报错
+    - getResourceAsStream("")                        # 相对路径从当前包目录开始。"/"绝对路径从class根目录开始
+    - 使用class
+        - Class cls1 = Data.class;                    # 虚拟机中已经加载过该类的字节码时
+        - Class cls2 = p1.getClass();
+        - Class cls3 = Class.forName("java.lang.String");        # 在虚拟机中没有加载过该类的字节码时
+    - 使用constructor新建实例
+        - Constructor constructor1 = String.class.getConstructor(StringBuffer.class);
+        - String str1 = (String)constructor1.newInstance(new StringBuffer("abc"));
+    - 数组
+        - class上的isArray()判断是否数组
+            - 不同维度(一维、二维等), 不同类型的数组，不是同一份字节码。只有同维度同类型的数组是相同的字节码
+                - 基本类型的数组是Object对象，如int[]。String[]是一个Object[]对象，不是Object对象
+            - Arrays.asList()
+                - 打印Object[], 不能打印基本类型数组的Object
+            - Array.getLength(obj)
+                - 得到长度
+            - Array.get(obj, i)
+                - 得到数组中的元素
+                - 没有办法得到int[] 对象的元素类型(即int), 只能取得其元素之后得到其类型
+    - 泛型
+        - public class BaseDao<T> 中
+            - // 得到的是继承类的字节码
+            - // hibernate.basedao2.HeroDao
+            - Class subClass = this.getClass();
+            - // 直接超类
+            - // hibernate.basedao2.BaseDao<hibernate.domain.Hero>
+            - Type type = subClass.getGenericSuperclass();
+            - // 得到参数
+            - ParameterizedType pt = (ParameterizedType) type;
+            - // 参数数组
+            - Type[] types = pt.getActualTypeArguments();
+            - // hibernate.domain.Hero
+            - type = types[0];
+            - //User
+            - this.clazz= (Class) type;
+- Proxy   # 只代理有接口的类
+    - o->
+    - final List<String> list = newArrayList<String>()
+    - List<String> proxyInstance = (List<String>) Proxy.newProxyInstance(list.getClass().getClassLoader(), list.getClass().getInterfaces(), new InvocationHandler() {
+        - @Override
+        - public Object invoke(Object proxy, Method method, Object[] args) throws Throwable{
+            - return method.invoke(list, args)
+        - }
+    - })
+    - proxyInstance.add(1)

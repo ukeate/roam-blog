@@ -1,0 +1,7 @@
+- maxdepth 1
+- name "*.go"
+- type f
+- atime +100         # 100天未使用过的执行文件
+- mtime -10          # 10天内创建或修改的文件
+- exec chmod +x      # 对找到的文件执行命令
+- xdev               # 忽略块设备

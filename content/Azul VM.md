@@ -1,0 +1,2 @@
+- HotSpot改进，Azul Systems公司运行于专有硬件Vega
+- 每个实例管理数十cpu, 数百GB内存，可控gc时间，对硬件优化线程调度

@@ -1,0 +1,124 @@
+- Java Memory Model
+- 内存
+    - 运行时区域
+        - Runtime data areas
+        - 分类
+            - Program Counter             # 程序计数器，下一条指令位置
+            - Method Area                 # 方法区,线程间共享
+                - 存储
+                    - Class元信息
+                    - 代码编译信息, JIT编译信息
+                    - 常量池(Runtime Constant Pool)           # 常量池在运行时存放区
+                - 版本区别
+                    - Perm Space(<1.8)    # 要设定大小, 会溢出报错
+                        - 存字符串常量
+                        - lambda生成临时类永远存在
+                        - Full GC不清理
+                    - Meta Space(>=1.8)   # 自动大小无上限
+                        - 字符串常量位于堆
+                        - 会触发Full GC
+            - JVM stacks                  # 线程栈 
+                - Frame(栈帧)             # 一个方法一个栈帧
+                    - Local Variable Table                # 局部变量表, 方法内的局部变量，值在常量池
+                        - 默认第0个为this
+                    - Operand Stack                       # 操作数栈
+                    - Dynamic Linking                     # 指向调用方法的 运行时常量池的符号连接
+                    - return address                      # 当前方法执行完的返回地址
+            - Native Method Stacks        # C/C++方法栈
+            - Direct Memory               # 直接内存
+            - Heap                        # 堆, 线程间共享
+    - 屏障
+        - CPU屏障
+        - JVM规范
+            - LoadLoad                # 上load和下load不能重排
+            - StoreStore
+            - LoadStore
+            - StoreLoad               # 最强
+- 对象
+    - 对象内存存储
+        - 普通对象
+            - 对象头: markword 8字节
+            - ClassPointer            # 指向Class对象, 启用压缩4字节，不启用8字节
+            - 实例数据
+                - 引用类型            # 启用压缩4字节，不启用8字节
+            - Padding: 对齐8的倍数
+        - 数组对象
+            - 对象头
+            - ClassPointer
+            - 数组长度4字节
+            - 数组数据
+            - Padding
+        - 对象头
+            - 32位64位(25位没用到)，内容不同
+            - 锁标志位2位             # 根据锁标志位判断存储内容
+                - 01 无锁/偏向锁
+                - 00 轻量级锁
+                - 10 重量级锁
+                - 11 GC标记
+            - 是否偏向锁1位
+            - 剩余位 
+                - 无锁状态
+                    - 对象hashCode(25位或31位)
+                        - 没重写过时默认计算(System.identityHashCode())
+                        - 重写过的hashCode()结果不存在这里
+                    - 分代年龄
+                - 轻量级锁
+                    - 指向栈中锁记录的指针
+                - 重量级锁
+                    - 指向互斥量（重量级锁）的指针
+                - 偏向锁
+                    - 线程ID 23位
+                    - Epoch 2位
+                    - 分代年龄4位(所以分代年龄只有15)
+            - 其它问题
+                - 对象计算过hashCode，对象不能进入偏向锁状态(位已经被占了)
+        - 实验工具 javaagent
+    - 对象定位
+        - 句柄池                      # 指向句柄，句柄有对象指针和class指针, 三色标记GC提高效率
+        - 直接指针                    # 指向对象，对象指class, HotSpot使用
+- 并发
+    - 硬件层数据一致性
+        - 硬件结构
+            - L0寄存器                # 1 cycles
+            - L1高速缓存              # 3-4 cycles, 1ns
+            - L2高速缓存              # 10 cycles, 3ns
+            - L3高速缓存              # 40-45 cycles, 15ns, 在主板
+            - (QPI总线传输)           # 20ns
+            - L4主存                  # 60-80ns
+            - L5磁盘
+            - L6远程文件存储
+        - 数据不一致                  # 从L2多CPU开始
+            - 锁总线(bus lock)
+            - CPU缓存一致性协议(如intel MESI)
+    - volatile
+        - 工具
+            - hsdis                   # HotSpot Dis Assembler, 虚拟机字节码对应汇编
+        - bytecode
+            - ACC_VOLATILE
+        - JVM
+            - StoreStoreBarrier
+            - volatile写操作          # 上边写完再写，写完下边再读，写一致
+            - StoreLoadBarrier
+            - LoadLoadBarrier
+            - volatile读操作          # 上边读完再读，读完下边再写，读一致
+            - LoadStoreBarrier
+        - OS
+            - windows
+                - lock
+            - linux
+                - 上下屏障，最后lock
+    - synchronized
+        - bytecode
+            - 方法修饰
+                - synchronized
+            - 代码
+                - monitorenter
+                - monitorexit
+        - JVM
+            - C/C++实现，会调用OS的同步机制
+        - OS
+            - lock
+    - happens-before原则
+        - Java要求指令不能重排的几种情况
+    - as if serial
+        - 不管如何重排序，单线程执行结果不变

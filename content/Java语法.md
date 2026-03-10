@@ -1,0 +1,118 @@
+- 基础
+    - [[Java 类型]]
+    - [[JVM 引用方式]]
+    - [[Java 修饰符]]
+    - [[Java 语句]]
+    - [[Java 表达式]]
+    - [[Java 声明]]
+    - [[Java 方法]]
+    - [[Java 类]]
+    - [[Java 安全性]]
+    - [[Java 异常]]
+    - [[Java 注解]]
+- 命名与写法
+    - 包名 小写、只用一个单词、只用单数
+    - 类名 UpperCamelCase
+        - 类名可以使用复数
+        - 抽象类开头 Abstract或Base
+        - 异常类结尾 Exception
+        - 测试类以要测试类名开始，以Test结尾
+        - 使用的设计模式，可以写在类名上
+        - 接口类形容能力时，用形容词做名字(一般是-able, 如Translatable)
+            - 实现类1: 结尾加Impl
+            - 实现类2: Translatable的实现类名Translator
+        - 枚举类结尾加Enum
+            - 成员全大写,下划线隔开
+    - 方法名、参数名、成员变量、局部变量 lowerCamelCase
+        - 获得单个对象前缀get
+        - 获得多个对象前缀list
+        - 获得统计值前缀count
+        - 插入前缀save或insert
+        - 删除前缀remove或delete
+        - 修改前缀update
+        - 方法按顺序排列
+            - 公有或保护 -> 私有 -> getter/setter
+    - 常量 MAX_COUNT
+    - 布尔类型变量不以is开头
+    - 保留字和运算符左右加空格, 参数逗号后加空格
+    - 缩进用4空格
+    - 杜绝不规范的缩写
+        - 如 AbstractClass写成AbsClass、condition写成condi
+    - 换行
+        - 单行120要换行
+        - 运算符、点号在下一行
+        - 参数中的逗号在上一行
+        - 括号前不换行，如append("a")的括号前
+    - 空行
+        - 执行语句组、变量定义语句组、业务逻辑或不同语义之间插入空行
+            - 相同业务逻辑和语义间不要空行
+    - 领域模型
+        - POJO是 DO/DTO/BO/VO 的统称，禁止命名xxxPOJO
+        - 数据对象 xxxDO
+        - 数据传输对象 xxxDTO
+        - 展示对象 xxxVO
+    - ide的text file encoding设置为utf-8, 文件换行用unix格式
+- 类
+    - 类成员和方法，访问控制从严
+    - 构造方法不加业务逻辑
+    - POJO类要实现toString (避免继承)
+    - 接口类
+        - 接口类中方法和属性，不要加修饰(如public)，
+        - 尽量不定义变量和default实现
+    - 枚举类
+        - 变量值在一范围内变化的，用Enum类，有延伸属性的(如MONDAY(1))，用Enum类
+- 方法
+    - 覆写方法一定加@Override，可判断是否覆盖成功
+    - 过时方法要加@Deprecated，并写明新接口是什么
+    - 可变参数只用在ids之类的地方
+    - 不使用过时方法
+- 变量
+    - 常量
+        - 不要定义一个总常量类，应分类定义单独的类
+        - 共享常量
+            - 跨应用，放在二方库，如client.jar中的constant目录
+            - 应用内，放在一方库modules中的constant目录
+            - 子工程内部，放在子工程的constant目录
+            - 包内，放在包的constant目录
+            - 类内，在类中定义private static final
+        - 不写魔法值，如key="Id#toabao"
+        - long型赋值用大写L, 如Long a = 2L
+    - 数组 String[] args,而不是String args[]
+- 控制语句
+    - switch中，case要么有break/return，要么注释执行到哪个case。switch都要有default
+    - 不要省略大括号
+    - 尽量少用else，用卫语句（只有一个if）或状态模式
+    - 条件判断只调用getXxx/isXxx，运算赋值给布尔变量判断，提高可读性
+    - 循环体中语句考量性能
+    - 参数校验场景
+        - 调用频次低的方法
+        - 执行时间大的方法
+        - 需要极高稳定性和可用性
+        - 对外开放接口
+        - 敏感权限入口
+    - 不需参数校验场景
+        - 可能被循环调用     # 要注明外部参数检查
+        - 底层方法，如DAO
+        - private方法明确入参已校验
+- 注释
+    - 自解释代码少注释，注释要反应设计思想与代码逻辑，描述业务含义
+    - 类、类属性、类方法使用/**内容*/      # Javadoc规范
+    - 抽象方法要Javadoc注释，除返回值、参数、异常说明外，还要指出做什么事，实现什么功能
+    - 类要添加创建者
+    - 枚举类型都要注释
+    - 用中文说清楚
+    - 注释要跟进修改
+    - 注释掉的代码要有说明
+    - 特殊注释，要注明标记人和标记时间
+        - TODO: (标记人，标记时间，[预计处理时间])
+- 异常
+    - 事先检查值，而不是调用后处理异常
+    - 异常不要用来做流程控制，效率低
+    - 异常要对小段代码, 要细分
+    - 异常要处理或上抛，最外层一定要处理
+    - 注意事务回滚
+    - finally资源要关闭，异常要处理，JDK7用 try-with-resources
+    - finally中不要return，否则不执行try中return
+    - 不要捕获异常的父类
+    - rpc异常定义自己的result，好处一是调用方不会漏查，二是可以加异常栈
+    - 不抛RuntimeException，Exception和Throwable。抛确定异常

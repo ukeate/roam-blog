@@ -1,0 +1,26 @@
+- [[JMM]]
+- Java自动管理堆栈, C++手动分配
+- 组成
+    - ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Foutrun%2FVOQl9496L9.png?alt=media&token=bf97612f-fb62-4a27-b7a7-776f0540d4ce)
+    - [[JVM 方法区]]
+    - [[JVM 栈]]
+    - [[JVM 堆]]
+    - 程序计数器(program counter register)
+        - 特点
+            - 线程隔离
+- 机制
+    - 程序计数器、虚拟机栈、本地方法栈 是线程私有空间
+        - 随线程产生和销毁，每个栈帧分配多少内存在随类结构确定。内存分配回收都是确定的
+    - 方法区和堆
+        - 一个接口的各实现类需要内存可能不一样, 所以运行时才知道创建哪些对象，内存分配和回收是动态的，gc主要关注
+- 内存溢出
+    - 原因
+        - 加载数据过大  # 大约10万条以上, 应分页查询
+        - 集合中对象引用未清除
+        - 代码循环产生对象
+        - 第三方软件bug
+        - 启动参数内存设置过小
+    - 方案
+        - jvm启动参数 -Xms, -Xmx
+        - jvm错误日志, OutOfMemory前信息
+        - 内存查看工具动态查看

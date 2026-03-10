@@ -1,0 +1,4 @@
+- 原子性(atomicity)          # 什么都做或都不做
+- 一致性(correspondence)     # 事务前后数据库状态一致, 事务中断时也不会有暂时状态
+- 隔离性(isolation)          # 事务间不干扰
+- 持久性(durability)         # 提交结果是永久的

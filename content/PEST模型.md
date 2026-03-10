@@ -1,0 +1,4 @@
+- Political，政治/法律
+- Economic，经济
+- Social，社会文化
+- Technological，技术

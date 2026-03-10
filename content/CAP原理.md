@@ -1,0 +1,4 @@
+- 当面临分区的时候，必须在一致性和可用性之间权衡
+- 一致性Consistency
+- 可用性Availability
+- 分区容错性Partition tolerance

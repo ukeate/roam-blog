@@ -1,0 +1,4 @@
+- 用response.getOutputStream返回数据（而非JspWriter）时，调用：
+    - 如输出图片对象：ImageIO.write(image, "jpeg", response.getOutputStream());
+    - out.clear();        # 清空 out
+    - out = pageContext.pushBody()    # 将图片对象的流从out输出，直到整个输出结束（接收方网页加载全部完成时）后才断开

@@ -1,0 +1,16 @@
+- 相当于指针。JDK8只能根部类用, JDK11可以直接用
+- 操作内存
+    - allocateMemory
+    - putXX
+    - freeMemory
+    - pageSize
+- 生成类实例
+    - allocateInstance
+- 操作类或实例
+    - objectFieldOffset
+    - getInt
+    - getObject
+- CAS
+    - compareAndSwapObject()          # JDK1.8
+    - compareAndSetObject()
+    - weakCompareAndSetObject()       # JDK11

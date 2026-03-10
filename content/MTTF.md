@@ -1,0 +1,1 @@
+- Mean Time to Failure，平均无故障时间

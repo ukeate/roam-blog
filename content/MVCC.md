@@ -1,0 +1,4 @@
+- Multiversion concurrency control，多版本并发控制
+- 与锁对比
+    - 锁是悲观机制
+    - MVCC是乐观机制

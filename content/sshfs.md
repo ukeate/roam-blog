@@ -1,0 +1,2 @@
+- 挂载远程目录
+- sshfs  -o allow_other root@ip:~ /mnt   

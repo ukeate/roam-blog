@@ -1,0 +1,9 @@
+- 浏览器模拟框架，webkit js测试工具，支持多web标准, dom, css, json, canvas和svg
+- 使用1
+    - npm install mocha-phantomjs
+    - mocha-phantomjs index.html
+- 使用2
+    - phantomjs hello.js
+    - // hello.js
+    - console.log('Hello, world');
+    - phantom.exit();

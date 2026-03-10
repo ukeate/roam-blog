@@ -1,0 +1,59 @@
+- 设置文件
+    - /etc/vimrc
+    - ~/.vimrc                        # vim的配置文件, 优先于.exrc
+    - ~/.exrc                         # vi的配置文件
+- 命令
+    - :set
+        - all                         # 打印所有set选项
+        - nocompatible                # 不设置vi兼容
+        - ruler? 　　                  # 查看是否设置了ruler，在.vimrc中，使用set命令设制的选项都可以通过这个命令查看
+        - shell    :/usr/bin/sh       # 使用SystemⅤ中的shell来执行vi中以！或  :!开头的shell命令
+        - nrformts                    # 设置进制, <c - a> <c - x>时对八进制有用，如07
+        - encoding=utf-8              # 程序显示编码
+        - enc                         # 同上
+        - fileencodings=ucs-bom,utf-8,cp936                       # 设置读取文件支持的编码
+        - fencs                       # 同上
+        - fileencoding=utf-8          # 当前文件编码
+        - fenc                        # 同上
+        - termencoding=utf-8          # 设置终端编码
+        - tenc                        # 同上
+        - list                        # 显示非打印字符，如tab，空格，行尾等。
+        - nolist                      # 取消显示非打印字符, 如果tab无法显示，请确定用 set lcs=tab:>- 命令设置了.vimrc文件
+        - number                      # 显示行号
+        - nu                          # 同上
+        - nonumber                    # 不显示行号
+        - nonu                        # 同上
+        - reprot=2                    # 用户做2行以上修改时显示统计信息
+        - hlsearch                    # 设置查找高亮
+        - hls                         # 同上
+        - incsearch                   # 查找高亮所有(增量高亮)
+        - smartindent                 # 括号补全
+        - sm                          # 同上
+        - ignorecase                  # 查找时忽略大小写
+        - ic                          # 同上
+        - noignorecase                # 查找时不忽略大小写
+        - noic                        # 同上
+        - expandtab                   # 存起来的文件, 用space替换tab
+        - shiftwidth=4                # 换行时缩进长度
+        - sw                          # 同上
+        - softtabstop=4               # 插入模式tab长度
+        - tabstop=4                   # 识别和显示tab时，转换成space的长度
+        - autoindent                  # 启用自动缩进
+        - ai                          # 同上
+        - foldmethod=indent           # 设置折叠
+        - fdm                         # 同上
+            - indent 缩进折叠
+            - syntax 语法高亮折叠
+            - expr 表达式定义折叠
+            - diff 对没有更改的文本折叠
+            - marker 对文中的标志折叠
+    - :scriptnames                    # 脚本文件位置，如.vimrc文件、语法文件、plugin
+    - :syntax clear                   # 列出已经定义的语法项
+        - clear 清除已定义的语法规则
+        - case match 大小写敏感，int和Int将视为不同的语法元素
+        - case ignore 大小写无关，int和Int将视为相同的语法元素，并使用同样的配色方案
+- 配置
+    - inoremap <C-]> <C-X><C-]>       # 插入模式下映射
+    - nnoremap                        # 在normal模式下映射
+    - fileType plugin on              # 激活内置插件, 检测文件类型
+    - filetype on                     # 同上

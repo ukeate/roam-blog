@@ -1,0 +1,138 @@
+- 仓库
+    - mvnrepository.com
+- 依赖范围
+    - compile     # 默认,对编译、测试、运行有效
+    - test        # 对测试有效
+    - runtime     # 对测试和运行有效
+    - provided    # 编译和测试有效
+    - system      # 本地仓库
+    - import
+- 源
+    - 阿里云maven: https://maven.aliyun.com/mvn/view
+- mvn                                         # 相当于mvn compile
+    - 全局
+        - version                            # 版本
+        - e                                  # 错误详情
+        - help:describe                       # help插件的describe
+            - Dplugin=help                   # 显示help插件的详情
+            - Dfull                          # 显示完整参数
+        - help:effective-pom                  # 显示默认设置
+    - 生成
+        - archetype:create                    # 创建java项目
+            - DgroupId=com.outrun
+            - DartifactId=erp
+            - Dversion=0.0.1-SNAPSHOT
+            - DarchetypeArtifactId=maven-archetype-webapp                            # 指定模板为webapp
+        - archetype:generate                  # 向导创建项目
+        - site                                # 产生html文档
+        - source:jar                          # 源码打包
+        - generate-sources                    # 生成源码, 如xdoclet
+        - eclipse:eclipse                     # 生成或转化成eclipse工程
+        - eclipse:clean                       # 清除eclipse设置
+        - idea:idea                           # 生成idea项目
+        - install                             # compile, package后， 保存到本地仓库
+            - X                              # 显示依赖
+            - Dmaven.test.skip=true          # 跳过测试
+            - rf 模块名                       # 从指定模块从新开始
+    - 执行
+        - validate                            # 项目验证
+        - verify                              # 验证包
+        - compile                             # 编译
+            - exec:java                       # 编译完成后，执行java main方法
+        - test-compile                        # 编译测试代码
+        - test                                # 运行测试
+            - skipping                       # 跳过
+                - compile                     # 不编译
+                - test-compile                # 不编译测试
+        - integration-test                    # 集成测试
+        - package                             # 打包
+            - Dmaven.test.skip=true          # 跳过单元测试，不编译
+            - DskipTests                     # 跳过单元测试，编译
+        - clean                               # 清除编译
+            - install-U                       # 强制更新
+            - package                         # 编译成jar包
+        - deploy                              # install后, 上传
+        - jar:jar                             # 打jar包
+    - 插件
+        - jetty:run                           # 引入jetty-plugin后, 运行jetty
+        - tomcat:run
+    - 分析
+        - dependency:list                     # 列出依赖
+        - dependency:tree                     # 列出依赖树
+        - dependency:analyze                  # 依赖分析, 未使用的做标记
+        - dependency:resolve                  # 列出已解决的依赖
+        - dependency:sources                  # 下载源码
+        - dependency:copy-dependencies        # 得到jar包
+- 常用
+    - 分析包依赖
+        - mvn dependency:tree -Dverbose -Dincludes=org.apache.commons:commons-lang3
+    - 清理打包文件
+        - mvn clean package -DskipTests
+    - idea工具
+        - 打包了带main方法的jar不能引用
+        - 在父项目运行mvn package, model中运行会找不到其它model
+        - model运行前先mvn package
+    - 手动添加依赖
+        - mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=12.1.0.2 -Dpackaging=jar -Dfile=ojdbc7.jar
+- 配置
+    - &lt;groupId&gt;                               # 包名    - &lt;artifactId&gt;                            # 项目名    - &lt;version&gt;    - &lt;packaging&gt;                             # 打包方式, war, jar    - &lt;parent&gt;                                # 父模块    - &lt;properties&gt;        - &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;        - &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;        - &lt;java.version&gt;1.8&lt;/java.version&gt;        - &lt;spring-cloud.version&gt;Dalston.RELEASE&lt;/spring-cloud.version&gt;    - &lt;/properties&gt;    - &lt;dependencies&gt;                              # 子模块继承        - &lt;dependency&gt;            - &lt;groupId&gt;            - &lt;artifactId&gt;            - &lt;version&gt;                - LATEST
+                - ${spring-cloud.version}         #引用properties中定义的变量
+            - &lt;scope&gt;                             # 何时使用                - compile
+                - provided                        # 类似compile
+                - runtime
+                - test
+                - system
+        - &lt;/dependency&gt;    - &lt;/dependencies&gt;    - &lt;dependenciesManager&gt;                       # 子模块不继承, 继承时需要声明        - &lt;dependencies&gt;    - &lt;/dependenciesManager&gt;    - &lt;build&gt;        - &lt;plugins&gt;            - &lt;plugin&gt;                - &lt;groupId&gt;                - &lt;artifactId&gt;            - &lt;/plugin&gt;        - &lt;/plugins&gt;    - &lt;/build&gt;- 插件
+    - 介绍
+        - 按顺序执行，完成maven生命周期
+        - 无配置时调默认插件
+    - 生命周期(lifecycle)顺序
+        - clean                                   # 清除target目录
+        - resources                               # 复制resources下文件到target/classes
+        - complie                                 # 包含resources, 编译java下文件到target/classes
+        - testResources                           # 复制test/resources下文件到target/test-classes
+        - testCompile                             # 包含testResources, 编译test/java下文件到target/test-classes
+        - test                                    # 包含resources, compile, testResources, testCompile, test
+        - package
+        - jar                                     # 打包class文件, 配置文件, 不打包lib
+        - install
+    - maven-clean-plugin
+    - maven-resources-plugin
+        - &lt;plugin&gt;              - &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;              - &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;              - &lt;version&gt;2.6&lt;/version&gt;              - &lt;executions&gt;                  - &lt;execution&gt;                      - &lt;id&gt;copy-resources&lt;/id&gt;                      - &lt;phase&gt;validate&lt;/phase&gt;                    - &lt;goals&gt;                          - &lt;goal&gt;copy-resources&lt;/goal&gt;                      - &lt;/goals&gt;                      - &lt;configuration&gt;                          - &lt;outputDirectory&gt;${project.build.outputDirectory}&lt;/outputDirectory&gt;                          - &lt;resources&gt;                              - &lt;resource&gt;                                  - &lt;directory&gt;src/main/${deploy.env}/applicationContext.xml&lt;/directory&gt;                                  - &lt;excludes&gt;                                    - &lt;exclude&gt;WEB-INF/*.*&lt;/exclude&gt;                                - &lt;/excludes&gt;                                - &lt;filtering&gt;false&lt;/filtering&gt;                              - &lt;/resource&gt;                          - &lt;/resources&gt;                      - &lt;/configuration&gt;                      - &lt;inherited&gt;&lt;/inherited&gt;                  - &lt;/execution&gt;              - &lt;/executions&gt;          - &lt;/plugin&gt;      - maven-compiler-plugin
+    - maven-surefire-plugin                       # 对应test, 单元测试
+    - maven-dependency-plugin                     # 打包lib
+    - maven-jar-plugin
+        - &lt;plugin&gt;            - &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;            - &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;            - &lt;version&gt;2.6&lt;/version&gt;            - &lt;configuration&gt;                - &lt;archive&gt;                    - &lt;manifest&gt;                        - &lt;addClasspath&gt;true&lt;/addClasspath&gt;                        - &lt;classpathPrefix&gt;lib/&lt;/classpathPrefix&gt;                        - &lt;mainClass&gt;com.xxx.xxxService&lt;/mainClass&gt;                    - &lt;/manifest&gt;                - &lt;/archive&gt;            - &lt;/configuration&gt;        - &lt;/plugin&gt;        - &lt;plugin&gt;                                # 单独打包lib            - &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;            - &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;            - &lt;version&gt;2.10&lt;/version&gt;            - &lt;executions&gt;                - &lt;execution&gt;                    - &lt;id&gt;copy-dependencies&lt;/id&gt;                    - &lt;phase&gt;package&lt;/phase&gt;                    - &lt;goals&gt;                        - &lt;goal&gt;copy-dependencies&lt;/goal&gt;                    - &lt;/goals&gt;                    - &lt;configuration&gt;                        - &lt;outputDirectory&gt;${project.build.directory}/lib&lt;/outputDirectory&gt;                    - &lt;/configuration&gt;                - &lt;/execution&gt;            - &lt;/executions&gt;        - &lt;/plugin&gt;    - maven-assembly-plugin                       # 打包lib, 有bug缺失spring xds文件, 同级jar会冲突
+        - &lt;plugin&gt;            - &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;            - &lt;configuration&gt;                - &lt;descriptorRefs&gt;                    - &lt;descriptorRef&gt;jar-with-dependencies&lt;/descriptorRef&gt;                - &lt;/descriptorRefs&gt;                - &lt;archive&gt;                    - &lt;manifest&gt;                        - &lt;mainClass&gt;com.xxx.xxxService&lt;/mainClass&gt;                    - &lt;/manifest&gt;                - &lt;/archive&gt;            - &lt;/configuration&gt;            - &lt;executions&gt;                - &lt;execution&gt;                    - &lt;id&gt;make-assembly&lt;/id&gt;                    - &lt;phase&gt;package&lt;/phase&gt;                    - &lt;goals&gt;                        - &lt;goal&gt;single&lt;/goal&gt;                    - &lt;/goals&gt;                - &lt;/execution&gt;            - &lt;/executions&gt;        - &lt;/plugin&gt;    - maven-shade-plugin                          # 打包lib, 同级jar会冲突, 提示SF,DSA,RSA冲突，排除META-INF相关文件
+        - &lt;plugin&gt;            - &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;            - &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;            - &lt;version&gt;2.4.3&lt;/version&gt;            - &lt;executions&gt;                - &lt;execution&gt;                    - &lt;phase&gt;package&lt;/phase&gt;                    - &lt;goals&gt;                        - &lt;goal&gt;shade&lt;/goal&gt;                    - &lt;/goals&gt;                    - &lt;configuration&gt;                        - &lt;filters&gt;                            - &lt;filter&gt;                                - &lt;artifact&gt;*:*&lt;/artifact&gt;                                - &lt;excludes&gt;                                    - &lt;exclude&gt;META-INF/*.SF&lt;/exclude&gt;                                    - &lt;exclude&gt;META-INF/*.DSA&lt;/exclude&gt;                                    - &lt;exclude&gt;META-INF/*.RSA&lt;/exclude&gt;                                - &lt;/excludes&gt;                            - &lt;/filter&gt;                        - &lt;/filters&gt;                        - &lt;transformers&gt;                            - &lt;transformer                                - implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                - &lt;resource&gt;META-INF/spring.handlers&lt;/resource&gt;                            - &lt;/transformer&gt;                            - &lt;transformer                                - implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                - &lt;resource&gt;META-INF/spring.schemas&lt;/resource&gt;                            - &lt;/transformer&gt;                            - &lt;transformer                                - implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                - &lt;resource&gt;META-INF/spring.tooling&lt;/resource&gt;                            - &lt;/transformer&gt;                            - &lt;transformer                                - implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                - &lt;mainClass&gt;com.xxx.xxxInvoke&lt;/mainClass&gt;                            - &lt;/transformer&gt;                        - &lt;/transformers&gt;                        - &lt;minimizeJar&gt;true&lt;/minimizeJar&gt;                        - &lt;shadedArtifactAttached&gt;true&lt;/shadedArtifactAttached&gt;                    - &lt;/configuration&gt;                - &lt;/execution&gt;            - &lt;/executions&gt;        - &lt;/plugin&gt;    - maven-install-plugin
+    - spring-boot-maven-plugin
+    - gradle-maven-plugin
+    - protobuf-maven-plugin
+    - build-helper-maven-plugin                   # 用于指定自定义目录
+    - dockerfile-maven-plugin                     # root用户直接打包到docker images
+        - &lt;plugin&gt;            - &lt;groupId&gt;com.spotify&lt;/groupId&gt;            - &lt;artifactId&gt;dockerfile-maven-plugin&lt;/artifactId&gt;            - &lt;version&gt;1.4.10&lt;/version&gt;            - &lt;configuration&gt;                - &lt;repository&gt;${project.artifactId}&lt;/repository&gt;                - &lt;contextDirectory&gt;./&lt;/contextDirectory&gt;                - &lt;tag&gt;${project.version}&lt;/tag&gt;                - &lt;buildArgs&gt;                    - &lt;JAR_FILE&gt;mqtt/target/*.jar&lt;/JAR_FILE&gt;                - &lt;/buildArgs&gt;            - &lt;/configuration&gt;        - &lt;/plugin&gt;        - ./Dockerfile
+            - FROM primetoninc/jdk:1.8
+            - ADD mqtt/target/*.jar app.jar
+            - ARG JAR_FILE
+            - COPY ${JAR_FILE} /opt/app.jar
+            - ENTRYPOINT ["java", "-jar", "/app.jar"]
+        - mvn package dockerfile:build
+- 方案
+    - 新项目安装
+        - mvn clean install -DskipTests
+        - mvn install -rf :模块名 -DskipTests     # 指定模块开始
+    - ojdbc14本地加载
+        - ＃ oracle是收费的，所以不能直接下载到驱动
+        - o-> mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc14 -Dversion=10.2.0.4.0 -Dpackaging=jar -Dfile=ojdbc14-10.2.0.4.0.jar
+        - o-> 把ojdbc14-10.2.0.4.0.jar复制到目录下: /home/outrun/.m2/repository/com/oracle/ojdbc14/10.2.0.4.0/
+        - o-> /home/outrun/.m2/repository/com/oracle/ojdbc14/下会产生maven-metadata-local.xml文件存放maven引入依赖
+        - o-> 项目中引入本地依赖
+            - &lt;dependency&gt;                - &lt;groupId&gt;com.oracle&lt;/groupId&gt;                - &lt;artifactId&gt;ojdbc14&lt;/artifactId&gt;                - &lt;version&gt;10.2.0.4.0&lt;/version&gt;                - &lt;/dependency&gt;    - 代理
+        - 复制$M2_HOME/conf/settings.xml到.m2/
+        - settings.xml
+            - &lt;proxies&gt;                - &lt;proxy&gt;                    - &lt;id&gt;my-proxy&lt;/id&gt;                    - &lt;active&gt;true&lt;/active&gt;                    - &lt;protocol&gt;http&lt;/protocol&gt;                    - &lt;host&gt;localhost&lt;/host&gt;                    - &lt;port&gt;8123&lt;/port&gt;                    - &lt;!--                    - &lt;username&gt;admin&lt;/username&gt;                    - &lt;password&gt;admin&lt;/password&gt;                    - &lt;nonProxyHosts&gt;repository.mycom.com|*.google.com&lt;/nonProxyHosts&gt;                    - ->
+                - &lt;/proxy&gt;            - &lt;/proxies&gt;

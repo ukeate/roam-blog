@@ -1,0 +1,37 @@
+- 基本类型
+    - 作为面向对象语言，为了方便引入了基本类型
+    - boolean 1或4字节
+        - 没有定义类型的字节码，跟据jvm实现有时用int代替
+        - 据说[]boolean是1个，boolean直接用int类型是4个
+    - byte  1个字节
+    - short 2个字节
+    - char  2个字节
+        - gbk, gb2312这种2字节编码，一个汉字存一个char。utf-8一个字用3字节
+    - int   4个字节
+    - long  8个字节
+    - float 4个字节
+    - double 8个字节
+- 包装类型
+    - 不可变(immutable)类
+    - Boolean, Byte, Short, Character, Integer, Long, Float, Double
+    - 享元
+        - Integer i1 = 120, i2 = 120, i3 = 130, i4 = 130;
+        - i1 == i2; i3 != i4
+            - 数字小于1字节(-128 -- 127)后 , 内部存在IntegerCache中,这是一种享元模式
+    - 自动折装箱(java5)
+        - Integer iObj = 3;        # 装箱
+        - iObj + 12;            # 折箱
+- 字符串
+    - 不可变(immutable)类, 用cahr数组实现
+    - 字面量处理 String str = "abc"
+        - String s = new String("abc") 放堆里
+        - 定义引用变量str
+        - 栈中查找"abc", 有则返回地址，没有则开辟地址，再创建String对象，对象指向该地址, 该地址标记对象引用
+            - 放在栈的静态区(static segement)里
+        - str指向地址, 所以str保存了一个指向栈中数据的引用
+    - "a"+"b" 会编译成使用StringBuilder
+        - 循环中会重复创建
+- 泛型
+    - 字面量
+        - Map<String, Integer> a = new HashMap<>();               # 后面的菱形操作符做了类型推断
+        - f(new HashMap<>)                                        # 传值使用菱形操作符

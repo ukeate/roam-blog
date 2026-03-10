@@ -1,0 +1,22 @@
+- 审计（Audit)
+    - 用于监视用户所执行的数据库操作，并且Oracle会将审计跟踪结果存放到OS文件（默认位置为$ORACLE_BASE/admin/$ORACLE_SID/adump/）
+    - 或数据库（存储在system表空间中的SYS.AUD$表中，可通过视图dba_audit_trail查看）中。
+    - 默认情况下审计是没有开启的。
+    - 不管你是否打开数据库的审计功能，以下这些操作系统会强制记录：用管理员权限连接Instance；启动数据库；关闭数据库。
+- 两个参数                # cmd> set xxx=xx
+    - 这两个参数是static参数，需要重新启动数据库才能生效。
+    - Audit_sys_operations
+        - 默认为false，当设置为true时，所有sys用户（包括以sysdba,sysoper身份登录的用户）的操作都会被记录，
+        - audit trail不会写在aud$表中，因为数据库还没有启动，conn / as sysdba 这样的命令是没法记录的
+        - windows平台记录在windows的事件管理中,unix平台记录在audit_file_dest参数指定的文件中
+    - Audit_trail
+        - None：是默认值，不做审计；
+        - DB：将audit trail 记录在数据库的审计相关表中，如aud$，审计的结果只有连接信息；
+        - DB,Extended：这样审计结果里面除了连接信息还包含了当时执行的具体语句；
+        - OS：将audit trail 记录在操作系统文件中，文件名由audit_file_dest参数指定；
+        - XML：10g里新增的。
+- 审计级别
+    - Statement(语句)、Privilege（权限）、object（对象）。
+    - Statement        按语句来审计，比如audit table 会审计数据库中所有的create table,drop table,truncate table语句。
+    - Privilege        按权限来审计，当用户使用了该权限则被审计，如执行grant select any table to a，
+    - object                按对象审计，只审计on关键字指定对象的相关操作，如aduit alter,delete,drop,insert on cmy.t by scott; 

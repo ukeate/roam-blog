@@ -1,0 +1,14 @@
+- __java作业调度__
+- 配置applicationContext_job.xml
+    - job             # 任务内容
+    - jobDetail       # 调度方案
+    - trigger         # 时间
+    - scheduler       # jobDetail和trigger的容器
+- 状态监控
+    - 用日志表记录
+    - 运行中
+        - JobListener监听器
+    - 暂停中
+        - scheduler.pauseTrigger()
+    - 等待中
+        - 创建job时

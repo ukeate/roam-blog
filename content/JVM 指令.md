@@ -1,0 +1,73 @@
+- Instructions
+- 分类
+    - 基于栈的指令类
+        - 简单, HotSpot
+    - 基于寄存器的指令集
+        - 复杂但快, HotSpot局部变量表
+- 8大原子操作(JSR-133已放弃这个描述，但指令没变化)
+    - lock
+        - 主内存，标识变量线程独占
+    - unlock
+        - 主内存，解锁独占
+    - read
+        - 主内存，读到工作内存
+    - load
+        - 工作内存，read后的值放入线程本地变量副本
+    - use
+        - 工作内存，传值给执行引擎
+    - assign
+        - 工作内存，执行引擎结果赋值给线程本地变量 
+    - store
+        - 工作内存，存值到主内存给write备用
+    - write
+        - 主内存，写变量值
+- 方法指令
+    - 在methods的Code中罗列
+    - aload_0
+        - 变量表第0项入栈
+    - `invokespecial #1`
+        - 调private(无多态)的方法
+    - invokevirtual
+        - 调有多态可能性的方法
+    - invokestatic
+        - 调静态方法
+    - invokeinterface
+        - 调interface方法
+    - invokedynamic
+        - JDK7加入，定义类似函数指针时生成(但每个函数都创建了类)
+        - 调用动态产生的类
+            - lambda
+            - 反射
+            - [[JVM语言]]
+            - CGLib ASM
+        - 组成
+            - bootstrapMethod
+            - 方法签名
+        - &lt;1.8的bug            - 类产生于Perm Space，内存不回收
+            - `for(;;) {I j = C::n;}`
+    - return
+        - 方法返回
+    - bipush 8
+        - byte扩展成int类型，放到方法栈中
+    - sipush 200
+        - short
+    - istore_1
+        - 出栈，放到下标为1的局部变量表
+    - iload_1
+        - 局部变量表下标1位置值压栈
+    - iinc 1 by 1
+        - 局部变量表1位置值+1
+    - iadd
+        - 出栈两个，相加压栈
+    - new
+        - new对象, 地址压栈
+    - dup
+        - 复制栈顶并压栈
+    - pop
+        - 弹出栈顶
+    - if_icmpne 7
+        - int值比较，不等时跳到第7条指令
+    - mul
+        - 乘法
+    - sub
+        - 减法

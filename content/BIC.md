@@ -1,0 +1,8 @@
+- 为了帮助员工，否则就开掉了
+- Behavior
+    - 说事实而非观点
+- has Impact
+    - 短期就能看到的影响
+- which leads to Consequence
+    - 负面结果（一定要和其个人利益挂钩）
+    - 听员工意见，如果要改我改

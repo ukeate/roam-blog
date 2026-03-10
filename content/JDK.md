@@ -1,0 +1,23 @@
+- Java Development Kit，Java开发的最小环境
+- [[JRE]]
+- JDK组成
+    - Java语言
+    - JVM
+    - Java API类库
+- [[JDK1.5]]
+- [[JDK6]]
+- [[JDK7]]
+- [[JDK8]]
+- [[JDK9]]
+- [[JDK10]]
+- [[JDK11]]
+- [[JDK12]]
+- [[JDK13]]
+- [[JDK14]]
+- [[JDK15]]
+- [[JDK16]]
+- [[JDK17]]
+- [[JDK18]]
+- [[JDK19]]
+- [[JDK20]]
+- [[JDK21]]

@@ -1,0 +1,4 @@
+- tar xf
+- cfzv x.tar.gz x     # 压缩
+- xfzv x.tar.gz       # 解压
+- -exclude=/proc

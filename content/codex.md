@@ -1,0 +1,3 @@
+- --dangerously-bypass-approvals-and-sandbox
+- ~/.codex/config.toml
+    - project_doc_fallback_filenames = ["CLAUDE.md"]

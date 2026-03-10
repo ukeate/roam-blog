@@ -1,0 +1,27 @@
+- JDK8, 默认格式(yyyy-MM-dd)
+- now()
+    - LocalDate.now()
+    - LocalDate.now(ZoneId.of("Asia/Kolkata"))   // 时区时间
+- of()    # 指定时间
+- ofEpochDay()  # 纪元日(1970.1.1)后多少天
+- ofYearDay()   # 年后多少天
+- minusDays()
+    - today.minusDays(1)  # 昨天
+- isLeapYear()    # 闰年
+- isBefore()  # 比较大小
+- atTime()    # 返回LocalDateTime
+- plusDays()
+- plusWeeks()
+- plusMonths()
+- minusDays()
+- minusWeeks()
+- minusMonths()
+- with()      # 定位时间
+    - today.with(TemporalAdjusters.irstDayOfMonth())
+    - today.with(TemporalAdujsters.lastDayOfYear())
+- until()     # 返回Period
+- 使用
+    - LocalDate today = LocalDate.now()
+    - LocalDate firstday = LocalDate.of(today.getYear(), today.getMonth(), 1)     // 月第一天
+    - LocalDate lastDay = today.with(TemporaAdjusters.lastDayOfMonth())       // 月最后一天
+    - System.out.println(lastDay)

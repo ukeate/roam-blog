@@ -1,0 +1,5 @@
+- onedrive --resync
+- 常用命令
+    - systemctl --user enable onedrive
+    - systemctl --user start onedrive
+    - journalctl --user-unit onedrive -f

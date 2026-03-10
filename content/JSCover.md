@@ -1,0 +1,11 @@
+- 介绍
+    - 覆盖率测试
+- 使用
+    - npm install jscover -g
+    - jscover lib lib-cov
+        - 把lib下的源码编译到lib-cov下，新代码在每一行加上了执行次数统计
+    - index.js中
+        - module.exports = process.env.LIB_COV ? require('./lib-cov/index') : require('./lib/index')
+    - export LIB_COV=1
+    - mocha -R html-cov > coverage.html
+        - 生成结果

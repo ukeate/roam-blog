@@ -1,0 +1,1 @@
+- 用户输入直接反序列化，可利用Apache Commons Collections执行任意代码

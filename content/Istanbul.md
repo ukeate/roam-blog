@@ -1,0 +1,5 @@
+- 介绍
+    - 名字是依斯坦布尔，用来白盒覆盖用例测试
+    - 支持的use cases有unit tests, browser tests, server side code embedding
+- 使用
+    - instanbul cover test.js

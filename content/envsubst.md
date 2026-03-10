@@ -1,0 +1,2 @@
+- __编译文件中环境变量__
+- envsubst '${THREAD_NUM}' < decoder.conf.template > decoder.conf

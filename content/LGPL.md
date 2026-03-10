@@ -1,0 +1,4 @@
+- 介绍
+    - GNU Lesser General Public License，OpenOffice使用此协议
+- 特点
+    - 类库引用可不开源，有代码修改要使用LGPL开源

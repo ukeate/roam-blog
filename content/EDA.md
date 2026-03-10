@@ -1,0 +1,3 @@
+- Electronic Design Automation，电子设计自动化
+- 包括
+    - [[CAD]]

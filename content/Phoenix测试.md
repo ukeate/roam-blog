@@ -1,0 +1,47 @@
+- 介绍
+    - web自动化测试工具
+- 特点
+    - 分布式执行
+    - 无脚本模式执行
+    - 无人值守模式执行
+    - 自定模式执行
+- 模块
+    - 数据维护模块
+- 部署模式
+    - server-client
+        - 仅windows下可用
+        - socket通信
+    - web部署
+        - server与client放到tomcat或webLogic下部署
+        - http通信
+        - web页面控制与监控client端执行
+- wireshark
+- [[siege]]
+- tcpcopy
+    - 基于tcp packets的请求复制工具, 在线流量导入到测试系统中
+- ab
+    - 内网测试, apache自带的压力测试工具, 安装apache后在bin目录中找到
+    - ab -n1000 -c100 http://www.google.com/a.html
+        - 100并发, 发送1000次请求
+- locust
+    - 外网性能测试　
+- http_load
+    - 压测
+    - http_load -rate 5 -seconds 10 http://www.baidu.com
+        - -p 并发
+        - -f 总计访问数
+        - -r 每秒访问频率
+        - -s 总计访问时间
+- yslow
+    - firefox插件，网页性能测试工具
+- gatling
+    - dsl脚本, 生成报表
+- wrk
+    - 压测
+    - wrk -R5000 -d10s "http://internal-rope-api-1875734411.cn-north-1.elb.amazonaws.com.cn/online_agents/1"
+- swagger
+    - 文档与测试用例
+- fortio
+    - istio压测工具
+- hey
+    - http压测

@@ -1,0 +1,42 @@
+- 常用系统命令
+    - systemctl daemon-reload
+    - systemctl restart docker
+- 查容器pid
+    - docker container top ea1
+    - docker inspect -f '{{.State.Pid}}' ea1
+- 批量删除镜像
+    - docker rmi $(docker image ls -a |grep jncloud |awk '{print $3}')
+- 进入容器
+    - docker exec -it mysql bash
+- 进入镜像
+    - docker run -it --rm mysql /bin/sh
+- 制作镜像并运行
+    - make
+    - docker build -t search:v1 .
+    - docker images
+    - docker run -p 50088:80 -d search:v1
+    - docker ps -a
+    - docker logs ea1
+    - docker rmi bc8
+- 提交镜像到官方
+    - docker -ps -a
+    - docker login
+    - docker commit d79 outrun11/node_pm2
+        - 把容器提交为镜像
+    - docker images node_pm2
+    - docker push outrun11/node_pm2
+- 代理
+    - /etc/systemd/system/docker.service.d/http-proxy.conf            # 没有时创建
+        - Environment="HTTP_PROXY=http://127.0.0.1:8123"
+            - "HTTPS_PROXY=http://127.0.0.1:8123"
+            - "NO_PROXY=192.168.1.1,localhost"
+    - systemctl daemon-reload
+- 换源
+    - /etc/docker/daemon.json                                         # 没有时创建
+        - {
+            - "registry-mirrors": ["https://nmp74w3y.mirror.aliyuncs.com"]
+        - }
+    - systemctl daemon-reload
+    - systemctl restart docker
+- 登录运行容器
+    - docker exec -it --user root 8ce /bin/sh

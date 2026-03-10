@@ -1,0 +1,77 @@
+- 接收邮箱
+    - qpiucnde@library.readwise.io
+- 功能
+    - Reader
+        - 配置
+            - Tags
+            - Feeds
+        - Home
+            - 订制分类
+        - Library
+            - 书
+        - Feed
+            - RSS
+        - Search
+        - 内容采集
+            - Articles
+                - 网页内容
+            - Books
+                - 导入的EPUB
+            - Emails
+                - 来自Readwise邮箱
+            - PDFs
+                - 导入的PDF
+            - Tweets
+                - 来自Tweets
+            - Shortlist
+                - 收藏
+            - Videos
+    - Readwise
+        - 首页
+            - 总览计数
+        - Connect
+            - Import
+                - [[Supplemental Books]]
+                - [[Twitter]]
+                - [[Hypothesis]]
+                - Apple Books
+                - [[Medium]]
+                - [[Snipd]]
+                - [[Shortform]]
+                - [[Goodreads]]
+                - [[Libby]]
+                - [[Diigo]]
+                - [[Airr]]
+                - [[Kobo]]
+                - [[Feedly]]
+                - [[Raindrop.io]]
+                - [[Command Browser]]
+                - [[Moon+ Reader]]
+                - [[Inoreader]]
+                - [[Refind]]
+                - [[Web Highlighter]]
+                - [[Kindle]]
+                - [[Instapaper]]
+                - [[Pocket]]
+                - [[Scribd]]
+                - [[O'Reilly]]
+            - Export
+                - [[Notion]]
+                - [[Roam]]
+                - [[Evernote]]
+                - [[Obsidian]]
+                - [[Logseq]]
+                - RemNote
+                - [[Mailbrew]]
+                - [[Heptabase]]
+                - [[CSV]]
+                - [[Markdown]]
+        - Browse
+            - Book
+            - Supplemental Books
+                - 补充书
+            - Articles
+            - Tweets
+            - Hightlight Tags
+            - Reviews
+                - 闪卡

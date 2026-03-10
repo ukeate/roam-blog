@@ -1,0 +1,9 @@
+- 介绍
+    - 对函数mock
+- Patch()
+- Unpatch()
+- PatchInstanceMethod()
+- UnpatchInstanceMethod()
+- 问题
+    - 内联函数不能mock
+        - 测试时禁止内联, go test -gcflags=all="-N -l"

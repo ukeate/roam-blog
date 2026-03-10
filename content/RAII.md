@@ -1,0 +1,1 @@
+- 资源获取即初始化，resource acquisition is initialization

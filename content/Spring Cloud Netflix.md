@@ -1,0 +1,7 @@
+- 对netflix oss套件整合
+- [[Eureka]]
+- [[Hystrix]]
+- [[Ribbon]]
+- [[Feign]]
+- [[Zuul]]
+- [[Archaius]]

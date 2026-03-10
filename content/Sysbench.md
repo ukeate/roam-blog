@@ -1,0 +1,3 @@
+- 硬件压测
+- 场景
+    - sysbench cpu run

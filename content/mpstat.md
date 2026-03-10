@@ -1,0 +1,16 @@
+- cpu统计信息
+- 参数
+    - -P
+        - 指定CPU
+        - ALL
+- 显示
+    - %usr 用户态CPU时间
+    - %nice nice值为负的进程的CPU时间
+    - %sys 内核时间
+    - %iowait 硬盘IO等待时间
+    - %irq 硬中断时间
+    - %soft 软中断时间
+    - %idle 除去IO等待，CPU闲置时间
+- 场景
+    - mpstat -P ALL 1 3
+        - 1秒1次共3次

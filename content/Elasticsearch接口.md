@@ -1,0 +1,52 @@
+- [[Elasticsearch数据对象]]
+- index
+    - get/put/delete /index1              # 创建index, get查询，delete删除
+        - settings
+        - mappings
+        - aliases:
+    - put /index1/_mapping/type2
+    - get/put /index1/type2/_mapping      # 创建type或给已有type加mappings
+        - properties
+    - put /index1/_settings
+    - get/put /index1/type1/1             # 插入doc
+        - name: "name1"
+- _cat
+    - get /_cat/health?v                  # 集群健康
+    - get /_cat/nodes?v                   # 集群节点
+    - get /_cat/indices?v                 # 所有索引
+- _cluster
+    - get /_cluster/state?pretty          # 集群状态
+- _aliases
+    - post /_aliases                      # 索引别名
+        - actions:
+            - add:
+                - alias: "my_index"
+                - index: "my_index_v1"
+            - remove
+- _template
+    - put /_template/tpl1
+        - template: "te*"
+            - 匹配所有re开头的index
+        - settings:
+        - mappings:
+- _search
+    - post /index1/type1/_search
+        - from size实时分页
+        - scroll快照分页
+        - ?from=0&size=50
+        - ?scroll=1m&size=50
+            - 过期时间1分钟，每次返回50条
+        - ?search_type=scan&scroll=1m
+            - scroll-scan分页不排序，更快,
+- _analyze
+    - post /index1/_analyze
+        - text: "刘德华"
+        - analyzer: "analyzer1"
+- _close
+    - post /index1/_close
+        - 关闭索引，此后可以改settings
+- _open
+    - post /index1/_open
+- _cache
+    - post /index1/type1/_cache/clear?filter_keys=k1
+        - 清空query filter的缓存

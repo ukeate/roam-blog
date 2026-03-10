@@ -1,0 +1,2 @@
+- Human Capital Management
+- 包含[[HRM 人力资源管理]]相比HRM更广泛

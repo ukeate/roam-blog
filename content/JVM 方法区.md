@@ -1,0 +1,18 @@
+- Method Area
+- 组成
+    - 类信息
+        - class
+    - 数据区(data segment)
+        - 运行时常量池(constant pool) # 编译期确定，保存在.class中的数据
+            - 字面量
+            - 文本形式的符号引用
+                - 字段名称和描述符
+                - 方法名称和描述符
+                - 类和接口的全限定名
+        - 静态区(static segment)
+            - 静态变量
+    - 代码区(code segement)
+        - JIT编译后的代码
+- 特点
+    - 线程共享
+    - 静态分配, 位置不改变

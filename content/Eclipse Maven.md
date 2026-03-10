@@ -1,0 +1,39 @@
+- 创建web 项目
+    - maven project 
+        - catalog: internal
+        - filter:webapp
+            - org.apache.maven.archetypes
+    - 项目右键 - new -> source folder
+        - src/main/java
+        - src/main/resources
+        - src/test/java
+        - src/test/resources
+            - 可以在navigator中创建, 再项目右键 -> buildpath -> configure... -> source -> add folder添加以上4个source folder
+    - 修改 configure build path -> source 中2个source folder中的output folder
+        - src/main/java                target/classes
+        - src/main/resources        target/classes
+        - src/test/java                target/test-classes
+        - src/test/resources        target/test-classes
+    - 修改 configure build path -> libraries -> jre system library -> edit
+    - 右键 -> properties ->java compiler -> 1.8
+    - 项目右键 -> run as -> maven install                #下载依赖包
+    - 右键 -> properties -> project facets -> convert to faceted from
+        - 选中 dynamic web module
+        - 选中 java
+        - 右边选择runtime
+        - 下面further configuration available
+            - content directory: src/main/webapp
+            - 勾选generate web.xml
+    - 右键 -> properties -> deployment assembly中配置文件发布路径
+        - 去掉test的目录
+        - 添加发布包maven dependencies
+- 方案
+    - 修改项目名
+        - o-> 修改project名
+        - o-> 修改包名与test包名
+        - o-> 修改配置文件, 类中的常量, (workspace配置文件[maven项目没有这些文件])                # ctrl + h 全局搜索(替换)
+        - o-> mvn clean
+        - o-> mvn install
+        - o-> preferences -> web project settings -> context root中修改项目名称
+    - 集成spring
+        - pom.xml中添加spring依赖

@@ -1,0 +1,5 @@
+- 静态导入
+    - 1.5引入
+    - import static java.lang.Math.max
+    - import static java.lang.Math.*
+        - 导入的是方法，该方法就可以直接使用

@@ -1,0 +1,11 @@
+- 文件
+    - ~/.config/pip/pip.conf
+- 命令
+    - pip
+        - list
+            - 已安装的模块
+- 场景
+    - pip install -i http://pypi.douban.com/simple/ torndb
+        - 用豆辨的pypi索引
+    - pip install ipython==4.2.0
+        - 安装指定版本

@@ -1,0 +1,52 @@
+- [[Python 模块 内置]]
+- [[Python 模块 AI]]
+- [[Python 模块 数据处理]]
+- [[Python 模块 媒体处理]]
+- [[Python 模块 爬虫]]
+- 模板
+    - pongo2
+        - 国际化模板
+    - simhash
+        - google 文档hash
+    - pygments
+        - python 生成高亮html
+    - mako
+        - python 模板
+    - [[jinja2]]
+        - python 模板
+- 搜索
+    - [[Sphinx]]
+- 运维
+    - SimpleHTTPServer
+        - python2自带ftp服务器。
+        - pythom -m SimpleHTTPServer 8080
+    - fabric
+        - 远程自动部署
+- API
+    - [[Tornado]]
+    - web.py
+    - [[Twisted]]
+    - [[Flask]]
+    - [[Django]]
+    - bottle
+        - python wsgi
+- 图形界面
+    - PyQt
+    - PyGTK
+    - wxPython
+        - wxWidgets的Python绑定
+    - TkInter
+        - 基于Tk GUI 
+- Client
+    - mysql-connector
+    - mysqlclient
+    - PyMySQL
+    - MySQLdb
+    - redis.py
+    - peewee
+        - Python ORM
+    - south
+        - 表结构迁移, django自带
+- 编译器
+    - ast
+        - 运算前检查的eval()

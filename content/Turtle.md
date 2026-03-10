@@ -1,0 +1,3 @@
+- 用于[[RDF]]数据的人可读格式语言
+- Turtle/N3更易阅读
+- [[Apache Jena]]可转换不同RDF格式

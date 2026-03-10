@@ -1,0 +1,1 @@
+- github上项目的coverage测试覆盖率条目由它提供服务

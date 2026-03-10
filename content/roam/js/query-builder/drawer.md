@@ -1,0 +1,4 @@
+- scratch
+    - custom
+    - selections
+    - conditions

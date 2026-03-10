@@ -1,0 +1,5 @@
+- mount /dev/sdb1 /mnt
+- o acl                  # 打开acl功能
+- o loop x.iso           # 挂载文件
+- o iocharset=utf8       # 指定编码
+- t vfat                 # 指定类型

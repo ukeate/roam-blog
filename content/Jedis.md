@@ -1,0 +1,9 @@
+- java, 支持redis sharding, 即ShardedJedis结合ShardedJedisPool
+- Jedis jedis = new Jedis("localhost");                        # 连接redis数据库
+- jedis.set("name", "aa");                                                # 添加、覆盖
+- jedis.append("name", "bb");                                                # 追加，结果为 name=aabb
+- jedis.get("name");                                                                # 取值
+- jedis.del("name");                                                                # 删除
+- jedis.mset("name1", "aa", "name2", "bb");                # 批量添加、覆盖
+- jedis.mget("name1", "name2")                                        # 批量取值
+- 

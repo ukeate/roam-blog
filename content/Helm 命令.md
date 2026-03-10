@@ -1,0 +1,47 @@
+- 查看
+    - ls/list
+        - -all-namespaces
+    - get values a1
+        - 查看已部署的values变更
+    - history  a1
+        - 查看历史版本
+    - get manifest a1
+        - 查看已安装模板
+    - template
+        - 查看编译后内容
+        - -debug
+    - search repo a1 
+        - -versions
+            - 列所有版本
+- 维护
+    - repo
+        - list
+            - 列已添加的repo
+        - update
+            - 更新repo元信息
+    - plugin
+        - install --version master https://gitee.com/mirrors_sonatype-nexus-community/helm-nexus-push.git
+        - ls
+- 项目
+    - create a1
+        - 创建空项目
+    - install [deployName] [packageName|packageFile|packagePath] 
+        - f values.yaml
+        - -values=values.yaml
+        - -set a=b
+    - upgrade
+        - 热更新部署文件
+        - -debug --dry-run
+            - 只输出编译结果
+        - i
+            - 没有时执行install
+        - -disable-openapi-validation
+    - uninstall
+    - rollback a1 1
+        - 回滚到1版本
+    - 打包
+        - create a1
+        - lint --strict a1
+            - 校验
+        - package a1
+            - 打包成a1-0.1.0.tgz

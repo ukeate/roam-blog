@@ -1,0 +1,17 @@
+- [[Helm 命令]]
+- 目录
+    - charts/
+    - Chart.yaml
+        - apiVersion: v1
+        - appVersion: "1.0"
+        - description: A Helm chart for Kubernetes
+        - name: nginx-test
+        - version: 0.1.0
+    - requirements.yaml
+    - requirements.lock
+    - values.yaml
+        - replicaCount: 1
+    - templates/
+        - _helpers.tpl
+        - deployment.yaml
+- 相关命令

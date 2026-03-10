@@ -1,0 +1,31 @@
+- 性能分析
+- 命令
+    - jstat -gc 进程号 500 
+        - 每500ms打印一次gc信息
+        - -gcutil
+            - 查看比值
+    - option
+        - 查看分析项
+    - class
+        - 加载class的数量
+    - compiler
+        - 实时编译数量
+    - gc
+        - gc次数，时间
+    - gccapacity
+        - gc占量: young、old、perm
+    - gcnew
+        - new对象数量
+    - gcnewcapacity
+        - new对象占量
+    - gcutil
+        - gc统计
+- 显示
+    - S0C, S1C S代总大小
+    - S0U, S1U 已使用大小
+    - EC, EU Eden区
+    - OC, OU 老年代
+    - MC, MU 元空间
+    - CCSC, CCSU 指针压缩
+    - YGC, YGCT YoungGC次数与时长
+    - FGC, FGCT FullGC次数与时长

@@ -1,0 +1,47 @@
+- 基本
+    - generator生成的遍历器g, g[Symbol.iterator]()得到自己。继承它prototype上的方法
+        - generator中this添加的属性, 生成的遍历器实例中没有, generator new相当于执行得到遍历器
+        - g.bind(obj) 可以改变generator中的this
+    - 作为对象属性时写做 {* g() {}}, {g: function* () {}}
+- 应用
+    - 状态机
+    - 协程(coroutine)
+        - generator是半协程(semi-coroutine), 只有generator函数的调用者，才能改变程序运行状态
+        - 将多个协作的任务写成generator, 用yield语句交换控制权
+    - 异步程序同步写法
+    - 部署iterator接口
+    - 可看作数组结构
+- yield
+    - 特点
+        - 惰性求值
+        - 在表达式中时加圆括号, 如'hello' + (yield 1)，字符串模板中`${yield}`
+        - var n = yield i; g.next(1) 来返回值给n, g.next()返回undefined
+        - 第一次调用g.next()不能传值，因为执行第一个yield之前的代码, 还没有yield来接收
+    - var a = yield* g()
+        - 展开g()得到的generator(可展开所有iterator), 是for ... of的一种简写形式
+        - g()中有return 时, a 得到return 的值
+    - yield [a(), b()]
+        - 非展开，而是并列执行, 全部执行返回时返回
+- throw
+    - 特点
+        - 外部的throw语句只被外部捕获
+        - generator中throw的错误先内部捕获，再抛出, g.throw(1)相当于从内部yield处抛出一个错误
+        - generator抛出错误后不再能继续执行，再执行返回done=true
+    - var g = function* () {try {yield;} catch (e) {}}                # 可以多个yield一个try catch ,  而回调函数只能一个回调一个try catch
+    - var i = g(); i.next()
+    - try{i.throw('a'); i.throw('b') } catch(e){}                     # 内部捕获a, 外部捕获b
+- return
+    - 特点
+        - 相当于强制内部return
+        - generator中有finally时, g.return()延迟到所有finally执行后执行，再结束
+    - g.return(0)    // {value: 0, done: true}
+- 使用
+    - function* f () {
+        - yield 1; yield 2; return 3;
+    - }
+    - var ff = f(), ff.next()
+        - {value: 1, done: false}, {value: 2, done: false}, {value: 3, done: true}, {value: undefined, done: true}
+            - 没有return语句时, 去掉第三个结果，其它不变
+- 自动执行                                    # 写执行器处理thunk和promise
+    - 非promise
+        - thunk函数, 把回调函数抽离出来

@@ -1,0 +1,2 @@
+- ouch decompress a.zip b.tar.gz c.tar，解压
+- ouch compress one.txt two.txt archive.zip，压缩

@@ -1,0 +1,10 @@
+- Network Basic Input Output System                           # 网络基本输入输出系统 由ibm开发
+    - 定义了一种软件接口以及在应用程序和连接介质之间提供通信接口的标准方法。
+- wins
+    - Windows Internet Name Server                            # Windows网际名字服务 WINS为NetBIOS名字提供名字注册、更新、释放和转换服务，
+        - 这些服务允许WINS服务器维护一个将NetBIOS名链接到IP地址的动态数据库，大大减轻了对网络交通的负担。
+- smb/cifs
+    - smb        Sever Message Block                          # 服务信息块协议 , 用于计算机间共享文件系统、打印机和其他资源。
+    - cifs        Common Internet File System）                # 通用互联网文件系统。
+        - 微软将原有的几乎没有多少技术文档的SMB协议进行整理， 重新命名为CIFS
+        - 成为Internet上计算机之间相互共享数据的一种标准。

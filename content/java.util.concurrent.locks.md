@@ -1,0 +1,17 @@
+- &lt;&lt;Lock&gt;&gt;    # 主要是可重入锁，非阻塞结构上下文使用    - ReentrantLock
+        - 多线程不可同时访问一个类中2个加Lock的方法, 因为是2个锁。
+        - lock()
+        - unlock
+            - 用lock, unlock可设置交替锁(hand-over-hand locking), 轮流锁、解锁一部分
+        - tryLcok()
+            - 可设置超时
+            - 同时超时，再尝试失败再尝试而进入活锁。设置不同超时时间减少活锁机率
+        - lockInterruptibly()
+            - 突破死锁
+        - newCondition()
+            - 条件变量, 原子地阻塞并解锁，直到条件满足(如有容量，队列非空)
+            - condition.await()
+            - condition.signal()
+            - condition.signalAll()
+- &lt;&lt;ReadWriteLock&gt;&gt;   # 读写锁，写独占- &lt;&lt;Condition&gt;&gt;   # 替代wait(), notify()    - await()
+    - signal()

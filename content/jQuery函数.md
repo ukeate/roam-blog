@@ -1,0 +1,87 @@
+- 基础函数
+    - 对象访问
+        - size()          # 同length,返回元素个数
+        - length          # 同size(),返回元素个数
+        - get(index)      # 取得一个匹配的元素,从0开始
+        - each(function(){});                        # 遍历调用该方法的元素数组中的元素，其中的this代表循环中的每一个元素
+    - 属性
+        - val()                              # value属性的值，或option元素之间的值
+        - val("")                        # 设置value的值
+        - var(["Multiple2", "Multiple3"]);        # 设置select 下option的值
+        - html()                                # 相当于innerHTML ,同样不支持xml
+        - attr("")                        # 查找属性
+        - attr("checked","checked")                # 设置checked属性的值为"checked"
+        - removeAttr("align");                # 删除属性
+        - 样式类（css）
+            - addClass("myClass");          # 添加 css 样式
+            - removeClass("myClass");        # 删除样式
+            - toggleClass("myClass");        # 切换样式，有变无，无变有
+            - hasClass("myClass")            # 返回是否有样式
+- 筛选
+    - 过滤
+        - eq(index)                                                # 从0开始的第index元素
+        - is(expr)                                                # 判断元素中是否有符合expr的元素（如"form"），有则返回true,无则返回false
+        - first()                                                        # 第一个元素
+        - last()                                                        # 最后一个元素
+        - filter(expr)                                        # 筛选出符合表达式的集合
+        - has(expr)                                                # 保留符合expr的元素，去掉不符合的
+        - not(expr)                                                # 删除符合expr的元素，与has相反
+    - 查找
+        - find("");                      # 搜索所有与指定表达式匹配的后代元素
+        - children()                      # 取得所有直接子元素，不包含后代
+        - next()                          # 下一个同级兄弟
+        - prev();                        # 上一个同级兄弟
+        - parent("")                      # 含着所有匹配元素的唯一父元素 ,可以用选择器筛选
+        - parents("p")                    # $("span").parents("p") 每个span的所有是p元素的祖先元素
+        - nextAll()                      # 之后所有同级兄弟
+        - prevAll()                      # 之前所有同级兄弟
+        - siblings()                      # 上下的所有同级兄弟
+    - 对象处理
+        - replaceWith()                  # $("p").replaceWith("<b>Paragraph. </b>"); 替换p节点为自制的粗体节点
+        - remove()                        # 自己删除自己
+        - clone()                        # 复制自己  clone(true) 会复制行为
+        - 内部插入
+            - append(content)            # 元素内部之后添加元素，相当于appendChild()
+            - prepend(content)            # 元素内部之前添加元素
+        - 外部插入
+            - after(content)              # 元素同级之后插入
+            - before(content)            # 元素同级之前插入
+- 事件函数
+    - change(fn)              # $("select").change(function(){})  dom 中的onchange事件，元素内容变化时触发
+    - submit(fn)              # $("form").submit(function(){})  选中表单提交时触发，多用于简单检测输入
+        - 该事件函数中写return false;代表不提交表单
+    - focus(fn)              # $(":text").focus();      将光标定位到input text表单中
+    - select(fn)              # 选中  如 $(function(){  $(":text").select(); $(":text").focus(); })  页面加载时定位光标到input text文本域，并选中其中的文字        
+    - mouseover(fn)           
+    - mouseout(fn)
+    - mousemove(function(e){})          # 鼠标移动时执行 ie 中已经定义参数，不用传递，直接用event，event.clientX,event.clientY分别得到鼠标的x,y坐标
+    - keyup(fn)                  # ie 中 event.keyCode得到按键编码(firefox 中传递参数e,e.which得到按键编码)
+    - ready(fn)              # $(document).ready(fn) 相当于window.load()事件，但可以写多个
+- CSS函数 
+    - css("background-color","red");                # 设置style属性
+    - addClass("myClass")                                # 添加css样式
+    - removeClass("myClass")              # 删除样式
+    - toggleClass("myClass")              # 切换样式，有则删除，无则添加
+    - hasClass("myClass")                # 是否有样式，返回true或false
+- 效果函数
+    - slideUp(speed,fn)      # 向上滑动,如$("div").slideUp(200);
+    - slideToggle(speed,fn)  # 滑上滑下切换,如$("div").slideToggle(200);
+    - show(speed,fn)          # 元素从无到有动画显示出来
+    - hide(speed,fn)          # 元素从有到无隐藏起来
+    - toggle(speed,fn)        # 有则无，无则有隐藏、显示元素
+    - fadeIn(speed,fn)        # 淡入显示图片
+    - fadeOut(speed,fn)      # 淡出隐藏图片
+    - animate(styles,speed,easing,callback)                # 自定义动画。只有数字值可创建动画（比如 "margin:30px"）
+- 工具函数
+    - $.trim(str)            # 去除str字符串开头和结尾的空白
+- 其它函数
+    - serialize()            # 序列表单内容为字符串  ajax提交表单时可以        var sendData = $("form").serialize();  给sendData赋值传递表单信息
+- AJAX
+    - load(url)                      # $("span").css("color","red").load(url)        无参以get方式提交，返回的值直接作为<span>标签内的文本节点值
+    - load(url,sendData);            # 有参以post的方式提交
+        - var sendData = {"username":"user","password":"psw"};  sendData的内容用json的语法写
+    - load(url,sendData,function(backData,textStatus,ajax){});          # 加上处理返回值的函数,服务器返回数据时调用此函数
+        - 其中backData是返回的字符串,textStatus是响应头状态码的值对应的信息（success代表200）,ajax是ajax引擎对象
+        - &lt;span&gt;标签的文本节点的值仍会被改变        - 可以只写一个参数：backData，参数的名字可以任意更改
+    - $.get(url,sendData,function(backData,textStatus,ajax){});          # 用get方式提交ajax模拟的表单
+    - $.post(url,sendData,function(backData,textStatus,ajax){});          # 用post方式提交ajax模拟的表单 响应头 content-type = "application/x-www-form-urlencoded" 会自动设置好

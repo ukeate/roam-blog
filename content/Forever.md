@@ -1,0 +1,5 @@
+- openvpn --config openvpn.conf
+    - 连接
+    - --user outrun
+    - --auth-nocache
+    - askpass pass.txt 放密码到文件

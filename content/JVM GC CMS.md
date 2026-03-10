@@ -1,0 +1,46 @@
+- concurrent mark sweep，1.4后期引入, JDK11取消
+- 特点
+    - 适用20G
+    - 多线程并行回收, 并发回收(GC与程序同时运行)，降低STW时间(200ms)
+- 不足            # 问题多，没有版本默认CMS
+    - 浮动垃圾
+    - 碎片多，新对象分配不下时，使用SerialOld
+        - 设低GC阈值回收浮动垃圾
+- 清理过程
+    - 初始标记(initial mark)
+        - STW, 单线程, 标记根对象
+    - [预标记]                        # Card Marking, 把Card标为Dirty
+    - 并发标记(concurrent mark)
+        - 不STW, 多线程, 执行多次
+    - 重新标记(remark)                # 处理并发标记过程中的变化
+        - STW, 多线程, 
+    - 并发清理(concurrent sweep)      # 过程中产生的浮动垃圾, 下次回收
+        - 不STW, 多线程, 
+    - [整理阶段]
+- 日志
+    - [GC(Allocation Failure)[ParNew:6144K->640K(6144K)], 0.02 secs] 6585K->2770K(19840K),0.02 secs][Times:user=0.02 sys=0.00, real=0.02 secs]
+        - 6144K->640K(6144K)
+            - 回收前 回收后 总容量
+        - 6585K->2770K(19840K)
+            - 堆回收前 回收后 总大小  
+    - [GC (CMS Initial Mark)]
+        - [1 CMS-initail-mark]
+    - [CMS-concurrent-mark-start]
+    - [CMS-concurrent-preclean-start]
+    - [GC (CMS Final Remark)]
+        - [YG occupancy]
+            - 清理后年轻代占用及容量
+        - [Rescan(parallel)]
+            - STW下标记存活对象
+        - [weak refs processing]
+            - 弱引用处理
+        - [class unloading]
+            - 卸载用不到的class
+        - [scrub symbol table]
+            - 清理常量池
+        - [scrub string table]
+            - 清理常量池
+        - [1 CMS-remark]
+            - 清理后老年代占用及容量
+    - [CMS-concurrent-sweep-start]
+    - [CMS-concurrent-reset-start]

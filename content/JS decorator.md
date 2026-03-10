@@ -1,0 +1,25 @@
+- 介绍
+    - 编译时执行
+    - 相当于 class A {}, A = decorator(A) || A;
+    - 不能用于函数，因为函数提升?
+- o-> 修饰类
+- function testable(target) {                         # target是被修饰的类, 参数2为属性名, 参数3为属性描述对象
+    - target.isTestable = true;
+- }
+- function testable(val) {
+    - return function(target) {
+        - target.isTestable = val;
+    - }
+- }
+- @testable
+- class A {}
+- A.isTestable    // true
+- o-> 修饰类属性
+- function readonly(target, name, descriptor) {
+    - descriptor.writable = false;
+    - return descriptor;
+- }
+- class Person {
+    - @readonly
+    - name() {return 0}
+- }

@@ -1,0 +1,4 @@
+- rust实现，多语言版本管理，替代asdf，指定目录用命令版本
+- mise use node@24 python@3.13
+- mise ls --current
+- mise x -- node -v

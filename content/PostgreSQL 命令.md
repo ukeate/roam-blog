@@ -1,0 +1,38 @@
+- initdb                          # 初始化数据库
+    - -locale en_US.UTF-8 
+    - D 'data'
+- postgres                        # 启动数据库
+    - D 目录
+    - p 6543
+- pg_ctl start                    # 控制数据库: start, stop等
+    - D data 
+    - l a.log 
+- postmaster
+    - D /data
+- psql
+    - d db1
+    - h localhost 
+    - p 5432
+    - U 用户名
+    - W                          # 强制要求验证密码
+    - f 导入sql命令文件, 或者在末尾加 < a.sql 来导入
+    - L 导出日志文件
+    - o->
+    - psql -U outrun -f pg.sql db1                    # 导入数据
+- pg_dump                         # 导出数据库
+    - f                          # 指定文件
+    - U                          # 用户
+    - E UTF8                     # 编码
+    - h localhost
+    - n public                   # 指定schema
+    - a                          # 只导数据，没有schema
+    - F t                        # 压缩成tar
+    - o->
+    - pg_dump -U outrun -f pg.sql db1                 # 导出数据, -t tb1 导出表
+- pg_restore
+    - o->
+    - pg_restore -U outrun -d db1 pg.tar              # 导入压缩的数据
+- createdb                        # 创建数据库并指定 owner
+    - hlocalhost -Upostgres -O 用户名 数据库名                        
+- dropdb
+    - U user dbname

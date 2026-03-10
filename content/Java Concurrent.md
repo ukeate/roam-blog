@@ -1,0 +1,62 @@
+- [[性能估算]]
+- 单例方法要线程安全, 获取单例要注意线程安全
+- 线程或线程池指定有意义的名称
+    - public class TimerTaskThread extends Thread {
+        - public TimerTaskThread() {
+            - super.setName("TimerTaskThread")
+- 线程资源只从线程池取，不要自行创建
+- 不用Executors而用ThreadPoolExecutor创建
+    - FixedThreadPool和SingleThreadPool允许请求队列长度为Integer.MAX_VALUE, 可能堆积大量请求OOM(out of memory)
+    - CachedThreadPool和ScheduledThreadPool允许创建线程数量为Integer.MAX_VALUE，可能创建大量线程，导致OOM
+- SimpleDateFormat线程不安全，不要static。应使用DateUtils
+    - JDK8用Instant代替Date, LOcalDateTime代替Calendar, DateTimeFormatter代替Simpledateformatter
+- 尽量锁小范围
+- 多线程中，都对多对象加锁，加锁顺序要一致，否则会死锁
+- 并发修改时，在应用层加锁或在缓存加锁或在数据库层加乐观锁并使用version作更新依据
+    - 每次访问冲突率小于20%, 使用乐观锁，否则用悲观锁。
+    - 乐观锁重试次数不得小于3
+- Timer的多个TimeTask，一个没有捕获异常会同时终止。应使用ScheduledExecutorServcie
+- CountDownLatch进行异步转同步时，线程代码注意catch异常，确保countDown执行
+    - 子线程异常，主线程catch不到
+- Random多线程下，会因竞争同一seed导致性能下降。JDK7后用ThreadLocalRandom
+- 延迟初始化的双重检查锁隐患。将目标属性声明为volatile
+- volatile不能解决多写问题, 使用AtomicInteger或JDK8的LongAdder，它减少了乐观锁的重试次数
+- HashMap在容量不够进行resize时，高并发可能会出现死链，导致cpu飙升
+- ThreadLocal使用static修饰
+- 基础
+    - 并发编程
+    - [[CPU]]
+    - OS
+        - [[进程]]
+        - [[线程]]
+        - [[CPU性能]]
+    - JVM
+        - [[Java 内存屏障]]
+        - [[乱序执行]]
+    - [[Java Unsafe]]
+- 修饰符
+    - [[synchronized]]
+    - [[volatile]]
+- 锁
+    - 概念
+        - 锁细化
+            - 少代码加轻量锁
+        - 锁粗化
+            - 锁太多时，如行锁变表锁
+    - [[CAS]]
+    - [[AQS]]
+    - [[ReentrantLock]]
+    - [[CountDownLatch]]
+    - [[CyclicBarrier]]
+    - [[Java Phaser]]
+    - [[ReadWriteLock]]
+    - [[StampedLock]]
+    - [[Java Semaphore]]
+    - [[Java Exchanger]]
+    - [[LockSupport]]
+- [[Java 线程]]
+- [[Java 协程]]
+- [[Java API 并发]]
+- 源码分析
+    - [[ThreadPoolExecutor]]
+    - [[ForkJoinPool]]

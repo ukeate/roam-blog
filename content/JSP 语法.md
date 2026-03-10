@@ -1,0 +1,20 @@
+- 模板元素
+- 脚本
+    - &lt;%    %&gt;- 脚本表达式
+    - &lt;%=    %&gt;- 注释
+    - &lt;%--    --%&gt;- 指令
+    - &lt;%@ page%&gt;    - language="java"
+    - import="java.util.*,java.io.*"
+    - contentType="mineType [; charset=characterSet]"
+    - pageEncoding="characterSet"
+    - session="true"
+    - buffer="none | 8kb | sizekb"
+    - autoFlush="true"
+    - isThreadSafe="true"
+    - info="text"
+    - errorPage="relative_url"
+    - isErrorPage="true"
+    - isELIgnored="true"
+    - &lt;%@ include%&gt;    # &lt;%@ include file="in.jspf" %&gt; 是静态包含（原代码中包含），一般包含名字为*.jspf的jsp文件    - &lt;%@ taglib%&gt;    # 标签库- 声明
+    - &lt;%!    %&gt;    # 全局声明（刷新页面仍然保存数据）    - &lt;% %&gt;    # 局部的声明（刷新页面不保存数据）- 标签
+    - &lt;jsp:forward page=""&gt;&lt;/jsp:forward&gt;    - &lt;jsp:include page=""&gt;&lt;/jsp:include&gt;

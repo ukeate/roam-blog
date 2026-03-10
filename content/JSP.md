@@ -1,0 +1,11 @@
+- Java Server Pages，基于servlet, html页面嵌java代码，第一次访问时解释成servlet。位于视图层
+- [[JSP 语法]]
+- [[JSP 全局变量]]
+- [[JSP 内置对象]]
+- [[JSP EL]]
+- [[JSP Taglib]]
+- [[JSP 动作标签]]
+- [[JSP 函数]]
+- [[JSP 验证码]]
+- [[JSP 自定义标签]]
+- [[JSP i18n]]

@@ -1,0 +1,10 @@
+- Message Queue Telemetry Transport，最早由IBM提供的，二进制消息的MQ
+- 低电量低带宽, 提供数据传输QoS, 可传任意类型数据, 有Session
+    - 针对硬件性能低、网络状态差的远程设备, 如卫星链路通信
+    - 需要一个消息中间件
+- 基于TCP
+- qos级别
+    - quality of service
+    - 尽力转发(best effort service)           # 没有保障
+    - 区分服务(differentiated service)        # soft qos优先级
+    - 确保服务(guaranteed service)            # hard qos专有带宽

@@ -1,0 +1,31 @@
+- 跨域访问，使用ssh隧道加密通信
+- set password设置密码
+- 用grant和revoke对用户授权
+    - 少开权限
+    - 只有启动mysql的用户有写权限
+    - 只授权process和super权限给管理用户
+        - mysqladmin processlist 可列举当前执行的查询
+        - super 可切断连接，改变服务器运行参数，控制从库
+    - 不信任dns时，权限表只设置ip
+- 常见攻击
+    - 防偷听
+    - 篡改
+    - 回放
+    - 拒绝服务
+- acl控制接口权限
+- 设置只有root可访问mysql数据库和user表
+- 不用明文密码，密码强度高
+- 数据库放在防火墙后，或在DMZ(demilitarized zone, 隔离区)
+- 防火墙设置3306端口不可访问
+- sql预编译，避免sql注入
+- 存数据时检查大小
+- 以普通用户启动mysql
+- tcpdump检查传输数据的安全性
+    - tcpdump -l -i eth0 -w -src or dst port 3306 strings
+- max_user_connections变量限制指定帐户连接数
+- 打开mysqld安全开关
+    - -local-infile=0     # 0时客户端无法使用local load data
+    - -skip-grant-tables     # 对用户不做访问控制
+        - mysqladmin flush-privileges # 运行中开启访问控制
+        - mysqladmin reload           # 运行中开启访问控制
+    - -skip-show-databases   # 禁止show databases

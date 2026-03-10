@@ -1,0 +1,82 @@
+- 允许软件
+    - sudo xattr -rd com.apple.quarantine /Applications/LockedApp.app
+- 阻止休眠
+    - caffeinate -dims
+        - -d 显示器，-i 系统idle，-m 磁盘，-s 接电
+- 操作
+    - 四指
+        - 向内：启动台
+        - 向外：桌面
+    - 三指
+        - 左右：切桌面
+        - 向上：app列表
+        - 向下：expose(单程序多窗口)
+    - 二指
+        - 上下：滚动
+        - 左右：前进后退
+        - 右边：通知中心
+        - 缩放,旋转
+        - 点一下：菜单
+        - 点二下：小缩放
+    - 一指
+        - 点一下：选中
+        - 点二下：打开
+        - 点一段：拖
+        - 点二段：查询
+- Terminal
+    - 清屏 <Cmd k>
+    - 到Dock <Cmd h> <Cmd m>
+- 快捷键
+    - 系统：
+        - 锁屏：Ctrl + Cmd + q 
+        - 关屏：Shift + Ctrl + 关机
+        - 注销：Shift + Cmd + q 
+        - 睡眠：option + Cmd + 关机
+        - 强退：Ctrl + Cmd + 关机
+    - 程序坞： option + Cmd + d
+    - 调度中心：
+        - app列表: Ctrl + 上
+        - expose: Ctrl + 下
+        - 左右桌面：Ctrl + 左右
+        - 桌面：f11
+    - 窗口：
+        - 切换：Cmd + tab
+        - 程序内切换：Cmd + `
+        - 关闭：Cmd + w
+        - 退出：Cmd + q
+        - 强制退出：option + Cmd + esc
+        - 隐藏：Cmd + h
+        - 最大化: Ctrl + Cmd + f
+        - 最小化：Cmd + m
+        - 放大、缩小：Cmd + +和-
+        - 新标签：Cmd + t
+        - 新建: Cmd + n
+        - 打开：Cmd + o
+        - 保存：Cmd + s
+        - 另存为：Shift + Cmd + s
+        - 刷新：Cmd + r
+        - 打印：Cmd + p
+        - 搜索：Cmd + f
+    - 文件： 
+        - 全选、复制、剪切、粘贴、撤销: Cmd + a c x v z 
+        - 粘贴移到: option + Cmd + v
+        - 删除: Cmd + return
+    - 访达：
+        - 预览：空格
+        - 简介：Cmd + i
+    - 回收站：
+        - 清空：Shift + Cmd + return
+    - 截屏：
+        - 整屏存文件：Shift + Cmd + 3
+        - 区域存文件：Shift + Cmd + 4
+        - 窗口区域：Shift + Cmd + 4 + 空格
+        - 录屏：Shift + Cmd + 5
+    - 输入法：Ctrl + 空格
+- 命令
+    - [[brew]]
+- 场景
+    - 改MAC地址
+        - ```shell
+          sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -z
+          sudo ifconfig <intf> lladdr 00:bb:cc:dd:ee:ff 
+          ```

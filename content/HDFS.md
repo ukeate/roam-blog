@@ -1,0 +1,70 @@
+- 批量读写，高吞吐量，不适合小文件
+- Hadoop Distributed File System, 一开始为Nutch搜索引擎开发
+- 存储模型
+    - 按字节切割,block存储,block多副本
+    - 不支持修改(因为修改文件而非block, 且会引发规模修改)，可以追加
+- 主从架构
+    - NameNode
+        - 树形目录
+        - 内存存储元数据，可持久化(EditLog事务日志, FsImage)
+            - NameNode启动时安全模式
+                - SecondaryNameNode合并EditLog到新FsImage
+                - DataNode上报block列表
+        - 存副本策略
+    - DataNode
+        - 本地文件形式存block, 存校验
+        - 与NameNode心跳，汇报block列表
+    - Client
+        - 交互元数据和block
+- API结构
+    - 推荐节点数不过5000
+    - 角色：一个进程
+- Block副本放置策略
+    - Pipeline
+- HA
+    - JournalNode
+        - NameNode同步EditLog
+    - FailoverController
+        - 利用ZooKeeper
+        - 同主机下监控NameNode
+        - 验证对方主机主NN是否真的挂掉，调用对方降级为Standby
+- 问题及方案
+    - 单点故障
+        - 多NameNode，主备(2.x只能1主1备, 3.x可以1主5备)
+    - 压力大，内存受限
+        - 联帮: Federation(元数据分片)
+- 配置网络
+    - /etc/sysconfig/network-scripts/ifcfg-eth0
+    - /etc/sysconfig/network
+        - NETWORKING=YES
+        - HOSTNAME=node01    
+    - /etc/hosts
+    - /etc/selinux/config
+        - SELINUX=disabled
+    - /etc/ntp.conf
+        - server htp1.aliyun.com
+    - /etc/profile
+        - export JAVA_HOME=/usr/java/default
+        - export PATH=$PATH:$JAVA_HOME/bin
+    - service iptables stop & chkconfig iptables off
+    - service ntp start & chkconfig ntp on
+    - 配ssh免密登录
+- 部署配置
+    - mkdir /opt/bigdata
+    - /etc/profile
+        - export HADOOP_HOME=/opt/bigdata/hadoop-2.6.5
+        - export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+    - /etc/hadoop
+        - hadoop-env.sh
+            - export JAVA_HOME=/usr/java/default
+        - core-site.xml
+            - &lt;name&gt;fs.defaultFS&lt;/name&gt;            - &lt;value&gt;hdfs://node01:9000&lt;/value&gt;        - hdfs-site.xml
+            - &lt;name&gt;fs.replication&lt;/name&gt;            - &lt;value&gt;1&lt;/value&gt;            - &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;            - &lt;value&gt;/var/bigdata/hadoop/local/dfs/name&lt;/value&gt;                - namenode元数据
+            - &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;            - &lt;value&gt;/var/bigdata/hadoop/local/dfs/data&lt;/value&gt;            - &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;            - &lt;value&gt;node01:50090&lt;/value&gt;            - &lt;name&gt;dfs.namenode.checkpoint.dir&lt;/name&gt;            - &lt;value&gt;/var/bigdata/hadoop/local/dfs/secondary&lt;/value&gt;        - slaves
+            - node1
+- 命令
+    - hdfs namenode -format
+    - start-dfs.sh
+    - 访问页面 node01:50070 node01:50090
+    - hdfs dfs -mkdir -p /user/root
+    - hdfs dfs -D dfs.blocksize=1048576 -put a.txt /user/root

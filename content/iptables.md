@@ -1,0 +1,150 @@
+- iptables [-t 表] -命令 匹配 操作
+- 参数
+    - t                  # 要操作的匹配表
+    - 命令
+        - P                  # 策略, INPUT等
+        - A                  # append, 添加
+        - I 1                # 在第2条前添加
+        - D 1                # delete, 删除
+        - R 1                # 替换
+        - L                  # list 显示
+        - n                  # 端口以数字显示
+        - v                  # verbose, 显示更多信息
+        - F                  # flush
+        - X                  # 清除自定chain
+        - Z                  # 清除统计数
+    - 规则
+        - p                  # 协议
+        - i                  # 指定网卡流入
+        - o                  # 指定网卡流出
+        - s                  # 来源ip, !表示排除
+        - d                  # 目标ip
+        - -sport             # 源端口
+        - -dport             # 目标端口
+        - m                  # 使用模块, 会根据-p选择模块
+    - 动作
+        - j                  # 跳转
+            - ACCEPT
+- 四表(table)
+    - raw             # 跟踪
+    - mangle          # 标记
+    - nat             # 修改ip、port
+    - filter          # 过滤, 默认
+- 五链(chain)
+    - PREROUTING
+    - FORWORD         # INPUT前转发到POSTROUTING
+    - INPUT
+    - OUTPUT
+    - POSTROUTING 
+- 策略(policy)
+    - ACCEPT          # 通过
+    - REJECT          # 拒绝，返回数据
+        - 返回数据包
+            - ICMP port-unreachable
+            - ICMP echo-reply
+            - tcp-reset
+        - iptables -A  INPUT -p TCP --dport 22 -j REJECT --reject-with ICMP echo-reply
+    - DROP            # 丢弃
+    - REDIRECT        # 导向端口(PNAT)
+        - iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT--to-ports 8081
+    - MASQUERADE      # 改写来源ip为本机ip, 可指定目标端口范围
+        - iptables -t nat -A POSTROUTING -p TCP -j MASQUERADE --to-ports 21000-31000
+    - LOG             # 日志, 记在/var/log
+        - iptables -A INPUT -p tcp -j LOG --log-prefix "input packet"
+    - ULOG
+    - SNAT            # 改写源地址, 只适用POSTROUTING
+        - iptables -t nat -A POSTROUTING -p tcp-o eth0 -j SNAT --to-source 192.168.10.15-192.168.10.160:2100-3200
+    - DNAT            # 改写目标地址, 只适用POSTROUTING
+        - iptables -t nat -A PREROUTING -p tcp -d 15.45.23.67 --dport 80 -j DNAT --to-destination 192.168.10.1-192.168.10.10:80-100
+    - TOS
+    - MIRROR          # 对调源ip与目标ip后返回
+    - QUEUE           # 封包入队列待处理，实现功能如：计算联机费用
+    - RETURN          # 退出当前规则链, 返回主规则链
+    - TTL
+    - MARK            # 对包做标记数字
+        - iptables -t mangle -A PREROUTING -p tcp --dport 22 -j MARK --set-mark 22
+- 规则(rule)          # 自定义的条件
+- 配置文件
+    - /etc/sysconfig/iptables
+    - /usr/libexec/iptables/iptables.init
+        - save
+    - rules.v4        # 自定义配置
+        - filter
+        - :INPUT ACCEPT [186:19951]
+        - :FORWARD ACCEPT [0:0]
+        - :OUTPUT ACCEPT [71:11164]
+        - A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
+        - A INPUT -p tcp -m tcp --dport 23 -j ACCEPT
+        - A INPUT -p tcp -m tcp --dport 24 -j ACCEPT
+        - COMMIT
+- 命令
+    - systemctl enable iptables.service
+    - service iptables save
+    - service iptables restart
+    - iptables-restore < rules.v4
+        - 导入配置
+- 案例
+    - 关iptables
+        - service iptables stop
+        - chkconfig iptables off
+    - 查看
+        - iptables -L -n -v --line-numbers
+    - 查nat表
+        - iptables -t nat -L
+    - flush, 生效
+        - iptables -F
+    - service命令
+        - service iptables save
+        - service iptables stop
+        - service iptables start
+        - service iptables restart
+    - 开机启动
+        - /etc/network/if-pre-up.d/iptables
+            - iptables-restore < rules.v4
+    - 插入规则
+        - iptables -I INPUT 2 -s 202.54.1.2 -j DROP
+    - 删除规则
+        - iptables -D INPUT 4
+    - 开放所有input/output
+        - iptables -P INPUT ACCEPT
+        - iptables -P OUTPUT ACCEPT
+    - 开放input/output tcp 22
+        - iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+        - iptables -A OUTPUT -p tcp --sport 22 -j ACCEPT
+    - vpn转发
+        - iptables -t nat -A POSTROUTING -s 192.168.252.0/24 -j SNAT --to-source 10.171.83.146
+    - 屏蔽私有地址
+        - iptables -A INPUT -i eth1 -s 192.168.0.0/24 -j DROP
+        - iptables -A INPUT -i eth1 -s 10.0.0.0/8 -j DROP
+    - 屏蔽ip
+        - iptables -A INPUT -s 1.2.3.4 -j DROP
+        - iptables -A INPUT -s 192.168.0.0/24 -j DROP
+        - iptables -A OUTPUT -d 192.168.1.0/24 -j DROP
+        - iptables -A OUTPUT -o eth1 -d 192.168.1.0/24 -j DROP
+    - 屏蔽端口
+        - iptables -A INPUT -p tcp -s 1.2.3.4 --dport 80 -j DROP
+        - iptables -A INPUT -i eth1 -p tcp -s 192.168.1.0/24 --dport 80 -j DROP
+    - 记录并屏蔽
+        - iptables -A INPUT -i eth1 -s 10.0.0.0/8 -j LOG --log-prefix "IP_SPOOF A: "
+        - iptables -A INPUT -i eth1 -s 10.0.0.0/8 -j DROP
+    - mac屏蔽
+        - iptables -A INPUT -m mac --mac-source 00:0F:EA:91:04:08 -j DROP
+        - *only accept traffic for TCP port # 8080 from mac 00:0F:EA:91:04:07 * ##
+        - iptables -A INPUT -p tcp --destination-port 22 -m mac --mac-source 00:0F:EA:91:04:07 -j ACCEPT
+    - 屏蔽icmp
+        - iptables -A INPUT -p icmp --icmp-type echo-request -j DROP
+        - iptables -A INPUT -i eth1 -p icmp --icmp-type echo-request -j DROP
+    - 开启范围端口
+        - iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 7000:7010 -j ACCEPT
+    - 开启范围ip
+        - iptables -A INPUT -p tcp --destination-port 80 -m iprange --src-range 192.168.1.100-192.168.1.200 -j ACCEPT
+    - nat
+        - iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o eth0 -j SNAT --to 123.4.5.100
+            - 改写来自192.168.1.0/24的包, 源ip为123.4.5.100
+        - iptables -t nat -A PREROUTING -s 192.168.1.0/24 -i eth1 -j DNAT --to 123.4.5.100
+            - 改写来自192.168.1.0/24的包, 目标ip为123.4.5.100
+        - iptables -t nat -A POSTROUTING -s 172.27.0.0/16 -d 10.0.0.1 -p tcp --dport 80 -j SNAT --to-source MASQUERADE
+            - 改写来自172.27.0.0/16去向10.0.0.1:80的tcp包, 源ip为本机ip
+        - iptables -t nat -A PREROUTING -d 192.168.1.1 -p tcp --dport 80 -j DNAT --to-destination 10.0.0.1
+            - 改写去向192.168.1.1:80的tcp包, 目标ip为10.0.0.1
+- 

@@ -1,0 +1,2 @@
+- dependency injection
+- 容器向类添加属性        # 反射，用带参构造或set方法

@@ -1,0 +1,97 @@
+- ognl标签
+    - 注意
+        - jquery中不能定位ognl标签，而要用标签自己生成的id定位（看源码得到）
+    - 使用：
+        - &lt;%@ taglib uri="/struts-tags" prefix="s" %&gt;        - tld映射文件路径
+            - struts2-core-2.3.1.1.jar包中
+            - /META-INF/struts-tags.tld
+    - `'#'出现的地方`
+        - o-> 除ValueStack 之外的所有struts内置对象的取值前面都要加
+        - o-> 取JavaBean中的属性时要加 ''，如"#user.username",ValueStack中也不例外
+        - o-> 构造Map对象，Map：#{'male':'[男]','female':'[女]'}，构造radio和select标签，如
+            - &lt;s:radio list="#{'male':'aa','bb':'cc'}" name="gender2" /&gt;        - o-> 迭代数组或list集合
+            - 集合的投影：userList.{username}
+            - 集合的过滤：userList.{?#this.age>22}
+    - 主题与模板
+        - 主题：为多个模板提供风格
+            - struts2-core-2.3.1.1.jar包中
+                - template中的四个主题
+                    - archive                # 其中是.vm文件，其它是.ftl文件。vm与ftl是两种视图技术
+                        - ajax        # 除此之外其它都不支持ajax
+                        - simple
+                        - xhtml
+                    - xhtml                # 默认主题,default.properties配置文件中定义
+                    - css_xhtml
+                    - simple
+            - 修改主题
+                - 1.struts.properties 中修改
+                    - struts.ui.theme=simple          # 针对当前webapp
+                - 2.<s:form theme="xhtml">            # 只针对当前表单
+                - 3.<s:textfield name="username" theme="simple">  # 修改某个标签的属性
+        - 模板：为标签提供样式
+            - 做模板的技术freemarker
+    - ognl标签的优点：自动排版、验证数据回显、国际化
+    - 所有标签：
+        - 逻辑标签
+            - 对 Map 集合的迭代：
+                - &lt;s:iterator value="#session.fileMap" var="entry" status="stat"&gt;                    - &lt;s:property value="#entry.key"/&gt;                - &lt;s:if test="#stat.count%4==0"&gt;&lt;/s:if&gt;                - &lt;/s:iterator&gt;            - 对 List 集合的迭代  List<User> userList
+                - 普通迭代
+                    - &lt;s:iterator var="user" value="userList"&gt;      # 投影语法List&lt;user&gt;中的所有username                    - &lt;s:property value="#user.username"/&gt;                        - 投影语法
+                    - &lt;s:iterator var="username" value="userList.{username}"&gt;                    - &lt;s:property/&gt;                        # 这里不用写属性value="username"就可以对page域中的username进行显示                - 过滤语法
+                    - &lt;s:iterator var="user" value="userList.{?#this.age&gt;9}"&gt;                        - this代表当前被迭代的元素 ?#是所有 ^#是第一个 $#是最后一个  ?...[0]按标记取
+                    - &lt;s:property value="#user.username" /&gt;        - 显示标签（UI标签）
+            - 普通字符串中使用ognl
+                - jsp中用%{}      xml中用${}
+                - 例如
+                - jsp中：<s:textfield label="%{#attr.testValueStack}"/>
+                - xml中：<param name="min">4000</param>
+                    - &lt;message&gt;${min}&lt;/message&gt;            - 普通信息
+                - &lt;s:text name=""/&gt;            - 输出值
+                - 迭代器中
+                    - &lt;s:property/&gt;        # 直接输出被迭代的内容（简单）                    - &lt;s:property value="aa"/&gt;                    - &lt;s:property value="aa"/&gt;                - 普通
+                    - &lt;s:property value="username"/&gt;      # 输出标签,得到valueStack中属性                    - &lt;s:property value="#request.name"/&gt;                # 得到request域对象中的值                        - request #session #application #parameters #attr
+                        - `'#attr'优先级：page,request,valueStack,session,application`
+            - 显示验证拦截器的验证信息集合中的数据：
+                - &lt;s:fielderror/&gt;                                                        # 显示所有错误信息                - &lt;s:fielderror fieldName=""/&gt;                        # 显示验证返回的错误信息            - 单选
+                - &lt;s:radio list="#{'male':'男','female':'女'}" name="gender2" value='男'&gt;                    - 自动加class id <label for="gender2male">等
+                    - list键值对中male是实际值,男是显示值
+                    - name是<input radio >的name属性
+                    - value中是选中的项
+            - 多选
+                - &lt;s:select multiple="true" list="#{'bj':'北京','sh':'上海','gz':'广州'}" name="select1" value="{'sh','bj'}"/&gt;            - 表单                        # 在ognl的标签中， struts的验证消息自动回显，不用加<s:fielderror/>标签
+                - &lt;s:form action=""&gt;                # 默认中加上了 method="post" action中加上了当前网站了contextPath路径                    - &lt;s:textfield label="用户名" name="username" /&gt;                    - &lt;s:password label="密码" name="password" /&gt;                    - &lt;s:submit value="登录" /&gt;            - 国际化                # 国际化一般放在整个网站的最后写
+                - ##　伪国际化：将不同语言的页面放在不同文件夹中分别访问
+                - 国际化是通过i18n拦截器实现的
+                - 1.创建国际化信息文件
+                    - message_zh_CH.properties      # 基名_语言名_国家名.properties
+                        - username=xxx
+                        - password=xxxx
+                        - submit=xx
+                    - message_en_US.properties
+                    - ..
+                    - message.properties                # 默认的显示语言
+                        - 找伊拉克没有的话找本地区语言，本地语言没有的话找其它(默认的或美国等)
+                - 2.struts.properties中引入国际化配置的属性文件
+                    - struts.custom,i18n.resources=struts2/tag/i18n/message        # 从src文件夹路径开始，只写基名
+                - 3.验证消息国际化
+                    - message.properties文件中配置属性validationRequiredUsername=用户名错误
+                    - validation.xml文件中
+                    - &lt;message key="validationRequiredUsername"&gt;&lt;/message&gt;                - 4.jsp文件中用key属性代替 label属性(或其它在页面上显示信息的属性),key中写国际化信息文件中的key
+                    - &lt;s:form action="taglogin"&gt;                        - &lt;s:textfield key="username" name="username" /&gt;                        - &lt;s:password key="password" name="password" /&gt;                        - &lt;s:submit key="submit"/&gt;                    - &lt;/s:form&gt;                - 5.普通信息的国际化
+                    - message.properties中配置属性 normalMessage:普通信息
+                    - jsp中<s:text name="normalMessage"/>
+                - 6.测试
+                    - intername选项 -- 语言 改地区访问
+    - xml文件中的ognl标签
+        - o-> ${aa}
+            - 1.调用转到该标签类的getAa()方法得到aa的值替换${aa}
+            - 2.本标签中name="aa"的标签的文本节点的内容
+        - o-> {1}{2}{3}..{n}
+            - 匹配本标签中name="*a*" 中的第n个‘*’,用于通配传递过来的参数的一部分的值
+- ognl表达式
+    - ognl 开源，java写的免费标签,是struts2特有的
+    - xml文件中
+        - ${Xxx}                取值栈中栈中的东西，如action类中的属性
+        - ${#Xxx}                取值栈中值的东西，如request,session域中的数据（其实就是老师说的内置对象【valueStack就是值栈】）
+    - jsp文件中
+        - &lt;s:iterator value="#session.fileMap" var="entry" status="stat"&gt;            - &lt;s:property value="#entry.key"/&gt;            - &lt;s:if test="#stat.count%4==0"&gt;&lt;/s:if&gt;        - &lt;/s:iterator&gt;

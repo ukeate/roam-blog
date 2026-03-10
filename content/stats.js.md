@@ -1,0 +1,30 @@
+- 网页性能监控
+- 官网
+    - https://github.com/mrdoob/stats.js 
+- 视图                        # 点击切换
+    - fps                # 上一秒的帧数
+    - ms                # 一帧的毫秒数
+- 使用
+    - 引入stats.js文件
+    - init中
+        - var stats = new Stats();
+        - stats.setMode(1); // 0: fps, 1: ms
+        - // 将stats的界面对应左上角
+        - stats.domElement.style.position = 'absolute';
+        - stats.domElement.style.left = '0px';
+        - stats.domElement.style.top = '0px';
+        - document.body.appendChild( stats.domElement );
+    - treeStart中
+        - setInterval( function () {
+            - stats.begin();
+            - // 你的每一帧的代码
+            - stats.end();
+        - }, 1000 / 60 );
+    - 或
+    - init中
+        - stats = new Stats();
+        - stats.domElement.style.position = 'absolute';
+        - stats.domElement.style.left = '0px';
+        - stats.domElement.style.top = '0px';
+    - animation中
+        - stats.update();

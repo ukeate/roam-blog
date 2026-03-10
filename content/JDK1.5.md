@@ -1,0 +1,20 @@
+- 自动装箱, 泛型, 动态注解, 枚举, 变长参数, foreach
+- 改进内存模型[[JMM]], java.util.concurrent包([[Doug Lea]]带领开发)
+- 自动装箱拆箱
+- 枚举类型
+- import static
+- 可变参数
+- 内省
+- 泛型
+- for增强
+- 注解
+- 泛型，允许指定集合里元素的类型
+- 枚举类型
+- 自动类型包装和拆包
+- 可变参数
+- 注解
+- 增强for循环
+- 静态引入
+- 新的线程模型与并发库
+    - HashMap的替代者ConcurrentHashMap
+    - ArrayList的替代者CopyOnWriteArrayList

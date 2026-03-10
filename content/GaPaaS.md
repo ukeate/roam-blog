@@ -1,0 +1,1 @@
+- generator of aPaaS，脚手架，产生定制的aPaaS

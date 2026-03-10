@@ -1,0 +1,9 @@
+- 调试工具，进入系统namespace，可进入docker容器
+- 指定pid, 不需ssh进入容器运行shell
+- `docker inspect --format {{.State.Pid}} nginx`
+- nsenter -t4629 -n
+- 场景
+    - 查看镜像内文件
+        - docker run -it --entrypoint sh nginx:latest
+    - 查看/var/lib/docker/overlay2/id文件对应container
+        - `docker ps -q | xargs docker inspect --format '{{.State.Pid}}, {{.Id}}, {{.Name}}, {{.GraphDriver.Data.WorkDir}}' | grep bff250`

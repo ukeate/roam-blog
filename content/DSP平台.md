@@ -1,0 +1,9 @@
+- Demand-Side Platform, 互联网广告
+- 特点
+    - 标签种植
+    - 区别于广告网络(Ad Network)
+        - 不用CPD(Cost Per Day)
+        - 采用广告交易平台(AdExchange)，CPM(Cost Per Mille)
+    - RTB(Real-Time Bidding)基础设施能力
+    - 用户定向(AudienceTargeting)技术
+- 限制：隐私侵犯、推送用APP未打开、设备更换

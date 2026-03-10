@@ -1,0 +1,1 @@
+- 基于jvm，结合python, ruby, smalltalk的特性

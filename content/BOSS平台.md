@@ -1,0 +1,17 @@
+- 适配器实现
+    - action                  # 存http地址，参数名，验证器
+        - code                # 业务，如用户套餐
+        - mode: get/post/put/delete               # 如获得套餐，添加套餐，修改套餐，删除套餐
+        - ctx                 # 参数map, action调用前后修改
+        - next                # 下个触发action
+    - history_action          # action调用历史
+    - suite                   # 带参action, thunk待触发
+        - price               # 标价
+        - tag                 # 用作商品分类
+    - order                   # 用户关联到suite, 计费
+    - category                # 生成action模板
+        - apps/plugins        # 由category生成, 多个带形参(如app_id)action, 封装成的模板。添加实例填入实参
+    - role
+    - permission              # action code
+        - type                # action, suite等
+        - access              # crud和其它自定义权限
