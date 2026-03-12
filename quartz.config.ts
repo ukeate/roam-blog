@@ -13,6 +13,7 @@ import { Static } from "./quartz/plugins/emitters/static"
 import { TagPage } from "./quartz/plugins/emitters/tagPage"
 import { CrawlLinks } from "./quartz/plugins/transformers/links"
 import { CreatedModifiedDate } from "./quartz/plugins/transformers/lastmod"
+import { Latex } from "./quartz/plugins/transformers/latex"
 import { Description } from "./quartz/plugins/transformers/description"
 import { FrontMatter } from "./quartz/plugins/transformers/frontmatter"
 import { GitHubFlavoredMarkdown } from "./quartz/plugins/transformers/gfm"
@@ -77,6 +78,7 @@ const config: QuartzConfig = {
       CreatedModifiedDate({
         priority: ["frontmatter", "git", "filesystem"],
       }),
+      Latex(),
       SyntaxHighlighting({
         theme: {
           light: "github-light",
