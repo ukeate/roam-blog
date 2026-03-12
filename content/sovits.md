@@ -1,0 +1,52 @@
+- 整合包
+    - [羽毛布団](https://space.bilibili.com/3493141443250876)
+        - [炼丹全书](https://docs.qq.com/doc/DUWdxS1ZaV29vZnlV?dver=)
+- 辅助工具
+    - [[Ultimate Vocal Remover]]
+    - Audio Slicer
+    - Adobe Audition
+- 步骤
+    - 预处理
+        - slice放入dataset_raw
+        - 数据预处理.bat
+            - 改resample.py的线程数
+    - 训练
+        - 清空
+            - 删除
+                - logs/44k/*
+                - dataset/44k/*
+            - 复制
+                - pre_trained_model/* 到 logs/44k/*
+            - 添加
+                - dataset_raw/{name}
+        - 设置configs/config.json
+            - batch_size: 24
+                - learning_rate: 0.0004
+                    - 和batch_size正比
+            - keep_ckpts: 20
+                - 保留的模型数
+        - 训练.bat
+    - 训练聚类模型
+        - 训练聚类模型.bat
+    - 推理
+        - 选模型
+            - G开头的为推理模型
+            - 选聚类模型
+        - 参数
+            - NSF_HIFIGAN
+                - 对小数据集有增强作用
+                - 勾选后再加载模型
+            - 聚类模型混合比例
+                - 一般0.5, 越大咬字越清，音乐差别越大
+            - f0预测
+                - 自动变调，适合语音，不适合唱歌
+            - f0均值滤波
+                - 改善哑音
+            - 切片阈值
+                - -40，表示切掉能量水平低于-40dB的片段
+                    - 最大幅度值为0
+            - noise_scale
+                - 添加噪声的强度，越小与原信号越相似
+        - 目标干声切分
+            - Adobe Audition
+            - 大概1分钟显存10G

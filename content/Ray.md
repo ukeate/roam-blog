@@ -1,0 +1,13 @@
+- Anyscale开发，机器学习用分布式计算框架，Python实现
+- 组成
+    - AIR(Ray AI Runtime)
+        - 分布式
+            - 数据处理
+            - 模型训练
+            - 超参数调整
+            - 强化学习
+            - 批量推理
+    - Core
+        - 交互API
+    - Clusters
+        - 部署工具

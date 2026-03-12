@@ -1,0 +1,4 @@
+- Expectation Maximization
+- 迭代算法
+    - E步骤算每个隐含变量期望
+    - M步骤利用期望重新估计参数

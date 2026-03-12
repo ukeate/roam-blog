@@ -1,0 +1,60 @@
+- 爬虫模型训练
+    - Browse AI
+- 分布式计算
+    - [[Ray]]
+- NLP
+    - [[Hugging Face]]
+- 分类
+    - [[Annoy]]
+- 深度学习
+    - PyTorch
+    - TensorFlow
+    - [[Caffee]]
+    - GLUON
+    - [[BladeDISC]]
+    - Paddle
+- 包装
+    - Keras
+    - scikit-learn
+- 训练
+    - [[ConvNetJS]]
+- 分类模型训练
+    - teachablemachine.withgoogle.com
+    - OpenAI CLIP
+- 课程
+    - fast.ai
+    - Codedamn
+- 测试
+    - test.ai
+- 数据集、模型
+    - laion.ai
+- 画图模型
+    - civitai.com
+- 声音克隆
+    - [[sovits]]
+- 语音识别
+    - github.com/openai/whisper
+- 网站生成
+    - durable.co
+- 3D人物动画生成
+    - www.kinetix.tech
+- APP生成
+    - studio.softr.io
+- 生成定制AI聊天应用
+    - www.buildai.space
+- AI 集成 pipeline
+    - brancher.ai
+- 低代码APP生成
+    - felvin.com
+    - Power Apps
+- 图像/视频修复
+    - real-esrgan
+- 视频深伪换脸
+    - github.com/deepfakes/faceswap
+    - github.com/iperov/DeepFaceLab
+    - github.com/iperov/DeepFaceLive
+- 知识图谱
+    - CiteSpace
+    - [[Jigsaw]]
+    - Carrot
+    - iOpener

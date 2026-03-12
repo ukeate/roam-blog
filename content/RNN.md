@@ -1,0 +1,16 @@
+- Recurrent Neural Networks, 循环神经网络
+- 公式
+    - $$h(t)=f(Ux(t)+Wh(t-1)+u_0)$$
+        - 算隐状态
+        - x(t)是当前向量, h(t-1)是上一时刻向量
+    - $$y^\prime(t)=g(Vh(t)+v_0)$$
+        - 算分类
+    - $$U,V,W,u_0$$是共享参数
+- 问题
+    - 不能并行计算
+    - 梯度消失、爆炸
+        - $$\frac{\partial y(\epsilon)}{\partial w} \propto w^{t-1}$$
+        - $$w^n$$矩阵特征分解
+            - $$(P\Lambda P^{-1})^n=P\Lambda^n P^{-1}$$
+        - 为什么DNN没问题
+            - w不是同一个

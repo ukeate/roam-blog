@@ -1,0 +1,1 @@
+- RLHF, Reinforcement Learning by Human Feedback。找人提问题，并对模型反馈奖励、惩罚

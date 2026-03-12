@@ -1,0 +1,10 @@
+- 2019年提出
+- 无监督的预训练模型做有监督的任务
+- 相比GPT
+    - 模型结构去除Fine-Tuning层
+    - Layer Normalization移到到每个sub-block输入的地方与最后一个Self-Attention后
+    - 采用了修正初始化方法
+    - Vocabulary规模扩展到50257，输入上下文从512扩展到1024，使用更大batch_size
+- 特点
+    - 强泛化能力
+    - 40G训练语料

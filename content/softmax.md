@@ -1,0 +1,33 @@
+- 结果相加概率为1，归一 化
+- 输出区间$$\left(0, 1 \right)$$
+- 连续可导
+- $$y_i^{\prime} = \frac{e^{d_i}}{\sum\limits_{j=1}^{k}e^{d_j}}$$
+    - d表示输入
+- $$\frac{\partial Loss}{\partial w} = \sum\limits_{i=1}^k\frac{\partial Loss}{\partial d_i} \frac{\partial d_i}{\partial w}$$
+    - $$Loss = \sum\limits_{j=1}^{k}-y_j  \log y_j^{\prime}$$
+        - $$y_j$$表示真实情况，只有一个为1
+            - $$Loss = -y_j  \log y_j^{\prime}$$
+    - $$\frac{\partial Loss}{\partial d_j} = \frac{\partial Loss}{\partial y_j} \frac{\partial y_j}{\partial d_j}$$
+        - 链式法则
+        - $$=\frac{-y_j}{y_j^{\prime}} \cdot [\frac{e^{d_j}}{\sum\limits_{j=1}^{k}e^{d_j}} + - \frac{e^{d_j}}{(\sum\limits_{j=1}^{k}e^{d_j})^2}e^{d_j}]$$
+        - $$=\frac{-y_j}{y_j^{\prime}}y_j^{\prime}(1-y_j^{\prime})$$
+            - 输出概率
+            - 真实概率
+                - 且$$y_j = 1$$
+                    - $$=y_j^{\prime} - y_j$$
+    - $$\frac{\partial Loss}{\partial w_1} = (y^{\prime}-y)w_n f^{\prime}(d_{n-1})w_{n-1}...f^{\prime}(d_1)x$$
+        - $$=(y^{\prime}-y)\prod\limits_{i=2}^{n}w_i\prod\limits_{i=1}^{n-1}f(d_i)x$$
+            - 梯度消失
+                - $$f^{\prime}$$最大0.25
+                - n越大$$\prod\limits_{i=1}^{n-1}f(d_i)$$越趋向0
+                - n大的原因
+                    - 层数多
+                    - w向前求的多
+                - w如果用了正则项
+                    - 加速梯度消失
+            - 实际上不会有一项为0
+                - 实际上有多神经元
+- 不适合中间层
+    - 属于logit函数
+        - 倾向产生onehot向量，会参数放大
+    - 导数比较小

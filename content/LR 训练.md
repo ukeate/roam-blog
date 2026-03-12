@@ -1,0 +1,28 @@
+- KL距离
+- FM模型
+- 分类函数
+    - $$f = \frac{1}{1 + e^{-(wx + w_0)}}$$
+    - 为什么
+        - 概率密度
+        - $$f(x) = \frac{1}{\sqrt{2\pi \sigma}} e^-\frac{(x-\mu)^2}{2\sigma^2}$$
+            - $$P(y=1|x) = \frac{P(y=1)}{P(x)}\cdot P(x | y=1)$$
+            - 判别模型，可以用来做分类
+              
+- 实现
+    - 随机一个w
+    - 计算模型输出和真实数值差异，得到损失函数(mse, kl距离)
+    - 不停调整w让损失函数变小
+- 计算
+    - $$f = \frac{1}{1 + e^{-(wx + w_0)}}$$对w求导
+        - $$\frac{\partial f}{\partial w} = f(1 - f)x$$
+    - $$w = w - \partial \frac{\partial kl}{\partial w}$$
+        - $$\frac{\partial kl}{\partial w} = \frac{\partial kl}{\partial f} \times \frac{\partial f}{\partial w} = \frac{-1}{n}\Sigma_{i=1}^{n}(\frac{y_i}{f_i} - \frac{(1 - y_i)}{1-f_i}) \cdot f_i(1-f_i)x$$
+            - $$\frac{-1}{n}\Sigma_{i=1}^{n}[y_i(1-f_i) - (1 - y_i)f_i] \cdot x$$
+                - 两边总有一个为0
+    - 为什么不用mse
+        - $$\frac{\partial mse}{\partial w} = \frac{2}{n} \Sigma_{n}^{i=1}(f_i - y_i)(f_i)(1-f_i)\cdot x$$
+            - w非常大时，fi趋向1或0
+                - $$(f_i)(1-f_i)$$很小，$$\frac{\partial mse}{\partial w}$$很小，训练效果不好，走向局部最小值
+                - 体现出取w正常值时，也会很小
+            - 是否通过选初始点解决
+                - 局部极小的数量和维数平方成正比

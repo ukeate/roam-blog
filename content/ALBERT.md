@@ -1,0 +1,8 @@
+- A Lite BERT
+- 词向量因式分解Factorized Embedding Parameterization
+    - 加一层参数转换，解决参数过多问题
+    - 问题
+        - 词与词向量经过一层转换，不再独立
+- 跨层参数共享Cross-layer parameter sharing
+- 句子顺序预测任务Sentence Order Prediction,SOP
+    - 连续两句话调换顺序，让模型学习是否正确

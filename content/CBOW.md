@@ -1,0 +1,2 @@
+- Continuous Bag-of-Words
+- 根据上下文预测出中心词，用于构建词向量

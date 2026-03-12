@@ -1,0 +1,29 @@
+- [[XGBoost]]
+- $$F_k(x)=\sum\limits_{i=1}^k f_i(x)$$
+    - 分类器预测结果相加
+        - 概率得分相加，即sigmoid中的d
+- 训练
+    - $$F_k=F_{k-1}+f_k$$
+        - $$Loss = (y-F_k)^2 \\ \frac{\partial Loss}{\partial F_k}=-2(y-F_k)$$
+            - $$F_k$$变化方向为$$-\frac{\partial Loss}{\partial F_k}=(y-F_k)$$
+                - 即$$f_k$$的目标为$$y-F_{k-1}$$
+                - $$\mu (y-F_{k-1})$$加学习因子
+            - 平方对异常值敏感问题
+                - $$L(y,F)=\begin{cases} \frac{1}{2}(y-F)^2 & \quad |y-F| \leq \delta \\ \delta(|y-F| - \delta/2) & \quad |y-F| > \delta \end{cases}$$
+            - sigmoid化
+                - $$L(y,F)=log(1+e^{-2yF})$$
+                    - $$y \in (-1,1)$$
+                    - 相当于sigmoid中的d=2F
+                    - 学习目标KL距离
+                        - $$-\frac{\partial Loss}{\partial F} = - \frac{1}{1+e^{-2yf}} \cdot -2ye^{-2yF}$$
+        - 树模型作为子模型
+- 实现
+    - 第0颗按平均类别
+    - 设损失函数
+    - 确定结构
+    - 确定叶子节点值
+- 优化
+    - 解决欠拟合，希望每个树弱，降低对任一树的依赖
+    - $$f_i$$可以不是树模型
+        - 只因方便实现
+        - [[XGBoost]]同理

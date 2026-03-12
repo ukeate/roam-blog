@@ -1,0 +1,5 @@
+- $$y_i = \frac{e^{d_i}}{e^d_i + \sum\limits_{j=1,j\neq i}^{N}e^{d_j}} $$
+    - 负例中采样
+        - 在训练阶段做
+            - 预测时还是用softmax
+        - 条件采样，先采出现概率大的

@@ -1,0 +1,30 @@
+- 2017, Google发表《Attention Is All You Need》，提出Transformer
+- [[Attention机制]]
+- 分类
+    - encoder transformer
+    - decoder transformer
+- 步骤
+    - 一个Transformer
+        - 输入序列
+            - 词向量+位置向量
+            - [[Multi-Head Attention]]
+        - Self-Attention
+            - 输出Z
+        - Add & Norm
+            - shortcut，LayerNorm(X+Z)
+        - Feed Forward
+            - 前馈神经网络
+                - 2层DNN
+        - Add & Norm
+        - 输出序列
+    - 累加Transformer
+        - 为什么不直接多层self-attention
+            - $$Z=WV, Y=MZ, Y=MWV$$
+                - 多层无意义，多层MW等价一层
+- 模型
+    - [[BERT]]
+    - [[UniLM]]
+    - [[GPT]], CPM
+    - [[MASS]]
+    - [[T5]]
+    - BART

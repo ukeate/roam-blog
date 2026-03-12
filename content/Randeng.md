@@ -1,0 +1,11 @@
+- 选取某些句mask再生成
+    - encoder做其它mask
+        - 辅助加强decoder的语义理解能力
+    - decoder生成句mask
+    - 如何选取句子
+        - [[n-gram相似度]]
+        - 选重要性强的句子
+            - $$s_i=rouge(S\bigcup{x_i},D\backslash(S\bigcup{x_i}))$$
+                - 复杂度$$N^2$$
+            - 与其它句子相似最强的
+    - 但容易出现语言错误

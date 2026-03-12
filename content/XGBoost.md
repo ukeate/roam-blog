@@ -1,0 +1,36 @@
+- 目标函数
+    - $$Obj^{(t)}=\sum\limits_{i=1}^n l(y_i,\hat{y}_i^t) + \sum\limits_{i=1}^t \Omega (f_i)=\sum\limits_{i=1}^n l(y_i,\hat{y}_i^{t-1}+f_t(x_i)) + \sum\limits_{i=1}^t \Omega (f_i)$$
+        - 泰勒展开$$=\sum\limits_{i=1}^n[l(y_i,\hat{y}_i^{t-1})+g_i f_t(x_i)+\frac{1}{2}h_i f_t^2(x_i)]+\sum\limits_{i=1}^t \Omega(f_i)$$
+            - $$\hat{y}_i^{t-1}$$视为x,$$f_t(x_i)$$视为$$\Delta x$$
+            - 代入mse损失函数
+                - $$g_i=\frac{\partial(\hat{y}^{t-1}-y_i)^2}{\partial \hat{y}^{t-1}}=2(\hat{y}^{t-1}-y_i)$$
+                - $$h_i = \frac{\partial^2(\hat{y}^{t-1}-y_i)^2}{\hat{y}^{t-1}}=2$$
+            - 优化目标
+                - 舍去$$l(y_i,\hat{y}_i^{t-1})$$
+                - $$\sum\limits_{i=1}^t \Omega(f_i)$$是正则项
+                    - $$\Omega(f_i)=\gamma T+\frac{1}{2}\lambda\sum\limits_{j=1}^Tw_j^2$$
+                        - 根据经验定义的
+                        - T是叶子节点个数, $$\gamma$$控制复杂度
+                        - $$\lambda$$控制叶子和的影响力
+                - $$=\sum\limits_{i=1}^{n}[g_i w_{q(x_i)}+\frac{1}{2}h_i w_{q(x_i)}^2]+\gamma T+\frac{1}{2}\lambda\sum\limits_{j=1}^Tw_j^2$$
+                    - $$=\sum\limits_{j=1}^T [(\sum\limits_{i \in I_j}g_i)w_j + \frac{1}{2}(\sum\limits_{i\in I_j}h_i+\lambda)w_j^2]+\gamma T$$
+                        - 叶子节点角度
+                    - $$=\sum\limits_{j=1}^T [G_jw_j + \frac{1}{2}(H_j+\lambda)w_j^2]+\gamma T$$
+                        - $$G_j$$是一阶导数常数值, $$H_j$$是二阶导数常数值
+                        - $$\frac{\partial L_1}{\partial w_j}=G_j+(H_j+\lambda)w_j=0$$
+                            - $$w_j=-\frac{G_j}{H_j+\lambda}$$时Obj为极值
+                                - $$\lambda>0, H_j\geq 0$$, 所以是极小值
+                            - 代入得$$Obj=-\frac{1}{2}\sum\limits_{j=1}^T\frac{G_j^2}{H_j+\lambda}+\gamma T$$
+                    - 一个节点分裂
+                        - 分裂前$$Obj_1=-\frac{1}{2}[\frac{(G_L+G_R)^2}{H_L+H_R+\lambda}]+\gamma$$
+                        - 分裂后$$Obj_2=-\frac{1}{2}[\frac{G_L^2}{H_L+\lambda}+\frac{G_R^2}{H_R+\lambda}]+2\gamma$$
+                        - $$Gain=Obj_1-Obj_2$$
+                            - 遍历所有条件，找到Gain最大一个的作为分裂条件
+- 相比GBDT
+    - 用了二阶泰勒展开
+        - 多考虑了变化方向的方向，学习速度快
+- 实现
+    - 定义损失函数+正则项
+    - 求解各点g和h，已由前面分类器决定
+    - 根节点开始，计算各节点分裂条件
+        - 深度是超参数限制

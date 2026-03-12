@@ -1,0 +1,5 @@
+- 预训练模型，Masked Sequence to Sequence
+- 模型类型
+    - Seq2Seq
+- 预训练任务
+    - CTR

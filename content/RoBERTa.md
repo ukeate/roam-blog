@@ -1,0 +1,5 @@
+- Facebook提出
+- 动态掩码Dynamic Masking
+    - 防止过拟合
+- 舍弃NSP
+- 更大数据集，更长训练步数

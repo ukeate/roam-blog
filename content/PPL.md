@@ -1,0 +1,3 @@
+- Perplexity(PPL)、Reverse PPL
+    - PPL是参考文本上的训练语言概率模型，计算生成文本概率，越高越流畅
+    - Reverse PPL是生成文本上训练语言概率模型，算参考文本概率，越高越多样

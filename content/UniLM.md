@@ -1,0 +1,13 @@
+- Unified Language Model, 2019年微软提出
+- 特点
+    - 只用BERT，没有Decoder
+    - 集合了L2R-LM, R2L-LM, BI-LM和Seq2Seq-LM的训练方式
+- 模型类型
+    - AE(自编码)+AR(自回归)+Seq2Seq
+- 预训练任务
+    - SLM(标准语言模型)+CTR(受损文本重建)+NSP(下一句预测)
+    - 步骤
+        - Left-to-Right
+        - Bidirectional
+        - Seq-to-Seq
+    - 相比BERT，添加的单向LM预训练加强文本表示能力，添加的Seq-to-Seq LM预训练更好胜任文本生成任务

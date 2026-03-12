@@ -1,0 +1,8 @@
+- 相对GPT-3
+    - 引入人类反馈中强化学习RLHF(Reinforcement Learning from Human Feedback)
+- 特点
+    - 遵循指令方面比GPT-3好得多
+    - 较少捏造事实
+- GPT-3.5
+    - 2021年四季度训练的InstructGPT模型
+    - 自动编写代码方面有较强的能力

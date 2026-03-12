@@ -1,0 +1,2 @@
+- 衡量纯度、贫富差距
+- $$Gini(D)=\sum\limits_{k=1}^{|y|}\sum\limits_{k'\neq k}P_kP_k'=1-\sum\limits_{k=1}^{|y|}P_k^2$$

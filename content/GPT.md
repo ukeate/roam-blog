@@ -1,0 +1,15 @@
+- Generative Pre-Training, OpenAI提出
+- [[GPT-1]]
+- [[GPT-2]]
+- [[GPT-3]]
+- [[InstructGPT]]
+- [[ChatGPT]]
+- 历史
+    - 2018.6, OpenAI发布GPT-1, 1.2亿参数
+    - 2018.10, Google发布[[BERT]]，3亿参数
+    - 2019.2, GPT-2，15亿参数
+    - 2020.6, GPT-3，1750亿参数
+- 模型类型
+    - AR
+- 预训练任务
+    - SLM

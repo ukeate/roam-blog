@@ -1,0 +1,12 @@
+- Jensen-Shannon距离，解决KL距离对称性的问题
+- $$JS(P\|Q)=KL(P\|\frac{1}{2}(P+Q)) + KL(Q\|\frac{1}{2}(P+Q))$$
+- 情况
+    - $$P(x)=0, Q(x)=0$$
+        - =0
+    - $$P(x)=0, Q(x)\neq0$$
+        - $$=\int Q\log\frac{Q}{\frac{1}{2}(P+Q)}dx=\int Qlog 2\,dx=\log 2$$
+    - $$P(x)\neq0, Q(x)=0$$
+        - $$=\log 2$$
+    - $$P(x)\neq0, Q(x))\neq0$$
+        - 几乎不存在
+            - 高维中，两条概率线不易有重合

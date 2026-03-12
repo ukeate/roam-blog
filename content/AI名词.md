@@ -1,0 +1,27 @@
+- ASIC
+    - Application-Specific Integrated Circuit，专用集成电路
+    - 如比特币挖矿
+- CoWoS
+    - Chip-on-Wafer-on-Substrate
+    - 台积电开发，2.5D 封装技术，集成多个芯片（die）在一个硅中介层（interposer）上，提高带宽、降低延迟
+- Scaling Law
+    - 来自 OpenAI 2019 《Scaling Laws for Neural Language Models》
+- TFLOPS
+    - Tera Floating Point Operations Per Second
+    - 万亿浮点运算/s
+    - A100 312 TFLOPS(FP16), H100 1979 TFLOPS(FP16)
+- MoE
+    - Mixture of Experts，专家混合模型
+    - 稀疏激活机制
+- HBM
+    - High Bandwidth Memory，高带宽存储器，显存
+    - HBM2e带宽1.55TB/s, HBM3带宽3.35TB/s
+    - 由4-8个DRAM堆叠式3D封装，通过TSV(硅通孔)通信
+    - 从NAND FLASH中读取数据
+-  DRAM
+    - Dynamic Random Access Memory，动态随机存取存储器
+    - 存储CPU对GPU的管理指令
+- NAND Flash
+    - 多为支持NVMe协议的SSD
+- FFN
+    - FeedForward Network，前馈神经网络

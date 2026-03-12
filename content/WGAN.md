@@ -1,0 +1,27 @@
+- [[EM距离]]
+- GAN求Loss方法
+    - L优化联合分布距离$$\theta$$，与$$\theta$$相关
+    - 如果[[KL距离]]
+        - $$KL(f_1\|f_2)=\int f_1\log\frac{f_1}{f_2}dxdy$$
+            - 无交集时
+                - $$f_1=0,f_2 \text{任意}, KL=0$$
+                - $$f_1\neq 0\Rightarrow f_2=0,KL=\infty$$
+            - 有突变性
+                - $$KL=\begin{cases}\infty & \quad \theta\neq 0 \\ 0 & \quad  \theta=0\end{cases}$$
+            - $$\frac{\partial KL}{\partial \theta}=0$$
+    - 如果JS距离
+        - $$JS=\begin{cases}\log2 & \quad \theta\neq 0 \\ 0 & \quad  \theta=0\end{cases}$$
+            - $$\frac{\partial JS}{\partial \theta}=0$$
+    - EM距离
+        - $$\frac{\partial JS}{\partial \theta}=\pm1$$
+- 找到Loss
+    - [[Lipschitz函数]]
+    - $$W(P_r,P_g)=\frac{1}{K}sup_{\mathop{\|f\|}_L\leq K}E_{x\sim P_r}[f(x)]-E_{x\sim P_g}[f(x)]$$
+        - $$L=E_{x\sim P_r}[f_w(x)]-E_{x\sim P_g}[f_w(x)]$$
+            - $$f_w$$是DNN
+                - 限制w不超过某范围[-c,c]，$$f_w$$不放大
+            - $$P_r$$是真实图, $$P_g$$是生成图
+            - 不用sigmoid，值$$[-\infty, \infty]$$
+            - 不要用基于动量的优化算法
+                - 基于经验总结
+                - 不要momentum、Adam，推荐RMSProp, SGD

@@ -1,0 +1,56 @@
+- Support Vector Machine, 支持向量机
+- 评价
+    - 好处
+        - 抗噪声
+    - 缺点
+        - 没有概率意义，只有几何意义
+        - 点是耦合的
+            - 要遍历所有样本，找到边界点
+            - 数据量大时，资源要求高
+            - 不能分布式
+- 公式
+    - $$w = \sum\limits_{i \in SN}^n  \alpha_i y_i x_i$$
+        - 算出向量
+        - SN是边界点集合
+            - 既支持向量$$x_i$$
+        - $$\alpha_i$$表示第i条数据的权重(边界权重)
+        - 数学解法[[拉格朗日求极值]]
+        - 找边界点
+            - 时间复杂度$$N^3$$
+    - $$w_0 = y_i - wx_i$$
+    - $$wx = \sum\limits_{i \in SN}^n  \alpha_i y_i x_i x$$
+        - $$x_i x$$是内积，表示相似度
+            - 向量被相似度高的边界点影响大
+            - 相当于边界点的[[KNN]]
+- 找到w
+    - 泛化能力
+        - $$\frac{2\| wx + w_0 \|}{\| w \|}$$
+            - $$\| wx_1 + w_0 \|$$缩放成1
+            - 求max $$\frac{2}{\| w \|}$$, 既 min $$\|w\|$$
+    - 正确分类
+        - y=1表示分类正确，y=0表示分类错误
+        - $$y_i(wx_i + w_0) > 0$$
+    - 相当于换了损失函数的L2正则
+- 线性不可分时
+    - min $$\| w \| + c\sum\limits_{i=1}^{n}\epsilon_i$$
+        - 网格搜索，找到合适的超参数
+            - c取值，在有效集看效果
+        - $$\epsilon_i = max(0, 1-y_i(wx+w_0))$$
+            - hingle距离，用作损失函数
+        - 对x升维
+            - 因为w可分解成样本数据点表示
+            - $$wx = \sum\limits_{i \in SN}^n  \alpha_i y_i \langle \phi(x),\phi(x_i) \rangle$$
+                - $$= \sum\limits_{i \in SN}^n  \alpha_i y_i (\langle x,x_i \rangle)^2$$
+            - 核方法
+                - $$k(\langle x_i,x_j \rangle)=\langle \phi(x_i),\phi(x_j)\rangle$$
+                    - k叫作核函数
+                - 高斯核函数
+                    - $$k(x,y)=exp(-\frac{\|x-y\|}{2\sigma^2})$$
+                        - x到无穷维
+                        - $$\sigma$$调映射方式
+                - 线性核函数
+                    - $$\langle x,y\rangle + c$$
+                - 多项式核函数
+                    - $$(\alpha \langle x,y\rangle + c)^d$$
+    - $$y_i(wx_i + w_0) > 1 - \epsilon_i$$
+        - $$\sum\limits_{i=1}^{n}\epsilon_i$$越小越好

@@ -1,0 +1,3 @@
+- k-Nearest Neighbors，最近邻距离
+- 最近的取平均
+- [[KD-Tree]]

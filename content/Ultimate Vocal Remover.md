@@ -1,0 +1,16 @@
+- 音源分离，分离人声和背景声
+- 分离伴奏
+    - Process Method: Demucs
+    - Demucs Model: v3 UVR Model
+    - Stem: Vocals
+    - 勾选GPU Conversion
+- 消除混响
+    - 选分离后的人声
+    - Process Method: VR Architecture
+    - Window Size: 320
+        - 音频样本长度
+        - 越大频率分辨率越高，时间分辨率越低
+    - Aggression: 10
+        - 分离强度
+    - VR MODEL: 5_HP_Karaoke_UVR
+    - 勾选GPU Conversion、Vocals Only

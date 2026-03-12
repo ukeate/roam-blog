@@ -1,0 +1,8 @@
+- Sequence Neural Network, 序列神经网络
+- [[HMM]]
+- RNN
+- LSTM
+- [[TextCNN]]
+- GRU
+- 逐字的好处
+    - 新词多，新字不多

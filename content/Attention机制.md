@@ -1,0 +1,44 @@
+- 17年提出，18年广泛应用
+- [[Transformer]]
+- [[BERT]]
+- 标准模式
+    - 三要素
+        - Q是输出
+        - K是自身维度
+        - V是输出维度
+            - 与K维度不用一致
+            - 与K序列长度一致
+        - H
+            - 与V维度一致
+            - 与Q序列长度一致
+    - 步骤
+        - 单个q和K算相似度，s向量
+            - 优化(炼丹)
+                - $$s=A^\intercal Tanh(qW, kU)$$
+                    - 好处，Q和K维度可以不一致
+                - $$s=qWk^\intercal$$
+                    - 好处，Q和K元素都相乘，表达力强
+                - $$s=\frac{\left<q,k\right>}{\sqrt{d}}$$
+                    - d是特征向量的维度
+                        - 用s通过softmax算a时
+                            - s大a放大，算出向量某个大，成为onehot
+                - $$s=\frac{qWk^\intercal}{\sqrt{d}}$$
+                - $$s=\frac{\left<qW,kU\right>}{\sqrt{d}}$$
+        - s向量归一化，a向量
+        - a向量与V加权求和算出h
+    - 情况
+        - K=V
+            - 大多数
+        - Q=K=V
+            - [[self-attention]]
+- 文章分类
+    - 自创词CLS放文首，代表全局，用softmax分类
+        - 如果LSTM做在链后加，容易被位置影响
+    - 句子CLS向量组合文章CLS向量
+- 优化
+    - 归纳偏置问题
+        - [[Multi-Head Attention]]
+    - 内部协变量问题
+        - [[批标准化]]
+        - [[层标准化]]
+    - shortcut

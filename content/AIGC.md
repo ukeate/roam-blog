@@ -1,0 +1,44 @@
+- AI-generated Content
+- GC分别
+    - [[PGC]]
+    - UGC
+    - AIGC
+        - NLP
+        - CV
+- 步骤
+    - 在数据分布中采样
+    - 生成
+- 目标
+    - DNN学习出数据分布
+        - 分布太大不能拟合，工程办法
+            - 输入正态分布，过DNN，模拟出需要的分布
+                - 正态分布即随机噪声
+            - 发展
+                - GAN
+                - [[VAE]]
+                - Flow-based models
+                - Diffusion models
+                    - [[扩散学习]]
+- 发展
+    - 2017之前 RNN Seq2Seq
+    - Transformer
+        - 2019 UniLM
+        - 2019 MASS
+        - 2020 T5
+        - 2020 BART
+        - 2018开始 GPT
+- 评测
+    - 指标
+        - 流畅度Fluency
+        - 真实性Factuality
+        - 语法Grammar
+        - 多样性Diversity
+    - 度量
+        - 基于词汇
+            - [[BLEU-n]]
+            - [[Self-BLEU]]
+            - [[ROUGE-n]]
+            - [[PPL]]
+        - 基于语义
+            - [[dssm]]
+            - BERT

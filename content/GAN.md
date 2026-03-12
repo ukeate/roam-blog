@@ -1,0 +1,37 @@
+- Generative Adversarial Nets，生成对抗网络
+- 解决问题
+    - decoder原来向量需要满足特定分布
+        - 不能用于生成
+- 步骤
+    - 随机向量
+        - 不能随机插值，因为高维分布复杂
+    - decoder出结果
+- 实现
+    - 生成器
+        - 输入噪声
+            - 正态分布
+    - 判别器
+        - 用真实图片训练
+    - combine模型
+        - 训练生成器，用判别器判断
+- 损失函数
+    - $$\mathop{min}\limits_{G}\mathop{max}\limits_{D}V(D,G)=E_{x\sim p_{data(x)}}[\log D(x)]+E_{z\sim p_z(z)}[\log(1-D(G(z)))]$$
+        - $$\mathop{min}\limits_G$$是生成器目标，$$\mathop{max}\limits_D$$是判别器目标
+        - E是求均值，即加权求和
+    - $$\mathop{max}\limits_{D}V(D,G)=E_{x\sim p_{data(x)}}[\log D(x)]+E_{x\sim p_g(x)}[\log(1-D(x)]$$
+        - 换写法去G(z)，实现中上下文已有生成器生成的分布G(z)
+        - $$L=P_{data}(x)\log D(x)+P_g(x)\log(1-D(x)))$$
+            - 具体x时
+            - $$\frac{\partial L}{\partial D(x)}=0$$时
+                - D(x)为极值
+                - D是可训练的DNN
+                - $$=\frac{P_{data}(x)}{D(x)}-\frac{P_g(x)}{1-D(x)}=0$$
+                    - $$D^*(x)=\frac{P_{data}(x)}{P_{data}(x)+P_g(x)}$$
+    - $$E_{x\sim P_r}\log \frac{P_r(x)}{\frac{1}{2}[P_r(x)+P_g(x)]}+E_{x\sim P_g}\log \frac{P_g(x)}{\frac{1}{2}[P_r(x)+P_g(x)]}-2\log2$$
+        - $$D^*$$最优判别器代入, $$P_r$$为$$P_{data}$$
+        - [[JS距离]]
+            - 问题
+                - $$\frac{\partial JS}{\partial G_w}\equiv 0$$，所以不能优化生成器
+                    - 办法1，多随机，某次$$P_r\neq0, P_g\neq 0$$分布交集多
+                    - 办法2，不用$$D^*$$，判别器不宜太强
+        - [[WGAN]]

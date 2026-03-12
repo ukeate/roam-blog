@@ -1,0 +1,4 @@
+- $$y_i = \frac{e^{\frac{d_j-m}{t}}}{\sum\limits_{i=1}^{N}e^{\frac{d_j-m}{t}}}$$
+    - t越大，各$$y_j$$趋于一致，增加难度y'变小，学习变快
+    - m用于微调
+- 

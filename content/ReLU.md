@@ -1,0 +1,7 @@
+- [[LReLU]]
+- 试验出来的
+    - 训练快
+    - 没有饱和
+    - 导数大
+- $$f(x) = \begin{cases}  x & \quad x>0 \\ 0  & \quad x \leq 0 \end{cases}$$
+- 输出区间$$\left [0, \infty \right)$$

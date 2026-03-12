@@ -1,0 +1,44 @@
+- 求概率间的距离，香农提出
+- 公式
+    - $$kl(P,Q) = \frac{1}{n} \sum\limits_{i=1}^{n}P(x_i) \cdot \log \frac{P(x_i)}{Q(x_i)}$$
+        - 如果x是连续值，$$\Sigma$$改求积分$$\int$$
+        - 没有对称性
+            - JS距离
+    - 为什么
+        - 最大似然估计
+            - $$\prod\limits_{i=1}^{n}P(x_i,y_i) = \prod\limits_{i=1}^n P(y_i|x_i)P(x_i)$$
+                - $$=\sum\limits_{i=1}^n[\log P(y_i|x_i) + \log P(x_i)]$$
+            - $$P(y=1|x) = f(x), P(y=0|x)=1-f(x)$$
+                - $$P(y|x)=f^y(1-f)^{(1-y)}$$
+            - $$\log P(y_i|x_i) = \log f^y\cdot (1-f)^{(1-y)}$$
+                - max $$y\log f + (1-y)log(1-f)$$
+                - = min $$-y\log f -(1-y)log(1-f)$$
+    - 感觉
+        - $$P(x_i) \cdot \log P(x_i) - P(x_i) \cdot \log Q(x_i)$$
+            - P大时，Q越大越好
+            - P小时，Q无所谓
+            - $$\Sigma Q = 1$$所以要把Q分布在P大的时候
+        - $$Q\log \frac{Q}{P} = Q\log Q - Q\log P$$
+            - $$Q\log Q$$ 形状固定，所以$$Q\log P$$ 越大越好
+            - $$Q\log P$$
+                - P小的时候logP趋向负无穷，所以P小的时候Q尽量小
+        - 结论
+            - 使KL(P, Q)小, Q尽可能匹配P的大值
+            - 使KL(Q, P)小, Q尽可能匹配P的小值
+        - 不能用$$y\log \frac{y}{f}$$单独训练
+            - y=1时，f可以度量
+            - f=0时，f度量不出来
+- 损失函数
+    - 用交叉熵损失函数
+        - $$\frac{1}{n} \Sigma_{i=1}^{n}[y_i \cdot \log \frac{y_i}{f_i} + (1 - y_i) \cdot \log \frac{(1 - y_i)}{(1 - f_i)}]$$
+            - 两边总有一个为0
+            - 简化，只保留与f相关的
+                - $$\frac{-1}{n}\Sigma_{i=1}^{n}[y_i \log f_i + (1 - y_i) \log (1 - f_i)]$$
+                    - $$f_i \neq 0$$，不存在log0为$$-\infty$$
+                - $$\frac{-1}{n}\Sigma_{i=1}^{n}(\frac{y_i}{f_i} - \frac{(1 - y_i)}{1-f_i})$$
+- 优化
+    - W无限增大问题
+        - [[合页损失函数]]
+- 连续KL距离
+    - $$KL=\int P(x)\log \frac{P(x)}{P(x)} dx$$
+        - $$=E_{p(x)}[\log \frac{P(x)}{G(x)}]$$

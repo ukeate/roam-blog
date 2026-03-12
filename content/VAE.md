@@ -1,0 +1,4 @@
+-  Variational Autoencoder
+- 假设真实世界的高维数据分布，可以Encoder成正态分布，再Decoder
+    - 有损压缩
+- 多用于以图搜图

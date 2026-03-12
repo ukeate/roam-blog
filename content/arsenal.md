@@ -1,14 +1,3 @@
-- 数据
-    |  |
-    | --- |
-    | [[AI 认知]] |
-    | [[AI paper]]、[[论文]] |
-    | [[AI code]] |
-- AI
-    |  |  |  |
-    | --- | --- | --- |
-    | 使用 | [[gt]]、[[claude]]、[[codex]]、[[gemini]]、[[openclaw]] | [[AI 听说]]、[[S.D.]] |
-    | 组装 | [[skills]]、[[mcp]]、[[plugin]] |  |
 - 操作
     |  |  |  |
     | --- | --- | --- |
@@ -57,7 +46,7 @@
         | 句柄 | [[iotop]]、[[iostat]]、[[lsof]]、[[file]]、[[ldd]]、[[fuser]]、[[ulimit]] | [[rename]] |
         | 存储 | [[dust]]、[[dysk]]、[[du]] | [[duf]]、[[ncdu]]、[[fclones]](查重)、smartctl |
         | 系统 |  | [[strace]]、[[bpftool]]、[[bpftrace]]、journalctl |
-- resource工具
+- Resource工具
     |  |  |  |
     | --- | --- | --- |
     | 系统 | [[Linux工具]]、[[Linux场景]] | [[Linux]]、[[Linux系统编程]]、[[Windows]]、[[Android]] |

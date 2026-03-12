@@ -1,0 +1,22 @@
+- [[Adagrad]]
+- 自适应动量估计法，梯度下降法改良
+- 动量法
+    - $$g=\frac{\partial Loss}{\partial w} \\ v_t = \alpha v_{t-1}+\epsilon g \\ w_t = w_{t-1} - v_t$$
+        - $$\epsilon$$是学习因子
+            - 自适应
+                - $$r_t=r_{t-1} + \left<g,g\right> \\ v_t = \frac{\alpha}{\sqrt{r_t}}g \\ w_t = w_{t-1} - v_t$$
+                    - $$\left<g,g\right>$$一定大于0
+                    - 不好的点，学习因子越来越小，学习变慢
+                        - $$r_t=\rho_1 r_{t-1} + (1-\rho_1)\left<g,g\right> $$
+                        - $$\rho$$是衰减因子，加权控制
+                    - 预防$$r_t$$为0
+                        - $$v_t = \frac{\alpha}{\sqrt{r_t}+\delta}g $$
+                            - $$\delta$$很小
+                    - 起步加速
+                        - $$\hat{v_t}=\frac{v_t}{1-\rho_1^t}$$
+- 适用
+    - 各维度差异较大
+- 与Adagrad区别
+    - 梯度平方变为指数移动平均数
+        - 学习率自适应更灵活
+    - 处理稀疏梯度更稳定

@@ -1,0 +1,80 @@
+- [[YOLOs]]
+- CNN的位置不变性
+- 目标
+    - 预测位置
+- 通道
+    - 有没有1个
+    - 框位置4个
+        - 左上角坐标，长宽
+    - 是什么
+- 组成
+    - backbone
+    - 检测头
+        - 7x7x30
+            - 1个物品
+                - 30=1+4+25
+                    - 25个类别
+            - 2个物品
+                - 30=2(1+4)+20
+- $$Loss=$$
+    - $$\lambda_{coord}\sum\limits_{i=0}^{S^2}\sum\limits_{j=0}^B \mathbb I_{ij}^{obj}[(x_i-\hat{x}_i)^2+(y_i-\hat{y}_i)^2]$$
+        - $$\mathbb I^{obj}$$是指示函数，表示有目标时
+        - 预测框位置
+    - $$+\lambda_{coord}\sum\limits_{i=0}^{S^2}\sum\limits_{j=0}^B\mathbb I_{ij}^{obj}[(\sqrt{w_i}-\sqrt{\hat{w}_i})^2+(\sqrt{h_i}-\sqrt{\hat{h}_i})^2]$$
+        - 预测框位置
+        - $$\sqrt{w_i}$$经验公式防止长宽过大
+    - $$+\sum\limits_{i=0}^{S^2}\sum\limits_{j=0}^B\mathbb I_{ij}^{obj}(C_i-\hat{C}_i)^2+\lambda_{noobj}\sum\limits_{i=0}^{S^2}\sum\limits_{j=0}^B\mathbb I_{ij}^{noobj}(C_i-\hat{C}_i)^2$$
+        - 预测有无目标
+    - $$+\sum\limits_{i=0}^{S^2}\mathbb I_i^{obj}\sum\limits_{c\in classes}(p_i(c)-\hat{p}_i(c))^2$$
+        - 有目标时，预测多分类
+- 细节
+    - 后处理合并
+        - 结果面积排序，小的向大的合并
+    - 预测x,y,w,h的激活函数
+        - 值域$$(0,\infty)$$
+            - sigmoid, tanh不行
+            - relu不行，落到负区不能训练
+        - 方法
+            - 变成相对值
+            - $$b_w=p_we^{t_w}$$
+                - $$p_w$$是先验宽度, $$b_w$$是实际宽度
+                    - $$p_w$$怎么得到
+                        - kmeans聚类得到多类标准框
+                            - 多类分成小、中、大三类
+                            - backbone出来三种位数采样
+                                - 高倍采样框小，用大框$$p_w$$分别预测
+                                    - 小倍采样用大框$$p_w$$
+                                    - 每个框都用一次
+                                - 大框$$p_w$$预测信息传到小框$$p_w$$
+                                    - 小框预测有了更大视角
+                            - V3出来
+                - $$e^{t_w}$$在$$(0,\infty)$$, $$t_w$$在$$(-\infty,\infty)$$
+                - 成了预测$$t_w$$
+                    - 不用激活函数
+            - x,y
+                - $$x=\alpha C_x$$
+                    - $$C_x$$是框长度, $$\alpha$$在[0,1]间
+                    - $$\alpha=\frac{1}{1+e^{-t_x}}=\sigma(t_x)$$
+                        - $$t_x$$在$$(-\infty,\infty)$$
+                        - 成了预测$$t_x$$
+                    - V3出现
+                - 问题, mse收敛慢
+                    - IoU损失函数
+                        - 预测框、真实框
+                            - 交集是分子、并集是分母
+                                - Loss=分数的负数
+                        - 问题
+                            - 框无重合导数为0
+                                - 没有意义，也不能训练
+                                - 改进
+                                    - $$GIoU=IoU-\frac{A^c-\mu}{A^c}$$
+                                        - $$A^c$$是两框最大框
+                                        - 大框套小框有问题
+                                            - $$DIoU=IoU-\frac{\rho^2(b,b^{gt})}{c^2} \\ =IoU-\frac{d^2}{c^2} \\ -1\leq DIoU \leq 1$$
+                                                - $$\rho$$代表b和$$b^{gt}$$的对角线距离
+                                                - c是b和$$b^{gt}$$的欧式距离
+- 迁移学习
+    - 不用改backbone, 训练检测头
+    - 数据配置
+        - traffic.yaml
+    - 标注数据

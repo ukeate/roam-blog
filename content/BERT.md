@@ -1,0 +1,27 @@
+- Bidirectional Encoder Representation from Transformers，Google，2018年产生, 《The Attention is all you need》
+- [[RoBERTa]]
+- [[ALBERT]]
+- [[T5]]
+- 组成
+    - 字为单位输入
+        - 字向量，位置向量，句向量
+    - 多层Transformer
+    - 遮挡字mask,有位置向量 输出中只预测mask
+        - 好处
+            - 不需标注
+        - 取14%字mask
+            - 取的是经验值
+            - 80%mask
+            - 10%随机另外的字，用来纠错
+            - 10%正确的字，做负样本
+        - 训练要求
+            - mask任务难易适中
+                - 填空要求的语义理解度
+- 与word2vec区别
+    - BERT的词向量有上下文信息
+        - word2vec没有位置信息
+- 用于分词
+    - 词向量由字决定，字向量上下文决定
+- 变种
+    - BERTscores、BERTr、YiSi
+        - 基于预训练模型评测，利用BERT的embedding表示代替n-gram计算生成文本和参考文本的相似性

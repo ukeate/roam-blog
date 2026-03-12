@@ -1,0 +1,3 @@
+- Term Frequency-Inverse Document Frequency，词频-逆文档频率
+- TF是词计数，IDF是词信息量
+    - 单纯计数，没有词与文章的关系

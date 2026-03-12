@@ -1,0 +1,45 @@
+- Deep Neural Network，深度神经网络
+- 特征工程
+- [[激活函数]]
+- 梯度下降法
+- 反向传播
+- 分类
+    - 惯序模型
+    - 函数性模型
+        - 多输入·输出
+- 历史
+    - 原来的[[BP模型]]
+        - 2012年后发展成深度学习
+- 学习过程
+    - $$x\stackrel{w_1}{\rightarrow}D_1\stackrel{f}{\rightarrow}A_1\stackrel{w_2}{\rightarrow}D_2 \cdots D_L\stackrel{softmax}{\rightarrow}y^{\prime}$$
+        - $$\frac{\partial Loss}{\partial w_1} = \sum\limits_{i=1}^{c}\frac{\partial Loss}{\partial d_{L,i}}\frac{\partial d_{L,i}}{\partial w_2}$$
+            - c为D的向量长度
+            - $$\frac{\partial d_{L,i}}{\partial w_2} = \frac{\partial d_{L,1}}{\partial D_2}A_1^\intercal$$
+                - $$\frac{\partial d_{L,1}}{\partial D_2} = (\frac{\partial A_{L-1}}{\partial D_{L-1}^\intercal} \frac{\partial D_{L-1}}{\partial A_{L-2}^\intercal } \cdots \frac{\partial A_2}{\partial D_{2}^\intercal})^\intercal \frac{\partial d_{L,1}}{\partial A_{L-1}}$$
+                    - $$\frac{\partial A}{\partial D}$$是对角矩阵$$f^\prime (d_1) \rightarrow f^\prime{d_n}$$
+                        - 趋向0
+                    - $$\frac{\partial D}{\partial A^\intercal}$$是w
+- 权重初始化
+    - $$w_1$$随机
+        - 随机系数
+            - 均匀分布
+                - ReLU中
+                    - $$\mu=0$$能更好利用非线性
+                    - $$\sigma \propto \frac{1}{M}$$方差与总数反相关
+                    - $$\sigma \propto \frac{1}{N}$$w与神经元个数反相关，因为:
+                        - $$f(aw)w_1 = x_1$$
+                        - $$\sum\limits_{i=1}^N\frac{\partial Loss}{\partial x_i}\frac{\partial x_i}{\partial w},\frac{\partial x_i}{\partial w} = a f^\prime(aw)w_1$$
+                            - 要控制$$\frac{\partial Loss}{\partial w}$$幅度，N越大，w越小
+- 优化
+    - 局部极小问题
+        - 越高次项，局部极小越多
+    - 悬崖下降
+        - Loss可能增大
+    - 平缓
+        - 不好收敛，训练时间长
+    - 鞍点
+        - $$\frac{\partial Loss}{\partial w}=0$$但有下降空间
+            - 所有方向$$f^{\prime\prime}$$都<0
+- Loss分类
+    - 和目标的Loss
+    - 各层的Loss

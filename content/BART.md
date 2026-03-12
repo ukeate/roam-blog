@@ -1,0 +1,18 @@
+- Bidirectional and Auto-Regressive Transformers, 2020年Facebook提出
+- 结构
+    - encoder
+        - 类似BERT双向Transformer
+    - decoder
+        - 类似GPT单向Transformer
+- 5种任务
+    - Token Masking
+    - Sentence Permutation
+    - Document Rotation
+    - Token Deletion
+    - Text Infilling
+- 与BERT区别
+    - 生成式模型
+        - 无需输入输出等长
+- 用处
+    - 纠错
+    - 机器翻译

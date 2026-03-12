@@ -1,0 +1,1 @@
+- $$y = \begin{cases}  x & \quad x \geq 0 \\ kx  & \quad x < 0 \end{cases}$$

@@ -1,0 +1,26 @@
+- 因子分解模型
+    - 每个特征x取辅助向量v
+- 线性不可分问题
+    - 扩展特征
+        - $$C_{n}^{2}$$个
+            - $$n^2$$个
+        - 百度2011年凤巢团队用
+        - 缺点
+            - 维度过高，性能低
+            - 特征稀疏
+                - 适用大数据量
+            - 有相似度问题
+    - 交叉项
+        - 两个w的内积表示
+        - kn个
+        - $$\left< v_1, v_2 \right>$$可以表示特征间相似度
+- 公式
+    - $$y = \frac{1}{1+e^{-d}}$$ $$d = w_0 + \sum\limits_{i=1}^{h}w_i x_i + \frac{1}{2}\sum\limits_{h=1}^{k}[(\sum\limits_{i=1}^n x_i v_{ih})^2 - \sum\limits_{i=1}^{n} (x_i v_{ih})^2]$$
+    - 推理
+        - $$\sum\limits_{i=1}^n\sum\limits_{j=i+1}^n x_i x_j \left< v_i, v_j \right>$$
+            - $$=\sum\limits_{i=1}^n\sum\limits_{j=i+1}^n x_i x_j \sum\limits_{h=1}^{k}v_{ih} v_{jh} = \sum\limits_{h=1}^{k}[\sum\limits_{i=1}^n\sum\limits_{j=i+1}^n x_i v_{ih} x_j v_{jh}]$$
+            - $$\sum\limits_{i=1}^n\sum\limits_{j=i+1}^n x_i v_{ih} x_j v_{jh} = (\sum\limits_{i=1}^n x_i v_{ih})^2 - \sum\limits_{i=1}^{n} (x_i v_{ih})^2$$
+                - O(n^2) 变为O(n)
+    - 求导
+        - $$\frac{\partial d}{\partial w_i} = x_i$$
+        - $$\frac{\partial d}{\partial v_{ih}} = [\sum\limits_{i=1}^{n}(x_i v_{ih})]x_i - x_i v_{ih}x_i$$

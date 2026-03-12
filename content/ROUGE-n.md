@@ -1,0 +1,3 @@
+- 召回版本的BLEU
+    - BLEU重合n-gram数/生成文本n-gram数
+    - ROUGE重合n-gram数/参考文本n-gram数

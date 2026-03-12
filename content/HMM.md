@@ -1,0 +1,1 @@
+- Hidden Markov Model, 隐马尔科夫模型，被RNN取代

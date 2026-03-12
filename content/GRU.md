@@ -1,0 +1,5 @@
+- Gated Recurrent Unit, 门控循环单元，LSTM的变种
+- 引入门控机制
+    - 门控单元
+        - 更新门
+        - 重置门

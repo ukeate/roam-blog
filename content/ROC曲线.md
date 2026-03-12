@@ -1,0 +1,22 @@
+- Receiver Operating Characteristic curve，展示不同阈值下分类器的性能变化
+- 标注
+    - M = (TP + FN)表示所有正，m = TP
+    - N = (FP + TN)表示所有负，n = FP
+    - 真阳性率为纵轴
+        - TPR, True Positive Rate
+        - $$\frac{m}{M}$$，表示正确分类为正样本的比例，即是召回率
+    - 假阳性率为横轴
+        - FPR，False Positive Rate
+        - $$\frac{n}{N}$$为横轴，表示错误分类为正样本的比例
+- 预测值为$$y'$$, $$y' \geqslant \theta$$表示正样本
+    - $$\theta = 1$$时，没有正样本
+    - $$\theta = 0$$时，都是正样本
+- $$\theta$$曲线是ROC，向下的面积是AUC
+    - $$AUC = \frac{C}{M\times N}$$
+        - C组合数表示，分类器正类概率比反类概率大的组合
+            - 对于所有正样本，得分高的正样本排在得分低的正样本之前的情况数之和
+        - MxN表示所有预测组合
+    - AUC越大越好
+    - 值在0.5到1之间
+        - 因为是二元分类，在0.5之下可以反向用是一样的
+    - 一般值在0.7到0.85

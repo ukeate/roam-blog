@@ -1,0 +1,7 @@
+- Wasserstein距离，Earth-Mover距离，推土机距离
+- 两个概率的差异
+- $$W(P_r,P_g)=\mathop{inf}_{\gamma\sim\prod(P_r,P_g)}E(x,y)\sim\gamma[\|x-y\|]$$
+    - $$\prod(P_r,P_g)$$是[[联合分布]]
+    - inf是最小，在联合分布中找最小
+        - 推土，最小挪动
+            - 依次推土被证明是最小挪动
