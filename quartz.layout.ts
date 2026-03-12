@@ -29,7 +29,7 @@ export const defaultContentPageLayout: PageLayout = {
       folderClickBehavior: "link",
       useSavedState: true,
       sortFn: (a, b) => {
-        const pinned = ["arsenal", "para"]
+        const pinned = ["arsenal", "ai", "para"]
         const ai = pinned.indexOf(a.displayName.toLowerCase())
         const bi = pinned.indexOf(b.displayName.toLowerCase())
         if (ai !== bi) {
@@ -85,7 +85,7 @@ export const defaultListPageLayout: PageLayout = {
       folderClickBehavior: "link",
       useSavedState: true,
       sortFn: (a, b) => {
-        const pinned = ["arsenal", "para"]
+        const pinned = ["arsenal", "ai", "para"]
         const ai = pinned.indexOf(a.displayName.toLowerCase())
         const bi = pinned.indexOf(b.displayName.toLowerCase())
         if (ai !== bi) {

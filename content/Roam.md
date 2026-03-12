@@ -19,110 +19,61 @@
         - 插入模板：;;
 - 帮助
     - 基础
-        - {{table}}
-            - 查找
-                - ctrl + u
-            - 快速命令
-                - /
-            - 新页
-                - [[
-            - 引用
-                - ((
-            - 新block
-                - enter
-            - 缩进block
-                - tab/shift tab
-            - 命令
-                - ctrl + p
+        | 查找 | ctrl + u |
+        | --- | --- |
+        | 快速命令 | / |
+        | 新页 | [[ |
+        | 引用 | (( |
+        | 新block | enter |
+        | 缩进block | tab/shift tab |
+        | 命令 | ctrl + p |
     - 格式
-        - {{table}}
-            - **加粗**
-                - **
-                    - ctrl + b
-            - __斜体__
-                - __
-                    - ctrl + i
-            - ~~删除线~~
-                - ~~
-                    - win + y
-            - ^^高亮^^
-                - ^^
-                    - ctrl + h
-            - [链接](/#/app/outrun/page/PqzvT5QRz)
-                - []()
-                    - ctrl + k
-            - $$\LaTeX$$
-                - $$
-                    - $$
-            - 标题1/2/3
-                - #
-                    - ctrl + alt + 1/2/3
+        | **加粗** | ** | ctrl + b |
+        | --- | --- | --- |
+        | __斜体__ | __ | ctrl + i |
+        | ~~删除线~~ | ~~ | win + y |
+        | ^^高亮^^ | ^^ | ctrl + h |
+        | [链接](/#/app/outrun/page/PqzvT5QRz) | []() | ctrl + k |
+        | $$\LaTeX$$ | $$ | $$ |
+        | 标题1/2/3 | # | ctrl + alt + 1/2/3 |
     - 导航
-        - {{table}}
-            - 下个block
-                - down
-            - 上个block
-                - up
-            - 日记
-                - alt + d
-            - 缩in/out
-                - alt + right/left
-            - 页首/页末block(无选中时)
-                - ctrl + enter / ctrl + shift + enter
-            - 跳转/跳转右栏
-                - ctrl + o / ctrl + shift + o
-            - block内最左/右
-                - ctrl + home/end
+        | 下个block | down |
+        | --- | --- |
+        | 上个block | up |
+        | 日记 | alt + d |
+        | 缩in/out | alt + right/left |
+        | 页首/页末block(无选中时) | ctrl + enter / ctrl + shift + enter |
+        | 跳转/跳转右栏 | ctrl + o / ctrl + shift + o |
+        | block内最左/右 | ctrl + home/end |
     - Block
-        - {{table}}
-            - 上移/下移
-                - alt +shift + up / down
-            - 块内换行
-                - shift + enter
-            - 展开/折叠
-                - ctrl + down/up
-            - 选中当前块
-                - shift + up
-            - 选中上面下面(选中模式时)
-                - shift + up / down
-            - 全选
-                - ctrl + shift + a
-            - 复制引用
-                - ctrl + shift + c
-            - 切换TODO状态
-                - ctrl + enter
-            - 块内搜索
-                - ctrl + shift + 9
+        | 上移/下移 | alt +shift + up / down |
+        | --- | --- |
+        | 块内换行 | shift + enter |
+        | 展开/折叠 | ctrl + down/up |
+        | 选中当前块 | shift + up |
+        | 选中上面下面(选中模式时) | shift + up / down |
+        | 全选 | ctrl + shift + a |
+        | 复制引用 | ctrl + shift + c |
+        | 切换TODO状态 | ctrl + enter |
+        | 块内搜索 | ctrl + shift + 9 |
     - 侧边栏
-        - {{table}}
-            - 左/右边栏显隐
-                - ctrl + \ 、ctrl + / 
-            - 右边栏打开/打开引用
-                - shift + click / ctrl + shift + click
-            - 右边栏打开(搜索时)
-                - shift + enter
+        | 左/右边栏显隐 | ctrl + \ 、ctrl + / |
+        | --- | --- |
+        | 右边栏打开/打开引用 | shift + click / ctrl + shift + click |
+        | 右边栏打开(搜索时) | shift + enter |
     - 外观
-        - {{table}}
-            - 切换显隐双括号
-                - ctrl + c + b
-            - 切换显隐块引用
-                - ctrl + c + r
-            - 切换所有用户/其它用户圆点颜色
-                - ctrl + c + s / ctrl + c + c + s
-            - 切换block预览
-                - ctrl + c + p
-            - 切换命名空间显示
-                - ctrl + c + l
+        | 切换显隐双括号 | ctrl + c + b |
+        | --- | --- |
+        | 切换显隐块引用 | ctrl + c + r |
+        | 切换所有用户/其它用户圆点颜色 | ctrl + c + s / ctrl + c + c + s |
+        | 切换block预览 | ctrl + c + p |
+        | 切换命名空间显示 | ctrl + c + l |
     - 其它
-        - {{table}}
-            - 切换显示帮助
-                - alt + shift + h
-            - undo
-                - ctrl + z
-            - redo
-                - ctrl + y
-            - 插入youtube视频时间戳
-                - ctrl + alt + t
+        | 切换显示帮助 | alt + shift + h |
+        | --- | --- |
+        | undo | ctrl + z |
+        | redo | ctrl + y |
+        | 插入youtube视频时间戳 | ctrl + alt + t |
     - 组件
         - 计算器
             - ```javascript

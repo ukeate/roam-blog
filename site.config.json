@@ -1,11 +1,14 @@
 {
   "siteTitle": "Ukeate笔记",
   "homeTitle": "Ukeate笔记",
-  "homeTransclude": "outrun",
   "entryLinks": [
     {
       "slug": "arsenal",
       "title": "武器库"
+    },
+    {
+      "slug": "AI",
+      "title": "AI"
     },
     {
       "slug": "para",

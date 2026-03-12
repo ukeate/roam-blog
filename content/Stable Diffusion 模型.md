@@ -34,47 +34,11 @@
                 - vae-ft-mse-840000-ema-pruned.ckpt放到models/VAE
                 - Counterfeit-V2.5.safetensors放到models/Stable-diffusion
     - 类别
-        - {{table}}
-            - 大类
-                - 小类
-                    - 需求(512x512)
-                        - 效果
-                            - 用途
-            - SD
-                - emaonly 4GB
-                    - 2G显存
-                        - 10s出图，最大920x920
-                            - 出图用
-                - full ema 7GB
-                    - 4G显存
-                        - 
-                            - 训练用
-            - Waifu
-                - Float 16 EMA
-                    - 2G显存
-                        -  
-                            - 出图用
-                - Float 32 EMA
-                    - 2G显存
-                        -  
-                            - 出图用,与16差别小
-                - Float 32 Full
-                    - 4G显存
-                        -  
-                            - 出图或训练
-                - Float 32 Full + Optimizer
-                    - 8G显存
-                        -  
-                            - 训练用
-            - Naifu
-                - pruned 4GB
-                    - 8G显存
-                        -  
-                            - 出图用
-                - latest 7GB
-                    - 8-10G显存
-                        -  
-                            - 出图或训练
+        | 大类 | 小类 | 需求(512x512) | 效果 | 用途 |
+        | --- | --- | --- | --- | --- |
+        | SD<br>- full ema 7GB<br>&nbsp;&nbsp;- 4G显存<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 训练用 | emaonly 4GB | 2G显存 | 10s出图，最大920x920 | 出图用 |
+        | Waifu<br>- Float 32 EMA<br>&nbsp;&nbsp;- 2G显存<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 出图用,与16差别小<br>- Float 32 Full<br>&nbsp;&nbsp;- 4G显存<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 出图或训练<br>- Float 32 Full + Optimizer<br>&nbsp;&nbsp;- 8G显存<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 训练用 | Float 16 EMA | 2G显存 |  | 出图用 |
+        | Naifu<br>- latest 7GB<br>&nbsp;&nbsp;- 8-10G显存<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 出图或训练 | pruned 4GB | 8G显存 |  | 出图用 |
 - 真人模型
     - ChilloutMix-Ni
         - https://civitai.com/models/6424?modelVersionId=8958

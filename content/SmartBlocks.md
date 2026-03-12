@@ -9,143 +9,109 @@
     - 命令参考
         - https://roamjs.com/extensions/smartblocks/command_reference
         - Data/Time
-            - {{table}}
-                - 名字
-                    - 值
-                        - 说明
-                - DATE
-                    - &lt;%DATE:Today%&gt;                      <%DATE:Friday%>
-                      <%DATE:Friday%>
-                      <%DATE:5 days from now%>
-                      <%DATE:In two weeks%>
-                      <%DATE:In two weeks,yyyy-MM-dd%>
-                - TIME
-                    - &lt;%TIME%&gt;                - TIMEAMPM
-                    - &lt;%TIMEAMPM%&gt;                        - AM/PM格式插入时间
-                - DATEBASIS
-                    - &lt;%DATEBASIS:DNP%&gt;使用运行工作流的每日注释页面日期，如果不是 DNP，它将使用今天的日期                      <%DATEBASIS:today%>使用今天的日期作为基础
-                      <%DATEBASIS:in 3 days%>使用从现在起 3 天后的日作为日期基准
-                      <%DATEBASIS:in two weeks%>
-                        - 基准日期
+            | 名字 | 值 | 说明 |
+            | --- | --- | --- |
+            | DATE | &lt;%DATE:Today%&gt;                      &lt;%DATE:Friday%&gt;<br>&lt;%DATE:Friday%&gt;<br>&lt;%DATE:5 days from now%&gt;<br>&lt;%DATE:In two weeks%&gt;<br>&lt;%DATE:In two weeks,yyyy-MM-dd%&gt; |  |
+            | TIME<br>- &lt;%TIMEAMPM%&gt;                        - AM/PM格式插入时间 | &lt;%TIME%&gt;                - TIMEAMPM |  |
+            | DATEBASIS | &lt;%DATEBASIS:DNP%&gt;使用运行工作流的每日注释页面日期，如果不是 DNP，它将使用今天的日期                      &lt;%DATEBASIS:today%&gt;使用今天的日期作为基础<br>&lt;%DATEBASIS:in 3 days%&gt;使用从现在起 3 天后的日作为日期基准<br>&lt;%DATEBASIS:in two weeks%&gt; | 基准日期 |
         - 偶然性
-            - {{table}}
-                - 名字
-                    - 值
-                        - 说明
-                - RANDOMBLOCK
-                - RANDOMBLOCKFROM
-                - RANDOMBLOCKMENTION
-                - RANDOMCHILDOF
-                - RANDOMNUMBER
-                    - 1,10
-                - RANDOMPAGE
+            | 名字 | 值 | 说明 |
+            | --- | --- | --- |
+            | RANDOMBLOCK |  |  |
+            | RANDOMBLOCKFROM |  |  |
+            | RANDOMBLOCKMENTION |  |  |
+            | RANDOMCHILDOF |  |  |
+            | RANDOMNUMBER | 1,10 |  |
+            | RANDOMPAGE |  |  |
         - TODO
-            - {{table}}
-                - 名字
-                    - 值
-                        - 说明
-                - TODOTODAY
-                    - &lt;%TODOTODAY:20,(({uid}))%&gt;                        - 今日块引用列表
-                - TODOOVERDUE
-                    - &lt;%TODOOVERDUE:20,(({uid}))%&gt;                        - 逾期
-                - TODOOVERDUEDNP
-                    - &lt;%TODOOVERDUEDNP:20,(({uid}))%&gt;                        - 过期
-                - TODOFUTURE
-                    - &lt;%TODOFUTURE:20,(({uid}))%&gt;                        - 未来 
-                - TODOFUTUREDNP
-                - TODOUNDATED
+            | 名字 | 值 | 说明 |
+            | --- | --- | --- |
+            | TODOTODAY | &lt;%TODOTODAY:20,(({uid}))%&gt;                        - 今日块引用列表 |  |
+            | TODOOVERDUE | &lt;%TODOOVERDUE:20,(({uid}))%&gt;                        - 逾期 |  |
+            | TODOOVERDUEDNP | &lt;%TODOOVERDUEDNP:20,(({uid}))%&gt;                        - 过期 |  |
+            | TODOFUTURE | &lt;%TODOFUTURE:20,(({uid}))%&gt;                        - 未来 |  |
+            | TODOFUTUREDNP |  |  |
+            | TODOUNDATED |  |  |
         - 块关联
-            - {{table}}
-                - 名字
-                    - 值
-                        - 说明
-                - ATTRIBUTE
-                - BLOCKMENTIONS
-                - BLOCKMENTIONSDATED
-                - BREADCRUMBS
-                - BUTTON
-                - CHILDREN
-                - CONCAT
-                - CURRENTPAGENAME
-                - CURRENTURL
-                - CURRENTUSER
-                - CURRENTBLOCKREF
-                - CURRENTBLOCKCONTENT
-                - GETATTRIBUTE
-                - TRIGGERREF
-                - RESOLVEBLOCKREF
-                - SEARCH
-                - HASHTAG
-                - TAG
-                - REPLACE
-                - UPDATEBLOCK
-                - PARENT
+            | 名字 | 值 | 说明 |
+            | --- | --- | --- |
+            | ATTRIBUTE |  |  |
+            | BLOCKMENTIONS |  |  |
+            | BLOCKMENTIONSDATED |  |  |
+            | BREADCRUMBS |  |  |
+            | BUTTON |  |  |
+            | CHILDREN |  |  |
+            | CONCAT |  |  |
+            | CURRENTPAGENAME |  |  |
+            | CURRENTURL |  |  |
+            | CURRENTUSER |  |  |
+            | CURRENTBLOCKREF |  |  |
+            | CURRENTBLOCKCONTENT |  |  |
+            | GETATTRIBUTE |  |  |
+            | TRIGGERREF |  |  |
+            | RESOLVEBLOCKREF |  |  |
+            | SEARCH |  |  |
+            | HASHTAG |  |  |
+            | TAG |  |  |
+            | REPLACE |  |  |
+            | UPDATEBLOCK |  |  |
+            | PARENT |  |  |
         - 逻辑控制
-            - {{table}}
-                - 名字
-                    - 值
-                        - 说明
-                - IFVAR
-                - IFNOTVAR
-                - IFMATCH
-                - IFNOTMATCH
-                - IFDATEOFYEAR
-                - IFDAYOFMONTH
-                - IFDAYOFWEEK
-                - IFTAGINBLOCK
-                - IFCHILDREN
-                - INPUT
-                - SET
-                - GET
-                - HAS
-                - CLEARVARS
-                - SUM
-                - DIFFERENCE
-                - PRODUCT
-                - DIVISION
-                - FLOOR
-                - ROUND
-                - SMARTBLOCK
-                - REPEAT
+            | 名字 | 值 | 说明 |
+            | --- | --- | --- |
+            | IFVAR |  |  |
+            | IFNOTVAR |  |  |
+            | IFMATCH |  |  |
+            | IFNOTMATCH |  |  |
+            | IFDATEOFYEAR |  |  |
+            | IFDAYOFMONTH |  |  |
+            | IFDAYOFWEEK |  |  |
+            | IFTAGINBLOCK |  |  |
+            | IFCHILDREN |  |  |
+            | INPUT |  |  |
+            | SET |  |  |
+            | GET |  |  |
+            | HAS |  |  |
+            | CLEARVARS |  |  |
+            | SUM |  |  |
+            | DIFFERENCE |  |  |
+            | PRODUCT |  |  |
+            | DIVISION |  |  |
+            | FLOOR |  |  |
+            | ROUND |  |  |
+            | SMARTBLOCK |  |  |
+            | REPEAT |  |  |
         - 指针
-            - {{table}}
-                - 名字
-                    - 值
-                        - 说明
-                - CLIPBOARDCOPY
-                - CLIPBOARDPASTETEXT
-                - CURSOR
-                - INDENT
-                - UNINDENT
-                - FOCUSONBLOCK
+            | 名字 | 值 | 说明 |
+            | --- | --- | --- |
+            | CLIPBOARDCOPY |  |  |
+            | CLIPBOARDPASTETEXT |  |  |
+            | CURSOR |  |  |
+            | INDENT |  |  |
+            | UNINDENT |  |  |
+            | FOCUSONBLOCK |  |  |
         - 动作
-            - {{table}}
-                - 名字
-                    - 值
-                        - 说明
-                - EXIT
-                - NOTIFICATION
-                - NOBLOCKOUTPUT
-                - SKIPIFEMPTY
-                - OPENPAGE
-                - SIDEBARWINDOWOPEN
-                - OPENREFERENCESINSIDEBAR
-                - SIDEBARWINDOWCLOSE
-                - SIDEBARSTATE
-                - APIGET
+            | 名字 | 值 | 说明 |
+            | --- | --- | --- |
+            | EXIT |  |  |
+            | NOTIFICATION |  |  |
+            | NOBLOCKOUTPUT |  |  |
+            | SKIPIFEMPTY |  |  |
+            | OPENPAGE |  |  |
+            | SIDEBARWINDOWOPEN |  |  |
+            | OPENREFERENCESINSIDEBAR |  |  |
+            | SIDEBARWINDOWCLOSE |  |  |
+            | SIDEBARSTATE |  |  |
+            | APIGET |  |  |
         - 工作流
-            - {{table}}
-                - 名字
-                    - 值
-                        - 说明
-                - HIDE
-                - NOCURSOR
+            | 名字 | 值 | 说明 |
+            | --- | --- | --- |
+            | HIDE |  |  |
+            | NOCURSOR |  |  |
         - 公共思想
-            - {{table}}
-                - 名字
-                    - 值
-                        - 说明
-                - Formatting
+            | 名字 | 值 | 说明 |
+            | --- | --- | --- |
+            | Formatting |  |  |
 - 其它功能
     - daily自动触发
     - 按钮
