@@ -1,7 +1,7 @@
 - Sequence Neural Network, 序列神经网络
 - [[HMM]]
-- RNN
-- LSTM
+- [[RNN]]
+- [[LSTM]]
 - [[TextCNN]]
 - GRU
 - 逐字的好处

@@ -4,6 +4,7 @@
     - 响应时间
     - 可用性降级方案
 - SLA估算
+
     | Availability % | Downtime per day | Downtime per year |
     | --- | --- | --- |
     | 99% | 14.40 minutes | 3.65 days |

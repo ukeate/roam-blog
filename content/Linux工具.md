@@ -1,4 +1,5 @@
 - 终端与文本
+
     |  |  |  |
     | --- | --- | --- |
     | 快捷键 | ctrl alt f1/f2/…（终端切换） |  |
@@ -10,6 +11,7 @@
     | 计算 | bc、maxima（符号计算）、factor（分解质因数） |  |
     | 编码与编辑 | [[iconv]]、nano |  |
 - 文件与存储
+
     |  |  |  |
     | --- | --- | --- |
     | 文件与目录 | rm -rf、[[touch]]、[[ls]]、mkdir、cd（~ / -）、[[cp]]、mv、ln | tree、rmdir |
@@ -21,6 +23,7 @@
     | 存储操作 | fdisk -l、parted、mkfs、fsck /dev/sda1（检查并修复）、[[mount]]、[[umount]]、df -h（-T 查看分区类型）、[[LVM]] | cfdisk、sfdisk、mkswap、testdisk /dev/sdb1、e2fsck -a /dev/sdb1（修复ext2）、ntfsfix -d -b /dev/sdb1（修复ntfs坏扇区和脏标记）、udisks --detach 设备编号（移除磁盘）、growpart（磁盘热扩容）、[[mdadm]]、[[dmsetup]]、[[multipath]] |
     | 存储测试 | [[hdparm]]、[[smartctl]]、[[fio]] | [[bonnie++]]、[[iozone]] |
 - 系统
+
     |  |  |  |
     | --- | --- | --- |
     | 电源 | poweroff（立即关机）、shutdown -h now（-r 重启）、halt |  |
@@ -31,6 +34,7 @@
     | 内核与模块 | uname -a（查看版本）、[[lsmod]] | modprobe vboxdrv、dkms（status） |
     | 包管理 | [[apt]]、[[dpkg]] | [[snap]]、[[rpm]]、[[pacman]]、[[yum]]、[[downgrade]]、[[pkgfile]] |
 - 观测与调试
+
     |  |  |  |
     | --- | --- | --- |
     | 设备查看 | [[lspci]]、[[lsusb]]、[[lshw]] |  |
@@ -43,6 +47,7 @@
     | 编译 | [[make]]、cmake、makepkg（创建软件包） | :() { :\|:& };:（fork bombmake） |
     | 调试/追踪 | [[strace]]、bpftrace、gdb、SystemTap、[[bcc]]、[[eBPF]] | [[itrace]]、[[dtrace]] |
 - 网络
+
     |  |  |  |
     | --- | --- | --- |
     | 基础 | hostname、[[ip命令]]、[[nmcli]]、nmtui、arp -n（-s 设置ip/mac表）、[[route]] | wpa_supplicant、iwlist、iwconfig、wifi-menu、pppoe、[[ifconfig]]、netctl、[[hostapd]] |
@@ -51,6 +56,7 @@
     | 防火墙 | ufw（ubuntu 简化防火墙）、[[iptables]]、[[firewall]] |  |
     | 隧道/穿透 | [[Ngrok]] | [[ptunnel]] |
 - 图形与多媒体
+
     |  |  |  |
     | --- | --- | --- |
     | 桌面环境 | kde、xfce、[[gnome]] | i3（.xinitrc: exec i3）、[[awesome]] |

@@ -183,10 +183,34 @@ function convertTables(text) {
   return out.join("\n")
 }
 
+function isListItem(line) {
+  return /^\s*(?:[-+*]|\d+\.)\s+/.test(line)
+}
+
+function isTableStart(line, next) {
+  const head = line.match(/^(\s*)\|.*\|\s*$/)
+  if (!head) return false
+  const sep = next.match(/^(\s*)\|(?:\s*:?-{3,}:?\s*\|)+\s*$/)
+  return !!sep && head[1] === sep[1]
+}
+
+function normalizeTableBoundaries(text) {
+  const lines = text.split("\n")
+  const out = []
+  for (let i = 0; i < lines.length; i++) {
+    if (isTableStart(lines[i], lines[i + 1] ?? "")) {
+      const prev = out.at(-1) ?? ""
+      if (prev.trim() && isListItem(prev)) out.push("")
+    }
+    out.push(lines[i])
+  }
+  return out.join("\n")
+}
+
 function transformTables(root) {
   for (const path of walkMarkdown(root)) {
     const text = readFileSync(path, "utf8")
-    const next = convertTables(text)
+    const next = normalizeTableBoundaries(convertTables(text))
     if (next !== text) writeFileSync(path, next)
   }
 }

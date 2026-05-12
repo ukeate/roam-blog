@@ -8,6 +8,7 @@
     - [[BERT]]
     - [[XLNet]]
     - RoBERTa
+
 | 模型 | 结构 | 位置编码 | 激活函数 | layer norm方法 |
 | --- | --- | --- | --- | --- |
 | 原生Transformer | Encoder-Decoder | Sinusoida编码 | ReLU | Post layer norm |

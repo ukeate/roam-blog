@@ -1,4 +1,5 @@
 - 操作
+
     |  |  |  |
     | --- | --- | --- |
     | 跳动 | 跳词&lt;alt b/f&gt; &lt;alt ↔&gt;<br>跳行&lt;ctr a/e&gt; &lt;cmd ↔&gt; | 跳符&lt;ctr b/f&gt;<br>[[标记切换]] |
@@ -8,6 +9,7 @@
     | 其它 |  | [[mac]]、[[KB]]、[[awesome]]、[[ipad]] |
 - TUI
     - 操作
+
         |  |  |  |
         | --- | --- | --- |
         | sh | [[alacritty]] & [[zellij]]、[[tmux]] | kitty、[[wezterm]]、termius & [[nu]] |
@@ -16,6 +18,7 @@
         | UI | [[yazi]]、[[broot]] | [[nnn]]、[[xplr]] |
         | 任务 | [[pet]]、[[^z]]、[[expect]]、[[viddy]]、[[watch]] | mprocs、parallel、[[just]]、[[pueue]]、[[watchexec]] |
     - 字符
+
         |  |  |  |
         | --- | --- | --- |
         | 流 | [[bat]]、[[rg]]、[[sd]]、[[less]]、[[more]]、[[head]]、[[tail]] | [[cat]]、[[paste]]、[[tac]]、[[wc]]、[[sort]]、[[grep]]、[[uniq]]、[[xargs]]、[[awk]]、[[sed]] |
@@ -25,6 +28,7 @@
         | 差异 | [[delta]]、[[difft]]、[[diff]] | [[vimdiff]] |
         | 同步 | [[rsync]]、[[patch]] | [[rclone]] |
     - 开发
+
         |  |  |  |
         | --- | --- | --- |
         | k8s | [[k9s]]、[[kubectx]]、[[kubens]] | lazydocker、ctop、dive、[[krew]]、[[syft]] |
@@ -34,6 +38,7 @@
         | 请求 | [[mkcert]]、[[wuzz]] | curlie、hurl、httpie、xh、[[grpcurl]]、 |
         | 文件 |  | restic、rclone、[[ouch]] |
     - 排查
+
         |  |  |  |
         | --- | --- | --- |
         | 综合 | [[glances]]、[[btm]] |  |
@@ -47,12 +52,14 @@
         | 存储 | [[dust]]、[[dysk]]、[[du]] | [[duf]]、[[ncdu]]、[[fclones]](查重)、smartctl |
         | 系统 |  | [[strace]]、[[bpftool]]、[[bpftrace]]、journalctl |
 - Resource工具
+
     |  |  |  |
     | --- | --- | --- |
     | 系统 | [[Linux工具]]、[[Linux场景]] | [[Linux]]、[[Linux系统编程]]、[[Windows]]、[[Android]] |
     | [[运维工具]] [[测试工具]] |  |  |
     |  |  |  |
 - GUI
+
     |  |  |  |
     | --- | --- | --- |
     | 信息 | Reeder、ima | Folo |
@@ -67,11 +74,13 @@
     | 存储 | OneDrive、百度网盘 |  |
     | 远程 | [[Tailscale]]、向日葵、节点小宝、[[TeamViewer]] |  |
 - Resources
+
     |  |
     | --- |
     | 硬件：主机、数据 |
     | Read：[[Reading List: Archive]]、[[Unsorted]]、[[Readwise]]、[[Hypothesis]] |
 - Archives
+
     |  |  |
     | --- | --- |
     | 工具 | [[Eclipse]] |

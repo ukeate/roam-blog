@@ -19,6 +19,7 @@
         - 插入模板：;;
 - 帮助
     - 基础
+
         | 查找 | ctrl + u |
         | --- | --- |
         | 快速命令 | / |
@@ -28,6 +29,7 @@
         | 缩进block | tab/shift tab |
         | 命令 | ctrl + p |
     - 格式
+
         | **加粗** | ** | ctrl + b |
         | --- | --- | --- |
         | __斜体__ | __ | ctrl + i |
@@ -37,6 +39,7 @@
         | $$\LaTeX$$ | $$ | $$ |
         | 标题1/2/3 | # | ctrl + alt + 1/2/3 |
     - 导航
+
         | 下个block | down |
         | --- | --- |
         | 上个block | up |
@@ -46,6 +49,7 @@
         | 跳转/跳转右栏 | ctrl + o / ctrl + shift + o |
         | block内最左/右 | ctrl + home/end |
     - Block
+
         | 上移/下移 | alt +shift + up / down |
         | --- | --- |
         | 块内换行 | shift + enter |
@@ -57,11 +61,13 @@
         | 切换TODO状态 | ctrl + enter |
         | 块内搜索 | ctrl + shift + 9 |
     - 侧边栏
+
         | 左/右边栏显隐 | ctrl + \ 、ctrl + / |
         | --- | --- |
         | 右边栏打开/打开引用 | shift + click / ctrl + shift + click |
         | 右边栏打开(搜索时) | shift + enter |
     - 外观
+
         | 切换显隐双括号 | ctrl + c + b |
         | --- | --- |
         | 切换显隐块引用 | ctrl + c + r |
@@ -69,6 +75,7 @@
         | 切换block预览 | ctrl + c + p |
         | 切换命名空间显示 | ctrl + c + l |
     - 其它
+
         | 切换显示帮助 | alt + shift + h |
         | --- | --- |
         | undo | ctrl + z |

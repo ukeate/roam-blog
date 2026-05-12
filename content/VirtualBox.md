@@ -1,4 +1,5 @@
 - 网络连接
+
     | 联通 | NAT | Bridged Adapter | Internal | Host-only Adapter |
     | --- | --- | --- | --- | --- |
     | 虚拟机-&gt;主机 | √ | √ | × | 默认不能，需设置 |

@@ -34,6 +34,7 @@
                 - vae-ft-mse-840000-ema-pruned.ckpt放到models/VAE
                 - Counterfeit-V2.5.safetensors放到models/Stable-diffusion
     - 类别
+
         | 大类 | 小类 | 需求(512x512) | 效果 | 用途 |
         | --- | --- | --- | --- | --- |
         | SD<br>- full ema 7GB<br>&nbsp;&nbsp;- 4G显存<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 训练用 | emaonly 4GB | 2G显存 | 10s出图，最大920x920 | 出图用 |
